@@ -15,7 +15,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,23 +32,23 @@
 		<beans:property name="maxUploadSize" value="10000000"></beans:property>		
 	</beans:bean>
 	<!-- 가로챌 놈 -->
-	<beans:bean class="com.kh.team.interceptor.AuthInterceptor" id="authInterceptor">
-	</beans:bean>
+<!-- 	<beans:bean class="com.kh.team.interceptor.AuthInterceptor" id="authInterceptor"> -->
+<!-- 	</beans:bean> -->
 	
 	<!-- 인터셉터 -->
-	<interceptors>
-		<interceptor>
-			<mapping path="/doA"/>
-			<mapping path="/doB"/>
-			<beans:ref bean="sampleInterceptor"/>
-		</interceptor>
-		<interceptor>
-			<mapping path="/board/**/*"/>
-			<mapping path="/comment/**/*"/>
-			<exclude-mapping path="/board/list"/>
-			<beans:ref bean="authInterceptor"/>
-		</interceptor>
-	</interceptors>
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/doA"/> -->
+<!-- 			<mapping path="/doB"/> -->
+<!-- 			<beans:ref bean="sampleInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/board/**/*"/> -->
+<!-- 			<mapping path="/comment/**/*"/> -->
+<!-- 			<exclude-mapping path="/board/list"/> -->
+<!-- 			<beans:ref bean="authInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
 	
 	
 </beans:beans>

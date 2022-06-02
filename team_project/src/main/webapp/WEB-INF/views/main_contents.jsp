@@ -22,9 +22,9 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/main_catagory/style.css" type="text/css">
-    <link rel="stylesheet" href="resources/main_column/css/style.css" type="text/css">
-    <link rel="stylesheet" href="resources/park_main_customstyle.css" type="text/css">
+    <link rel="stylesheet" href="main_catagory/style.css" type="text/css">
+    <link rel="stylesheet" href="main_column/css/style.css" type="text/css">
+    <link rel="stylesheet" href="ho_main_customstyle.css" type="text/css">
     
 
 </head>
@@ -44,7 +44,7 @@
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<img class="d-block w-100" alt="Carousel Bootstrap First"
-							src="resources/main_catagory/custom_images/11.jpg" />
+							src="main_catagory/custom_images/11.jpg" />
 						<div class="carousel-caption">
 							<h4>사이트 안내 사진</h4>
 							<p></p>
@@ -52,7 +52,7 @@
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100" alt="Carousel Bootstrap Second"
-							src="resources/main_catagory/custom_images/10.jpg" />
+							src="main_catagory/custom_images/10.jpg" />
 						<div class="carousel-caption">
 							<h4>오늘의 추천 레시피</h4>
 							<p>일단 잡솨봐</p>
@@ -60,7 +60,7 @@
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100" alt="Carousel Bootstrap Third"
-							src="resources/main_catagory/custom_images/9.jpg" />
+							src="main_catagory/custom_images/9.jpg" />
 						<div class="carousel-caption">
 							<h4>포인트샵</h4>
 							<p>일단 사자</p>
@@ -83,7 +83,7 @@
 		                <!-- Single Post Catagory -->
 		                <div class="col-12 col-md-6 col-lg-4">
 		                    <div class="single-post-catagory mb-30">
-		                        <img src="resources/main_catagory/custom_images/korean3.jpg" alt="" class="single-post-img">
+		                        <img src="main_catagory/custom_images/korean3.jpg" alt="" class="single-post-img">
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
@@ -96,7 +96,7 @@
 		                <!-- Single Post Catagory -->
 		                <div class="col-12 col-md-6 col-lg-4">
 		                    <div class="single-post-catagory mb-30">
-		                        <img src="resources/main_catagory/custom_images/chinese4.jpg" alt="" class="single-post-img">
+		                        <img src="main_catagory/custom_images/chinese4.jpg" alt="" class="single-post-img">
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
@@ -109,7 +109,7 @@
 		                <!-- Single Post Catagory -->
 		                <div class="col-12 col-md-6 col-lg-4">
 		                    <div class="single-post-catagory mb-30">
-		                        <img src="resources/main_catagory/custom_images/western10.jpg" alt="" class="single-post-img">
+		                        <img src="main_catagory/custom_images/western10.jpg" alt="" class="single-post-img">
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
@@ -130,7 +130,7 @@
 				<div class="col-lg-6">
 					<div class="top-recipe-item large-item">
 						<div>
-							<img src="resources/main_column/custom_images/recipe-1.jpg" class="main_column_big_img">	
+							<img src="main_column/custom_images/recipe-1.jpg" class="main_column_big_img">	
 						</div>
 						<div class="top-recipe-text">
 							<a href="#">
@@ -148,7 +148,7 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div>
-									<img src="resources/main_column/custom_images/recipe-2.jpg" class="main_column_small_img">	
+									<img src="main_column/custom_images/recipe-2.jpg" class="main_column_small_img">	
 								</div>
 							</div>
 							<div class="col-sm-8">
@@ -167,7 +167,7 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div>
-									<img src="resources/main_column/custom_images/recipe-3.jpg" class="main_column_small_img">	
+									<img src="main_column/custom_images/recipe-3.jpg" class="main_column_small_img">	
 								</div>
 							</div>
 							<div class="col-sm-8">
@@ -186,7 +186,7 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div>
-									<img src="resources/main_column/custom_images/recipe-4.jpg" class="main_column_small_img">	
+									<img src="main_column/custom_images/recipe-4.jpg" class="main_column_small_img">	
 								</div>
 							</div>
 							<div class="col-sm-8">
@@ -205,7 +205,7 @@
 <!-- 						<div class="row"> -->
 <!-- 							<div class="col-sm-4"> -->
 <!-- 								<div> -->
-<!-- 									<img src="resources/main_column/custom_images/recipe-5.jpg" class="main_column_small_img">	 -->
+<!-- 									<img src="main_column/custom_images/recipe-5.jpg" class="main_column_small_img">	 -->
 <!-- 								</div> -->
 <!-- 							</div> -->
 <!-- 							<div class="col-sm-8"> -->

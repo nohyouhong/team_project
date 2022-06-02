@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/* Master Stylesheet - 1.0 */
+/* :: 1.0 Import Fonts */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
+/* :: 3.0 Base CSS */
+
+/* .single-post-catagory .catagory-content-bg :hover { */
+/* 	opacity: 0; */
+/* } */
+
+.single-post-catagory .catagory-content-bg::after {
+	border-color: rgb(248,56,1);
+}
+
+.post-title {
+	color: rgb(248,56,1);
+}
+
+.single-post-img {
+	width: 150%;
+	height: 300px;
+}
+
+.carousel-item img {
+	width: 1142.71px;
+	height: 357.09px;
+}
+
+.carousel-item h4 {
+	color: rgb(248,56,1);
+}
+
+.carousel-item p {
+	color: rgb(248,56,1);
+}
+
+.main_column_big_img {
+	width: 541px;
+	height: 369px;
+}
+
+.main_column_small_img {
+	width: 180px;
+	height: 140px;
+}
+
+.top-recipe-item {
+	height: 170;
+}
+

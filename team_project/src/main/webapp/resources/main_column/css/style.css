@@ -1,0 +1,128 @@
+/*---------------------
+  Top Recipe
+-----------------------*/
+
+.top-recipe {
+	background: #F8F9FB;
+	padding-bottom: 60px;
+	position: relative;
+}
+
+.top-recipe .section-title {
+	width: 470px;
+	text-align: right;
+	background: #FC0254;
+	padding: 18px 0;
+	padding-right: 40px;
+	position: absolute;
+	top: -57px;
+	left: 0;
+}
+
+.top-recipe .section-title h5 {
+	color: #fff;
+	font-weight: 700;
+}
+
+.top-recipe .po-relative {
+	position: relative;
+}
+
+.top-recipe .po-relative .plus-icon {
+	position: absolute;
+	right: 0;
+	top: -157px;
+	width: 80px;
+	background: #FC0254;
+	text-align: center;
+	height: 57px;
+	line-height: 57px;
+	color: #fff;
+}
+
+.top-recipe-item {
+	margin-bottom: 40px;
+}
+
+.top-recipe-item:hover .top-recipe-img:after {
+	opacity: 0.5;
+}
+
+.top-recipe-item:hover .top-recipe-img i {
+	opacity: 1;
+}
+
+.top-recipe-item.large-item .top-recipe-img {
+	height: 514px;
+	width: 100%;
+	max-width: 100%;
+}
+
+.top-recipe-item.large-item .top-recipe-text {
+	padding-top: 38px;
+}
+
+.top-recipe-item.large-item .top-recipe-text h4 {
+	margin-top: 23px;
+	margin-bottom: 20px;
+}
+
+.top-recipe-item .top-recipe-img {
+	height: 145px;
+	position: relative;
+	z-index: 1;
+}
+
+.top-recipe-item .top-recipe-img:after {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	background: #FC0254;
+	content: "";
+	opacity: 0;
+	z-index: -1;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.top-recipe-item .top-recipe-img i {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+	top: 50%;
+	-webkit-transform: translateY(-46px);
+	transform: translateY(-46px);
+	color: #fff;
+	opacity: 0;
+	-webkit-transform: translateY(-8px);
+	transform: translateY(-8px);
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.top-recipe-item .top-recipe-text .cat-name {
+	color: #fff;
+	background: #FC0254;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 4px 25px 4px 25px;
+}
+
+.top-recipe-item .top-recipe-text a {
+	display: block;
+	margin-top: 9px;
+	margin-bottom: 20px;
+}
+
+.top-recipe-item .top-recipe-text a h4 {
+	font-weight: 700;
+}
+
+.top-recipe-item .top-recipe-text p {
+	margin-bottom: 0;
+}

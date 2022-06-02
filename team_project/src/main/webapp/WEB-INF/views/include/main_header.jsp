@@ -1,0 +1,99 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<title>오늘뭐먹지?</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/main_header/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/main_header/css/icomoon.css">
+	<!-- Ion Icon Fonts-->
+	<link rel="stylesheet" href="/main_header/css/ionicons.min.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/main_header/css/bootstrap.min.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="/main_header/css/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="/main_header/css/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="/main_header/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/main_header/css/owl.theme.default.min.css">
+	
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="/main_header/css/bootstrap-datepicker.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="/main_header/fonts/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="/main_header/css/style.css">
+
+	<!-- customfont css -->
+	<link rel="stylesheet" href="/main_header/css/font.css">
+	
+	</head>
+	<body>
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row toploginmenu">
+						<div class="col-md-12">
+						<c:choose>
+							<c:when test="">
+								<a href="#">로그인</a>
+								<a href="#">회원가입</a>
+							</c:when>
+							<c:otherwise>
+								<a href="#">로그아웃</a>
+								<a href="#">출석체크</a>
+								<a href="#">마이페이지</a>
+							</c:otherwise>
+						</c:choose>
+							<a href="#">고객센터</a>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-7 col-md-5">
+							<div id="colorlib-logo"><a href="index.html"><img id=logoimg src="/main_header/images/logo4.png"></a></div>
+							
+						</div>
+						<div class="col-sm-4 col-md-4" id="uldiv">
+			            <ul>
+								<li><a href="#">레시피</a></li>
+								<li><a href="#">포인트샵</a></li>
+								<li><a href="#">칼럼</a></li>
+<!-- 								<li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li> -->
+						</ul>
+						</div>
+						<div class="col-sm-4 col-md-3">
+			            <form action="#" class="search-wrap" style="padding-top:70px;">
+			               <div class="form-group">
+			                  <input type="search" class="form-control search" placeholder="Search">
+			                  <button class="btn submit-search text-center searchBtn" type="submit"><i class="icon-search"></i></button>
+			               </div>
+			            </form>
+			       		</div>
+		         </div>
+				</div>
+			</div>
+		</nav>
+
+	</div>
+
+
+
+

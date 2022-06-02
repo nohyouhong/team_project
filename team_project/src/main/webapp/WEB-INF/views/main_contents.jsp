@@ -108,12 +108,15 @@
 						</div>
 						<div class="top-recipe-text">
 							<a href="#">
-								<h4>One Pot Weeknight Lasagna Soup Recipe</h4>
+								<h4>가나다라마바사아자차카타파하</h4>
 							</a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore et dolore magna
-								aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore.</p>
+							<p>나라의 말이 중국과 달라
+								한자와 서로 통하지 아니하므로
+								이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
+								마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
+								내가 이를 위해 가엽게 여겨
+								새로 스물여덟 글자를 만드노니
+								사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
 						</div>
 					</div>
 				</div>
@@ -128,11 +131,15 @@
 							<div class="col-sm-8">
 								<div class="top-recipe-text">
 									<a href="#">
-										<h4>One Pot Weeknight Lasagna Soup Recipe</h4>
+										<h4>가나다라마바사아자차카타파하</h4>
 									</a>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna
-										aliqua.</p>
+									<p>나라의 말이 중국과 달라
+										한자와 서로 통하지 아니하므로
+										이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
+										마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
+										내가 이를 위해 가엽게 여겨
+										새로 스물여덟 글자를 만드노니
+										사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
 								</div>
 							</div>
 						</div>
@@ -147,11 +154,15 @@
 							<div class="col-sm-8">
 								<div class="top-recipe-text">
 									<a href="#">
-										<h4>Veggie soup with Mushrooms</h4>
+										<h4>가나다라마바사아자차카타파하</h4>
 									</a>
-									<p>Consectetur adipiscing elit, sed do eiusmod tempor
-										incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-										sit amet, consectetur.</p>
+									<p>나라의 말이 중국과 달라
+										한자와 서로 통하지 아니하므로
+										이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
+										마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
+										내가 이를 위해 가엽게 여겨
+										새로 스물여덟 글자를 만드노니
+										사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
 								</div>
 							</div>
 						</div>
@@ -166,11 +177,14 @@
 							<div class="col-sm-8">
 								<div class="top-recipe-text">
 									<a href="#">
-										<h4>Caramel Ice Cream with Berries</h4>
-									</a>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna
-										aliqua.</p>
+										<h4>가나다라마바사아자차카타파하</h4>
+									<p>나라의 말이 중국과 달라
+										한자와 서로 통하지 아니하므로
+										이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
+										마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
+										내가 이를 위해 가엽게 여겨
+										새로 스물여덟 글자를 만드노니
+										사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
 								</div>
 							</div>
 						</div>

@@ -7,9 +7,7 @@
   margin: 0;
   padding: 0; }
 
-body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px; }
+
 
 h1,
 h2,
@@ -17,21 +15,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "jua", Georgia, serif;
   color: #272727;
   line-height: 1.3;
   font-weight: 600; }
 
-p {
-  font-family: "Montserrat", sans-serif;
-  color: #7a7a7a;
-  font-size: 14px;
-  line-height: 2;
-  font-weight: 500; }
 
-a,
-a:hover,
-a:focus {
+.post-title,
+.post-title:hover,
+.post-title:focus {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   text-decoration: none;

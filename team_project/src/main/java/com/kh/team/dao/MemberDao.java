@@ -6,7 +6,7 @@ import java.util.List;
 import com.kh.team.vo.MemberVo;
 
 public interface MemberDao { 
-	public void insertMember(MemberVo memberVo); 
+	public boolean insertMember(MemberVo memberVo); 
 	public List<MemberVo> getMemberList();
 	public MemberVo getMemberById(String userid);
 	public boolean modifyMember(MemberVo memberVo);

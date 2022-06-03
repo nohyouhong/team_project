@@ -14,6 +14,13 @@ public class PointVo {
 		super();
 	}
 
+	public PointVo(String userid, int point, int p_code) {
+		super();
+		this.userid = userid;
+		this.point = point;
+		this.p_code = p_code;
+	}
+
 	public PointVo(int pno, String userid, int point, int p_code, Date p_regdate, String p_desc) {
 		super();
 		this.pno = pno;

@@ -32,6 +32,11 @@ public class MemberController {
 	public String joinForm() {
 		return "member/join_form";
 	}
+
+	@RequestMapping(value="/login_form", method=RequestMethod.GET)
+	public String loginForm() {
+		return "member/login_form";
+	}
 	
 	@RequestMapping(value="/point_list", method = RequestMethod.GET)
 	public String pointList() {

@@ -21,3 +21,26 @@ p{
 span{
 	color:black;
 }
+
+.btn-secondary{
+	border-radius:5px;
+	margin-bottom:5px;
+	padding:5px 10px 5px 10px;
+}
+#readform{
+	margin-top:100px;
+	margin-bottom:30px;
+}
+#message_read{
+	border-top-style: solid;
+	border-top-color: rgb(255,227,219); 
+}
+.message_read{
+	padding:10px;
+}
+.btn-danger{
+	margin-bottom:5px;
+	padding:5px 10px 5px 10px;
+	border-radius:5px;
+	margin-left:2px;
+}

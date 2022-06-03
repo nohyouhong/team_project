@@ -90,7 +90,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-sm-7 col-md-5">
-							<div id="colorlib-logo"><a href="index.html">
+							<div id="colorlib-logo"><a href="/">
 							<img id=logoimg src="/resources/main_header/images/logo.png"></a></div>
 							
 						</div>

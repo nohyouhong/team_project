@@ -15,13 +15,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Star Admin</title>
-<!--   <link rel="stylesheet" href="mypage_catagory/node_modules/font-awesome/css/font-awesome.min.css" /> -->
-<!--   <link rel="stylesheet" href="mypage_catagory/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css" /> -->
-<!--   <link rel="stylesheet" href="mypage_catagory/node_modules/flag-icon-css/css/flag-icon.min.css" /> -->
-  <link rel="stylesheet" href="/resources/main_mypage/css/style.css" />
-  <link rel="shortcut icon" href="/resources/main_mypage/images/favicon.png" />
-  <img src="/resources/main_mypage/images/face.jpg">
-  <link rel="stylesheet" href="/resources/main_mypage/hongcss.css" />
+  <link rel="stylesheet" href="/resources/mypage_catagory/node_modules/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/resources/mypage_catagory/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css" />
+  <link rel="stylesheet" href="/resources/mypage_catagory/node_modules/flag-icon-css/css/flag-icon.min.css" />
+  <link rel="stylesheet" href="/resources/mypage_catagory/css/style.css" />
+  <link rel="shortcut icon" href="/resources/mypage_catagory/images/favicon.png" />
+  <link rel="stylesheet" href="/resources/hongcss.css" />
 </head>
 
 <body>
@@ -33,7 +32,6 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
           <div class="user-info">
-            <img src="/resources/main_mypage/images/face.jpg" alt="">
             <p class="name">Richard V.Welsh</p>
             <p class="designation">Manager</p>	
             
@@ -133,20 +131,22 @@
 
   </div>
 
+  <script src="/resources/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/resources/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/resources/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/resources/node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="/resources/node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script>
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/misc.js"></script>
-  <script src="js/chart.js"></script>
-  <script src="js/maps.js"></script>
+  <script src="/resources/js/off-canvas.js"></script>
+  <script src="/resources/js/hoverable-collapse.js"></script>
+  <script src="/resources/js/misc.js"></script>
+  <script src="/resources/js/chart.js"></script>
+  <script src="/resources/js/maps.js"></script>
 </body>
 
-</html>
 </div>
 		<div class="col-md-2">
 		</div>
 	</div>
 </div>
-          
-          
-        
+</html>

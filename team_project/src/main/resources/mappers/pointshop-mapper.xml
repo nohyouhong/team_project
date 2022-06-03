@@ -4,13 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.pointshop">
-	<select id="getPoint_list" resultType="PointShopVo">
+
+	<insert id="insertPoint">
+		insert into tbl_point(pno, userid, point, p_code) 
+		values(seq_pointshop_pno.nextval, #{userid}, #{point}, #{p_code})
+	</insert>
+	
+	<select id="getPoint_list" resultType="PointVo">
 		select pno, userid, point, p_regdate, p_desc
 		from tbl_point p, tbl_point_code c
 		where p.p_code = c.p_code
 		and userid = #{userid}
 	</select>
 	
-	<select id="point_useList">
-	</select>
+	<update id="updatePoint">
+		update tbl_member set 
+			<include refid="gainorlossPoint"></include>
+		where userid = #{userid}
+	</update>
+	
+	<delete id="deletePoint">
+		delete from tbl_point
+		where pno = #{pno}
+	</delete>
+	
+	<sql id="gainorlossPoint">
+		<choose>
+			<when test="p_code == 1004">
+				m_point = m_point - #{point}
+			</when>
+			<otherwise>
+				m_point = m_point + #{point}				
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>

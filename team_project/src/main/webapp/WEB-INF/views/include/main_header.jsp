@@ -18,34 +18,34 @@
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="main_header/css/animate.css">
+	<link rel="stylesheet" href="/resources/main_header/css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="main_header/css/icomoon.css">
+	<link rel="stylesheet" href="/resources/main_header/css/icomoon.css">
 	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="main_header/css/ionicons.min.css">
+	<link rel="stylesheet" href="/resources/main_header/css/ionicons.min.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="main_header/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/main_header/css/bootstrap.min.css">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="main_header/css/magnific-popup.css">
+	<link rel="stylesheet" href="/resources/main_header/css/magnific-popup.css">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="main_header/css/flexslider.css">
+	<link rel="stylesheet" href="/resources/main_header/css/flexslider.css">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="main_header/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="main_header/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/resources/main_header/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/resources/main_header/css/owl.theme.default.min.css">
 	
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="main_header/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/resources/main_header/css/bootstrap-datepicker.css">
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="main_header/fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="/resources/main_header/fonts/flaticon/font/flaticon.css">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="main_header/css/style.css" type="text/css">
+	<link rel="stylesheet" href="/resources/main_header/css/style.css" type="text/css">
 
 	<!-- customfont css -->
-	<link rel="stylesheet" href="main_header/css/font.css" type="text/css">
+	<link rel="stylesheet" href="/resources/main_header/css/font.css" type="text/css">
 	
 	<!-- ho/main -->
     <meta name="description" content="">
@@ -59,9 +59,9 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="main_catagory/style.css" type="text/css">
-    <link rel="stylesheet" href="main_column/css/style.css" type="text/css">
-    <link rel="stylesheet" href="ho_main_customstyle.css" type="text/css">
+    <link rel="stylesheet" href="/resources/main_catagory/style.css" type="text/css">
+    <link rel="stylesheet" href="/resources/main_column/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/resources/ho_main_customstyle.css" type="text/css">
 	
 	</head>
 	<body>
@@ -90,7 +90,8 @@
 					<hr>
 					<div class="row">
 						<div class="col-sm-7 col-md-5">
-							<div id="colorlib-logo"><a href="index.html"><img id=logoimg src="main_header/images/logo.png"></a></div>
+							<div id="colorlib-logo"><a href="index.html">
+							<img id=logoimg src="/resources/main_images/logo.png"></a></div>
 							
 						</div>
 						<div class="col-sm-4 col-md-4" id="uldiv">

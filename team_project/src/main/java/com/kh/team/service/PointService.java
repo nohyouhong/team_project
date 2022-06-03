@@ -7,4 +7,5 @@ import com.kh.team.vo.PointVo;
 
 public interface PointService {
 	public List<PointVo> getPoint_list(String userid);
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.kh.team.dao.PointDao;
 import com.kh.team.vo.PointVo;
 
+
 public class PointServiceImpl implements PointService {
 	
 	@Autowired

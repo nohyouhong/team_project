@@ -18,7 +18,7 @@
 		margin-top:30px;
 	}
 	th{
-		background-color: rgb(255,227,219);
+ 		background-color: rgb(255,227,219); 
 	}
 </style>
 <script>
@@ -67,7 +67,7 @@
 										읽지않음
 									</c:when>
 									<c:otherwise>
-										${memberVo.opendate}
+										${messageVo.opendate}
 									</c:otherwise>
 								</c:choose>
 								</td>
@@ -90,7 +90,7 @@
 						<c:forEach var="messageVo" items="${send_messagelist}" varStatus="status">
 							<tr class="tr_list">
 								<td>${status.count}</td>
-								<td class="td_list">${messageVo.message}</td>
+								<td class="td_list"  data-mno="${messageVo.mno}">${messageVo.message}</td>
 								<td>${messageVo.sender}</td>
 								<td>${messageVo.senddate}</td>
 							</tr>

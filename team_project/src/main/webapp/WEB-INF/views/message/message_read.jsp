@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
+
+<script>
+	$(document).ready(function(){
+		var frmPaging = $("#frmPaging");
+		$("#btn_msg_del").click(function(e){
+			e.preventDefault();
+			var mno  = $(this).attr("href");
+			frmPaging.find("input[name=mno]").val(mno);
+			frmPaging.attr("action", "/message/message_delete");
+			frmPaging.attr("method", "get");
+			frmPaging.submit();
+		});
+	});
+</script>
+
 <div class="row" id="readform">
 	<div class="col-md-12">
 		<div class="row">
@@ -12,9 +27,11 @@
 					<button type="button" class="btn btn-sm btn-secondary">
 						답장하기
 					</button>
-					<button type="button" class="btn btn-sm btn-danger">
+					<a href="${messageVo.mno}" class="btn btn-sm btn-danger" id="btn_msg_del">
 						삭제하기
-					</button>
+					</a>
+					<a href="/message/message_list" class="btn btn-sm btn-warning"
+						 id="msg_list">목록으로</a>
 					<div class="form-group message_read text-left" id="message_read">
 						보낸사람
 						<input type="text" class="form-control" id="receiver" name="receiver"

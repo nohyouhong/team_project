@@ -21,7 +21,7 @@ public class MessageDaoTest {
 	@Test
 	public void testInsertMessage() {
 		for(int i = 1; i <= 5; i++) {
-			MessageVo messageVo = new MessageVo("user02", "user01", "hello");
+			MessageVo messageVo = new MessageVo("user02", "user01", "집에 가고시퐈");
 			boolean result = messageDao.insertMessage(messageVo);
 			System.out.println("Message, insert_result: " + result);
 		}

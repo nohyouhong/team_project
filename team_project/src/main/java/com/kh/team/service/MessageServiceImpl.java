@@ -25,14 +25,27 @@ public class MessageServiceImpl implements MessageService{
 
 	@Override
 	public MessageVo readMessage(int mno) {
-		MessageVo messageVo = messageDao.readMessage(mno);
-		return messageVo;
+		boolean result = messageDao.updateOpendate(mno);
+		if(result) {
+			MessageVo messageVo = messageDao.readMessage(mno);
+			return messageVo;
+		}
+		return null;
 	}
 
 	@Override
 	public List<MessageVo> listMessage(String userid, String mType) {
 		List<MessageVo> messageList = messageDao.listMessage(userid, mType);
 		return messageList;
+	}
+
+	@Override
+	public boolean deleteMessage(int mno) {
+		boolean result = messageDao.deleteMessage(mno);
+		if(result) {
+			return true;
+		}
+		return false;
 	}
 
 }

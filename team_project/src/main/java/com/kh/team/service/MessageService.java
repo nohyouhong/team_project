@@ -10,5 +10,6 @@ public interface MessageService {
 	
 	public boolean sendMessage(MessageVo messageVo);
 	public MessageVo readMessage(int mno);
+	public boolean deleteMessage(int mno);
 	public List<MessageVo> listMessage(String userid, String mType);
 }

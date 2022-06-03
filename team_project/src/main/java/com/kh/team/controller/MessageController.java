@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.MessageService;
 import com.kh.team.vo.MessageVo;
@@ -33,5 +34,13 @@ public class MessageController {
 		MessageVo messageVo = messageService.readMessage(mno);
 		model.addAttribute("messageVo", messageVo);
 		return "message/message_read";
+	}
+	
+	@RequestMapping(value="/message_delete", method = RequestMethod.GET)
+	public String deleteMessage(int mno, RedirectAttributes rttr) {
+		System.out.println("message_delete, mno: " +mno);
+		boolean result = messageService.deleteMessage(mno);
+		rttr.addFlashAttribute("message_delete", result);
+		return "redirect:/message/message_list";
 	}
 }

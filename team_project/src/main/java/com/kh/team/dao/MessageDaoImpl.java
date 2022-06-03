@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.MessageVo;
 
+@Repository
 public class MessageDaoImpl implements MessageDao{
 	private String NAMESPACE = "com.kh.team.mappers.message.";
 	
@@ -53,8 +55,8 @@ public class MessageDaoImpl implements MessageDao{
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", userid);
 		map.put("mType", mType);
-		List<MessageVo> messageList = sqlsession.selectList(NAMESPACE, mType);
-		return messageList;
+		List<MessageVo> listMessage = sqlsession.selectList(NAMESPACE+"listMessage", map);
+		return listMessage;
 	}
 
 }

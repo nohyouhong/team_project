@@ -26,12 +26,23 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="messageVo" items="${receive_messagelist}" varStatus="status">
 							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
+								<td>${status.count}</td>
+								<td>${messageVo.message}</td>
+								<td>${messageVo.receiver}</td>
+								<td>
+								<c:choose>
+									<c:when test="${empty messageVo.opendate}">
+										읽지않음
+									</c:when>
+									<c:otherwise>
+										${memberVo.opendate}
+									</c:otherwise>
+								</c:choose>
+								</td>
 							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -46,12 +57,14 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="messageVo" items="${send_messagelist}" varStatus="status">
 							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
+								<td>${status.count}</td>
+								<td>${messageVo.message}</td>
+								<td>${messageVo.sender}</td>
+								<td>${messageVo.senddate}</td>
 							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				

@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.user-info {
+	
+}
+
+.content-wrapper {
+	border-left: 1px solid #DFD9D8;
+}
+
+li a {
+	width: 270px;
+}
+
+.menu-title {
+	font-size: 15px;	
+	width:49%
+}
+
+.menu-answer{
+	font-size: 15px;
+	color: #AFACAC;
+	width:49%;
+	float:right;
+	text-align: right;	
+}
+
+.attendance{
+	width:49%;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+ul li:after {
+	position: absolute;
+ 	content: "";
+    width: 85%;
+    height: 1px;
+    background: #DFD9D8;
+}
+
+li.hidden{
+	visibility: hidden;
+}

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %> --%>
+
 <body>
 	<div class="row">
 	<div class="col-md-2"></div>
@@ -80,4 +82,5 @@
 	</div>
 	<div class="col-md-2"></div>
 </div>
+<%-- <%@ include file="/WEB-INF/views/include/mypage_footer.jsp" %> --%>
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

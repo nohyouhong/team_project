@@ -187,11 +187,11 @@ h6 {
   .single-post-catagory:hover, .single-post-catagory:focus {
     box-shadow: 0 5px 70px 0 rgba(0, 0, 0, 0.25); }
     .single-post-catagory:hover .catagory-content-bg, .single-post-catagory:focus .catagory-content-bg {
-      background-color: #b0c364; }
+      background-color: rgb(248,56,1); }
       .single-post-catagory:hover .catagory-content-bg::after, .single-post-catagory:focus .catagory-content-bg::after {
         border-color: #ffffff; }
       .single-post-catagory:hover .catagory-content-bg .catagory-content, .single-post-catagory:focus .catagory-content-bg .catagory-content {
-        background-color: #b0c364; }
+        background-color: rgb(248,56,1); }
         .single-post-catagory:hover .catagory-content-bg .catagory-content .post-tag,
         .single-post-catagory:hover .catagory-content-bg .catagory-content .post-title, .single-post-catagory:focus .catagory-content-bg .catagory-content .post-tag,
         .single-post-catagory:focus .catagory-content-bg .catagory-content .post-title {

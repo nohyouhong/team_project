@@ -10,7 +10,7 @@ import com.kh.team.vo.PointVo;
 
 @Repository
 public class PointDaoImpl implements PointDao {
-	private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
+	private final String NAMESPACE = "com.kh.team.mappers.point.";
 	
 	@Autowired
 	private SqlSession sqlSession;

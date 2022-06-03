@@ -4,8 +4,26 @@
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%-- <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %> --%>
 
-<body>
-	<div class="row">
+<style>
+	tr.tr_list{
+		cursor: pointer;
+	}
+	
+	tr.tr_list:hover{
+		background-color: rgb(255,227,219);
+	}
+	#msg_list{
+		margin-top:100px;
+	}
+	#msg_paging{
+		margin-top:30px;
+	}
+	th{
+		background-color: aliceblue;
+	}
+</style>
+
+<div class="row" id="msg_list">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="tabbable" id="tabs-667120">
@@ -16,24 +34,27 @@
 					data-toggle="tab">포인트 사용 내역</a></li>
 			</ul>
 			<div class="tab-content">
-<!-- 				<div class="tab-pane active" id="panel-489324"> -->
 				<div class="tab-pane active" id="tab1">
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>획득 내용</th>
-								<th>아이디</th>
-								<th>획득 날짜</th>
+								<th>포인트 획득 사유</th>
+								<th>포인트</th>
+								<th>포인트 획득 날짜</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
+						<c:forEach var="pointVo" items="${point_list}" varStatus="getPoint_status">
+							<c:if test="${pointVo.p_code != 1004}">
+								<tr class="tr_list">
+									<td>${getPoint_status.count}</td>
+									<td class="td_list">${pointVo.p_desc}</td>
+									<td>${pointVo.userid}</td>
+									<td>${pointVo.p_regdate}</td>
+								</tr>
+							</c:if>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -42,18 +63,22 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>사용 내용</th>
-								<th>아이디</th>
-								<th>사용 날짜</th>
+								<th>내용</th>
+								<th>받는사람</th>
+								<th>날짜</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
+							<c:forEach var="pointVo" items="${point_list}" varStatus="usePoint_status">
+								<c:if test="${pointVo.p_code == 1004}">
+									<tr class="tr_list">
+										<td>${usePoint_status.count}</td>
+										<td class="td_list">${pointVo.p_desc}</td>
+										<td>${pointVo.userid}</td>
+										<td>${pointVo.p_regdate}</td>
+									</tr>
+								</c:if>
+							</c:forEach>
 						</tbody>
 					</table>
 				
@@ -63,8 +88,9 @@
 	</div>
 	<div class="col-md-2"></div>
 </div>
+
 <!-- 페이징 -->
-<div class="row">
+<div class="row" id="msg_paging">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<nav>

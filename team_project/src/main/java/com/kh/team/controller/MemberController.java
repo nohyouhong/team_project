@@ -13,8 +13,8 @@ import com.kh.team.vo.MemberVo;
 @RequestMapping("/member")
 public class MemberController {
 	
-//	@Autowired
-//	MemberService memberService;
+	@Autowired
+	MemberService memberService;
 	
 	@RequestMapping(value="/mapper", method=RequestMethod.GET) 
 	public String home() {
@@ -31,5 +31,11 @@ public class MemberController {
 	@RequestMapping(value="/join_form", method=RequestMethod.GET)
 	public String joinForm() {
 		return "member/join_form";
+	}
+	
+	@RequestMapping(value="/point_list", method = RequestMethod.GET)
+	public String pointList() {
+		
+		return "point/point_list";
 	}
 }

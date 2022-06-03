@@ -22,12 +22,12 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	@Transactional
-	public void insertMember(MemberVo memberVo) {
+	public boolean insertMember(MemberVo memberVo) {
 		PointVo pointVo = new PointVo(memberVo.getUserid(), PointDao.JOIN_POINT, PointDao.JOIN_CODE);
 		boolean result = memberDao.insertMember(memberVo);
 		pointDao.updatePoint(pointVo);
 		pointDao.insertPoint(pointVo);
-		
+		return result;
 	}
 
 	@Override
@@ -55,5 +55,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVo getMemberByIdAndPw(String userid, String userpw) {
 		MemberVo memberVo = memberDao.getMemberByIdAndPw(userid, userpw);
 		return memberVo;
+	}
+
+	@Override
+	public List<PointVo> getPoint_list(String userid) {
+		List<PointVo> point_list = pointDao.getPoint_list(userid);
+		return point_list;
 	}
 }

@@ -192,7 +192,7 @@
 				</div>
 			</div>
 			<div>
-				<a href="#" style="float: right;">more</a>
+				<a href="/column/column_list" style="float: right;">more</a>
 			</div>
 		</div>
 	</section>

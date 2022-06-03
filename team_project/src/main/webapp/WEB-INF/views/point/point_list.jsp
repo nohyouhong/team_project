@@ -23,7 +23,7 @@
 	}
 </style>
 
-<div class="row" id="msg_list">
+<div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="tabbable" id="tabs-667120">
@@ -81,7 +81,6 @@
 							</c:forEach>
 						</tbody>
 					</table>
-				
 				</div>
 			</div>
 		</div>
@@ -90,13 +89,12 @@
 </div>
 
 <!-- 페이징 -->
-<div class="row" id="msg_paging">
+<div class="row" id="point_paging">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<nav>
 			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">Previous</a>
-				</li>
+				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 				<li class="page-item"><a class="page-link" href="#">1</a></li>
 				<li class="page-item"><a class="page-link" href="#">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>

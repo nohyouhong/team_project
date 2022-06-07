@@ -50,8 +50,8 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public int getCount(PagingDto pagingDto) {
-		int count = messageDao.getCount(pagingDto);
+	public int getCount(String userid, String mType) {
+		int count = messageDao.getCount(userid, mType);
 		return count;
 	}
 

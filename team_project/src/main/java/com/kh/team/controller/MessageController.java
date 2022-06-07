@@ -22,9 +22,9 @@ public class MessageController {
 	
 	@RequestMapping(value="/send_list", method = RequestMethod.GET)
 	public String sendMessageList(Model model, PagingDto pagingDto) {
-		pagingDto.setCount(messageService.getCount(pagingDto));
-		pagingDto.setPage(pagingDto.getPage());
 		String userid = "user01";
+		pagingDto.setCount(messageService.getCount(userid, messageService.TYPE_SENDER));
+		pagingDto.setPage(pagingDto.getPage());
 		List<MessageVo> send_list = messageService.listMessage(userid, messageService.TYPE_SENDER, pagingDto);
 		model.addAttribute("send_list", send_list);
 		model.addAttribute("pagingDto", pagingDto);
@@ -33,9 +33,9 @@ public class MessageController {
 	
 	@RequestMapping(value="/receive_list", method = RequestMethod.GET)
 	public String receiveMessageList(Model model, PagingDto pagingDto) {
-		pagingDto.setCount(messageService.getCount(pagingDto));
-		pagingDto.setPage(pagingDto.getPage());
 		String userid = "user01";
+		pagingDto.setCount(messageService.getCount(userid, messageService.TYPE_RECEIVER));
+		pagingDto.setPage(pagingDto.getPage());
 		List<MessageVo> receive_list = messageService.listMessage(userid, messageService.TYPE_RECEIVER, pagingDto);
 		model.addAttribute("receive_list", receive_list);
 		model.addAttribute("pagingDto", pagingDto);

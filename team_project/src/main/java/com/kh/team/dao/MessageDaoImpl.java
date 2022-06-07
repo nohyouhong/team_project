@@ -63,8 +63,11 @@ public class MessageDaoImpl implements MessageDao{
 	}
 
 	@Override
-	public int getCount(PagingDto pagingDto) {
-		int count = sqlsession.selectOne(NAMESPACE+"getCount", pagingDto);
+	public int getCount(String userid, String mType) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("mType", mType);
+		int count = sqlsession.selectOne(NAMESPACE+"getCount", map);
 		return count;
 	}
 

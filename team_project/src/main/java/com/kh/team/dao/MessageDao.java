@@ -11,5 +11,5 @@ public interface MessageDao {
 	public boolean updateOpendate(int mno);
 	public boolean deleteMessage(int mno);
 	public List<MessageVo> listMessage(String userid, String mType, PagingDto pagingDto);
-	public int getCount(PagingDto pagingDto);
+	public int getCount(String userid, String mType);
 }

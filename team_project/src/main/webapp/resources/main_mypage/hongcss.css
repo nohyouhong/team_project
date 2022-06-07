@@ -38,7 +38,7 @@ li a {
 	margin-bottom: 10px;
 }
 
-ul li:after {
+.nav-item:after {
 	position: absolute;
  	content: "";
     width: 85%;

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.recipeboard">
+
+	<select id="getNextBno" resultType="int">
+		select seq_board_bno.nextval from dual
+	</select>
+	
+	<insert id="insertAttach">
+		insert into tbl_attach(filename, bno)
+		values(#{filename}, #{bno})
+	</insert>
+
+	<insert id="create">
+		insert into tbl_recipe_board
+			(r_bno, r_title, r_content, userid)
+		values(#{r_bno}, #{r_title}, #{r_content, jdbcType=VARCHAR}, #{userid})
+	</insert>
+	
+	<select id="read" resultType="BoardVo">
+		select * from tbl_recipe_board
+		where r_bno = #{r_bno}
+	</select>
+	
+	<update id="update">
+		update tbl_recipe_board set
+			r_title = #{r_title},
+			r_content = #{r_content, jdbcType=VARCHAR},
+			userid = #{userid}
+		where r_bno = #{r_bno}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_recipe_board
+		where r_bno = #{r_bno}
+	</delete>
+	
+	<select id="list" resultType="RecipeBoardVo">
+		select * from(select rownum rnum, a.* from 
+  		  (select * from tbl_recipe_board
+  		  <include refid="search"></include>
+   			 order by r_regdate desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_recipe_board
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null and keyword != null">
+			<choose>
+				<when test='searchType == "t"'>
+					where title like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "c"'>
+					where content like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "w"'>
+					where writer like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "tc"'>
+					where title like '%' || #{keyword} || '%'
+					or content like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "tcw"'>
+					where title like '%' || #{keyword} || '%'
+					or content like '%' || #{keyword} || '%'
+					or writer like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+  		  </if>
+	</sql>
+	
+	<update id="updateViewCnt">
+		update tbl_recipe_board set
+			viewcnt = viewcnt + 1
+		where r_bno = #{r_bno}
+	</update>
+</mapper>

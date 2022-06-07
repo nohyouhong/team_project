@@ -28,5 +28,11 @@ public class ColumnController {
 		return "column/column_content";
 	}
 	
+	@RequestMapping(value="/column_form", method=RequestMethod.GET)
+	public String column_form()	{
+		
+		return "column/column_form";
+	}
+	
 	
 }

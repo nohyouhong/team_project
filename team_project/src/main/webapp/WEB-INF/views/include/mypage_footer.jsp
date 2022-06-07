@@ -2,8 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-		<div class="col-md-2">
+								</div>
+							<!-- partial:partials/_footer.html -->
+							<!-- partial -->
+						</div>
+					</div>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
-</div>
-            
+

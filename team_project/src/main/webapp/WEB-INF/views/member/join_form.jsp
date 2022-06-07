@@ -12,13 +12,13 @@
 	margin-top:100px;
 	margin-bottom:30px;
 }
-.col-md-12 {
+.myjoinForm {
 	text-align: left;
 }
 </style>
 	<div class="container-fluid window" >
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 myjoinForm">
 				<form role="form" action="" method="post">
 					<div class="form-group">
 						<label for="userid">아이디</label> 

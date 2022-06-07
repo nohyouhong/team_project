@@ -3,12 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp"%>
 
-
-<script src="/resources/summernote/summernote-lite.js"></script>
-<script src="/resources/summernote/summernote-ko-KR.js"></script>
-<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>

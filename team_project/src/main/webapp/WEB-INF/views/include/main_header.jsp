@@ -75,6 +75,11 @@
     <link rel="stylesheet" href="/resources/main_column/css/style.css" type="text/css">
     <link rel="stylesheet" href="/resources/ho_main_customstyle.css" type="text/css">
 	
+	<!-- summernote -->
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+	
 	</head>
 	<body>
 	<div class="colorlib-loader"></div>

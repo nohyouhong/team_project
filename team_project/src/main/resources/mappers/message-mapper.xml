@@ -22,9 +22,11 @@
 		where mno = #{mno}
 	</delete>
 	<select id="listMessage" resultType="MessageVo">
-		select * from tbl_message
-		where ${mType} = #{userid}
-		order by mno desc
+		select * from(select rownum rnum, a.* from
+            (select * from tbl_message
+			 where ${mType} = #{userid}
+			 order by mno desc) a)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_message

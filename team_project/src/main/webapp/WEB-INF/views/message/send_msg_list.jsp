@@ -75,8 +75,7 @@ $(document).ready(function(){
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="messageVo" items="${send_list}" varStatus="status" 
-							begin="${pagingDto.startRow}" end="${pagingDto.endRow}">
+						<c:forEach var="messageVo" items="${send_list}" varStatus="status">
 							<tr class="tr_list">
 								<td>${status.count}</td>
 								<td class="td_list"  data-mno="${messageVo.mno}">${messageVo.message}</td>

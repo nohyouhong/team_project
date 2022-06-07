@@ -53,9 +53,11 @@ public class MessageDaoImpl implements MessageDao{
 
 	@Override
 	public List<MessageVo> listMessage(String userid, String mType, PagingDto pagingDto) {
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("userid", userid);
 		map.put("mType", mType);
+		map.put("startRow", pagingDto.getStartRow());
+		map.put("endRow", pagingDto.getEndRow());
 		List<MessageVo> listMessage = sqlsession.selectList(NAMESPACE+"listMessage", map);
 		return listMessage;
 	}

@@ -42,12 +42,12 @@
 					$.ajax({
 						data : data,
 						type : "POST",
-						url : "uploadSummernoteImageFile",
+						url : "uploadColumnImage",
 						contentType : false,
 						enctype : 'multipart/form-data',
 						processData : false,
-						success : function(data) {
-							$(el).summernote('editor.insertImage', data.url);
+						success : function(rData) {
+							$(el).summernote('editor.insertImage', rData.url);
 						}
 					});
 				}

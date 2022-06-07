@@ -3,26 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp"%>
 
-<style>
-.column_content {
-	padding: 16px 24px;
-    border: 1px solid #D6D6D6;
-    border-radius: 4px;
-}
-</style>
 
-<script>
-$(function(){
-	$("#column_picture").on("dragenter dragover", function(e){
-		e.preventDefault();
-	});
-	$("#column_picture").on("drop", function(e){
-		
-})
-</script>
+<script src="/resources/summernote/summernote-lite.js"></script>
+<script src="/resources/summernote/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+
 
 <div class="container-fluid">
-	
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -30,30 +17,20 @@ $(function(){
 				
 				<div class="form-group">
 					<label for="title"> 칼럼 제목 </label> 
-					<input type="text" class="form-control" id="title" name="title"/>
+					<input type="text" class="form-control" id="c_title" name="c_title"/>
 				</div>
 				
 				<div class="form-group">
 					<label for="content"> 칼럼 내용 </label> 
-					<textarea class="form-control" id="content" name="content"></textarea>
+					<textarea class="summernote" id="c_content" name="c_content"></textarea>
 				</div>
+				<script>
+				$(".summernote").summernote({
+					height: 450,
+					lang: "ko-KR"
+				});
+				</script>
 				
-				<div>
-					<label for="file">첨부 파일을 드래그 &amp; 드롭하세요.</label>
-					<div id="fileDrop"></div>
-				</div>
-				
-				<!-- 업로드 항목 템플릿(클론해서 사용) -->
-				<div class="divUploaded" style="display:none;">
-					<img src="/resources/images/default.png" height="100"><br>
-					<span>default.png</span>
-					<a class="a_delete" href="#">&times;</a>
-				</div>
-				
-				<!-- 업로드한 파일들 -->
-				<div id="uploadedList">
-					
-				</div>
 				<div style="clear:both;">
 					<button type="submit" class="btn btn-primary">작성 완료</button>
 				</div>

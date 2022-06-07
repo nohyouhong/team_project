@@ -5,7 +5,8 @@
   
 <mapper namespace="com.kh.team.mappers.column">
 	<insert id="insertColumn">
-	
+		insert into tbl_column(c_bno, c_title, c_content)
+		values (seq_column_bno.nextval, #{c_title}, #{c_content})
 	</insert>
 	
 	<select id="readColumn" resultType="ColumnVo">

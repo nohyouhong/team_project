@@ -2,27 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
-<!DOCTYPE HTML>
-<html>
-<head>
+
+
   <!-- Required meta tags -->
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>오늘뭐먹지 마이페이지</title>
   <link rel="stylesheet" href="/resources/main_mypage/css/font-awesome.min.css" />
   <link rel="stylesheet" href="/resources/main_mypage/css/perfect-scrollbar.min.css" />
   <link rel="stylesheet" href="/resources/main_mypage/css/flag-icon.min.css" />
   <link rel="stylesheet" href="/resources/main_mypage/css/style.css" />
   <link rel="shortcut icon" href="/resources/main_mypage/images/favicon.png" />
   <link rel="stylesheet" href="/resources/main_mypage/hongcss.css" />
-</head>
 
-<body>
+
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class=" container-scroller">
 
 					<!-- partial -->
 					<div class="container-fluid">
@@ -36,58 +32,70 @@
 
 								</div>
 								<ul class="nav">
-									<li class="nav-item active"><a class="nav-link" href="#">
-											<span class="menu-title">멤버등급</span> <span
-											class="menu-answer">1</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" href="#"> <span
-											class="menu-title">쪽지함</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" href="index.html">
-											<span class="attendance"> <span>2</span><br> <span>이번달
-													출석</span>
-										</span> <span class="attendance"> <span>102</span><br> <span>총
-													누적 출석</span>
-										</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" href="#"> <span
-											class="menu-title">내 정보</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" href="#"> <span
-											class="menu-title">포인트 내역</span>
-									</a></li>
+									<li class="nav-item active">
+										<a class="nav-link" href="#">
+											<span class="menu-title">멤버등급</span> 
+											<span class="menu-answer">1</span>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<span class="menu-title">받은 쪽지함</span>
+											<span class="menu-answer">보낸 쪽지함</span>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="#"> 
+											<span class="menu-title">안 정해짐</span>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="index.html">
+											<span class="attendance"> <span>2</span><br> 
+											<span>이번달 출석</span>
+											</span> 
+											<span class="attendance"> <span>102</span><br> 
+											<span>총누적 출석</span>
+											</span>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="#"> 
+											<span class="menu-title">내 정보</span>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="#"> 
+											<span class="menu-title">포인트 내역</span>
+										</a>
+									</li>
 
-									<li class="nav-item"><a class="nav-link" href="#"> <span
-											class="menu-title">출석 폼</span>
-									</a></li>
-
-									<li class="nav-item hidden"><a class="nav-link" href="#">
+									<li class="nav-item hidden">
+										<a class="nav-link" href="#">
 											<span class="menu-title">hidden</span>
-									</a></li>
+										</a>
+									</li>
 
-									<li class="nav-item"><a class="nav-link" href="#"> <span
-											class="menu-title">1:1문의하기</span>
-									</a></li>
+									<li class="nav-item">
+										<a class="nav-link" href="#"> 
+											<span class="menu-title">1:1문의하기</span>
+										</a>
+									</li>
 
-									<li class="nav-item"><a class="nav-link" href="#"> <span
-											class="menu-title">서비스 가이드</span>
-									</a></li>
+									<li class="nav-item">
+										<a class="nav-link" href="#"> 
+											<span class="menu-title">1:1문의하기</span>
+										</a>
 
 								</ul>
 							</nav>
-
 							<!-- partial -->
-							<div class="content-wrapper bg-white"></div>
-							<!-- partial:partials/_footer.html -->
-
-							<!-- partial -->
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
-	</div>
-
-</body>
-</html>
+							<div class="content-wrapper bg-white">
+							
+							
+							

@@ -1,6 +1,7 @@
 package com.kh.team.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class ColumnVo {
 	private int c_bno;
@@ -10,14 +11,15 @@ public class ColumnVo {
 	private Date c_regdate;
 	private int c_viewcnt;
 	private int c_likecnt;
-	private int c_lno;
+	private String[] pictures;
+	
 	
 	public ColumnVo() {
 		super();
 	}
 
 	public ColumnVo(int c_bno, String c_title, String c_content, String userid, Date c_regdate, int c_viewcnt,
-			int c_likecnt, int c_lno) {
+			int c_likecnt) {
 		super();
 		this.c_bno = c_bno;
 		this.c_title = c_title;
@@ -26,7 +28,6 @@ public class ColumnVo {
 		this.c_regdate = c_regdate;
 		this.c_viewcnt = c_viewcnt;
 		this.c_likecnt = c_likecnt;
-		this.c_lno = c_lno;
 	}
 
 	public int getC_bno() {
@@ -85,19 +86,19 @@ public class ColumnVo {
 		this.c_likecnt = c_likecnt;
 	}
 
-	public int getC_lno() {
-		return c_lno;
+	public String[] getPictures() {
+		return pictures;
 	}
 
-	public void setC_lno(int c_lno) {
-		this.c_lno = c_lno;
+	public void setPictures(String[] pictures) {
+		this.pictures = pictures;
 	}
 
 	@Override
 	public String toString() {
 		return "ColumnVo [c_bno=" + c_bno + ", c_title=" + c_title + ", c_content=" + c_content + ", userid=" + userid
-				+ ", c_regdate=" + c_regdate + ", c_viewcnt=" + c_viewcnt + ", c_likecnt=" + c_likecnt + ", c_lno="
-				+ c_lno + "]";
+				+ ", c_regdate=" + c_regdate + ", c_viewcnt=" + c_viewcnt + ", c_likecnt=" + c_likecnt + ", pictures="
+				+ Arrays.toString(pictures) + "]";
 	}
 	
 }

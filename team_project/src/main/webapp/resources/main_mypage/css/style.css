@@ -13,8 +13,9 @@
   .nav-link.disabled {
     color: #868e96; }
 
-
-
+.d-flex, .sidebar .nav .nav-item a.nav-link {
+    display: flex !important;
+}
 
 .sidebar {
   min-height: 100%;

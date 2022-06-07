@@ -41,7 +41,7 @@
 										<span>2</span><br> <span>이번달 출석</span>
 									</span> 
 									<span class="attendance"> 
-									<span>102</span><br> <span>총누적 출석</span>
+										<span>102</span><br> <span>총누적 출석</span>
 									</span>
 								</a>
 							</li>

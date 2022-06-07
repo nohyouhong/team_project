@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
+<%@include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <style>
 .gender{
 	margin-left: 20px; 
@@ -61,4 +62,5 @@
 			</div>
 		</div>
 	</div>
+<%@include file="/WEB-INF/views/include/mypage_footer.jsp" %>
 <%@include file="/WEB-INF/views/include/main_footer.jsp" %>

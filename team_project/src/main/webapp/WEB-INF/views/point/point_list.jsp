@@ -24,8 +24,7 @@
 </style>
 
 <div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
+	<div class="col-md-12">
 		<div class="tabbable" id="tabs-667120">
 			<ul class="nav nav-tabs">
 				<li class="nav-item"><a class="nav-link active show"
@@ -85,7 +84,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-2"></div>
 </div>
 
 <!-- 페이징 -->

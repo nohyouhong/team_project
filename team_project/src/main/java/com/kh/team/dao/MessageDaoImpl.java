@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.MessageVo;
+import com.kh.team.vo.PagingDto;
 
 @Repository
 public class MessageDaoImpl implements MessageDao{
@@ -51,12 +52,18 @@ public class MessageDaoImpl implements MessageDao{
 	}
 
 	@Override
-	public List<MessageVo> listMessage(String userid, String mType) {
+	public List<MessageVo> listMessage(String userid, String mType, PagingDto pagingDto) {
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", userid);
 		map.put("mType", mType);
 		List<MessageVo> listMessage = sqlsession.selectList(NAMESPACE+"listMessage", map);
 		return listMessage;
+	}
+
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = sqlsession.selectOne(NAMESPACE+"getCount", pagingDto);
+		return count;
 	}
 
 }

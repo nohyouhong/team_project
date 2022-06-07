@@ -15,6 +15,12 @@
 			frmPaging.attr("method", "get");
 			frmPaging.submit();
 		});
+		$("#a_list").click(function(e){
+			e.preventDefault();
+			frmPaging.find("input[name=mno]").val("${messageVo.mno}")
+			frmPaging.attr("action", "/message/send_message_list");
+			frmPaging.submit();
+		});
 	});
 </script>
 
@@ -30,7 +36,7 @@
 					<a href="${messageVo.mno}" class="btn btn-sm btn-danger" id="btn_msg_del">
 						삭제하기
 					</a>
-					<a href="/message/message_list" class="btn btn-sm btn-warning"
+					<a href="#" class="btn btn-sm btn-warning"
 						 id="msg_list">목록으로</a>
 					<div class="form-group message_read text-left" id="message_read">
 						보낸사람

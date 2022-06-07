@@ -50,3 +50,23 @@ span{
 	border-radius:5px;
 	margin-left:2px;
 }
+
+tr.tr_list {
+	cursor: pointer;
+}
+
+tr.tr_list:hover {
+	background-color: aliceblue;
+}
+
+#msg_list {
+	margin-top: 100px;
+}
+
+#msg_paging {
+	margin-top: 30px;
+}
+
+th {
+	background-color: rgb(255, 227, 219);
+}

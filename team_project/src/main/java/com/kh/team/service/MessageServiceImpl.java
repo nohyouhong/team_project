@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.MessageDao;
 import com.kh.team.vo.MessageVo;
+import com.kh.team.vo.PagingDto;
 
 @Service
 public class MessageServiceImpl implements MessageService{
@@ -34,8 +35,8 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public List<MessageVo> listMessage(String userid, String mType) {
-		List<MessageVo> messageList = messageDao.listMessage(userid, mType);
+	public List<MessageVo> listMessage(String userid, String mType, PagingDto pagingDto) {
+		List<MessageVo> messageList = messageDao.listMessage(userid, mType, pagingDto);
 		return messageList;
 	}
 
@@ -48,4 +49,11 @@ public class MessageServiceImpl implements MessageService{
 		return false;
 	}
 
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = messageDao.getCount(pagingDto);
+		return count;
+	}
+
+	
 }

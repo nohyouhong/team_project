@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.RecipeBoardService;
 import com.kh.team.util.MyFileUploader;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
 
 @Controller
@@ -88,13 +89,6 @@ public class RecipeBoardController {
 		model.addAttribute("pagingDto", pagingDto);
 		
 		return "recipeboard/list";
-	}
-	
-	@RequestMapping(value="/replyRun", method=RequestMethod.POST)
-	public String replyRun(RecipeBoardVo recipeBoardVo, RedirectAttributes rttr) {
-		boolean result = recipeBoardService.insertReply(recipeBoardVo);
-		rttr.addFlashAttribute("reply_result", result);
-		return "redirect:/recipeboard/list";
 	}
 	
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)

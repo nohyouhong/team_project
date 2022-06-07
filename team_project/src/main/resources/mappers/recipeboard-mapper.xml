@@ -20,7 +20,7 @@
 		values(#{r_bno}, #{r_title}, #{r_content, jdbcType=VARCHAR}, #{userid})
 	</insert>
 	
-	<select id="read" resultType="BoardVo">
+	<select id="read" resultType="RecipeBoardVo">
 		select * from tbl_recipe_board
 		where r_bno = #{r_bno}
 	</select>

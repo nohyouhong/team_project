@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.RecipeBoardDao;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
 
 @Service

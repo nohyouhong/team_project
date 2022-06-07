@@ -75,7 +75,8 @@ $(document).ready(function(){
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="messageVo" items="${send_list}" varStatus="status">
+						<c:forEach var="messageVo" items="${send_list}" varStatus="status" 
+							begin="${pagingDto.startRow}" end="${pagingDto.endRow}">
 							<tr class="tr_list">
 								<td>${status.count}</td>
 								<td class="td_list"  data-mno="${messageVo.mno}">${messageVo.message}</td>
@@ -97,11 +98,20 @@ $(document).ready(function(){
 					<a class="page-link" href="${pagingDto.startPage -1}">이전</a>
 				</li>
 			</c:if>
-			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
-				<li class="page-item">
-					<a class="page-link" href="${v}">${v}</a>
-				</li>
-			</c:forEach>
+				<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}"
+					var="i">
+					<li
+						<c:choose>
+									<c:when test="${i == param.page}">
+										class = "page-item active"
+									</c:when>
+									<c:otherwise>
+										 class="page-item" 
+									</c:otherwise>
+								</c:choose>>
+						<a href="${i}" class="page-link">${i}</a>
+					</li>
+				</c:forEach>
 			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
 				<li class="page-item">
 					<a class="page-link" href="${pagingDto.endPage +1}">다음</a>

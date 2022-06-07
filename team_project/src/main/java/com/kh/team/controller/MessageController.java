@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.MessageService;
 import com.kh.team.vo.MessageVo;
+import com.kh.team.vo.PagingDto;
 
 @Controller
 @RequestMapping("/message")
@@ -19,14 +20,26 @@ public class MessageController {
 	@Autowired
 	private MessageService messageService;
 	
-	@RequestMapping(value="/message_list", method = RequestMethod.GET)
-	public String messageList(Model model) {
+	@RequestMapping(value="/send_message_list", method = RequestMethod.GET)
+	public String sendMessageList(Model model, PagingDto pagingDto) {
+		pagingDto.setCount(messageService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
 		String userid = "user01";
-		List<MessageVo> r_msg_list = messageService.listMessage(userid, messageService.TYPE_RECEIVER);
-		List<MessageVo> s_msg_list = messageService.listMessage(userid, messageService.TYPE_SENDER);
-		model.addAttribute("receive_messagelist", r_msg_list);
+		List<MessageVo> s_msg_list = messageService.listMessage(userid, messageService.TYPE_SENDER, pagingDto);
 		model.addAttribute("send_messagelist", s_msg_list);
-		return "message/message_list";
+		model.addAttribute("pagingDto", pagingDto);
+		return "message/send_message_list";
+	}
+	
+	@RequestMapping(value="/receive_message_list", method = RequestMethod.GET)
+	public String receiveMessageList(Model model, int page) {
+		PagingDto pagingDto = new PagingDto();
+		pagingDto.setPage(page);
+		String userid = "user01";
+		List<MessageVo> r_msg_list = messageService.listMessage(userid, messageService.TYPE_RECEIVER, pagingDto);
+		model.addAttribute("receive_messagelist", r_msg_list);
+		model.addAttribute("pagingDto", pagingDto);
+		return "message/send_message_list";
 	}
 	
 	@RequestMapping(value="/message_read", method = RequestMethod.GET)

@@ -47,7 +47,7 @@ public class MessageDaoTest {
 	
 	@Test
 	public void testlistMessage() {
-		List<MessageVo> listMessage = messageDao.listMessage("user01", "sender");
+		List<MessageVo> listMessage = messageDao.listMessage("user01", "sender", null);
 		System.out.println("Message, listMessage: " + listMessage);
 	}
 }

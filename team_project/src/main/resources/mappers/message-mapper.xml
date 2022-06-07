@@ -27,6 +27,6 @@
 		order by mno desc
 	</select>
 	<select id="getCount" resultType="int">
-		select count(mno) from tbl_message
+		select count(*) from tbl_message
 	</select>
 </mapper>

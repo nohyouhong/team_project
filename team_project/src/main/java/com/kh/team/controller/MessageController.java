@@ -32,9 +32,9 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/receive_list", method = RequestMethod.GET)
-	public String receiveMessageList(Model model, int page) {
-		PagingDto pagingDto = new PagingDto();
-		pagingDto.setPage(page);
+	public String receiveMessageList(Model model, PagingDto pagingDto) {
+		pagingDto.setCount(messageService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
 		String userid = "user01";
 		List<MessageVo> receive_list = messageService.listMessage(userid, messageService.TYPE_RECEIVER, pagingDto);
 		model.addAttribute("receive_list", receive_list);

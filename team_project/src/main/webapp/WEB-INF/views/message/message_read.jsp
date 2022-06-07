@@ -18,7 +18,7 @@
 		$("#a_list").click(function(e){
 			e.preventDefault();
 			frmPaging.find("input[name=mno]").val("${messageVo.mno}")
-			frmPaging.attr("action", "/message/send_message_list");
+			frmPaging.attr("action", "/message/send_msg_list");
 			frmPaging.submit();
 		});
 	});
@@ -36,12 +36,22 @@
 					<a href="${messageVo.mno}" class="btn btn-sm btn-danger" id="btn_msg_del">
 						삭제하기
 					</a>
-					<a href="#" class="btn btn-sm btn-warning"
+					
+					<a href="/message/" class="btn btn-sm btn-warning"
 						 id="msg_list">목록으로</a>
 					<div class="form-group message_read text-left" id="message_read">
-						보낸사람
-						<input type="text" class="form-control" id="receiver" name="receiver"
+					<c:choose>
+						<c:when test="${messageVo.sender != 'user01'}">
+							보낸사람
+							<input type="text" class="form-control" name="receiver"
 							value="${messageVo.receiver}" readonly />
+						</c:when>
+						<c:otherwise>
+							받는사람
+							<input type="text" class="form-control" name="sender"
+							value="${messageVo.sender}" readonly />
+						</c:otherwise>
+					</c:choose>
 					</div>
 					<div class="form-group message_read text-left">
 						 내용 

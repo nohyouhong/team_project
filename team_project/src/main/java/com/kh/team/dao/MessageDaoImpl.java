@@ -66,4 +66,5 @@ public class MessageDaoImpl implements MessageDao{
 		return count;
 	}
 
+
 }

@@ -2,34 +2,31 @@ package com.kh.team.vo;
 
 public class PagingDto {
 	private int page = 1;
-	private int startRow = 1;
-	private int endRow = 10;
-	private int count;
-	private int totalPage;
-	private int startPage = 1;
-	private int endPage = 10;
+	private int startRow;
+	private int endRow;
 	private String searchType;
 	private String keyword;
-	private int perPage=10;
+	private int perPage = 10;
+	private int totalPage;
+	private int count;
+	private int startPage;
+	private int endPage;
+	private final int PAGE_BLOCK=10;
 	
 	public int getPage() {
 		return page;
 	}
 	public void setPage(int page) {
 		this.page = page;
-		setPageInfo();
-		
-	}
-	
-	private void setPageInfo() {
-		endRow = page * perPage;
-		startRow = endRow - (perPage-1);
-		totalPage = (int)Math.ceil((double)count/ perPage); 
-		startPage = ((page-1) /10) * 10 +1;
-		endPage= startPage +9;
+		this.endRow = this.page * this.perPage;
+		this.startRow = this.endRow - (this.perPage-1);
+		totalPage = (int)(Math.ceil((double)count/perPage));
+		startPage = ((page - 1)/PAGE_BLOCK)*PAGE_BLOCK + 1;
+		endPage = startPage + (PAGE_BLOCK -1);
 		if(endPage > totalPage) {
-			endPage=totalPage;
+			endPage = totalPage;
 		}
+		
 	}
 	public int getStartRow() {
 		return startRow;
@@ -42,30 +39,6 @@ public class PagingDto {
 	}
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
-	public int getTotalPage() {
-		return totalPage;
-	}
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
-	public int getStartPage() {
-		return startPage;
-	}
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-	public int getEndPage() {
-		return endPage;
-	}
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
 	}
 	public String getSearchType() {
 		return searchType;
@@ -85,12 +58,42 @@ public class PagingDto {
 	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getStartPage() {
+		return startPage;
+	}
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+	public int getEndPage() {
+		return endPage;
+	}
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+	public int getPAGE_BLOCK() {
+		return PAGE_BLOCK;
+	}
 	@Override
 	public String toString() {
-		return "PagingDto [page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", count=" + count
-				+ ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage=" + endPage + ", searchType="
-				+ searchType + ", keyword=" + keyword + ", perPage=" + perPage + "]";
+		return "PagingDto [page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", searchType="
+				+ searchType + ", keyword=" + keyword + ", perPage=" + perPage + ", totalPage=" + totalPage + ", count="
+				+ count + ", startPage=" + startPage + ", endPage=" + endPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
+	
+	
+
 
 	
 	

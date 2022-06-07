@@ -25,19 +25,19 @@
 </style>
 <script>
 $(document).ready(function(){
-	var frmpaging = $("#frmPaging");
+	var frmPaging = $("#frmPaging");
 	$(".td_list").click(function(){
 		var mno = $(this).attr("data-mno");
-		frmpaging.find("input[name=mno]").val(mno);
-		frmpaging.attr("action", "/message/message_read");
-		frmpaging.attr("method", "get");
-		frmpaging.submit();
+		frmPaging.find("input[name=mno]").val(mno);
+		frmPaging.attr("action", "/message/message_read");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
 	});
-	$("a.msg_page-link").click(function(e){
+	$("a.page-link").click(function(e){
 		e.preventDefault();
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/message/send_msg_list");
+		frmPaging.attr("action", "/message/send_list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -79,7 +79,7 @@ $(document).ready(function(){
 							<tr class="tr_list">
 								<td>${status.count}</td>
 								<td class="td_list"  data-mno="${messageVo.mno}">${messageVo.message}</td>
-								<td>${messageVo.sender}</td>
+								<td>${messageVo.receiver}</td>
 								<td>${messageVo.senddate}</td>
 							</tr>
 						</c:forEach>
@@ -88,6 +88,7 @@ $(document).ready(function(){
 				</div>
 		</div>
 	<div class="col-md-2"></div>
+	${pagingDto}
 	<div class="col-md-8">
 		<nav>
 			<ul class="pagination justify-content-center">
@@ -98,7 +99,7 @@ $(document).ready(function(){
 			</c:if>
 			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
 				<li class="page-item">
-					<a class="msg_page-link" href="${v}">${v}</a>
+					<a class="page-link" href="${v}">${v}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">

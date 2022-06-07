@@ -41,8 +41,7 @@
 									
 									<li class="nav-item">
 										<a class="nav-link" href="#">
-											<span class="menu-title">받은 쪽지함</span>
-											<span class="menu-answer">보낸 쪽지함</span>
+											<span class="menu-title">쪽지함</span>
 										</a>
 									</li>
 									

@@ -1,17 +1,20 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.service.MemberService;
+import com.kh.team.service.ColumnService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.ColumnVo;
 
@@ -20,7 +23,7 @@ import com.kh.team.vo.ColumnVo;
 public class ColumnController {
 	
 	@Autowired
-	MemberService memberService;
+	private ColumnService columnService;
 	
 	// 칼럼 작성 폼
 	@RequestMapping(value="/column_form", method=RequestMethod.GET)
@@ -30,10 +33,12 @@ public class ColumnController {
 	}
 	
 	@RequestMapping(value="/column_run", method=RequestMethod.POST)
-	public String column_run(ColumnVo columnVo)	{
+	public String column_run(ColumnVo columnVo, RedirectAttributes rttr)	{
 		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
-		
-		return "column/column_list";
+		String c_content = columnVo.getC_content();
+		boolean result = columnService.insertColumn(columnVo);
+		System.out.println("ColumController, column_run, result" + result);
+		return "redirect: /column/column_list";
 	}
 	
 	@RequestMapping(value="/uploadColumnImage", method=RequestMethod.POST)
@@ -61,14 +66,16 @@ public class ColumnController {
 	}
 	
 	@RequestMapping(value="/column_list", method=RequestMethod.GET) 
-	public String column_list() {
-		
+	public String column_list(Model model) {
+		List<ColumnVo> columnList = columnService.getColumnList();
+		model.addAttribute("columnList", columnList);
 		return "column/column_list";
 	}
 	
-	@RequestMapping(value="/column_content", method=RequestMethod.GET) 
-	public String column_content() {
-		
+	@RequestMapping(value="/readColumn", method=RequestMethod.GET) 
+	public String readColumn(int c_bno, Model model) {
+		ColumnVo columnVo = columnService.readColumn(c_bno);
+		model.addAttribute("columnVo", columnVo);
 		return "column/column_content";
 	}
 	

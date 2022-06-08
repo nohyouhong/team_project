@@ -92,12 +92,12 @@
 					<div class="row toploginmenu">
 						<div class="col-md-12">
 						<c:choose>
-							<c:when test="">
-								<a href="#">로그인</a>
-								<a href="#">회원가입</a>
+							<c:when test="${empty loginVo}">
+								<a href="/member/login_form">로그인</a>
+								<a href="/member/join_form">회원가입</a>
 							</c:when>
 							<c:otherwise>
-								<a href="#">로그아웃</a>
+								<a href="/member/logout">로그아웃</a>
 								<a href="#">출석체크</a>
 								<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
 							</c:otherwise>

@@ -134,19 +134,20 @@ $(document).ready(function(){
 					<table class="table">
 						<thead>
 							<tr>
-<!-- 								<th>#</th> -->
 								<th>내용</th>
 								<th>받는사람</th>
 								<th>날짜</th>
 							</tr>
 						</thead>
 						<tbody>
+					
 						<c:forEach var="messageVo" items="${send_list}" varStatus="status">
 							<tr class="tr_list">
-<%-- 								<td>${status.count}</td> --%>
+								<c:if test="${messageVo.sender == loginVo.userid}">
 								<td class="td_list"  data-mno="${messageVo.mno}">${messageVo.message}</td>
 								<td>${messageVo.receiver}</td>
 								<td>${messageVo.senddate}</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 						</tbody>

@@ -18,8 +18,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session) {
-		MemberVo loginVo = memberService.getMemberById("user01");
-		session.setAttribute("loginVo", loginVo);
+//		MemberVo loginVo = memberService.getMemberById("user01");
+//		session.setAttribute("loginVo", loginVo);
 		return "main_contents";
 	}
 	

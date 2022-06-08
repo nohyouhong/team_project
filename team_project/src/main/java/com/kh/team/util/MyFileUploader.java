@@ -13,7 +13,7 @@ public class MyFileUploader {
 		
 		String saveFilename = uploadPath + "/" + 
 				uuid + "_" + originalFilename;
-		System.out.println(saveFilename);
+//		System.out.println(saveFilename);
 		//    C:/m_pic/5da10d8a-8d0d-4b3c-9eb1-81c80a783cfc_파일이름.pdf
 		File fTarget = new File(saveFilename);
 		try {

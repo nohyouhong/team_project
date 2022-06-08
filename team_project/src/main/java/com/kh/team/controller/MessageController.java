@@ -2,6 +2,8 @@ package com.kh.team.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.MessageService;
+import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.MessageVo;
 import com.kh.team.vo.PagingDto;
 
@@ -21,8 +24,9 @@ public class MessageController {
 	private MessageService messageService;
 	
 	@RequestMapping(value="/send_list", method = RequestMethod.GET)
-	public String sendMessageList(Model model, PagingDto pagingDto) {
-		String userid = "user01";
+	public String sendMessageList(HttpSession session, Model model, PagingDto pagingDto) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
 		pagingDto.setCount(messageService.getCount(userid, messageService.TYPE_SENDER));
 		pagingDto.setPage(pagingDto.getPage());
 		List<MessageVo> send_list = messageService.listMessage(userid, messageService.TYPE_SENDER, pagingDto);
@@ -32,8 +36,9 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/receive_list", method = RequestMethod.GET)
-	public String receiveMessageList(Model model, PagingDto pagingDto) {
-		String userid = "user01";
+	public String receiveMessageList(HttpSession session, Model model, PagingDto pagingDto) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
 		pagingDto.setCount(messageService.getCount(userid, messageService.TYPE_RECEIVER));
 		pagingDto.setPage(pagingDto.getPage());
 		List<MessageVo> receive_list = messageService.listMessage(userid, messageService.TYPE_RECEIVER, pagingDto);

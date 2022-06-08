@@ -53,7 +53,7 @@ $(document).ready(function(){
 	$("#btnMsgSend").click(function(){
 		var message = $("#message").val();
 		var receiver = $("#rec").val();
-		var sender = "user01";
+		var sender = "${loginVo.userid}";
 		var sData = {
 				"message" : message,
 				"receiver"  : receiver,
@@ -72,7 +72,7 @@ $(document).ready(function(){
 	
 	$(".dropdown-menu").on("click","#sendMessageSender", function(){
 		$("#modal-693650").trigger("click");
-		var sender = "user01";
+		var sender = "${loginVo.userid}";
 	})
 
 });
@@ -165,8 +165,10 @@ $(document).ready(function(){
 							</c:otherwise>
 						</c:choose>
 						</td>
+<%-- 						</c:if> --%>
 					</tr>
 				</c:forEach>
+				
 				</tbody>
 			</table>
 		</div>

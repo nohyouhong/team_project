@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
@@ -60,7 +61,7 @@ $(document).ready(function(){
 			<table class="table">
 				<thead>
 				<tr>
-					<th>#</th>
+<!-- 					<th>#</th> -->
 					<th>내용</th>
 					<th>보낸사람</th>
 					<th>날짜</th>
@@ -69,8 +70,8 @@ $(document).ready(function(){
 				<tbody>
 				<c:forEach var="messageVo" items="${receive_list}" varStatus="status">
 					<tr class="tr_list">
-						<td>${status.count}</td>
-						<td class="td_list" data-mno="${messageVo.mno}">${messageVo.message}</td>
+<%-- 						<td>${status.count}</td> --%>
+						<td class="td_list" data-mno="${messageVo.mno}">${fn:substring(messageVo.message,0,5)}...</td>
 						<td>${messageVo.receiver}</td>
 						<td>
 						<c:choose>
@@ -87,7 +88,6 @@ $(document).ready(function(){
 				</tbody>
 			</table>
 		</div>
-		${pagingDto}
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<nav>

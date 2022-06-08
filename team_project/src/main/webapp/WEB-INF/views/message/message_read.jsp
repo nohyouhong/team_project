@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
+<%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 
 <script>
@@ -17,14 +18,10 @@
 		});
 		$("#a_list").click(function(e){
 			e.preventDefault();
-			frmPaging.find("input[name=mno]").val("${messageVo.mno}")
-			frmPaging.attr("action", "/message/send_msg_list");
-			frmPaging.submit();
-		});
-		$("#msg_list").click(function(e){
-			e.preventDefault();
-			frmPaging.find("input[name=mno]").val("${messageVo.mno}");
-			frmPaging.attr("action", "/message/send_list");
+			frmPaging.find("input[name=mno]").val("");
+			frmPaging.find("input[name=page]").val("${param.page}");
+			frmPaging.find("input[name=perPage]").val("${param.perPage}");
+			frmPaging.attr("action", "/message/receive_list");
 			frmPaging.submit();
 		});
 		$("#btnreply").click(function(){
@@ -50,8 +47,6 @@
 </script>
 <div class="row">
 	<div class="col-md-12">
-		<a id="btnWriteMessage" class="btn btn-outline-danger">쪽지쓰기</a>
-		<hr>
 		<div class="modal fade" id="modal-container-693650" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<a id="modal-693650" href="#modal-container-693650" role="button"
@@ -66,8 +61,8 @@
 					</div>
 					<div class="modal-body">
 						<p id="p">받는 사람</p>
-						<input type="text" class="form-control" id="rec" 
-							placeholder="받는사람 아이디" value="${messageVo.sender}" readonly>
+						<input type="text" class="form-control" id="rec" placeholder="받는사람 아이디"
+							 value="${messageVo.sender}" readonly>
 						<p id="p">보낼 내용</p>
 						<textarea class="form-control" id="message" placeholder="내용을 적어주세요(150글자이내)" rows="4"></textarea>
 					</div>
@@ -77,25 +72,30 @@
 							data-dismiss="modal">닫기</button>
 					</div>
 				</div>
+
 			</div>
+
 		</div>
+
 	</div>
 </div>
 <div class="row" id="readform">
 	<div class="col-md-12">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
 				<form role="form">
-					<button type="button" class="btn btn-sm btn-secondary" id="btnreply">
-						답장하기
-					</button>
+					<c:choose>
+						<c:when test="${messageVo.sender == 'user01'}"></c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-sm btn-secondary" id="btnreply">
+								답장하기
+							</button>
+						</c:otherwise>
+					</c:choose>
 					<a href="${messageVo.mno}" class="btn btn-sm btn-danger" id="btn_msg_del">
 						삭제하기
 					</a>
 					
-					<a href="/message/send_list" class="btn btn-sm btn-warning"
-						 id="msg_list">목록으로</a>
+					<a href="#" class="btn btn-sm btn-warning"
+						 id="a_list">목록으로</a>
 					<div class="form-group message_read text-left" id="message_read">
 					<c:choose>
 						<c:when test="${messageVo.sender != 'user01'}">
@@ -116,10 +116,8 @@
 							 readonly >${messageVo.message}</textarea>
 					</div>
 				</form>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
 	</div>
 </div>
 
+<%@ include file="/WEB-INF/views/include/mypage_footer.jsp" %>
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

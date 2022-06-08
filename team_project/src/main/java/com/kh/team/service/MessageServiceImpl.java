@@ -17,7 +17,7 @@ public class MessageServiceImpl implements MessageService{
 
 	@Override
 	public boolean sendMessage(MessageVo messageVo) {
-		boolean result =messageDao.insertMessage(messageVo);
+		boolean result =messageDao.sendMessage(messageVo);
 		if(result) {
 			return true;
 		}

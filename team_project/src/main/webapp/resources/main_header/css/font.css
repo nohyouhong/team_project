@@ -59,9 +59,6 @@ tr.tr_list:hover {
 	background-color: aliceblue;
 }
 
-#msg_list {
-	margin-top: 100px;
-}
 
 #msg_paging {
 	margin-top: 30px;
@@ -69,4 +66,9 @@ tr.tr_list:hover {
 
 th {
 	background-color: rgb(255, 227, 219);
+	text-align: center;
 }
+td{
+	text-align: center;
+}
+

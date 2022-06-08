@@ -68,7 +68,7 @@ $(document).ready(function(){
 					<table class="table">
 						<thead>
 							<tr>
-								<th>#</th>
+<!-- 								<th>#</th> -->
 								<th>내용</th>
 								<th>받는사람</th>
 								<th>날짜</th>
@@ -77,7 +77,7 @@ $(document).ready(function(){
 						<tbody>
 						<c:forEach var="messageVo" items="${send_list}" varStatus="status">
 							<tr class="tr_list">
-								<td>${status.count}</td>
+<%-- 								<td>${status.count}</td> --%>
 								<td class="td_list"  data-mno="${messageVo.mno}">${messageVo.message}</td>
 								<td>${messageVo.receiver}</td>
 								<td>${messageVo.senddate}</td>
@@ -88,7 +88,6 @@ $(document).ready(function(){
 				</div>
 		</div>
 	<div class="col-md-2"></div>
-	${pagingDto}
 	<div class="col-md-8">
 		<nav>
 			<ul class="pagination justify-content-center">

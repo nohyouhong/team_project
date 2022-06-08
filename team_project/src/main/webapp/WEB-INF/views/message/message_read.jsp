@@ -21,6 +21,12 @@
 			frmPaging.attr("action", "/message/send_msg_list");
 			frmPaging.submit();
 		});
+		$("#msg_list").click(function(e){
+			e.preventDefault();
+			frmPaging.find("input[name=mno]").val("${messageVo.mno}")
+			frmPaging.attr("action", "/message/send_list");
+			frmPaging.submit();
+		});
 	});
 </script>
 
@@ -43,12 +49,12 @@
 					<c:choose>
 						<c:when test="${messageVo.sender != 'user01'}">
 							보낸사람
-							<input type="text" class="form-control" name="receiver"
+							<input type="text" class="form-control" id="receiver"
 							value="${messageVo.receiver}" readonly />
 						</c:when>
 						<c:otherwise>
 							받는사람
-							<input type="text" class="form-control" name="sender"
+							<input type="text" class="form-control" id="sender"
 							value="${messageVo.sender}" readonly />
 						</c:otherwise>
 					</c:choose>

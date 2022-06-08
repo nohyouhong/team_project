@@ -51,7 +51,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/member/point_list?userid='user01'"> 
+								<a class="nav-link" href="/member/point_list?userid=${loginVo.userid }"> 
 									<span class="menu-title">포인트 내역</span>
 								</a>
 							</li>

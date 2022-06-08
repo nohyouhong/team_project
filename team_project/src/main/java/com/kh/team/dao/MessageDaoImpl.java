@@ -19,8 +19,8 @@ public class MessageDaoImpl implements MessageDao{
 	private SqlSession sqlsession;
 
 	@Override
-	public boolean insertMessage(MessageVo messageVo) {
-		int count = sqlsession.insert(NAMESPACE+"insertMessage", messageVo);
+	public boolean sendMessage(MessageVo messageVo) {
+		int count = sqlsession.insert(NAMESPACE+"sendMessage", messageVo);
 		if(count >0) {
 			return true;
 		}

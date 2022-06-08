@@ -54,6 +54,14 @@ public class MessageController {
 		System.out.println("message_delete, mno: " +mno);
 		boolean result = messageService.deleteMessage(mno);
 		rttr.addFlashAttribute("message_delete", result);
-		return "redirect:/message/message_list";
+		return "redirect:/message/send_list";
+	}
+	
+	@RequestMapping(value="/sendMessage", method = RequestMethod.POST)
+	public String sendMessage(MessageVo messageVo, RedirectAttributes rttr) {
+		boolean result = messageService.sendMessage(messageVo);
+		System.out.println("result" +result);
+		rttr.addFlashAttribute("sendMessage", result);
+		return "redirect:/message/send_list";
 	}
 }

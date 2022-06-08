@@ -6,7 +6,7 @@ import com.kh.team.vo.MessageVo;
 import com.kh.team.vo.PagingDto;
 
 public interface MessageDao {
-	public boolean insertMessage(MessageVo messageVo);
+	public boolean sendMessage(MessageVo messageVo);
 	public MessageVo readMessage(int mno);
 	public boolean updateOpendate(int mno);
 	public boolean deleteMessage(int mno);

@@ -25,7 +25,7 @@ public class MessageDaoTest {
 					"하느님이 보우하사 우리나라 만세\r\n" + 
 					"무궁화 삼천리 화려 강산\r\n" + 
 					"대한 사람 대한으로 길이 보전하세");
-			boolean result = messageDao.insertMessage(messageVo);
+			boolean result = messageDao.sendMessage(messageVo);
 			System.out.println("Message, insert_result: " + result);
 		}
 	}

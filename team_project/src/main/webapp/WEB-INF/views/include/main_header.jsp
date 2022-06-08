@@ -116,7 +116,7 @@
 			            <ul>
 								<li><a href="#">레시피</a></li>
 								<li><a href="#">포인트샵</a></li>
-								<li><a href="#">칼럼</a></li>
+								<li><a href="/column/column_list">칼럼</a></li>
 <!-- 								<li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li> -->
 						</ul>
 						</div>
@@ -132,9 +132,4 @@
 				</div>
 			</div>
 		</nav>
-
 	</div>
-
-
-
-

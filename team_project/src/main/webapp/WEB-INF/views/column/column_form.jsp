@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp"%>
 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -27,7 +32,7 @@
 					lang: "ko-KR", 
 					//콜백 함수
 		            callbacks: { 
-		            	onImageUpload : function(files, editor, welEditable) {
+		            	onImageUpload : function(files) {
 				            // 파일 업로드(다중업로드를 위해 반복문 사용)
 				            for (var i = files.length - 1; i >= 0; i--) {
 				            uploadColumnImageFile(files[i], this);
@@ -48,13 +53,13 @@
 						processData : false,
 						success : function(rData) {
 							console.log("rData: ", rData)
-							$(el).summernote('editor.insertImage', rData.url);
+							$(el).summernote('editor.insertImage', rData);
 						}
 					});
 				}
 				</script>
 				
-				
+<!-- 				<img alt="이미지 예제" src="/column/displayImage?column_image=c:/boardattach/846c4b3c-b21d-4b75-83f3-c323edeed008_spade-2.png"> -->
 				<div style="clear:both;">
 					<button type="submit" class="btn btn-primary">작성 완료</button>
 				</div>

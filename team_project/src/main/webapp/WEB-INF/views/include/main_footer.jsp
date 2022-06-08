@@ -30,29 +30,5 @@
 		</div>
 		</footer>
 
-	<!-- jQuery -->
-	<script src="/resources/main_header/js/jquery.min.js"></script>
-   <!-- popper -->
-   <script src="/resources/main_header/js/popper.min.js"></script>
-   <!-- bootstrap 4.1 -->
-   <script src="/resources/main_header/js/bootstrap.min.js"></script>
-   <!-- jQuery easing -->
-   <script src="/resources/main_header/js/jquery.easing.1.3.js"></script>
-	<!-- Waypoints -->
-	<script src="/resources/main_header/js/jquery.waypoints.min.js"></script>
-	<!-- Flexslider -->
-	<script src="/resources/main_header/js/jquery.flexslider-min.js"></script>
-	<!-- Owl carousel -->
-	<script src="/resources/main_header/js/owl.carousel.min.js"></script>
-	<!-- Magnific Popup -->
-	<script src="/resources/main_header/js/jquery.magnific-popup.min.js"></script>
-	<script src="/resources/main_header/js/magnific-popup-options.js"></script>
-	<!-- Date Picker -->
-	<script src="/resources/main_header/js/bootstrap-datepicker.js"></script>
-	<!-- Stellar Parallax -->
-	<script src="/resources/main_header/js/jquery.stellar.min.js"></script>
-	<!-- Main -->
-	<script src="/resources/main_header/js/main.js"></script>
-
 </body>
 </html>

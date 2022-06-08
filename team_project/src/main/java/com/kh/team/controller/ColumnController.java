@@ -2,6 +2,7 @@ package com.kh.team.controller;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.kh.team.service.MemberService;
+import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.ColumnVo;
 
 @Controller
@@ -42,9 +44,15 @@ public class ColumnController {
 	}
 	
 	@RequestMapping(value="/uploadColumnImage", method=RequestMethod.POST)
-	public String uploadColumnImage(MultipartFile file) {
+	@ResponseBody
+	public String uploadColumnImage(MultipartFile file) throws Exception {
 		System.out.println("ColumController, uploadColumnImage, file: " + file);
-		return null;
+		String originalFilename = file.getOriginalFilename();
+		System.out.println("ColumController, uploadColumnImage, originalFilename: " + originalFilename);
+		byte[] fileData = file.getBytes();
+		String saveFilename = MyFileUploader.uploadFile("c:/boardattach", originalFilename, fileData);
+		System.out.println("ColumController, uploadColumnImage, saveFilename: " + saveFilename);
+		return saveFilename;
 	}
 	
 	@RequestMapping(value="/column_list", method=RequestMethod.GET) 

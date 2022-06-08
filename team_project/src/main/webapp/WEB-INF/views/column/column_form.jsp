@@ -47,6 +47,7 @@
 						enctype : 'multipart/form-data',
 						processData : false,
 						success : function(rData) {
+							console.log("rData: ", rData)
 							$(el).summernote('editor.insertImage', rData.url);
 						}
 					});

@@ -5,23 +5,35 @@
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <style>
-	tr.tr_list{
-		cursor: pointer;
-	}
-	
-	tr.tr_list:hover{
-		background-color: aliceblue;
-		cursor: pointer;
-	}
-	#msg_list{
-		margin-top:100px;
-	}
-	#msg_paging{
-		margin-top:30px;
-	}
-	th{
- 		background-color: rgb(255,227,219); 
-	}
+tr.tr_list {
+	cursor: pointer;
+}
+
+tr.tr_list:hover {
+	background-color: aliceblue;
+	cursor: pointer;
+}
+
+#msg_list {
+	margin-top: 20px;
+}
+
+#msg_paging {
+	margin-top: 30px;
+}
+
+th {
+	background-color: rgb(255, 227, 219);
+}
+
+#p {
+	text-align: left;
+	font-size: 15px;
+}
+
+#modal-693650 {
+	text-align: left;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -49,8 +61,62 @@ $(document).ready(function(){
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	$("#btnMsgSend").click(function(){
+		var message = $("#message").val();
+		var receiver = $("#rec").val();
+		var sender = "user01";
+		var sData = {
+				"message" : message,
+				"receiver"  : receiver,
+				"sender"  : sender
+		};
+		var url = "/message/sendMessage";
+		$.post(url, sData, function(rData){
+			console.log(rData);
+			$("#modalX").trigger("click");
+	 	});
+	});
+	
+	$("#btnWriteMessage").click(function() {
+		$("#modal-693650").trigger("click");
+	});
 });
 </script>
+<div class="row">
+	<div class="col-md-12">
+		<a id="btnWriteMessage" class="btn btn-outline-danger">쪽지쓰기</a>
+		<hr>
+		<div class="modal fade" id="modal-container-693650" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<a id="modal-693650" href="#modal-container-693650" role="button"
+			class="btn btn-outline-danger" data-toggle="modal" style="display:none;">쪽지쓰기</a>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">쪽지쓰기창</h5>
+						<button type="button" class="close" data-dismiss="modal" id="modalX">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="p">받는 사람</p>
+						<input type="text" class="form-control" id="rec" placeholder="받는사람 아이디">
+						<p id="p">보낼 내용</p>
+						<textarea class="form-control" id="message" placeholder="내용을 적어주세요(150글자이내)" rows="4"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="btnMsgSend">보내기</button>
+						<button type="button" class="btn btn-secondary" id="btnMsgClose"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
 <%-- ${messageList} --%>
 	<div class="row" id="msg_list">
 		<div class="col-md-12">

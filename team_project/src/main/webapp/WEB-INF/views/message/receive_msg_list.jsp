@@ -50,35 +50,39 @@ $(document).ready(function(){
 		frmPaging.submit();
 	});
 	$("#btnMsgSend").click(function(){
-// 		var message = $("#message").val();
-// 		var receiver = $("#rec").val();
-// 		var sender = "user01";
-// 		var sData = {
-// 				"message" : message,
-// 				"receiver"  : receiver,
-// 				"sender"  : sender
-// 		};
-// 		var url = "/message/sendMessage";
-// 		$.post(url, sData, function(rData){
-// 			console.log(rData);
-// 			$("#btnMsgClose").trigger("click");
-			$("#btnMsgClose").trigger("click").modal('hide');
-// 		});
+		var message = $("#message").val();
+		var receiver = $("#rec").val();
+		var sender = "user01";
+		var sData = {
+				"message" : message,
+				"receiver"  : receiver,
+				"sender"  : sender
+		};
+		var url = "/message/sendMessage";
+		$.post(url, sData, function(rData){
+			console.log(rData);
+			$("#modalX").trigger("click");
+	 	});
+	});
+	
+	$("#btnWriteMessage").click(function() {
+		$("#modal-693650").trigger("click");
 	});
 });
 </script>
 <div class="row">
 	<div class="col-md-12">
-		<a id="modal-693650" href="#modal-container-693650" role="button"
-			class="btn btn-outline-danger" data-toggle="modal">쪽지쓰기</a>
+		<a id="btnWriteMessage" class="btn btn-outline-danger">쪽지쓰기</a>
 		<hr>
 		<div class="modal fade" id="modal-container-693650" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
+			<a id="modal-693650" href="#modal-container-693650" role="button"
+			class="btn btn-outline-danger" data-toggle="modal" style="display:none;">쪽지쓰기</a>
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="myModalLabel">쪽지쓰기창</h5>
-						<button type="button" class="close" data-dismiss="modal">
+						<button type="button" class="close" data-dismiss="modal" id="modalX">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>

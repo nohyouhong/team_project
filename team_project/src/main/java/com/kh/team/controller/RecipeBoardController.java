@@ -23,23 +23,20 @@ public class RecipeBoardController {
 	@Autowired
 	private RecipeBoardService recipeBoardService;
 	
-	//글쓰기폼
 	@RequestMapping(value="/createForm", method=RequestMethod.GET)
 	public String createForm() {
-		return "board/create_form";
+		return "recipeboard/create_form";
 	}
 	
-	//글등록
 	@RequestMapping(value="/createRun", method=RequestMethod.POST)
 	public String createRun(RecipeBoardVo recipeBoardVo, RedirectAttributes rttr) {
 		System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
 		boolean result = recipeBoardService.create(recipeBoardVo);
 		System.out.println("BoardController, createRun, result: " + result);
 		rttr.addFlashAttribute("create_result", result);
-		return "redirect:/recipeBoard/list";
+		return "redirect:/recipeboard/list";
 	}
 
-	//조회
 	@RequestMapping(value="/read", method=RequestMethod.GET)
 	public String read(int bno, Model model, PagingDto pagingDto) {
 		System.out.println("BoardController, read, bno: " + bno);

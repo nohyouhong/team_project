@@ -82,13 +82,23 @@ $(function() {
 	
 // 	대표요리사진넣기
 	$("#mainCookImage").click(function() {
-		var inputFile = $("#file");
+		var inputFile = $("#mainFile");
 		inputFile.trigger("click");
 		var file = inputFile.val();
 		console.log("클릭됨");
 		console.log(file);
 		
 	});
+	$("#mainFile").on("change", function(){
+// 		console.log(this.files);
+    	if (this.files && this.files[0]) {
+       		var reader = new FileReader();
+    			reader.onload = function (e) {
+    			$("#mainCookImage").attr("src", e.target.result);
+    			}
+            reader.readAsDataURL(this.files[0]);
+    	}
+    });
 	
 // 	스텝요리사진넣기
 	$("#addCookStepList").on("click", ".stepCookImage" , function() {
@@ -97,7 +107,18 @@ $(function() {
 		var file = inputFile.val();
 		console.log(file);
 	});
-
+	$("#addCookStepList").on("change", ".cookStepFile" , function() {
+// 		console.log(this.files);
+		var inputImg = $(this).parent().find("img");
+    	if (this.files && this.files[0]) {
+       		var reader = new FileReader();
+    			reader.onload = function (e) {
+    			inputImg.attr("src", e.target.result);
+    			}
+            reader.readAsDataURL(this.files[0]);
+    	}
+    });
+	
 });
 </script>
 <div class="container-fluid">
@@ -109,22 +130,22 @@ $(function() {
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
-							<label for="title" class="createTitle">레시피 제목</label>
-							<input type="text" class="form-control inputVal" id="title" name="title" />
+							<label for="r_title" class="createTitle">레시피 제목</label>
+							<input type="text" class="form-control inputVal" id="r_title" name="r_title" />
 						</div>
 						<div class="form-group">
-							<label for="title" class="createTitle">요리 소개</label>
-							<textarea rows="4" class="form-control inputVal"></textarea>
+							<label for="r_explain" class="createTitle">요리 소개</label>
+							<textarea rows="4" class="form-control inputVal" id="r_explain" name="r_explain"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="title" class="createTitle">카테고리</label> 
 							<div class="row">
 		   						<div class="col">
-									<select class="custom-select inputVal" name="종류" >
+									<select class="custom-select inputVal" name="f_code">
 										<option selected>종류별</option>
-										<option>한식</option>
-										<option>한식</option>
-										<option>한식</option>
+										<option value="1001">한식</option>
+										<option value="1002">중식</option>
+										<option value="1003">양식</option>
 									</select>
 								</div>
 		   						<div class="col">
@@ -153,7 +174,7 @@ $(function() {
 						<img class="inputVal" id="mainCookImage" alt="요리사진을 등록해주세요."
 						src="/resources/main_mypage/images/cook.png" />
 						<label for="file"> 대표 요리사진을 등록해주세요. </label>
-						<input type="file" id="file" class="cookFile"/>
+						<input type="file" id="mainFile" class="cookFile"/>
 					</div>
 				</div><hr class="createHr">
 				<div class="explainDiv">
@@ -195,7 +216,7 @@ $(function() {
 							<div class="col-md-2 stepImageDiv">
 								<img class="inputImage stepCookImage" alt="요리사진을 등록해주세요."
 								src="/resources/main_mypage/images/plus.png"/>
-								<input type="file" id="file" class="cookFile cookStepFile"/>
+								<input type="file" class="cookFile cookStepFile"/>
 							</div>
 						</div>
 					</div>

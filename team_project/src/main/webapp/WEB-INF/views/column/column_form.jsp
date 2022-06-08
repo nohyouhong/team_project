@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/board/createRun" method="post" id="frmCreate">
+			<form role="form" action="/column/column_run" method="post" id="frmColumn">
 				
 				<div class="form-group">
 					<label for="title"> 칼럼 제목 </label> 
@@ -21,9 +21,39 @@
 				<script>
 				$(".summernote").summernote({
 					height: 450,
-					lang: "ko-KR"
+					minHeight: null,
+		        	maxHeight: null,
+		        	focus: true,
+					lang: "ko-KR", 
+					//콜백 함수
+		            callbacks: { 
+		            	onImageUpload : function(files, editor, welEditable) {
+				            // 파일 업로드(다중업로드를 위해 반복문 사용)
+				            for (var i = files.length - 1; i >= 0; i--) {
+				            uploadColumnImageFile(files[i], this);
+				    		}
+		            	}
+		            }
 				});
+		        
+				function uploadColumnImageFile(file, el) {
+					data = new FormData();
+					data.append("file", file);
+					$.ajax({
+						data : data,
+						type : "POST",
+						url : "uploadColumnImage",
+						contentType : false,
+						enctype : 'multipart/form-data',
+						processData : false,
+						success : function(rData) {
+							console.log("rData: ", rData)
+							$(el).summernote('editor.insertImage', rData.url);
+						}
+					});
+				}
 				</script>
+				
 				
 				<div style="clear:both;">
 					<button type="submit" class="btn btn-primary">작성 완료</button>

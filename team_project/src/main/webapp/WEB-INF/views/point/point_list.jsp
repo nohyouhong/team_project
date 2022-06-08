@@ -49,7 +49,7 @@
 								<tr class="tr_list">
 									<td>${getPoint_status.count}</td>
 									<td class="td_list">${pointVo.p_desc}</td>
-									<td>${pointVo.userid}</td>
+									<td>${pointVo.point}</td>
 									<td>${pointVo.p_regdate}</td>
 								</tr>
 							</c:if>
@@ -73,7 +73,7 @@
 									<tr class="tr_list">
 										<td>${usePoint_status.count}</td>
 										<td class="td_list">${pointVo.p_desc}</td>
-										<td>${pointVo.userid}</td>
+										<td>${pointVo.point}</td>
 										<td>${pointVo.p_regdate}</td>
 									</tr>
 								</c:if>

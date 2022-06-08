@@ -5,6 +5,12 @@
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <style>
 	tr.tr_list{
 		cursor: pointer;
@@ -68,6 +74,13 @@ $(document).ready(function(){
 	$("#btnWriteMessage").click(function() {
 		$("#modal-693650").trigger("click");
 	});
+	
+	$(".dropdown-menu").on("click","#sendMessageSender", function(){
+		$("#modal-693650").trigger("click");
+		var sender = "user01";
+		$("#rec").val(sender);
+	})
+
 });
 </script>
 <div class="row">
@@ -133,7 +146,22 @@ $(document).ready(function(){
 					<tr class="tr_list">
 <%-- 						<td>${status.count}</td> --%>
 						<td class="td_list" data-mno="${messageVo.mno}">${fn:substring(messageVo.message,0,5)}...</td>
-						<td>${messageVo.receiver}</td>
+						<td>
+						<div class="dropdown">
+							<button class="btn dropdown-toggle" type="button"
+											id="dropdownMenuButton" data-toggle="dropdown">
+								${messageVo.sender}
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-sender="${messageVo.sender}">
+								<a class="dropdown-item" href="#" id="sendMessageSender" >
+									쪽지보내기
+								</a> 
+								<a class="dropdown-item" href="#">
+									레시피보기 
+								</a>
+							</div>
+						</div>
+						</td>
 						<td>
 						<c:choose>
 							<c:when test="${empty messageVo.opendate}">

@@ -7,13 +7,12 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/column/column_run" method="post" id="frmColumn">
-				
+				<input type="hidden" name="c_picture" id="c_picture">
 				<div class="form-group">
 					<label for="title"> 칼럼 제목 </label> 
 					<input type="text" class="form-control" id="c_title" name="c_title"/>
@@ -54,10 +53,12 @@
 						success : function(rData) {
 							console.log("rData: ", rData)
 							$(el).summernote('editor.insertImage', rData);
+							$("#c_picture").val(rData);
 						}
 					});
 				}
 				</script>
+				
 				
 <!-- 				<img alt="이미지 예제" src="/column/displayImage?column_image=c:/boardattach/846c4b3c-b21d-4b75-83f3-c323edeed008_spade-2.png"> -->
 				<div style="clear:both;">

@@ -5,16 +5,27 @@
   
 <mapper namespace="com.kh.team.mappers.column">
 	<insert id="insertColumn">
-		insert into tbl_column(c_bno, c_title, c_content)
-		values (seq_column_bno.nextval, #{c_title}, #{c_content})
+		insert into tbl_column_board(c_bno, c_title, c_content)
+		values (#{c_bno}, #{c_title}, #{c_content})
+	</insert>
+	
+	<select id="getNextC_bno" resultType="int">
+		select seq_column_bno.nextval from dual
+	</select>
+	
+	<insert id="insertColumnPicture">
+		insert into tbl_column_pic(c_pno, c_bno, c_picture)
+		values(seq_column_pic_cno.nextval, #{c_bno}, #{c_picture})
 	</insert>
 	
 	<select id="readColumn" resultType="ColumnVo">
-	
+		select * from tbl_column_board
+		where c_bno = #{c_bno}
 	</select>
 	
 	<select id="getColumnList" resultType="ColumnVo">
-	
+		select * from tbl_column_board
+		order by c_bno
 	</select>
 	
 	<update id="updateColumn">

@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,24 @@ public class ColumnDaoImpl implements ColumnDao {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean insertColumnPicture(String c_picture, int c_bno) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("c_picture", c_picture);
+		map.put("c_bno", c_bno);
+		int count = sqlSession.insert(NAMESPACE + "insertColumnPicture", map);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int getNextC_bno() {
+		int c_bno = sqlSession.selectOne(NAMESPACE + "getNextC_bno");
+		return c_bno;
 	}
 
 	@Override

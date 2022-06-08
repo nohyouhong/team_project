@@ -13,10 +13,14 @@
 	border: 1px solid #DFD9D8;
 	width: 250px;
 	height: 250px;
+	cursor: pointer;
 }
 .inputImage{
-	width: 100px;
-	height: 100px;
+	background: #F5F5F5;
+	border: 1px solid #DFD9D8;
+	width: 120px;
+	height: 120px;
+	cursor: pointer;
 }
 .inputVal{
 	background: #F5F5F5;
@@ -24,6 +28,10 @@
 }
 .inputVal:focus{
 	background: #F5F5F5;
+}
+
+#addIngredList{
+	margin-bottom: 20px;
 }
 .createHr{
 	margin-top: 30px; 
@@ -45,7 +53,53 @@
 .cookFile {
 	display: none;
 }
+.cookStepTitle{
+	text-align: right;
+	color: 	#F83801;
+	font-size: 35px;
+}
 </style>
+<script>
+$(function() {
+// 	재료추가
+	$("#addIngred").click(function() {
+		var cloneIngredDiv = $(".addIngredDiv").eq(0).clone();
+		var inputs = cloneIngredDiv.find("input");
+		inputs.eq(0).val("");
+		inputs.eq(1).val("");
+		$("#addIngredList").append(cloneIngredDiv);
+	});
+
+// 	요리스텝추가
+	var index = 2;
+	$("#addStep").click(function() {
+		var cloneCookStepDiv = $(".addCookStepDiv").eq(0).clone();
+		cloneCookStepDiv.find("span").text("step" + index++);
+		cloneCookStepDiv.find("textarea").text("");
+		cloneCookStepDiv.find("img").attr("src", "/resources/main_mypage/images/plus.png");
+		$("#addCookStepList").append(cloneCookStepDiv);
+	});
+	
+// 	대표요리사진넣기
+	$("#mainCookImage").click(function() {
+		var inputFile = $("#file");
+		inputFile.trigger("click");
+		var file = inputFile.val();
+		console.log("클릭됨");
+		console.log(file);
+		
+	});
+	
+// 	스텝요리사진넣기
+	$("#addCookStepList").on("click", ".stepCookImage" , function() {
+		var inputFile = $(this).parent().find("input");
+		inputFile.trigger("click");
+		var file = inputFile.val();
+		console.log(file);
+	});
+
+});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -111,14 +165,14 @@
 							value="재료" style="background: #FFFECC"/>
 					</div>
 					<div class="col-md-8">
-						<div id="ingrdDiv">
-							<div class="input-group mb-2">
+						<div id="addIngredList">
+							<div class="input-group mb-2 addIngredDiv">
 								<input type="text" class="form-control inputVal" placeholder="예)돼지고기">
 								<input type="text" class="form-control inputVal" placeholder="예)300g">
 							</div>
 						</div>
 						<div style="text-align: center;">
-							<span class="addButton">재료 추가</span>
+							<span class="addButton btn btn-info" id="addIngred">재료 추가</span>
 						</div>
 					</div>
 					<div class="col-md-1"></div>
@@ -126,22 +180,27 @@
 				<div class="form-group createCookDiv">
 					<span class="createTitle">요리 순서</span><br>
 					<div class="explainDiv">
-					<span class="explain">요리하는 스텝마다 빠지면안될 중요한 부분을 입력해주세요.</span><br>
-					<span class="explain">예) 감자를 넣어주세요. ▶ 감자가 없으면, 고구마로 대체 가능합니다.</span><br>
-					<span class="explain">국간장을 넣어주세요. ▶ 물이 끓고 있을때 간장을 넣어주세요.</span><br>
+						<span class="explain">요리하는 스텝마다 빠지면안될 중요한 부분을 입력해주세요.</span><br>
+						<span class="explain">예) 감자를 넣어주세요. ▶ 감자가 없으면, 고구마로 대체 가능합니다.</span><br>
+						<span class="explain">국간장을 넣어주세요. ▶ 물이 끓고 있을때 간장을 넣어주세요.</span><br>
       				</div>
-      				<div class="row">
-						<div class="col-md-2">
-							step1
+      				<div id="addCookStepList">
+						<div class="row addCookStepDiv">      				
+							<div class="col-md-3 cookStepTitle">
+								<span class="cookStepTitle">step1</span>
+							</div>
+							<div class="col-md-7">
+								<textarea rows="5" class="form-control inputVal"></textarea>
+							</div>
+							<div class="col-md-2 stepImageDiv">
+								<img class="inputImage stepCookImage" alt="요리사진을 등록해주세요."
+								src="/resources/main_mypage/images/plus.png"/>
+								<input type="file" id="file" class="cookFile cookStepFile"/>
+							</div>
 						</div>
-						<div class="col-md-8">
-							<textarea rows="5" class="form-control inputVal"></textarea>
-						</div>
-						<div class="col-md-2">
-							<img class="inputImage" alt="요리사진을 등록해주세요."
-							src="/resources/main_mypage/images/cook.png" />
-							<input type="file" id="file" class="cookFile"/>
-						</div>
+					</div>
+					<div style="text-align: center;">
+						<span class="addButton btn btn-info" id="addStep">순서 추가</span>
 					</div>
 				</div>
 				<hr class="createHr">
@@ -149,7 +208,10 @@
 					<label for="title" class="createTitle">요리팁</label>
 					<textarea rows="4" class="form-control inputVal"></textarea>
 				</div><hr class="createHr">
-				<button type="submit" class="btn btn-primary">저장하기</button>
+				<div style="text-align: center;">
+					<button type="submit" class="btn btn-success btn-lg">저장하기</button>
+					<a href="#" class="btn btn-secondary btn-lg">취소하기</a>
+				</div>
 			</form>
 		</div>
 		<div class="col-md-2"></div>

@@ -36,9 +36,12 @@ public class ColumnController {
 	}
 	
 	@RequestMapping(value="/column_create_run", method=RequestMethod.POST)
-	public String column_create_run(ColumnVo columnVo, RedirectAttributes rttr)	{
+	public String column_create_run(ColumnVo columnVo, RedirectAttributes rttr) {
 		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
-		String c_content = columnVo.getC_content();
+		String[] c_pictures = columnVo.getPictures();
+//		for (String c_picture : c_pictures) {
+//		System.out.println("c_picture: " + c_picture);
+//		}
 		boolean result = columnService.insertColumn(columnVo);
 		System.out.println("ColumController, column_run, result" + result);
 		return "redirect: /column/column_list";
@@ -46,7 +49,7 @@ public class ColumnController {
 	
 	@RequestMapping(value="/uploadColumnImage", method=RequestMethod.POST)
 	@ResponseBody
-	public String uploadColumnImage(@RequestParam("file")MultipartFile file) throws Exception {
+	public String uploadColumnImage(@RequestParam("file")MultipartFile file, HttpSession session) throws Exception {
 		System.out.println("ColumController, uploadColumnImage, file: " + file);
 		String file_root = "//192.168.0.110/boardattach";
 		String originalFilename = file.getOriginalFilename();
@@ -54,6 +57,7 @@ public class ColumnController {
 		byte[] fileData = file.getBytes();
 		String saveFilename = MyFileUploader.uploadFile(file_root, originalFilename, fileData);
 		System.out.println("ColumController, uploadColumnImage, saveFilename: " + saveFilename);
+		session.setAttribute("saveFilename", saveFilename);
 		String url = "/column/displayImage?column_image=" + saveFilename;
         return url;
     }

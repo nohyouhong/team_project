@@ -17,7 +17,7 @@
 	
 	<insert id="insertColumnPicture">
 		insert into tbl_column_pic(c_pno, c_bno, c_picture)
-		values(seq_column_pic_cno.nextval, #{c_bno}, #{c_picture})
+		values(seq_column_pno.nextval, #{c_bno}, #{c_picture})
 	</insert>
 	
 	<select id="readColumn" resultType="ColumnVo">

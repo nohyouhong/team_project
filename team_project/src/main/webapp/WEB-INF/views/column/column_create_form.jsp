@@ -12,7 +12,6 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/column/column_create_run" method="post" id="frmColumn">
-				<input type="hidden" name="c_picture" id="c_picture">
 				<div class="form-group">
 					<label for="title"> 칼럼 제목 </label> 
 					<input type="text" class="form-control" id="c_title" name="c_title"/>
@@ -53,17 +52,16 @@
 						success : function(rData) {
 							console.log("rData: ", rData)
 							$(el).summernote('editor.insertImage', rData);
-							$("#c_picture").val(rData);
+							var filename = rData.substring(62);
+							console.log("filename: ", filename);
+							var html = "<input type='hidden' name='pictures' value=" + filename + ">"
+							$("#frmColumn").prepend(html);
+							
 						}
 					});
 				}
-				</script>
-				
-				
-<!-- 				<img alt="이미지 예제" src="/column/displayImage?column_image=c:/boardattach/846c4b3c-b21d-4b75-83f3-c323edeed008_spade-2.png"> -->
-				<div style="clear:both;">
-					<button type="submit" class="btn btn-primary">작성 완료</button>
-				</div>
+				</script>								
+				<button type="submit" class="btn btn-primary">작성 완료</button>
 			</form>
 		</div>
 		<div class="col-md-2"></div>

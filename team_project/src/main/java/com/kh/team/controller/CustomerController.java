@@ -13,9 +13,9 @@ public class CustomerController {
 		return "customer/customer_center";
 	}
 	
-	@RequestMapping(value="/inquiry", method=RequestMethod.GET)
-	public String inquiry(String userid) {
-		return "customer/inquiry_form";
+	@RequestMapping(value="/agreement", method=RequestMethod.GET)
+	public String inquiry() {
+		return "customer/agreement";
 	}
 	
 }

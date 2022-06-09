@@ -57,6 +57,11 @@ public class MemberController {
 		return "member/info";
 	}
 	
+	@RequestMapping(value="/customer_center", method=RequestMethod.GET)
+	public String coustomerCenter() {
+		return "member/customer_center";
+	}
+	
 	@RequestMapping(value="/point_list", method = RequestMethod.GET)
 	public String pointList(String userid, Model model) {
 		List<PointVo> point_list = memberService.getPoint_list(userid);

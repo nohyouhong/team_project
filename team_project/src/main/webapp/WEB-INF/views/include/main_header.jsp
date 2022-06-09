@@ -102,7 +102,7 @@
 								<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
 							</c:otherwise>
 						</c:choose>
-							<a href="#">고객센터</a>
+							<a href="/member/customer_center">고객센터</a>
 						</div>
 					</div>
 					<hr>

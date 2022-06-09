@@ -55,8 +55,19 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 
 	@Override
 	public RecipeBoardVo read(int r_bno) {
-//		recipeBoardDao.updateViewCnt(r_bno);
+		recipeBoardDao.updateViewCnt(r_bno);
 		RecipeBoardVo recipeBoardVo = recipeBoardDao.read(r_bno);
+		List<String> r_contents = recipeBoardDao.readContents(r_bno);
+		List<String> pictures = recipeBoardDao.readPictures(r_bno);
+		if(r_contents != null && r_contents.size() != 0) {
+			String[] contentVals = r_contents.toArray(new String[r_contents.size()]);
+			recipeBoardVo.setR_contents(contentVals);
+		}
+		if(pictures != null && pictures.size() != 0) {
+			String[] pictureVals = pictures.toArray(new String[pictures.size()]);
+			recipeBoardVo.setPictures(pictureVals);
+		}
+		
 		return recipeBoardVo;
 	}
 

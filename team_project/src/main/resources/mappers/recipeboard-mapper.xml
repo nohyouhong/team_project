@@ -34,12 +34,18 @@
 	</insert>
 	
 	<select id="read" resultType="RecipeBoardVo">
-		select * 
-		from tbl_recipe_board b join tbl_recipe_content c
-			on b.r_bno = c.r_bno
-		join tbl_recipe_pic p
-			on b.r_bno = p.r_bno
-		where b.r_bno = #{r_bno}
+		select * from tbl_recipe_board
+		where r_bno = #{r_bno}
+	</select>
+	
+	<select id="readContents" resultType="string">
+		select r_content from tbl_recipe_content
+		where r_bno = #{r_bno}
+	</select>
+	
+	<select id="readPictures" resultType="string">
+		select r_picture from tbl_recipe_pic
+		where r_bno = #{r_bno}
 	</select>
 	
 	<select id="ingredRead" resultType="IngredientVo">
@@ -102,7 +108,7 @@
 	
 	<update id="updateViewCnt">
 		update tbl_recipe_board set
-			viewcnt = viewcnt + 1
+			r_viewcnt = r_viewcnt + 1
 		where r_bno = #{r_bno}
 	</update>
 </mapper>

@@ -43,6 +43,18 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		RecipeBoardVo recipeBoardVo = sqlSession.selectOne(NAMESPACE + "read", r_bno);
 		return recipeBoardVo;
 	}
+	
+	@Override
+	public List<String> readContents(int r_bno) {
+		List<String> recipeBoardContents = sqlSession.selectList(NAMESPACE + "readContents", r_bno);
+		return recipeBoardContents;
+	}
+	
+	@Override
+	public List<String> readPictures(int r_bno) {
+		List<String> recipeBoardPictures = sqlSession.selectList(NAMESPACE + "readPictures", r_bno);
+		return recipeBoardPictures;
+	}
 
 	@Override
 	public boolean update(RecipeBoardVo recipeBoardVo) {

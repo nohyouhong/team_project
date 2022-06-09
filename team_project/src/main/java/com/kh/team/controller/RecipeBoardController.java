@@ -19,7 +19,8 @@ import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
-import com.kh.team.vo.ingredientVo;
+import com.kh.team.vo.IngredientListVo;
+import com.kh.team.vo.IngredientVo;
 
 @Controller
 @RequestMapping("/recipeboard")
@@ -34,12 +35,13 @@ public class RecipeBoardController {
 	}
 	
 	@RequestMapping(value="/createRun", method=RequestMethod.POST)
-	public String createRun(RecipeBoardVo recipeBoardVo, ingredientVo ingredintVo, HttpSession session, 
-			RedirectAttributes rttr, MultipartFile file, @RequestParam("files") List<MultipartFile> files) {
+	public String createRun(RecipeBoardVo recipeBoardVo, IngredientVo ingredientVo, 
+			IngredientListVo ingredientListVo, HttpSession session, RedirectAttributes rttr, MultipartFile file, 
+			@RequestParam("files") List<MultipartFile> files) {
 //		System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
 //		System.out.println("BoardController, createRun, titlepic: " + file);
 //		System.out.println("BoardController, createRun, contentpictures: " + files);
-//		System.out.println("BoardController, createRun, List<ingredientVo>: " + ingredintVo);
+//		System.out.println("BoardController, createRun, List<ingredientVo>: " + ingredientListVo);
 //		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 //		String userid = memberVo.getUserid();
 		String userid = "user01";
@@ -48,9 +50,9 @@ public class RecipeBoardController {
 		try {
 			//타이틀이미지
 			String originalFilename = file.getOriginalFilename();
-			String titlepic = MyFileUploader.uploadFile(
+			String r_titlepic = MyFileUploader.uploadFile(
 					"//192.168.0.110/boardattach", originalFilename, file.getBytes());
-			recipeBoardVo.setTitlepic(titlepic);
+			recipeBoardVo.setR_titlepic(r_titlepic);
 			
 			//요리스탭이미지들
 			int index = 0;
@@ -64,7 +66,7 @@ public class RecipeBoardController {
 			recipeBoardVo.setPictures(pictures);
 //			System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
 			
-			boolean result = recipeBoardService.create(recipeBoardVo, ingredintVo);
+			boolean result = recipeBoardService.create(recipeBoardVo, ingredientListVo);
 			System.out.println("BoardController, createRun, result: " + result);
 			rttr.addFlashAttribute("create_result", result);
 		} catch(Exception e) {

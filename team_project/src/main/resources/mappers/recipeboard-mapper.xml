@@ -34,8 +34,19 @@
 	</insert>
 	
 	<select id="read" resultType="RecipeBoardVo">
-		select * from tbl_recipe_board
-		where r_bno = #{r_bno}
+		select * 
+		from tbl_recipe_board b join tbl_recipe_content c
+			on b.r_bno = c.r_bno
+		join tbl_recipe_pic p
+			on b.r_bno = p.r_bno
+		where b.r_bno = #{r_bno}
+	</select>
+	
+	<select id="ingredRead" resultType="IngredientVo">
+		select * 
+		from tbl_ingredient_list l join tbl_ingredient i
+			on l.i_name = i.i_name
+		where l.r_bno = #{r_bno}
 	</select>
 	
 	<update id="update">

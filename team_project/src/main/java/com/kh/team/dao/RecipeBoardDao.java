@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
-import com.kh.team.vo.ingredientVo;
+import com.kh.team.vo.IngredientVo;
 
 
 public interface RecipeBoardDao {
 	public boolean create(RecipeBoardVo recipeBoardVo);
-	public boolean ingredCreate(ingredientVo ingredintVo);
+	public boolean ingredCreate(IngredientVo ingredintVo);
 	public RecipeBoardVo read(int bno);
 	public boolean update(RecipeBoardVo recipeBoardVo);
 	public boolean delete(int r_bno);

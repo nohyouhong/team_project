@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.dao.RecipeBoardDao;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
-import com.kh.team.vo.ingredientVo;
+import com.kh.team.vo.IngredientListVo;
+import com.kh.team.vo.IngredientVo;
 
 @Service
 public class RecipeBoardServiceImpl implements RecipeBoardService{
@@ -19,12 +20,14 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	
 	@Override
 	@Transactional
-	public boolean create(RecipeBoardVo recipeBoardVo, ingredientVo ingredintVo) {
+	public boolean create(RecipeBoardVo recipeBoardVo, IngredientListVo ingredientListVo) {
+		System.out.println("RecipeBoardService, create"+ recipeBoardVo);
+		System.out.println("RecipeBoardService, create"+ ingredientListVo);
 		int r_bno = recipeBoardDao.getNextBno();
+		//레시피보드
 		recipeBoardVo.setR_bno(r_bno);
 		boolean result = recipeBoardDao.create(recipeBoardVo);
-		recipeBoardDao.ingredCreate(ingredintVo);
-		String[] contents = recipeBoardVo.getR_content();
+		String[] contents = recipeBoardVo.getR_contents();
 		String[] pictures = recipeBoardVo.getPictures();
 		if((contents != null && contents.length != 0) &&
 				(pictures != null && pictures.length != 0)) {
@@ -33,6 +36,16 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 			}
 			for(String picture : pictures) {
 				recipeBoardDao.insertPicture(picture, r_bno);
+			}
+		}
+		//레시피재료리스트
+		String[] i_names = ingredientListVo.getI_names();
+		int[] i_amounts = ingredientListVo.getI_amounts();
+		if((i_names != null && i_names.length != 0) &&
+				(i_amounts != null && i_amounts.length != 0)) {
+			for(int i = 0; i < i_names.length; i++) {
+				IngredientVo ingredientVo = new IngredientVo(r_bno, i_names[i], i_amounts[i]);  
+				recipeBoardDao.ingredCreate(ingredientVo);
 			}
 		}
 		return result;

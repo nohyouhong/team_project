@@ -187,9 +187,9 @@ $(function() {
 						<div id="addIngredList">
 							<div class="input-group mb-2 addIngredDiv">
 								<input type="text" class="form-control inputVal" 
-									placeholder="예)소고기" name="i_name">
+									placeholder="예)소고기" name="i_names">
 								<input type="text" class="form-control inputVal" 
-									placeholder="예)1000g" name="i_amount">
+									placeholder="예)1000g" name="i_amounts">
 							</div>
 						</div>
 						<div style="text-align: center;">

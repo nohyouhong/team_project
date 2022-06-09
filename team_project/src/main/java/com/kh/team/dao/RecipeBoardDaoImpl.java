@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
-import com.kh.team.vo.ingredientVo;
+import com.kh.team.vo.IngredientVo;
 
 @Repository
 public class RecipeBoardDaoImpl implements RecipeBoardDao{
@@ -29,8 +29,9 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	}
 	
 	@Override
-	public boolean ingredCreate(ingredientVo ingredintVo) {
-		int count = sqlSession.insert(NAMESPACE + "ingredCreate", ingredintVo);
+	public boolean ingredCreate(IngredientVo ingredientVo) {
+		System.out.println(ingredientVo);
+		int count = sqlSession.insert(NAMESPACE + "ingredCreate", ingredientVo);
 		if(count > 0) {
 			return true;
 		}

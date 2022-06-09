@@ -1,27 +1,25 @@
 package com.kh.team.vo;
 
-import java.util.Arrays;
-
-public class ingredientVo {
+public class IngredientVo {
 	private int lno;
 	private int r_bno;
-	private String[] i_name;
-	private int[] i_amount;
+	private String i_name;
+	private int i_amount;
 	private String i_unit;
 	private String i_address;
 	
-	public ingredientVo() {
+	public IngredientVo() {
 		super();
 	}
-	
-	public ingredientVo(int r_bno, String[] i_name, int[] i_amount) {
+
+	public IngredientVo(int r_bno, String i_name, int i_amount) {
 		super();
 		this.r_bno = r_bno;
 		this.i_name = i_name;
 		this.i_amount = i_amount;
 	}
 
-	public ingredientVo(int lno, int r_bno, String[] i_name, int[] i_amount, String i_unit, String i_address) {
+	public IngredientVo(int lno, int r_bno, String i_name, int i_amount, String i_unit, String i_address) {
 		super();
 		this.lno = lno;
 		this.r_bno = r_bno;
@@ -47,19 +45,19 @@ public class ingredientVo {
 		this.r_bno = r_bno;
 	}
 
-	public String[] getI_name() {
+	public String getI_name() {
 		return i_name;
 	}
 
-	public void setI_name(String[] i_name) {
+	public void setI_name(String i_name) {
 		this.i_name = i_name;
 	}
 
-	public int[] getI_amount() {
+	public int getI_amount() {
 		return i_amount;
 	}
 
-	public void setI_amount(int[] i_amount) {
+	public void setI_amount(int i_amount) {
 		this.i_amount = i_amount;
 	}
 
@@ -81,7 +79,7 @@ public class ingredientVo {
 
 	@Override
 	public String toString() {
-		return "ingredientVo [lno=" + lno + ", r_bno=" + r_bno + ", i_name=" + Arrays.toString(i_name) + ", i_amount="
-				+ Arrays.toString(i_amount) + ", i_unit=" + i_unit + ", i_address=" + i_address + "]";
+		return "ingredientVo [lno=" + lno + ", r_bno=" + r_bno + ", i_name=" + i_name + ", i_amount=" + i_amount
+				+ ", i_unit=" + i_unit + ", i_address=" + i_address + "]";
 	}
 }

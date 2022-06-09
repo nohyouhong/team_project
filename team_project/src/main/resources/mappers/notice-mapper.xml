@@ -22,7 +22,7 @@
 	</delete>
 	<select id="noticeList" resultType="NoticeVo">
 		select * from tbl_notice_board
-			 order by n_regdate desc
+			 order by n_regdate desc 
 <!--     	select * from(select rownum rnum, a.* from -->
 <!--             (select * from tbl_notice_board -->
 <!-- 			 order by sysdate desc) a) -->

@@ -29,14 +29,14 @@ public class ColumnController {
 	private ColumnService columnService;
 	
 	// 칼럼 작성 폼
-	@RequestMapping(value="/column_form", method=RequestMethod.GET)
-	public String column_form()	{
+	@RequestMapping(value="/column_create_form", method=RequestMethod.GET)
+	public String column_create_form()	{
 		
-		return "column/column_form";
+		return "column/column_create_form";
 	}
 	
-	@RequestMapping(value="/column_run", method=RequestMethod.POST)
-	public String column_run(ColumnVo columnVo, RedirectAttributes rttr)	{
+	@RequestMapping(value="/column_create_run", method=RequestMethod.POST)
+	public String column_create_run(ColumnVo columnVo, RedirectAttributes rttr)	{
 		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
 		String c_content = columnVo.getC_content();
 		boolean result = columnService.insertColumn(columnVo);
@@ -73,6 +73,27 @@ public class ColumnController {
 		List<ColumnVo> columnList = columnService.getColumnList();
 		model.addAttribute("columnList", columnList);
 		return "column/column_list";
+	}
+	
+	@RequestMapping(value="/column_modify_form", method=RequestMethod.GET)
+	public String column_modify_form(int c_bno, Model model) {
+		ColumnVo columnVo = columnService.readColumn(c_bno);
+		model.addAttribute("columnVo", columnVo);
+		return "/column/column_modify_form";
+	}
+
+	@RequestMapping(value="/column_modify_run", method=RequestMethod.POST)
+	public String column_modify_run(ColumnVo columnVo) {
+		System.out.println("columnVo: " + columnVo);
+		columnService.modifyColumn(columnVo);
+		return "redirect: /column/readColumn?c_bno=" + columnVo.getC_bno();
+	}
+
+	@RequestMapping(value="/column_delete", method=RequestMethod.GET)
+	public String column_delete(int c_bno) {
+		System.out.println("c_bno: " + c_bno);
+		columnService.deleteColumn(c_bno);
+		return "redirect: /column/column_list";
 	}
 	
 	@RequestMapping(value="/readColumn", method=RequestMethod.GET) 

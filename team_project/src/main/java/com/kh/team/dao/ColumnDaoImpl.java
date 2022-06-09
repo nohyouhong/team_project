@@ -57,8 +57,8 @@ public class ColumnDaoImpl implements ColumnDao {
 	}
 
 	@Override
-	public boolean updateColumn(ColumnVo columnVo) {
-		int count = sqlSession.update(NAMESPACE + "updateColumn", columnVo);
+	public boolean modifyColumn(ColumnVo columnVo) {
+		int count = sqlSession.update(NAMESPACE + "modifyColumn", columnVo);
 		if (count > 0) {
 			return true;
 		}

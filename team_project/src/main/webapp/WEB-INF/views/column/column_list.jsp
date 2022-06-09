@@ -19,7 +19,9 @@
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<h3>칼럼 목록</h3>
-		<a class="btn btn-primary" id="insertColumn" href="/column/column_form">칼럼 작성</a>
+		<c:if test="${loginVo.m_code == 101}">
+			<a class="btn btn-primary" id="insertColumn" href="/column/column_create_form">칼럼 작성</a>
+		</c:if>
 		<table class="table">
 			<thead>
 				<tr>

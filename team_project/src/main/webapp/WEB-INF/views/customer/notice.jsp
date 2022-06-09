@@ -24,6 +24,9 @@ $(document).ready(function(){
 	        }
 	    });
 	}
+	if(${loginVo.m_code == 101}){
+		$("#notice_form").show();
+	}
 });
 </script>
 
@@ -35,7 +38,9 @@ $(document).ready(function(){
 				<div class="row">
 					<div class="col-md-3">
 						<div class="cus-info">
+							<a href="/customer/customer_center">
 							<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
+							</a>
 						</div>	
 					</div>
 					<div class="col-md-9">
@@ -46,6 +51,8 @@ $(document).ready(function(){
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
 								<li class="on"><a href="#">공지사항</a></li>
 							</ul>
+						<a href="/customer/notice_form" class="btn btn-outline-danger"
+							 style="display:none;" id="notice_form">공지사항등록</a>
 						</div>
 						<table class="table">
 							<thead>
@@ -57,12 +64,14 @@ $(document).ready(function(){
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach var="noticeVo" items="${notice_list}">
 								<tr>
-									<td>1</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Default</td>
+									<td>${noticeVo.n_bno}</td>
+									<td>${noticeVo.n_title}</td>
+									<td>${noticeVo.userid}</td>
+									<td>${noticeVo.n_regdate}</td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>

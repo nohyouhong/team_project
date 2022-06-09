@@ -94,7 +94,7 @@
 			<div class="top-menu">
 				<div class="container">
 					<div class="row toploginmenu">
-						<div class="col-md-12">
+						<div class="col-md-12" id="col12" >
 						<c:choose>
 							<c:when test="${empty loginVo}">
 								<a href="/member/login_form">로그인</a>

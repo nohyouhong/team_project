@@ -24,9 +24,9 @@ $(document).ready(function(){
 	        }
 	    });
 	}
-// 	if(${loginVo.m_code == 101}){
-// 		$("#notice_form").show();
-// 	}
+	if(${loginVo.m_code == 101}){
+		$("#notice_form").show();
+	}
 });
 </script>
 
@@ -38,7 +38,9 @@ $(document).ready(function(){
 				<div class="row">
 					<div class="col-md-3">
 						<div class="cus-info">
+							<a href="/customer/customer_center">
 							<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
+							</a>
 						</div>	
 					</div>
 					<div class="col-md-9">
@@ -53,7 +55,6 @@ $(document).ready(function(){
 							 style="display:none;" id="notice_form">공지사항등록</a>
 						</div>
 						<table class="table">
-						${loginVo.m_code}
 							<thead>
 								<tr>
 									<th>#</th>

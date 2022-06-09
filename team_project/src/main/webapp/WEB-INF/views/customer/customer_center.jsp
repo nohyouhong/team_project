@@ -34,7 +34,9 @@ $(document).ready(function(){
 				<div class="row">
 					<div class="col-md-3">
 						<div class="cus-info">
+							<a href="/customer/customer_center">
 							<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
+							</a>
 						</div>	
 					</div>
 					<div class="col-md-9">
@@ -45,7 +47,7 @@ $(document).ready(function(){
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
 								<li><a href="/customer/notice">공지사항</a></li>
 							</ul>
-							<a href="/customer/inquiry_form" class="btn btn-outline-danger">1:1문의하기</a>
+							<a href="/customer/inquiry_form" class="btn btn-outline-danger" id="inquirybtn">1:1문의하기</a>
 							<section class="faq-container">
 								<div class="faq-one">
 									<!-- faq question -->

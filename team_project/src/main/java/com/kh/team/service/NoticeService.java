@@ -10,6 +10,6 @@ public interface NoticeService {
 	public NoticeVo readNotice(int n_bno);
 	public boolean updateNotice(int n_bno);
 	public boolean deleteNotice(int n_bno);
-	public List<NoticeVo> noticeList();
+	public List<NoticeVo> noticeList(PagingDto pagingDto);
 	public int getCount(PagingDto pagingDto);
 }

@@ -61,6 +61,10 @@ hr{
 	margin:5px;
 }
 
+#col12{
+	text-align:right;
+}
+
 /* menubar */
 .colorlib-nav ul {
 	padding: 0;
@@ -112,10 +116,6 @@ a:hover, a:active, a:focus {
 	color: #616161;
 	outline: none;
 	text-decoration: none;
-}
-
-.col-md-12{
-	text-align:right;
 }
 
 /* font */

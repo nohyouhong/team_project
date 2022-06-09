@@ -21,12 +21,10 @@
 		where n_bno = #{n_bno}
 	</delete>
 	<select id="noticeList" resultType="NoticeVo">
-		select * from tbl_notice_board
-			 order by n_regdate desc 
-<!--     	select * from(select rownum rnum, a.* from -->
-<!--             (select * from tbl_notice_board -->
-<!-- 			 order by sysdate desc) a) -->
-<!-- 		where rnum between #{startRow} and #{endRow} -->
+    	select * from(select rownum rnum, a.* from
+            (select * from tbl_notice_board
+			 order by n_regdate desc) a)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_notice_board

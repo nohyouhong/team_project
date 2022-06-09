@@ -49,8 +49,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public List<NoticeVo> noticeList() {
-		List<NoticeVo> noticeList = noticeDao.noticeList();
+	public List<NoticeVo> noticeList(PagingDto pagingDto) {
+		List<NoticeVo> noticeList = noticeDao.noticeList(pagingDto);
 		return noticeList;
 	}
 

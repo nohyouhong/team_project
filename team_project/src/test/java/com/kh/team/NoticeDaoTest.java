@@ -20,7 +20,7 @@ public class NoticeDaoTest {
 	
 	@Test
 	public void testlistMessage() {
-		List<NoticeVo> noticeList = noticeDao.noticeList();
+		List<NoticeVo> noticeList = noticeDao.noticeList(null);
 		System.out.println("Notice, noticeList: " + noticeList);
 	}
 

@@ -52,11 +52,11 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public List<NoticeVo> noticeList() {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("startRow", pagingDto.getStartRow());
-//		map.put("endRow", pagingDto.getEndRow());
-		List<NoticeVo> noticeList = sqlsession.selectList(NAMESPACE+"noticeList");
+	public List<NoticeVo> noticeList(PagingDto pagingDto) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRow", pagingDto.getStartRow());
+		map.put("endRow", pagingDto.getEndRow());
+		List<NoticeVo> noticeList = sqlsession.selectList(NAMESPACE+"noticeList", map);
 		return noticeList;
 	}
 

@@ -12,6 +12,15 @@ public class NoticeVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public NoticeVo(int n_bno, String n_title, String n_content, String userid) {
+		super();
+		this.n_bno = n_bno;
+		this.n_title = n_title;
+		this.n_content = n_content;
+		this.userid = userid;
+	}
+
 	public NoticeVo(int n_bno, String n_title, String n_content, String userid, Date n_regdate) {
 		super();
 		this.n_bno = n_bno;

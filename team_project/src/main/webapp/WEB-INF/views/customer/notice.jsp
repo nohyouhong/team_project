@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
+<%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <link rel="stylesheet" href="/resources/customer_center/customer_center.css" type="text/css">
 
 <script>
@@ -40,48 +41,57 @@ $(document).ready(function(){
 					<div class="col-md-9">
 						<div class="faq">
 							<ul class="teb_lst">
-								<li class="on"><a href="#">자주묻는질문</a></li>
+								<li><a href="/customer/customer_center">자주묻는질문</a></li>
 								<li><a href="/customer/agreement">이용약관</a></li>
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
-								<li><a href="/customer/notice">공지사항</a></li>
+								<li class="on"><a href="#">공지사항</a></li>
 							</ul>
-							<a href="/customer/inquiry_form" class="btn btn-outline-danger">1:1문의하기</a>
-							<section class="faq-container">
-								<div class="faq-one">
-									<!-- faq question -->
-									<h3 class="faq-page">내가 레시피 등록한 건 어디서 보나요?</h3>
-									<!-- faq answer -->
-									<div class="faq-body">
-										<h5 class="faq-h5">-마이페이지에서 나의 레시피 보기에서 확인할 수 있습니다.</h5>
-									</div>
-								</div>
-								<hr class="hr-line">
-								<div class="faq-two">
-									<!-- faq question -->
-									<h3 class="faq-page">레시피 삭제 어떻게 하나요?</h3>
-									<!-- faq answer -->
-									<div class="faq-body">
-										<h5 class="faq-h5">-레시피 상세보기 아래쪽에서 레시피 삭제 버튼 클릭시 삭제 가능합니다.</h5>
-									</div>
-								</div>
-								<hr class="hr-line">
-								<div class="faq-three">
-									<!-- faq question -->
-									<h3 class="faq-page">회원탈퇴는 어떻게 하나요?</h3>
-									<!-- faq answer -->
-									<div class="faq-body">
-										<h5 class="faq-h5">
-											-마이페이지에서 회원정보수정에 들어가면 
-											아래쪽 회원탈퇴 버튼을 누르면 회원탈퇴가 가능합니다.
-										</h5>
-									</div>
-								</div>
-							</section>
 						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>날짜</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Default</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<nav>
+			<ul class="pagination justify-content-center">
+			<c:if test="${pagingDto.startPage != 1}">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.startPage -1}">이전</a>
+				</li>
+			</c:if>
+			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
+				<li class="page-item">
+					<a class="page-link" href="${v}">${v}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.endPage +1}">다음</a>
+				</li>
+			</c:if>
+			</ul>
+		</nav>
+	</div>
+	<div class="col-md-2"></div>
 		</div>
 	</div>
 </div>

@@ -40,43 +40,27 @@ $(document).ready(function(){
 					<div class="col-md-9">
 						<div class="faq">
 							<ul class="teb_lst">
-								<li class="on"><a href="#">자주묻는질문</a></li>
-								<li><a href="/customer/agreement">이용약관</a></li>
+								<li><a href="/customer/customer_center">자주묻는질문</a></li>
+								<li class="on"><a href="/customer/agreement">이용약관</a></li>
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
 								<li><a href="/customer/notice">공지사항</a></li>
 							</ul>
-							<a href="/customer/inquiry_form" class="btn btn-outline-danger">1:1문의하기</a>
-							<section class="faq-container">
-								<div class="faq-one">
-									<!-- faq question -->
-									<h3 class="faq-page">내가 레시피 등록한 건 어디서 보나요?</h3>
-									<!-- faq answer -->
-									<div class="faq-body">
-										<h5 class="faq-h5">-마이페이지에서 나의 레시피 보기에서 확인할 수 있습니다.</h5>
-									</div>
-								</div>
-								<hr class="hr-line">
-								<div class="faq-two">
-									<!-- faq question -->
-									<h3 class="faq-page">레시피 삭제 어떻게 하나요?</h3>
-									<!-- faq answer -->
-									<div class="faq-body">
-										<h5 class="faq-h5">-레시피 상세보기 아래쪽에서 레시피 삭제 버튼 클릭시 삭제 가능합니다.</h5>
-									</div>
-								</div>
-								<hr class="hr-line">
-								<div class="faq-three">
-									<!-- faq question -->
-									<h3 class="faq-page">회원탈퇴는 어떻게 하나요?</h3>
-									<!-- faq answer -->
-									<div class="faq-body">
-										<h5 class="faq-h5">
-											-마이페이지에서 회원정보수정에 들어가면 
-											아래쪽 회원탈퇴 버튼을 누르면 회원탈퇴가 가능합니다.
-										</h5>
-									</div>
-								</div>
-							</section>
+						</div>
+						<div id="cus_info">
+							제 1조(목적)<br>
+							이 약관은 울산KH정보교육원 JAVA반의 3명이 제공하는 레시피 서비스 및 관련 제반 서비스의 이용과 관련하여 사이트와 회원과의 권리,
+							 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 하면, 사이트의 로그인 계정을 통해 해당 서비스를 모두 이용할 수 있습니다.
+							<br>
+							<br> 제2조(정의) <br>
+							'사이트'란 JAVA반에서 제공하는 레시피 서비스를 말합니다.
+							'회원'이란 사이트에 접속하여 이 약관에 따라 JAVA반과 이용계약을 체결하고 JAVA반이 제공하는 서비스를 이용하는 고객을
+							말합니다. '아이디(ID)'란 회원식별과 서비스 이용을 위하여 회원이 선정하고 JAVA반이 승인한 문자와 숫자의 조합을
+							말합니다. '비밀번호'란 회원의 정보보호와 안전한 서비스 이용을 위하여 회원이 선정한 문자와 숫자의 조합을 말합니다.
+							'멀티미디어'란 부호ㆍ문자ㆍ음성ㆍ음향ㆍ화상ㆍ동영상등의 정보 형태의 글, 사진, 동영상 및 각종 파일과 링크등을 의미합니다.
+							'레시피'란 회원이 JAVA반으로 부터별도의 대가 없이 서비스 내에 작성 및 등록한 멀티미디어를 말합니다.
+							'컬럼'이란 JAVA반이 출처를 남기고 가져온 링크가 있는 첨부사이트를 의미합니다.
+							<br>
+							<br>
 						</div>
 					</div>
 				</div>

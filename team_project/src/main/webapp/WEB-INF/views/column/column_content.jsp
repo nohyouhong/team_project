@@ -24,38 +24,57 @@
 </style>
 
 <script>
+
 $(document).ready(function(){
+	var is_column_like = "false"
+	var c_bno = $(".fa-thumbs-up").attr("data-c_bno");
 	
 	// 좋아요 - 하트
 	$(".fa-thumbs-up").click(function() {
-		var c_bno = $(this).attr("data-c_bno");
+		var userid = "${loginVo.userid}"
 		var url = "/column/column_like";
 		var sendData = {
-			"c_bno" : c_bno
+			"c_bno" : c_bno, 
+			"userid" : userid
 		};
 		var thumbs_up = $(this);
 		$.post(url, sendData, function(rData) {
 			console.log("rData: " + rData);
-// 	 		var span = $("#column_like_span");
-// 			if (rData == "success") {
-// 				if (is_like == "true") {
-// 					thumbs_up.css("color", "black");
-// 					span.css("color", "black");
-// 			 		span.text(parseInt(span.text().trim()) - 1);
-// 			 		is_like = "false";										
-// 				} else {
-// 					thumbs_up.css("color", "rgb(248,56,1)");
-// 					span.css("color", "rgb(248,56,1)");
-// 			 		span.text(parseInt(span.text().trim()) + 1);
-// 			 		is_like = "true";
-// 				}
-// 			};
+			console.log("is_column_like: " + is_column_like);
+	 		var span = $("#column_like_span");
+			if (rData == "success") {
+				if (is_column_like == "true") {
+					thumbs_up.css("color", "black");
+					span.css("color", "black");
+			 		span.text(parseInt(span.text().trim()) - 1);
+			 		is_column_like = "false";										
+				} else {
+					thumbs_up.css("color", "rgb(248,56,1)");
+					span.css("color", "rgb(248,56,1)");
+			 		span.text(parseInt(span.text().trim()) + 1);
+			 		is_column_like = "true";
+				}
+			};
 		});
+	});
+	var sData = {
+			"c_bno" : c_bno, 
+			"userid" : "${loginVo.userid}"
+	}
+	console.log("sData: ", sData);
+	$.get("/column/is_column_like", sData, function(receivedData){
+//	 	console.log(receivedData);
+		is_column_like = receivedData;
+		if(receivedData == "true") {
+			$(".fa-thumbs-up").css("color", "rgb(248,56,1)");
+		} else {
+			$(".fa-thumbs-up").css("color", "black");			
+		}
 	});
 });
 </script>
 
-<%-- ${columnVo} --%>
+
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8" id="column_content_div">
@@ -63,8 +82,24 @@ $(document).ready(function(){
 		${columnVo.c_content}
 		<div id="column_like_div">
 			<i class="fa-regular fa-thumbs-up" data-c_bno="${columnVo.c_bno}"></i>
-			<span id="column_like_span">0</span>
+			<span id="column_like_span">${columnVo.c_likecnt}</span>
 		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Product</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="columnVo" items="${columnList}" begin="${columnVo.c_bno}" end="${columnVo.c_bno + 5}" varStatus="status">
+					<tr>
+						<td>${status.count}</td>
+						<td>${columnVo.c_title}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 	<div class="col-md-2"></div>
 </div>

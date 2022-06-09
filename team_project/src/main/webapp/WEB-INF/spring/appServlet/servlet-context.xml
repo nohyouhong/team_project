@@ -32,23 +32,20 @@
 		<beans:property name="maxUploadSize" value="10000000"></beans:property>		
 	</beans:bean>
 	<!-- 가로챌 놈 -->
-<!-- 	<beans:bean class="com.kh.team.interceptor.AuthInterceptor" id="authInterceptor"> -->
-<!-- 	</beans:bean> -->
+	<beans:bean class="com.kh.team.interceptor.AuthInterceptor" id="authInterceptor">
+	</beans:bean>
 	
 	<!-- 인터셉터 -->
-<!-- 	<interceptors> -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/doA"/> -->
-<!-- 			<mapping path="/doB"/> -->
-<!-- 			<beans:ref bean="sampleInterceptor"/> -->
-<!-- 		</interceptor> -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/board/**/*"/> -->
-<!-- 			<mapping path="/comment/**/*"/> -->
-<!-- 			<exclude-mapping path="/board/list"/> -->
-<!-- 			<beans:ref bean="authInterceptor"/> -->
-<!-- 		</interceptor> -->
-<!-- 	</interceptors> -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/**/*"/>
+			<mapping path="/culumn/**/*"/>
+			<exclude-mapping path="/member/customer_center"/>
+			<exclude-mapping path="/member/login_form"/>
+			<exclude-mapping path="/column/column_form"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>

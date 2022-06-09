@@ -51,7 +51,7 @@
 	margin-bottom: 10px;
 }
 .cookFile {
-	display: none;
+ 	display	: none;
 }
 .cookStepTitle{
 	text-align: right;
@@ -75,7 +75,7 @@ $(function() {
 	$("#addStep").click(function() {
 		var cloneCookStepDiv = $(".addCookStepDiv").eq(0).clone();
 		cloneCookStepDiv.find("span").text("step" + index++);
-		cloneCookStepDiv.find("textarea").text("");
+		cloneCookStepDiv.find("textarea").val("");
 		cloneCookStepDiv.find("img").attr("src", "/resources/main_mypage/images/plus.png");
 		$("#addCookStepList").append(cloneCookStepDiv);
 	});
@@ -87,7 +87,6 @@ $(function() {
 		var file = inputFile.val();
 		console.log("클릭됨");
 		console.log(file);
-		
 	});
 	$("#mainFile").on("change", function(){
 // 		console.log(this.files);
@@ -99,7 +98,6 @@ $(function() {
             reader.readAsDataURL(this.files[0]);
     	}
     });
-	
 // 	스텝요리사진넣기
 	$("#addCookStepList").on("click", ".stepCookImage" , function() {
 		var inputFile = $(this).parent().find("input");
@@ -125,7 +123,7 @@ $(function() {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form">
+			<form role="form" action="/recipeboard/createRun" method="post" enctype="multipart/form-data">
 				<h3>레시피 등록</h3><hr class="createHr">
 				<div class="row">
 					<div class="col-md-8">
@@ -149,7 +147,7 @@ $(function() {
 									</select>
 								</div>
 		   						<div class="col">
-									<select class="custom-select inputVal" name="종류" >
+									<select class="custom-select inputVal">
 										<option selected>종류별</option>
 										<option>한식</option>
 										<option>한식</option>
@@ -157,7 +155,7 @@ $(function() {
 									</select>
 								</div>
 		   						<div class="col">
-									<select class="custom-select inputVal" name="종류" >
+									<select class="custom-select inputVal">
 										<option selected>종류별</option>
 										<option>한식</option>
 										<option>한식</option>
@@ -174,7 +172,7 @@ $(function() {
 						<img class="inputVal" id="mainCookImage" alt="요리사진을 등록해주세요."
 						src="/resources/main_mypage/images/cook.png" />
 						<label for="file"> 대표 요리사진을 등록해주세요. </label>
-						<input type="file" id="mainFile" class="cookFile"/>
+						<input type="file" id="mainFile" name="file" class="cookFile"/>
 					</div>
 				</div><hr class="createHr">
 				<div class="explainDiv">
@@ -182,14 +180,16 @@ $(function() {
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="title" name="title" 
+						<input type="text" class="form-control"
 							value="재료" style="background: #FFFECC"/>
 					</div>
 					<div class="col-md-8">
 						<div id="addIngredList">
 							<div class="input-group mb-2 addIngredDiv">
-								<input type="text" class="form-control inputVal" placeholder="예)돼지고기">
-								<input type="text" class="form-control inputVal" placeholder="예)300g">
+								<input type="text" class="form-control inputVal" 
+									placeholder="예)소고기" name="i_name">
+								<input type="text" class="form-control inputVal" 
+									placeholder="예)1000g" name="i_amount">
 							</div>
 						</div>
 						<div style="text-align: center;">
@@ -211,12 +211,12 @@ $(function() {
 								<span class="cookStepTitle">step1</span>
 							</div>
 							<div class="col-md-7">
-								<textarea rows="5" class="form-control inputVal"></textarea>
+								<textarea rows="5" class="form-control inputVal" name="r_content"></textarea>
 							</div>
 							<div class="col-md-2 stepImageDiv">
 								<img class="inputImage stepCookImage" alt="요리사진을 등록해주세요."
 								src="/resources/main_mypage/images/plus.png"/>
-								<input type="file" class="cookFile cookStepFile"/>
+								<input type="file" class="cookFile cookStepFile" name="files"/>
 							</div>
 						</div>
 					</div>
@@ -227,7 +227,7 @@ $(function() {
 				<hr class="createHr">
 				<div class="form-group createCookDiv">
 					<label for="title" class="createTitle">요리팁</label>
-					<textarea rows="4" class="form-control inputVal"></textarea>
+					<textarea rows="4" class="form-control inputVal" id="r_cooktip" name="r_cooktip"></textarea>
 				</div><hr class="createHr">
 				<div style="text-align: center;">
 					<button type="submit" class="btn btn-success btn-lg">저장하기</button>

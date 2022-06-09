@@ -2,19 +2,24 @@ package com.kh.team.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.RecipeBoardService;
 import com.kh.team.util.MyFileUploader;
+import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
+import com.kh.team.vo.ingredientVo;
 
 @Controller
 @RequestMapping("/recipeboard")
@@ -29,11 +34,43 @@ public class RecipeBoardController {
 	}
 	
 	@RequestMapping(value="/createRun", method=RequestMethod.POST)
-	public String createRun(RecipeBoardVo recipeBoardVo, RedirectAttributes rttr) {
-		System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
-		boolean result = recipeBoardService.create(recipeBoardVo);
-		System.out.println("BoardController, createRun, result: " + result);
-		rttr.addFlashAttribute("create_result", result);
+	public String createRun(RecipeBoardVo recipeBoardVo, ingredientVo ingredintVo, HttpSession session, 
+			RedirectAttributes rttr, MultipartFile file, @RequestParam("files") List<MultipartFile> files) {
+//		System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
+//		System.out.println("BoardController, createRun, titlepic: " + file);
+//		System.out.println("BoardController, createRun, contentpictures: " + files);
+//		System.out.println("BoardController, createRun, List<ingredientVo>: " + ingredintVo);
+//		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+//		String userid = memberVo.getUserid();
+		String userid = "user01";
+		recipeBoardVo.setUserid(userid);
+		
+		try {
+			//타이틀이미지
+			String originalFilename = file.getOriginalFilename();
+			String titlepic = MyFileUploader.uploadFile(
+					"//192.168.0.110/boardattach", originalFilename, file.getBytes());
+			recipeBoardVo.setTitlepic(titlepic);
+			
+			//요리스탭이미지들
+			int index = 0;
+			String[] pictures = new String[files.size()];
+			for(MultipartFile onefile : files) {
+				String oneOriginalFilename = onefile.getOriginalFilename();
+				String picture = MyFileUploader.uploadFile(
+						"//192.168.0.110/boardattach", oneOriginalFilename, onefile.getBytes());
+				pictures[index++] = picture;
+			}
+			recipeBoardVo.setPictures(pictures);
+			
+//			System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
+			
+	//		boolean result = recipeBoardService.create(recipeBoardVo);
+	//		System.out.println("BoardController, createRun, result: " + result);
+	//		rttr.addFlashAttribute("create_result", result);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/recipeboard/list";
 	}
 

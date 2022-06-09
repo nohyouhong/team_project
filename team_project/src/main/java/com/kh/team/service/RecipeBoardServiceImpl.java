@@ -22,9 +22,9 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 		int r_bno = recipeBoardDao.getNextBno();
 		recipeBoardVo.setR_bno(r_bno);
 		boolean result = recipeBoardDao.create(recipeBoardVo);
-		String[] files = recipeBoardVo.getFiles();
-		if(files != null && files.length != 0) {
-			for(String filename : files) {
+		String[] pictures = recipeBoardVo.getPictures();
+		if(pictures != null && pictures.length != 0) {
+			for(String filename : pictures) {
 				recipeBoardDao.insertAttach(filename, r_bno);
 			}
 		}

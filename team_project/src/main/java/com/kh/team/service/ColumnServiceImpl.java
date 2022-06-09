@@ -11,6 +11,7 @@ import com.kh.team.vo.ColumnVo;
 @Service
 public class ColumnServiceImpl implements ColumnService {
 	
+	
 	@Autowired
 	private ColumnDao columnDao;
 	
@@ -53,6 +54,30 @@ public class ColumnServiceImpl implements ColumnService {
 	public boolean deleteColumn(int c_bno) {
 		
 		return false;
+	}
+
+	@Override
+	public boolean insertColumnLike(int c_bno, String userid) {
+		boolean result = columnDao.insertColumnLike(c_bno, userid);
+		return result;
+	}
+
+	@Override
+	public boolean updateColumnLikeCount(int c_bno, int likeCount) {
+		boolean result = columnDao.updateColumnLikeCount(c_bno, likeCount);
+		return result;
+	}
+
+	@Override
+	public boolean deleteColumnLike(int c_bno, String userid) {
+		boolean result = columnDao.deleteColumnLike(c_bno, userid);
+		return result;
+	}
+
+	@Override
+	public boolean isColumnLike(int c_bno, String userid) {
+		boolean result = columnDao.isColumnLike(c_bno, userid);
+		return result;
 	}
 
 }

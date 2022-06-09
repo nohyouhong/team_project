@@ -74,4 +74,52 @@ public class ColumnDaoImpl implements ColumnDao {
 		return false;
 	}
 
+	@Override
+	public boolean insertColumnLike(int c_bno, String userid) {
+		Map<String, Object> likeMap = new HashMap<>();
+		likeMap.put("c_bno", c_bno);
+		likeMap.put("userid", userid);
+		int count = sqlSession.insert(NAMESPACE + "insertColumnLike", likeMap);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean updateColumnLikeCount(int c_bno, int likeCount) {
+		Map<String, Object> likeMap = new HashMap<>();
+		likeMap.put("c_bno", c_bno);
+		likeMap.put("likeCount", likeCount);
+		int count = sqlSession.insert(NAMESPACE + "insertColumnLike", likeMap);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteColumnLike(int c_bno, String userid) {
+		Map<String, Object> likeMap = new HashMap<>();
+		likeMap.put("c_bno", c_bno);
+		likeMap.put("userid", userid);
+		int count = sqlSession.delete(NAMESPACE + "deleteColumnLike", likeMap);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isColumnLike(int c_bno, String userid) {
+		Map<String, Object> likeMap = new HashMap<>();
+		likeMap.put("c_bno", c_bno);
+		likeMap.put("userid", userid);
+		int isLikeCount = sqlSession.selectOne(NAMESPACE + "isColumnLike", likeMap);
+		if(isLikeCount > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

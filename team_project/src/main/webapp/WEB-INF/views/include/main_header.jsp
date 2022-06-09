@@ -81,6 +81,10 @@
 	<script src="/resources/summernote/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	
+	
+<!-- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
+	<script src="https://kit.fontawesome.com/8393ee0e69.js" crossorigin="anonymous"></script>
+		
 	</head>
 	<body>
 	<div class="colorlib-loader"></div>

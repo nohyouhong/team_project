@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.column">
+	
+	<!-- column CRUD -->
 	<insert id="insertColumn">
 		insert into tbl_column_board(c_bno, c_title, c_content)
 		values (#{c_bno}, #{c_title}, #{c_content})
@@ -35,4 +37,26 @@
 	<delete id="deleteColumn">
 	
 	</delete>
+	
+	<!-- Column Like -->
+	<insert id="insertColumnLike">
+		insert into tbl_column_like(c_lno, c_bno, userid)
+		values(seq_column_lno.nextval, #{c_bno}, #{userid})
+	</insert>
+	
+	<insert id="updateColumnLikeCount">
+		update tbl_column_board set
+		c_likecnt = c_likecnt + (#{likecount})
+		where c_bno = #{c_bno}
+	</insert>
+	
+	<delete id="deleteColumnLike">
+		delete from tbl_column_like
+		where c_bno = #{c_bno} and userid = #{userid}
+	</delete>
+	
+	<select id="isColumnLike" resultType="int">
+		select count(*) cnt from tbl_column_like
+		where c_bno = #{c_bno} and userid = #{userid}
+	</select>
 </mapper>

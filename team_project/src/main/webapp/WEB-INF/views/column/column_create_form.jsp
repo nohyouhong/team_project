@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/column/column_run" method="post" id="frmColumn">
+			<form role="form" action="/column/column_create_run" method="post" id="frmColumn">
 				<input type="hidden" name="c_picture" id="c_picture">
 				<div class="form-group">
 					<label for="title"> 칼럼 제목 </label> 

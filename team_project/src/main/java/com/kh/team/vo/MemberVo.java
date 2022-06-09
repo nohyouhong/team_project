@@ -12,6 +12,7 @@ public class MemberVo {
 	private int m_point;
 	private String m_picture;
 	private int m_totalattend;
+	private int m_code;
 	
 	public MemberVo() {
 		super();
@@ -122,10 +123,18 @@ public class MemberVo {
 		this.m_totalattend = m_totalattend;
 	}
 
+	public int getM_code() {
+		return m_code;
+	}
+
+	public void setM_code(int m_code) {
+		this.m_code = m_code;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", gender=" + gender + ", m_regdate=" + m_regdate + ", m_point=" + m_point + ", m_picture="
-				+ m_picture + ", m_totalattend=" + m_totalattend + "]";
+				+ m_picture + ", m_totalattend=" + m_totalattend + ", m_code=" + m_code + "]";
 	}
 }

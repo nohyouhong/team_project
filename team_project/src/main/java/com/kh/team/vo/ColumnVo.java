@@ -30,6 +30,14 @@ public class ColumnVo {
 		this.c_likecnt = c_likecnt;
 	}
 
+	public ColumnVo(int c_bno, String c_title, String c_content, String userid) {
+		super();
+		this.c_bno = c_bno;
+		this.c_title = c_title;
+		this.c_content = c_content;
+		this.userid = userid;
+	}
+
 	public int getC_bno() {
 		return c_bno;
 	}

@@ -44,11 +44,11 @@
 		values(seq_column_lno.nextval, #{c_bno}, #{userid})
 	</insert>
 	
-	<insert id="updateColumnLikeCount">
+	<update id="updateColumnLikeCount">
 		update tbl_column_board set
-		c_likecnt = c_likecnt + (#{likecount})
+		c_likecnt = c_likecnt + #{likeCount}
 		where c_bno = #{c_bno}
-	</insert>
+	</update>
 	
 	<delete id="deleteColumnLike">
 		delete from tbl_column_like

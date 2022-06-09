@@ -91,7 +91,7 @@ public class ColumnDaoImpl implements ColumnDao {
 		Map<String, Object> likeMap = new HashMap<>();
 		likeMap.put("c_bno", c_bno);
 		likeMap.put("likeCount", likeCount);
-		int count = sqlSession.insert(NAMESPACE + "insertColumnLike", likeMap);
+		int count = sqlSession.update(NAMESPACE + "updateColumnLikeCount", likeMap);
 		if(count > 0) {
 			return true;
 		}

@@ -76,10 +76,11 @@ public class RecipeBoardController {
 	}
 
 	@RequestMapping(value="/read", method=RequestMethod.GET)
-	public String read(int bno, Model model, PagingDto pagingDto) {
-		System.out.println("BoardController, read, bno: " + bno);
+	public String read(int r_bno, Model model, PagingDto pagingDto) {
+		System.out.println("BoardController, read, r_bno: " + r_bno);
 		System.out.println("BoardController, read, pagingDto: " + pagingDto);
-		RecipeBoardVo recipeBoardVo = recipeBoardService.read(bno);
+		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
+		System.out.println(recipeBoardVo);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
 		model.addAttribute("pagingDto", pagingDto);
 		return "recipeboard/read";
@@ -120,7 +121,7 @@ public class RecipeBoardController {
 		pagingDto.setCount(recipeBoardService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<RecipeBoardVo> recipeBoardList = recipeBoardService.list(pagingDto);
-		model.addAttribute("boardList", recipeBoardList);
+		model.addAttribute("recipeBoardList", recipeBoardList);
 		model.addAttribute("pagingDto", pagingDto);
 		
 		return "recipeboard/list";

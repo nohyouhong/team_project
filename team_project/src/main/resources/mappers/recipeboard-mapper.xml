@@ -23,7 +23,7 @@
 		insert into tbl_recipe_board
 			(r_bno, r_title, r_titlepic, r_explain, r_cooktip, userid, f_code)
 		values
-			(#{r_bno}, #{r_title}, #{r_titlepic}, #{r_explain, jdbcType=VARCHAR}, 
+			(#{r_bno}, #{r_title}, #{r_titlepic}, #{r_explain}, 
 				#{r_cooktip}, #{userid}, #{f_code})
 	</insert>
 	

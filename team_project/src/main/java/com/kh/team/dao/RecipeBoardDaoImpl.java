@@ -87,17 +87,17 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	}
 
 	@Override
-	public void insertPicture(String picture, int r_bno) {
+	public void insertPicture(String r_picture, int r_bno) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put("picture", picture);
+		parameter.put("r_picture", r_picture);
 		parameter.put("r_bno", r_bno);
 		sqlSession.insert(NAMESPACE + "insertPicture", parameter);
 	}
 	
 	@Override
-	public void insertContent(String content, int r_bno) {
+	public void insertContent(String r_content, int r_bno) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put("content", content);
+		parameter.put("r_content", r_content);
 		parameter.put("r_bno", r_bno);
 		sqlSession.insert(NAMESPACE + "insertContent", parameter);
 	}

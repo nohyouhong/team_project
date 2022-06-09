@@ -29,11 +29,13 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 		boolean result = recipeBoardDao.create(recipeBoardVo);
 		String[] contents = recipeBoardVo.getR_contents();
 		String[] pictures = recipeBoardVo.getPictures();
-		if((contents != null && contents.length != 0) &&
-				(pictures != null && pictures.length != 0)) {
+		System.out.println("contents: " + contents + "pictures: " + pictures);
+		if(contents != null && contents.length != 0) {
 			for(String content : contents) {
 				recipeBoardDao.insertContent(content, r_bno);
 			}
+		}
+		if(pictures != null && pictures.length != 0) {
 			for(String picture : pictures) {
 				recipeBoardDao.insertPicture(picture, r_bno);
 			}
@@ -53,7 +55,7 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 
 	@Override
 	public RecipeBoardVo read(int r_bno) {
-		recipeBoardDao.updateViewCnt(r_bno);
+//		recipeBoardDao.updateViewCnt(r_bno);
 		RecipeBoardVo recipeBoardVo = recipeBoardDao.read(r_bno);
 		return recipeBoardVo;
 	}

@@ -211,7 +211,7 @@ $(function() {
 								<span class="cookStepTitle">step1</span>
 							</div>
 							<div class="col-md-7">
-								<textarea rows="5" class="form-control inputVal" name="r_content"></textarea>
+								<textarea rows="5" class="form-control inputVal" name="r_contents"></textarea>
 							</div>
 							<div class="col-md-2 stepImageDiv">
 								<img class="inputImage stepCookImage" alt="요리사진을 등록해주세요."

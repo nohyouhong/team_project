@@ -9,7 +9,7 @@ import com.kh.team.vo.IngredientVo;
 
 public interface RecipeBoardService {
 	public boolean create(RecipeBoardVo recipeBoardVo, IngredientListVo ingredientListVo);
-	public RecipeBoardVo read(int bno);
+	public RecipeBoardVo read(int r_bno);
 	public boolean update(RecipeBoardVo recipeBoardVo);
 	public boolean delete(int r_bno);
 	public List<RecipeBoardVo> list(PagingDto pagingDto);

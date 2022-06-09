@@ -6,18 +6,31 @@
 <mapper namespace="com.kh.team.mappers.recipeboard">
 
 	<select id="getNextBno" resultType="int">
-		select seq_board_bno.nextval from dual
+		select seq_recipe_board_bno.nextval from dual
 	</select>
 	
-	<insert id="insertAttach">
-		insert into tbl_attach(filename, bno)
-		values(#{filename}, #{bno})
+	<insert id="insertPicture">
+		insert into tbl_recipe_pic(r_pno, r_picture, r_bno)
+		values(seq_recipe_pic_pno.nextval, #{r_picture}, #{r_bno})
+	</insert>
+	
+	<insert id="insertContent">
+		insert into tbl_recipe_content(r_cno, r_content, r_bno)
+		values(seq_recipe_content_cno.nextval, #{r_content}, #{r_bno})
 	</insert>
 
 	<insert id="create">
 		insert into tbl_recipe_board
-			(r_bno, r_title, r_content, userid)
-		values(#{r_bno}, #{r_title}, #{r_content, jdbcType=VARCHAR}, #{userid})
+			(r_bno, r_title, r_titlepic, r_explain, r_cooktip, userid, f_code)
+		values
+			(#{r_bno}, #{r_title}, #{r_titlepic}, #{r_explain, jdbcType=VARCHAR}, 
+				#{r_cooktip}, #{userid}, #{f_code})
+	</insert>
+	
+	<insert id="ingredCreate">
+		insert into tbl_ingredient_list
+			(lno, r_bno, i_name, i_amount)
+		values(seq_ingredient_list_lno.nextval, #{r_bno}, #{i_name}, #{i_amount})
 	</insert>
 	
 	<select id="read" resultType="RecipeBoardVo">

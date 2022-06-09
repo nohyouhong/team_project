@@ -62,12 +62,11 @@ public class RecipeBoardController {
 				pictures[index++] = picture;
 			}
 			recipeBoardVo.setPictures(pictures);
-			
 //			System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
 			
-	//		boolean result = recipeBoardService.create(recipeBoardVo);
-	//		System.out.println("BoardController, createRun, result: " + result);
-	//		rttr.addFlashAttribute("create_result", result);
+			boolean result = recipeBoardService.create(recipeBoardVo, ingredintVo);
+			System.out.println("BoardController, createRun, result: " + result);
+			rttr.addFlashAttribute("create_result", result);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

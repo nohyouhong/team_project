@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
+import com.kh.team.vo.ingredientVo;
 
 @Repository
 public class RecipeBoardDaoImpl implements RecipeBoardDao{
@@ -21,6 +22,15 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	@Override
 	public boolean create(RecipeBoardVo recipeBoardVo) {
 		int count = sqlSession.insert(NAMESPACE + "create", recipeBoardVo);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean ingredCreate(ingredientVo ingredintVo) {
+		int count = sqlSession.insert(NAMESPACE + "ingredCreate", ingredintVo);
 		if(count > 0) {
 			return true;
 		}
@@ -76,11 +86,19 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	}
 
 	@Override
-	public void insertAttach(String filename, int r_bno) {
+	public void insertPicture(String picture, int r_bno) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put("filename", filename);
+		parameter.put("picture", picture);
 		parameter.put("r_bno", r_bno);
-		sqlSession.insert(NAMESPACE + "insertAttach", parameter);
+		sqlSession.insert(NAMESPACE + "insertPicture", parameter);
+	}
+	
+	@Override
+	public void insertContent(String content, int r_bno) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("content", content);
+		parameter.put("r_bno", r_bno);
+		sqlSession.insert(NAMESPACE + "insertContent", parameter);
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.dao.RecipeBoardDao;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
+import com.kh.team.vo.ingredientVo;
 
 @Service
 public class RecipeBoardServiceImpl implements RecipeBoardService{
@@ -18,14 +19,20 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	
 	@Override
 	@Transactional
-	public boolean create(RecipeBoardVo recipeBoardVo) {
+	public boolean create(RecipeBoardVo recipeBoardVo, ingredientVo ingredintVo) {
 		int r_bno = recipeBoardDao.getNextBno();
 		recipeBoardVo.setR_bno(r_bno);
 		boolean result = recipeBoardDao.create(recipeBoardVo);
+		recipeBoardDao.ingredCreate(ingredintVo);
+		String[] contents = recipeBoardVo.getR_content();
 		String[] pictures = recipeBoardVo.getPictures();
-		if(pictures != null && pictures.length != 0) {
-			for(String filename : pictures) {
-				recipeBoardDao.insertAttach(filename, r_bno);
+		if((contents != null && contents.length != 0) &&
+				(pictures != null && pictures.length != 0)) {
+			for(String content : contents) {
+				recipeBoardDao.insertContent(content, r_bno);
+			}
+			for(String picture : pictures) {
+				recipeBoardDao.insertPicture(picture, r_bno);
 			}
 		}
 		return result;

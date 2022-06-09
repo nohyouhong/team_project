@@ -6,37 +6,50 @@ import java.util.Arrays;
 public class RecipeBoardVo {
 	private int r_bno;
 	private String r_title;
-	private String r_content;
+	private String r_explain;
+	private String[] r_content;
+	private String r_cooktip;
 	private String userid;
 	private Date r_regdate;
 	private int f_code;
 	private int r_viewcnt;
 	private int r_likecnt;
-	private String[] files;
+	private String titlepic;
+	private String[] pictures;
 	
 	public RecipeBoardVo() {
 		super();
 	}
 
-	public RecipeBoardVo(String r_title, String r_content, String userid, int f_code) {
+	public RecipeBoardVo(String r_title, String r_explain, String[] r_content, String r_cooktip, String userid,
+			int f_code, String titlepic, String[] pictures) {
 		super();
 		this.r_title = r_title;
+		this.r_explain = r_explain;
 		this.r_content = r_content;
+		this.r_cooktip = r_cooktip;
 		this.userid = userid;
 		this.f_code = f_code;
+		this.titlepic = titlepic;
+		this.pictures = pictures;
 	}
 
-	public RecipeBoardVo(int r_bno, String r_title, String r_content, String userid, Date r_regdate, int f_code,
-			int r_viewcnt, int r_likecnt) {
+	public RecipeBoardVo(int r_bno, String r_title, String r_explain, String[] r_content, String r_cooktip,
+			String userid, Date r_regdate, int f_code, int r_viewcnt, int r_likecnt, String titlepic,
+			String[] pictures) {
 		super();
 		this.r_bno = r_bno;
 		this.r_title = r_title;
+		this.r_explain = r_explain;
 		this.r_content = r_content;
+		this.r_cooktip = r_cooktip;
 		this.userid = userid;
 		this.r_regdate = r_regdate;
 		this.f_code = f_code;
 		this.r_viewcnt = r_viewcnt;
 		this.r_likecnt = r_likecnt;
+		this.titlepic = titlepic;
+		this.pictures = pictures;
 	}
 
 	public int getR_bno() {
@@ -55,12 +68,28 @@ public class RecipeBoardVo {
 		this.r_title = r_title;
 	}
 
-	public String getR_content() {
+	public String getR_explain() {
+		return r_explain;
+	}
+
+	public void setR_explain(String r_explain) {
+		this.r_explain = r_explain;
+	}
+
+	public String[] getR_content() {
 		return r_content;
 	}
 
-	public void setR_content(String r_content) {
+	public void setR_content(String[] r_content) {
 		this.r_content = r_content;
+	}
+
+	public String getR_cooktip() {
+		return r_cooktip;
+	}
+
+	public void setR_cooktip(String r_cooktip) {
+		this.r_cooktip = r_cooktip;
 	}
 
 	public String getUserid() {
@@ -103,18 +132,27 @@ public class RecipeBoardVo {
 		this.r_likecnt = r_likecnt;
 	}
 
-	public String[] getFiles() {
-		return files;
+	public String getTitlepic() {
+		return titlepic;
 	}
 
-	public void setFiles(String[] files) {
-		this.files = files;
+	public void setTitlepic(String titlepic) {
+		this.titlepic = titlepic;
+	}
+
+	public String[] getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(String[] pictures) {
+		this.pictures = pictures;
 	}
 
 	@Override
 	public String toString() {
-		return "RecipeBoardVo [r_bno=" + r_bno + ", r_title=" + r_title + ", r_content=" + r_content + ", userid="
-				+ userid + ", r_regdate=" + r_regdate + ", f_code=" + f_code + ", r_viewcnt=" + r_viewcnt
-				+ ", r_likecnt=" + r_likecnt + ", files=" + Arrays.toString(files) + "]";
+		return "RecipeBoardVo [r_bno=" + r_bno + ", r_title=" + r_title + ", r_explain=" + r_explain + ", r_content="
+				+ Arrays.toString(r_content) + ", r_cooktip=" + r_cooktip + ", userid=" + userid + ", r_regdate="
+				+ r_regdate + ", f_code=" + f_code + ", r_viewcnt=" + r_viewcnt + ", r_likecnt=" + r_likecnt
+				+ ", titlepic=" + titlepic + ", pictures=" + Arrays.toString(pictures) + "]";
 	}
 }

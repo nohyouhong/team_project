@@ -79,4 +79,10 @@ public class ColumnController {
 		return "column/column_content";
 	}
 	
+	@RequestMapping(value="/column_like", method=RequestMethod.POST)
+	public String likeColumn() {
+		
+		return null;
+	}
+	
 }

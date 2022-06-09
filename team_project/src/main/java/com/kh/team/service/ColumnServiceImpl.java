@@ -45,15 +45,15 @@ public class ColumnServiceImpl implements ColumnService {
 	}
 
 	@Override
-	public boolean updateColumn(ColumnVo columnVo) {
-		
-		return false;
+	public boolean modifyColumn(ColumnVo columnVo) {
+		boolean result = columnDao.modifyColumn(columnVo);
+		return result;
 	}
 
 	@Override
 	public boolean deleteColumn(int c_bno) {
-		
-		return false;
+		boolean result = columnDao.deleteColumn(c_bno);
+		return result;
 	}
 
 	@Override

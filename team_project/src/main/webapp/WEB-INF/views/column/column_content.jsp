@@ -21,6 +21,9 @@
 #column_like_span {
 	font-size: 50px;
 }
+#column_manage_btn_div {
+	float: right;	
+}
 </style>
 
 <script>
@@ -80,6 +83,10 @@ $(document).ready(function(){
 	<div class="col-md-8" id="column_content_div">
 		<h3>${columnVo.c_title}</h3>
 		${columnVo.c_content}
+		<div id="column_manage_btn_div">
+			<a href="/column/column_modify_form?c_bno=${columnVo.c_bno}" class="btn btn-info">수정</a>
+			<a href="/column/column_delete?c_bno=${columnVo.c_bno}" class="btn btn-danger">삭제</a>
+		</div>
 		<div id="column_like_div">
 			<i class="fa-regular fa-thumbs-up" data-c_bno="${columnVo.c_bno}"></i>
 			<span id="column_like_span">${columnVo.c_likecnt}</span>
@@ -88,13 +95,13 @@ $(document).ready(function(){
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Product</th>
+					<th>제목</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="columnVo" items="${columnList}" begin="${columnVo.c_bno}" end="${columnVo.c_bno + 5}" varStatus="status">
+				<c:forEach var="columnVo" items="${columnList}" begin="${columnVo.c_bno}" end="${columnVo.c_bno + 5}">
 					<tr>
-						<td>${status.count}</td>
+						<td>${columnVo.c_bno}</td>
 						<td>${columnVo.c_title}</td>
 					</tr>
 				</c:forEach>

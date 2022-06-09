@@ -13,7 +13,7 @@ public interface ColumnDao {
 	public int getNextC_bno();
 	public ColumnVo readColumn(int c_bno);
 	public List<ColumnVo> getColumnList();
-	public boolean updateColumn(ColumnVo columnVo);
+	public boolean modifyColumn(ColumnVo columnVo);
 	public boolean deleteColumn(int c_bno);
 	public boolean insertColumnLike(int c_bno, String userid);
 	public boolean updateColumnLikeCount(int c_bno, int likeCount);

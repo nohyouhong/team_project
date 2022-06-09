@@ -30,12 +30,16 @@
 		order by c_bno
 	</select>
 	
-	<update id="updateColumn">
-	
+	<update id="modifyColumn">
+		update tbl_column_board set
+			c_title = #{c_title}, 
+			c_content = #{c_content}
+		where c_bno = #{c_bno}
 	</update>
-	
+
 	<delete id="deleteColumn">
-	
+		delete from tbl_column_board
+		where c_bno = #{c_bno}	
 	</delete>
 	
 	<!-- Column Like -->

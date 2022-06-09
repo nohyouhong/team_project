@@ -2,117 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
-
-<style>
-#cus_h2{
-	margin-top:30px;
-	margin-left:150px;
-	text-align:left;
-}
-#cus_img{
-	width:150px;
-	height:150px;
-	margin:50px 50px 50px auto;
-}
-.cus_menu{
-	border-top:1px solid #e2e2e2;
-	border-bottom:1px solid #cbcbcb;
-	border-right:1px solid #e2e2e2;
-	border-left:1px solid #e2e2e2;
-	background-color:#ffffff;
-	border-radius:5px;
-}
-.cus-item-last{
-	margin-bottom:30px;
-}
-.cus-item{
-	margin-top:10px;
-}
-li{
-	list-style:none;
-}
-.faq_tr td, .faq_top_tr td {
-    border-bottom: dashed 1px #EDEDED;
-    text-align: left;
-    padding: 20px;
-    background-color: #fafafa;
-    font-size: 13px;
-    line-height: 24px;
-}
-.faq_top_q td, .faq_q td {
-    border-bottom: dashed 1px #EDEDED;
-    padding: 15px;
-    font-size: 13px;
-}
-.anspan{
-	color: #ff0000; 
-	font-weight: bold; 
-	font-size: 16px;
-}
-.quspan{
-	color:#666;
-	font-weight:bold; 
-	font-size:16px;
-}
-.anspan span{
-	font-size: 12px
-}
-.faq .teb_lst {margin: 100px auto 20px 50px; overflow: hidden; padding-bottom: 1px;  }
-.faq .teb_lst li { float: left; width: 14.1%; height: 38px; margin: 0 -1px -1px 0; border: 1px solid #DCDCDC;}
-.faq .teb_lst li:hover { position: relative; z-index: 20; border-color: #ff6600; background-color: #fff; }
-.faq .teb_lst li:hover a { color: #ff6600; }
-.faq .teb_lst li.on { position: relative; z-index: 10; border-color: #3d3d3d; background-color: #3d3d3d; font-weight: bold; letter-spacing: -1px; }
-.faq .teb_lst li.on a { color: #fff; }
-.faq .teb_lst li.col_last { width: 182px; }
-.faq .teb_lst a { display: block; width: 100%; height: 100%; line-height: 38px; color: #606060; text-align: center; }
-
-.an_td{
-	display: none;
-}
-
-.faq_list {
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: table;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-color: grey;
-}
-.faq-page:after {
-    content: '\02795';
-    /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
-.active:after {
-    content: "\2796";
-    /* Unicode character for "minus" sign (-) */
-}
-.faq-page {
-    /* background-color: #eee; */
-    color: #444;
-    cursor: pointer;
-    padding: 15px 20px;
-    width: 100%;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    margin: auto;
-    text-align:left;
-}
-.faq-body {
-    padding: 0 18px;
-    background-color: white;
-    display: none;
-    overflow: hidden;
-}
-.faq-h5{
-	color: brown;
-	text-align: left;
-}
-</style>
+<link rel="stylesheet" href="/resources/customer_center/customer_center.css" type="text/css">
 
 <script>
 $(document).ready(function(){
@@ -156,7 +46,7 @@ $(document).ready(function(){
 								<li><a href="#">공지사항</a></li>
 								<li><a href="#">공지사항</a></li>
 							</ul>
-							<a href="#" class="btn btn-outline-danger">1:1문의하기</a>
+							<a href="/member/inquiry" class="btn btn-outline-danger">1:1문의하기</a>
 							<section class="faq-container">
 								<div class="faq-one">
 									<!-- faq question -->

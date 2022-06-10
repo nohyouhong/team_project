@@ -7,8 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-<div class="container-fluid">
-	<div class="row">
+	<div class="row div_column">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/column/column_create_run" method="post" id="frmColumn">
@@ -68,6 +67,5 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-</div>
 
 <%@ include file="/WEB-INF/views/include/main_footer.jsp"%>

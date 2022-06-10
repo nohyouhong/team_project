@@ -19,6 +19,7 @@ import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
+import com.kh.team.vo.RecipeStepVo;
 import com.kh.team.vo.IngredientListVo;
 import com.kh.team.vo.IngredientVo;
 
@@ -80,8 +81,14 @@ public class RecipeBoardController {
 		System.out.println("BoardController, read, r_bno: " + r_bno);
 		System.out.println("BoardController, read, pagingDto: " + pagingDto);
 		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
+		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
+		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
+		MemberVo memberVo = recipeBoardService.getMemberVoByBno(r_bno);
 		System.out.println(recipeBoardVo);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
+		model.addAttribute("ingredientVoList", ingredientVoList);
+		model.addAttribute("recipeStepVoList", recipeStepVoList);
+		model.addAttribute("memberVo", memberVo);
 		model.addAttribute("pagingDto", pagingDto);
 		return "recipeboard/read";
 	}

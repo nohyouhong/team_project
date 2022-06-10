@@ -24,6 +24,12 @@
 #column_manage_btn_div {
 	float: right;	
 }
+.div_column {
+	margin-top: 50px;
+}
+.column_regdate {
+	font-size: 18px;
+}
 </style>
 
 <script>
@@ -78,10 +84,11 @@ $(document).ready(function(){
 </script>
 
 
-<div class="row">
+<div class="row div_column">
 	<div class="col-md-2"></div>
 	<div class="col-md-8" id="column_content_div">
-		<h3>${columnVo.c_title}</h3>
+		<h1>${columnVo.c_title}</h1>
+		<p class="column_regdate">${columnVo.c_regdate}</p>
 		${columnVo.c_content}
 		<div id="column_manage_btn_div">
 			<a href="/column/column_modify_form?c_bno=${columnVo.c_bno}" class="btn btn-info">수정</a>
@@ -92,12 +99,6 @@ $(document).ready(function(){
 			<span id="column_like_span">${columnVo.c_likecnt}</span>
 		</div>
 		<table class="table">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>제목</th>
-				</tr>
-			</thead>
 			<tbody>
 				<c:forEach var="columnvo" items="${columnList}" begin="${columnvo.c_bno}" end="${columnvo.c_bno + 5}">
 					<tr>

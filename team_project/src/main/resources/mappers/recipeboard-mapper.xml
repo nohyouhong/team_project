@@ -48,11 +48,17 @@
 		where r_bno = #{r_bno}
 	</select>
 	
-	<select id="ingredRead" resultType="IngredientVo">
-		select * 
-		from tbl_ingredient_list l join tbl_ingredient i
-			on l.i_name = i.i_name
-		where l.r_bno = #{r_bno}
+	<select id="readIngreds" resultType="IngredientVo">
+		select * from 
+		tbl_ingredient i join tbl_ingredient_list l
+			on i.i_name = l.i_name
+		where r_bno = #{r_bno}
+		order by l.lno asc
+	</select>
+	
+	<select id="getUseridByBno" resultType="string">
+		select userid from tbl_recipe_board
+		where r_bno = #{r_bno}
 	</select>
 	
 	<update id="update">

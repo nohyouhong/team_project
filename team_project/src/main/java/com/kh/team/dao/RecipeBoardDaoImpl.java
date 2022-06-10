@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
 import com.kh.team.vo.IngredientVo;
+import com.kh.team.vo.MemberVo;
 
 @Repository
 public class RecipeBoardDaoImpl implements RecipeBoardDao{
@@ -55,7 +56,12 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		List<String> recipeBoardPictures = sqlSession.selectList(NAMESPACE + "readPictures", r_bno);
 		return recipeBoardPictures;
 	}
-
+	
+	@Override
+	public List<IngredientVo> readIngreds(int r_bno) {
+		List<IngredientVo> recipeBoardIngreds = sqlSession.selectList(NAMESPACE + "readIngreds", r_bno);
+		return recipeBoardIngreds;
+	}
 	@Override
 	public boolean update(RecipeBoardVo recipeBoardVo) {
 		int count = sqlSession.update(NAMESPACE + "update", recipeBoardVo);
@@ -113,5 +119,10 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		parameter.put("r_bno", r_bno);
 		sqlSession.insert(NAMESPACE + "insertContent", parameter);
 	}
-	
+
+	@Override
+	public String getUseridByBno(int r_bno) {
+		String userid = sqlSession.selectOne(NAMESPACE + "getUseridByBno", r_bno);
+		return userid;
+	}
 }

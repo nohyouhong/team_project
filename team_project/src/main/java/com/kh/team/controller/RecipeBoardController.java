@@ -80,8 +80,12 @@ public class RecipeBoardController {
 		System.out.println("BoardController, read, r_bno: " + r_bno);
 		System.out.println("BoardController, read, pagingDto: " + pagingDto);
 		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
+		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
+		MemberVo memberVo = recipeBoardService.getMemberVoByBno(r_bno);
 		System.out.println(recipeBoardVo);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
+		model.addAttribute("ingredientVoList", ingredientVoList);
+		model.addAttribute("memberVo", memberVo);
 		model.addAttribute("pagingDto", pagingDto);
 		return "recipeboard/read";
 	}

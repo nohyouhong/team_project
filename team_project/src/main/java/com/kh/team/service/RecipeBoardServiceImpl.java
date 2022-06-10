@@ -6,17 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.team.dao.MemberDao;
 import com.kh.team.dao.RecipeBoardDao;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
 import com.kh.team.vo.IngredientListVo;
 import com.kh.team.vo.IngredientVo;
+import com.kh.team.vo.MemberVo;
 
 @Service
 public class RecipeBoardServiceImpl implements RecipeBoardService{
 	
 	@Autowired
 	private RecipeBoardDao recipeBoardDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	@Override
 	@Transactional
@@ -70,7 +75,13 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 		
 		return recipeBoardVo;
 	}
-
+	
+	@Override
+	public List<IngredientVo> readIngreds(int r_bno) {
+		List<IngredientVo> ingredientVoList = recipeBoardDao.readIngreds(r_bno);
+		return ingredientVoList;
+	}
+	
 	@Override
 	public boolean update(RecipeBoardVo recipeBoardVo) {
 		boolean result = recipeBoardDao.update(recipeBoardVo);
@@ -93,5 +104,12 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	public int getCount(PagingDto pagingDto) {
 		int count = recipeBoardDao.getCount(pagingDto);
 		return count;
+	}
+
+	@Override
+	public MemberVo getMemberVoByBno(int r_bno) {
+		String userid = recipeBoardDao.getUseridByBno(r_bno);
+		MemberVo memberVo = memberDao.getMemberById(userid);
+		return memberVo;
 	}
 }

@@ -20,5 +20,6 @@ public interface ColumnDao {
 	public boolean updateColumnLikeCount(int c_bno, int likeCount);
 	public boolean deleteColumnLike(int c_bno, String userid);
 	public boolean isColumnLike(int c_bno, String userid);
+	public void increaseColumnViewcnt(int c_bno);
 	
 }

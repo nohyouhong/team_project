@@ -47,8 +47,15 @@ public class ColumnDaoImpl implements ColumnDao {
 	@Override
 	public ColumnVo readColumn(int c_bno) {
 		ColumnVo columnVo = sqlSession.selectOne(NAMESPACE + "readColumn", c_bno);
+		sqlSession.update(NAMESPACE + "increaseColumnViewcnt", c_bno);
 		return columnVo;
 	}
+	
+	@Override
+	public void increaseColumnViewcnt(int c_bno) {
+		
+	}
+
 
 	@Override
 	public List<ColumnVo> getColumnList() {

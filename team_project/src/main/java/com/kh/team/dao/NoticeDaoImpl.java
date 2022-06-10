@@ -34,8 +34,8 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public boolean updateNotice(int n_bno) {
-		int count = sqlsession.update(NAMESPACE+"updateNotice", n_bno);
+	public boolean updateNotice(NoticeVo noticeVo) {
+		int count = sqlsession.update(NAMESPACE+"updateNotice", noticeVo);
 		if(count > 0) {
 			return true;
 		}

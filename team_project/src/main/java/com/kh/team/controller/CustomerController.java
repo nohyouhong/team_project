@@ -64,11 +64,14 @@ public class CustomerController {
 		return "redirect:/customer/notice";
 	}
 	
-	@RequestMapping(value="/notice_read", method=RequestMethod.GET)
-	public String noticeRead(int n_bno, Model model) {
-//		String username = 
-		NoticeVo noticeVo = noticeService.readNotice(n_bno);
-		model.addAttribute("noticeVo", noticeVo);
-		return "customer/notice_read";
+	@RequestMapping(value="/notice_modify_run", method=RequestMethod.POST)
+	public String noticeRead(NoticeVo noticeVo, int n_bno, RedirectAttributes rttr) {
+		System.out.println("noticeVo: " + noticeVo);
+		boolean result = noticeService.updateNotice(noticeVo);
+		rttr.addFlashAttribute("notice_modify_result", result);
+		rttr.addAttribute("n_bno", noticeVo.getN_bno());
+		rttr.addAttribute("n_title", noticeVo.getN_title());
+		rttr.addAttribute("n_content", noticeVo.getN_content());
+		return "redirect:/customer/notice";
 	}
 }

@@ -8,61 +8,93 @@
 #insertColumn {
 	float: right;
 	margin-bottom: 20px;
-	background-color: rgb(248,56,1);
+	background-color: rgb(248, 56, 1);
 }
-.div_column {
-	margin-top: 50px;
-}
+
 .col-md-2 {
 	background-color: rgb(240, 240, 240);
 }
+
+.div_column {
+	margin-top: 50px;
+}
+
 .img_column_list {
 	width: 150px;
 	height: 150px;
 }
-.td_column_content {
-	float: left;
+
+.single_column_post {
+	justify-content: flex-start;
 }
+
+.column_list_area {
+
+}
+
+.column_title_pic {
+	width: 330px;
+	height: 310px;
+}
+
+.column_img {
+	width: 250px;
+	height: 200px;
+}
+
+.column_content {
+	width: 650px;
+	height: auto;
+}
+
+.column_title {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.column_regdate {
+	font-size: 15px;
+}
+
+.column_contents {
+	font-size: 20px;
+	}
+
 </style>
 <div class="row div_column" id="div_column_list">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<h3>칼럼 목록</h3>
-		<c:if test="${loginVo.m_code == 101}">
-			<a class="btn btn-primary" id="insertColumn" href="/column/column_create_form">칼럼 작성</a>
-		</c:if>
-		<table class="tbl_column_list">
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th></th> -->
-<!-- 					<th></th> -->
-<!-- 					<th>작성일</th> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-			<tbody>
-				<c:forEach var="columnVo" items="${columnList}" varStatus="status">
-					<tr>
-						<td><a href="/column/readColumn?c_bno=${columnVo.c_bno}"><img class="img_column_list" src="/column/displayImage?column_image=C:/boardattach/${columnVo.c_picture}"></a></td>
-						<td>
-							<table class="td_column_list">
-								<tr>
-									<td>${columnVo.c_title}</td>
-								</tr>
-								<tr>
-									<td class="tbl_column_content">${fn:substring(columnVo.c_content, 0, 150)}...<br>
-										${columnVo.c_regdate}</td>
-								</tr>
-								<tr>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<div class="column_list_area" id="column_list_area">
+		
+			<h4>Column List</h4>
+			<c:if test="${loginVo.m_code == 101}">
+				<a class="btn btn-primary" id="insertColumn" href="/column/column_create_form">칼럼 작성</a>
+			</c:if>
+			
+			<c:forEach items="${columnList}" var="columnVo">
+				<!-- Single Blog Post -->
+				<div class="single_column_post d-flex">
+					<!-- Blog Thumbnail -->
+					<div class="column_title_pic">
+						<img class="column_img" src="/column/displayImage?column_image=C:/boardattach/${columnVo.c_picture}" alt="">
+					</div>
+					<!-- Blog Content -->
+					<div class="column_content">
+						<a href="/column/readColumn?c_bno=${columnVo.c_bno}" class="column_title">${columnVo.c_title}</a>
+						<div class="column_meta">
+							${columnVo.c_regdate}
+						</div>
+						<a href="/column/readColumn?c_bno=${columnVo.c_bno}" class="column_regdate">
+							<p class="column_contents">${fn:substring(columnVo.c_content, 0, 150)}...</p>
+						</a>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 	</div>
 	<div class="col-md-2"></div>
 </div>
+<!-- ##### Treading Post Area Start ##### -->
 
 
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

@@ -26,7 +26,7 @@ $(document).ready(function(){
 	}
 	if(${loginVo.m_code == 101}){
 		$("#notice_form").show();
-	}
+	};
 });
 </script>
 

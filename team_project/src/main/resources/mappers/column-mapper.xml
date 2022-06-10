@@ -25,6 +25,12 @@
 		where c_bno = #{c_bno}
 	</select>
 	
+	<update id="increaseColumnViewcnt">
+		update tbl_column_board set
+			c_viewcnt = c_viewcnt + 1
+		where c_bno = #{c_bno}
+	</update>
+	
 	<select id="getColumnList" resultType="ColumnVo">
 		select * from tbl_column_board
 		order by c_bno

@@ -140,8 +140,8 @@ li{
 .notice-form{
 	margin-top:10px;
 }
-#notice_form{
-	margin-left:500px;
+#notice_modify{
+	float:right;
 }
 #inquirybtn{
 	margin-left:550px;
@@ -166,9 +166,9 @@ tr.tr_list:hover {
 section{
 	margin-top:20px;
 }
-i{
-	font-size:20px;
-	float: right;
-	color: #777;
-	display: none;
+.modify_line{
+	margin-top:20px;
+}
+.notice_modify_run{
+	display:none;
 }

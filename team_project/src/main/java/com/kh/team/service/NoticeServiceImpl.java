@@ -31,8 +31,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public boolean updateNotice(int n_bno) {
-		boolean result = noticeDao.updateNotice(n_bno);
+	public boolean updateNotice(NoticeVo noticeVo) {
+		boolean result = noticeDao.updateNotice(noticeVo);
 		if(result) {
 			return true;
 		}

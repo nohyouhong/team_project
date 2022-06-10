@@ -28,6 +28,11 @@ $(document).ready(function(){
 	
 	if(${loginVo.m_code == 101}){
 		$("#notice_form").show();
+		$(".notice_modify").show();
+		$(".notice_delete").show();
+	}else{
+		$(".notice_modify").hide();
+		$(".notice_modify_run").hide();
 	};
 	
 	var not = document.getElementsByClassName("n_title");
@@ -45,6 +50,17 @@ $(document).ready(function(){
 	        }
 	    });
 	};
+	
+	
+	$(".notice_modify").click(function(){
+		var notice_content = $(this).parent();
+		var textarea = notice_content.find("textarea");
+		var modify_run = notice_content.find(".notice_modify_run");
+		var input = notice_content.find(".n_title_input");
+		textarea.attr("readonly", false);
+		modify_run.fadeIn();
+		$(this).fadeOut();
+	});
 	
 });
 </script>
@@ -70,21 +86,37 @@ $(document).ready(function(){
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
 								<li class="on"><a href="#">공지사항</a></li>
 							</ul>
-						<a href="/customer/notice_form" class="btn btn-outline-danger"
+						<a href="/customer/notice_form" class="btn btn-outline-success"
 							 style="display:none;" id="notice_form">공지사항등록</a>
 						</div>
 						<c:forEach var="noticeVo" items="${notice_list}">
-						<section>
-							<div>
-								<h3 class="n_title">${noticeVo.n_title}</h3>
-								<p><span class="span_username">${noticeVo.username}</span>${noticeVo.n_regdate}
-								</p>
-								<div class="notice_content">
-									<textarea class="form-control" readonly>${noticeVo.n_content}</textarea>
+							<form role="form" method="post" action="/customer/notice_modify_run">
+							<input type="hidden" value="${noticeVo.n_bno}" name="n_bno">
+							<section>
+								<div>
+									<input type="text" value="${noticeVo.n_title}" name="n_title"
+										class="form-control n_title_input" style="display:none;">
+									<h3 class="n_title" >${noticeVo.n_title}</h3>
+									<p><span class="span_username">${noticeVo.username}</span>  ${noticeVo.n_regdate}
+									</p>
+									<div class="notice_content">
+										<textarea class="form-control" name="n_content" class="n_content" readonly>${noticeVo.n_content}</textarea>
+										<button type="button" class="btn btn-outline-primary notice_modify">
+											공지사항 수정
+										</button>
+										<button type="submit"
+											class="btn btn-outline-warning notice_modify_run">
+											공지사항 수정완료
+										</button>
+										<a href="/customer/notice_delete" 
+											class="btn btn-outline-danger notice_delete">
+											공지사항 삭제
+										</a>
+									</div>
 								</div>
-							</div>
-							<hr class="hr-line">
-						</section>
+								<hr class="hr-line">
+							</section>
+							</form>
 						</c:forEach>
 					</div>
 				</div>

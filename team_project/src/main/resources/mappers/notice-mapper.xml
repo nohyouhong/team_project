@@ -18,6 +18,8 @@
 	</select>
 	<update id="updateNotice">
 		update tbl_notice_board set
+			n_title = #{n_title},
+			n_content = #{n_content}
 		where n_bno = #{n_bno}
 	</update>
 	<delete id="deleteNotice">

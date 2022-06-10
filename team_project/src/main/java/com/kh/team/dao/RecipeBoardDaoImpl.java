@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeBoardVo;
+import com.kh.team.vo.RecipeStepVo;
 import com.kh.team.vo.IngredientVo;
 import com.kh.team.vo.MemberVo;
 
@@ -46,15 +47,9 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	}
 	
 	@Override
-	public List<String> readContents(int r_bno) {
-		List<String> recipeBoardContents = sqlSession.selectList(NAMESPACE + "readContents", r_bno);
-		return recipeBoardContents;
-	}
-	
-	@Override
-	public List<String> readPictures(int r_bno) {
-		List<String> recipeBoardPictures = sqlSession.selectList(NAMESPACE + "readPictures", r_bno);
-		return recipeBoardPictures;
+	public List<RecipeStepVo> readStepVos(int r_bno){
+		List<RecipeStepVo> recipeStepVoList = sqlSession.selectList(NAMESPACE + "readStepVos", r_bno);
+		return recipeStepVoList;
 	}
 	
 	@Override
@@ -62,6 +57,7 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		List<IngredientVo> recipeBoardIngreds = sqlSession.selectList(NAMESPACE + "readIngreds", r_bno);
 		return recipeBoardIngreds;
 	}
+	
 	@Override
 	public boolean update(RecipeBoardVo recipeBoardVo) {
 		int count = sqlSession.update(NAMESPACE + "update", recipeBoardVo);
@@ -103,20 +99,27 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		int r_bno = sqlSession.selectOne(NAMESPACE + "getNextBno");
 		return r_bno;
 	}
+	
+	@Override
+	public int getNextCno() {
+		int r_cno = sqlSession.selectOne(NAMESPACE + "getNextCno");
+		return r_cno;
+	}
 
 	@Override
-	public void insertPicture(String r_picture, int r_bno) {
+	public void insertPicture(String r_picture, int r_cno) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("r_picture", r_picture);
-		parameter.put("r_bno", r_bno);
+		parameter.put("r_cno", r_cno);
 		sqlSession.insert(NAMESPACE + "insertPicture", parameter);
 	}
 	
 	@Override
-	public void insertContent(String r_content, int r_bno) {
+	public void insertContent(String r_content, int r_bno, int r_cno) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("r_content", r_content);
 		parameter.put("r_bno", r_bno);
+		parameter.put("r_cno", r_cno);
 		sqlSession.insert(NAMESPACE + "insertContent", parameter);
 	}
 

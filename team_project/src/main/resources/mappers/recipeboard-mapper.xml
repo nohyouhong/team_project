@@ -9,14 +9,18 @@
 		select seq_recipe_board_bno.nextval from dual
 	</select>
 	
+	<select id="getNextCno" resultType="int">
+		select seq_recipe_content_cno.nextval from dual
+	</select>
+	
 	<insert id="insertPicture">
-		insert into tbl_recipe_pic(r_pno, r_picture, r_bno)
-		values(seq_recipe_pic_pno.nextval, #{r_picture}, #{r_bno})
+		insert into tbl_recipe_pic(r_pno, r_picture, r_cno)
+		values(seq_recipe_pic_pno.nextval, #{r_picture}, #{r_cno})
 	</insert>
 	
 	<insert id="insertContent">
 		insert into tbl_recipe_content(r_cno, r_content, r_bno)
-		values(seq_recipe_content_cno.nextval, #{r_content}, #{r_bno})
+		values(#{r_cno}, #{r_content}, #{r_bno})
 	</insert>
 
 	<insert id="create">
@@ -38,15 +42,26 @@
 		where r_bno = #{r_bno}
 	</select>
 	
+	<select id="readStepVos" resultType="RecipeStepVo">
+		select r_content, r_picture from
+		tbl_recipe_board b inner join tbl_recipe_content c
+		    on b.r_bno = c.r_bno
+		inner join tbl_recipe_pic p
+		    on c.r_cno = p.r_cno
+		where b.r_bno = #{r_bno}
+		order by r_cno
+	</select>
+	
+<!-- 	지워도될듯 -->
 	<select id="readContents" resultType="string">
 		select r_content from tbl_recipe_content
 		where r_bno = #{r_bno}
 	</select>
-	
 	<select id="readPictures" resultType="string">
 		select r_picture from tbl_recipe_pic
 		where r_bno = #{r_bno}
 	</select>
+<!-- 	지워도될듯 -->
 	
 	<select id="readIngreds" resultType="IngredientVo">
 		select * from 

@@ -66,6 +66,9 @@ li{
 	display: none;
 }
 
+.span_username{
+	font-size:12px;
+}
 .faq_list {
     border-collapse: collapse;
     border-spacing: 0;
@@ -73,6 +76,13 @@ li{
     box-sizing: border-box;
     text-indent: initial;
     border-color: grey;
+}
+.n_title:after{
+	content:'\02795';
+	font-size:15px;
+	color: #777;
+	float: right;
+	margin-left: 5px;
 }
 .faq-page:after {
     content: '\02795';
@@ -84,7 +94,13 @@ li{
 }
 .active:after {
     content: "\2796";
+    
     /* Unicode character for "minus" sign (-) */
+}
+
+
+.notice_content{
+	display:none;
 }
 .faq-page {
     /* background-color: #eee; */
@@ -137,4 +153,22 @@ li{
 }
 .col-md-9{
 	margin-top:50px;
+}
+
+tr.tr_list {
+	cursor: pointer;
+}
+
+tr.tr_list:hover {
+	background-color: aliceblue;
+	cursor: pointer;
+}
+section{
+	margin-top:20px;
+}
+i{
+	font-size:20px;
+	float: right;
+	color: #777;
+	display: none;
 }

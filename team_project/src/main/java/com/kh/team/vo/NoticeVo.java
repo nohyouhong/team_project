@@ -7,6 +7,7 @@ public class NoticeVo {
 	private String n_title;
 	private String n_content;
 	private String userid;
+	private String username;
 	private Date n_regdate;
 	public NoticeVo() {
 		super();
@@ -29,6 +30,17 @@ public class NoticeVo {
 		this.userid = userid;
 		this.n_regdate = n_regdate;
 	}
+	
+	public NoticeVo(int n_bno, String n_title, String n_content, String userid, String username, Date n_regdate) {
+		super();
+		this.n_bno = n_bno;
+		this.n_title = n_title;
+		this.n_content = n_content;
+		this.userid = userid;
+		this.username = username;
+		this.n_regdate = n_regdate;
+	}
+
 	public int getN_bno() {
 		return n_bno;
 	}
@@ -59,10 +71,19 @@ public class NoticeVo {
 	public void setN_regdate(Date n_regdate) {
 		this.n_regdate = n_regdate;
 	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeVo [n_bno=" + n_bno + ", n_title=" + n_title + ", n_content=" + n_content + ", userid=" + userid
-				+ ", n_regdate=" + n_regdate + "]";
+				+ ", username=" + username + ", n_regdate=" + n_regdate + "]";
 	}
 	
 	

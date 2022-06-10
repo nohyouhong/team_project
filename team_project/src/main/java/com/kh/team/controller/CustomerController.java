@@ -57,10 +57,18 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value="/notice_run", method=RequestMethod.POST)
-	public String createRun(NoticeVo noticeVo, RedirectAttributes rttr) {
+	public String noticeRun(NoticeVo noticeVo, RedirectAttributes rttr) {
 		System.out.println("notice_run, noticeVo:" + noticeVo);
 		boolean result = noticeService.insertNotice(noticeVo);
 		rttr.addFlashAttribute("insert_notice", result);
 		return "redirect:/customer/notice";
+	}
+	
+	@RequestMapping(value="/notice_read", method=RequestMethod.GET)
+	public String noticeRead(int n_bno, Model model) {
+//		String username = 
+		NoticeVo noticeVo = noticeService.readNotice(n_bno);
+		model.addAttribute("noticeVo", noticeVo);
+		return "customer/notice_read";
 	}
 }

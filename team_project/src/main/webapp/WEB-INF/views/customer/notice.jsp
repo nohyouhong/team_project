@@ -7,6 +7,7 @@
 
 <script>
 $(document).ready(function(){
+	var frmPaging = $("#frmPaging");
 	var faq = document.getElementsByClassName("faq-page");
 	var i;
 	
@@ -14,7 +15,7 @@ $(document).ready(function(){
 	    faq[i].addEventListener("click", function () {
 	        /* Toggle between adding and removing the "active" class,
 	        to highlight the button that controls the panel */
-	        this.classList.toggle("active");
+	        this.classList.toggle("show");
 	        /* Toggle between hiding and showing the active panel */
 	        var body = this.nextElementSibling;
 	        if (body.style.display == "block") {
@@ -23,10 +24,28 @@ $(document).ready(function(){
 	            body.style.display = "block";
 	        }
 	    });
-	}
+	};
+	
 	if(${loginVo.m_code == 101}){
 		$("#notice_form").show();
-	}
+	};
+	
+	var not = document.getElementsByClassName("n_title");
+	var i;
+	
+	for (i = 0; i < not.length; i++) {
+		not[i].addEventListener("click", function () {
+	        this.classList.toggle("active");
+	        var p = this.nextElementSibling;
+	        var n_content = p.nextElementSibling;
+	        if (n_content.style.display == "block") {
+	        	n_content.style.display = "none";
+	        } else {
+	        	n_content.style.display = "block";
+	        }
+	    });
+	};
+	
 });
 </script>
 
@@ -54,31 +73,24 @@ $(document).ready(function(){
 						<a href="/customer/notice_form" class="btn btn-outline-danger"
 							 style="display:none;" id="notice_form">공지사항등록</a>
 						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>날짜</th>
-								</tr>
-							</thead>
-							<tbody>
-							<c:forEach var="noticeVo" items="${notice_list}">
-								<tr>
-									<td>${noticeVo.n_bno}</td>
-									<td>${noticeVo.n_title}</td>
-									<td>${noticeVo.userid}</td>
-									<td>${noticeVo.n_regdate}</td>
-								</tr>
-							</c:forEach>
-							</tbody>
-						</table>
+						<c:forEach var="noticeVo" items="${notice_list}">
+						<section>
+							<div>
+								<h3 class="n_title">${noticeVo.n_title}</h3>
+								<p><span class="span_username">${noticeVo.username}</span>${noticeVo.n_regdate}
+								</p>
+								<div class="notice_content">
+									<textarea class="form-control" readonly>${noticeVo.n_content}</textarea>
+								</div>
+							</div>
+							<hr class="hr-line">
+						</section>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2"></div>
-			<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<nav>
 			<ul class="pagination justify-content-center">

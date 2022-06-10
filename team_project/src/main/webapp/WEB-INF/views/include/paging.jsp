@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <form id="frmPaging">
 	<input type="hidden" name="mno" value="">
+	<input type="hidden" name="n_bno" value="">
 	<input type="hidden" name="page" value="${pagingDto.page}">
 	<input type="hidden" name="perPage" value="${pagingDto.perPage}">
 	<input type="hidden" name="searchType" value="${pagingDto.searchType}">

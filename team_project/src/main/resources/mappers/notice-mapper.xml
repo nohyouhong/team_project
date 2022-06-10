@@ -9,8 +9,12 @@
 		values (seq_notice_bno.nextval, #{n_title}, #{n_content}, #{userid})
 	</insert>
 	<select id="readNotice" resultType="NoticeVo">
-		select * from tbl_notice_board
-		where n_bno = #{n_bno}
+<!-- 		select * from tbl_notice_board -->
+<!-- 		where n_bno = #{n_bno} -->
+		select * from
+		tbl_notice_board n ,tbl_member m
+		where n.userid = m.userid
+		and n_bno = #{n_bno}
 	</select>
 	<update id="updateNotice">
 		update tbl_notice_board set
@@ -21,10 +25,15 @@
 		where n_bno = #{n_bno}
 	</delete>
 	<select id="noticeList" resultType="NoticeVo">
-    	select * from(select rownum rnum, a.* from
-            (select * from tbl_notice_board
-			 order by n_regdate desc) a)
-		where rnum between #{startRow} and #{endRow}
+		select * from( select rownum rnum, username, n_bno, n_title, n_content, n_regdate from (select * from
+             tbl_notice_board n ,tbl_member m
+		     where n.userid = m.userid
+			 order by n.n_regdate desc))
+             where rnum between #{startRow} and #{endRow}
+<!--     	select * from(select rownum rnum, a.* from -->
+<!--             (select * from tbl_notice_board -->
+<!-- 			 order by n_regdate desc) a) -->
+<!-- 		where rnum between #{startRow} and #{endRow} -->
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_notice_board

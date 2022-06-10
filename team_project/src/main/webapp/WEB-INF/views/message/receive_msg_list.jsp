@@ -129,7 +129,6 @@ $(document).ready(function(){
 			<table class="table">
 				<thead>
 				<tr>
-<!-- 					<th>#</th> -->
 					<th>내용</th>
 					<th>보낸사람</th>
 					<th>날짜</th>

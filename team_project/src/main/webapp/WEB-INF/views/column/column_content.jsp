@@ -99,10 +99,10 @@ $(document).ready(function(){
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="columnVo" items="${columnList}" begin="${columnVo.c_bno}" end="${columnVo.c_bno + 5}">
+				<c:forEach var="columnvo" items="${columnList}" begin="${columnvo.c_bno}" end="${columnvo.c_bno + 5}">
 					<tr>
-						<td>${columnVo.c_bno}</td>
-						<td>${columnVo.c_title}</td>
+						<td>${columnvo.c_bno}</td>
+						<td><a href="/column/readColumn?c_bno=${columnvo.c_bno}">${columnvo.c_title}</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

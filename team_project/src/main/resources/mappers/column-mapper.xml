@@ -30,6 +30,14 @@
 		order by c_bno
 	</select>
 	
+	<select id="getColumnTitlePic" resultType="ColumnVo">
+		select a.* from
+		(select * from tbl_column_pic
+		where c_bno=#{c_bno}
+		order by c_pno desc) a
+		where rownum = 1
+	</select>
+	
 	<update id="modifyColumn">
 		update tbl_column_board set
 			c_title = #{c_title}, 

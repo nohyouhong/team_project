@@ -8,6 +8,7 @@ public interface ColumnService {
 	public boolean insertColumn(ColumnVo columnVo);
 	public ColumnVo readColumn(int c_bno);
 	public List<ColumnVo> getColumnList();
+	public List<ColumnVo> getColumnTitlePic(int c_bno);
 	public boolean modifyColumn(ColumnVo columnVo);
 	public boolean deleteColumn(int c_bno);
 	public boolean insertColumnLike(int c_bno, String userid);

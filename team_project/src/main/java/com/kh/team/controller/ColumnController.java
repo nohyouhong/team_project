@@ -43,7 +43,7 @@ public class ColumnController {
 //		System.out.println("c_picture: " + c_picture);
 //		}
 		boolean result = columnService.insertColumn(columnVo);
-		System.out.println("ColumController, column_run, result" + result);
+		System.out.println("ColumController, column_run, result: " + result);
 		return "redirect: /column/column_list";
 	}
 	
@@ -51,7 +51,7 @@ public class ColumnController {
 	@ResponseBody
 	public String uploadColumnImage(@RequestParam("file")MultipartFile file, HttpSession session) throws Exception {
 		System.out.println("ColumController, uploadColumnImage, file: " + file);
-		String file_root = "//192.168.0.110/boardattach";
+		String file_root = "C:/boardattach";
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("ColumController, uploadColumnImage, originalFilename: " + originalFilename);
 		byte[] fileData = file.getBytes();
@@ -75,6 +75,18 @@ public class ColumnController {
 	@RequestMapping(value="/column_list", method=RequestMethod.GET) 
 	public String column_list(Model model) {
 		List<ColumnVo> columnList = columnService.getColumnList();
+		for (ColumnVo columnVo : columnList) {
+			int c_bno = columnVo.getC_bno();
+			String c_content = columnVo.getC_content();
+			String tagC_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+//			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
+			columnVo.setC_content(tagC_content);
+			List<ColumnVo> columnTitlePics = columnService.getColumnTitlePic(c_bno);
+			for (ColumnVo columnPicVo : columnTitlePics) {
+				String columnTitlePic = columnPicVo.getC_picture();
+				columnVo.setC_picture(columnTitlePic);
+			}
+		}
 		model.addAttribute("columnList", columnList);
 		return "column/column_list";
 	}
@@ -105,6 +117,7 @@ public class ColumnController {
 		ColumnVo columnVo = columnService.readColumn(c_bno);
 		model.addAttribute("columnVo", columnVo);
 		List<ColumnVo> columnList = columnService.getColumnList();
+		System.out.println("ColumnController, readColumn, columnList: " + columnList);
 		model.addAttribute("columnList", columnList);
 		return "column/column_content";
 	}

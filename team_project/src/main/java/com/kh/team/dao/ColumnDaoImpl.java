@@ -55,6 +55,12 @@ public class ColumnDaoImpl implements ColumnDao {
 		List<ColumnVo> ColumnList = sqlSession.selectList(NAMESPACE + "getColumnList");
 		return ColumnList;
 	}
+	
+	@Override
+	public List<ColumnVo> getColumnTitlePic(int c_bno) {
+		List<ColumnVo> ColumnTitlePic = sqlSession.selectList(NAMESPACE + "getColumnTitlePic", c_bno);
+		return ColumnTitlePic;
+	}
 
 	@Override
 	public boolean modifyColumn(ColumnVo columnVo) {

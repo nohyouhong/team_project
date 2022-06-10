@@ -85,6 +85,8 @@ public class RecipeBoardController {
 		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
 		MemberVo memberVo = recipeBoardService.getMemberVoByBno(r_bno);
 		System.out.println(recipeBoardVo);
+		System.out.println(ingredientVoList);
+		System.out.println(recipeStepVoList);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
 		model.addAttribute("ingredientVoList", ingredientVoList);
 		model.addAttribute("recipeStepVoList", recipeStepVoList);

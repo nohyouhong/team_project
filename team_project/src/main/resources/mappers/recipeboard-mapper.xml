@@ -43,13 +43,13 @@
 	</select>
 	
 	<select id="readStepVos" resultType="RecipeStepVo">
-		select r_content, r_picture from
+		select c.r_content, p.r_picture from
 		tbl_recipe_board b inner join tbl_recipe_content c
 		    on b.r_bno = c.r_bno
 		inner join tbl_recipe_pic p
 		    on c.r_cno = p.r_cno
 		where b.r_bno = #{r_bno}
-		order by r_cno
+		order by c.r_cno
 	</select>
 	
 <!-- 	지워도될듯 -->

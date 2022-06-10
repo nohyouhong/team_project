@@ -10,12 +10,18 @@
 	text-align: center;
 }
 .mainImage{
+	position:relative;
+	top: 25px;
 	width: 680px;
 	height: 400px;
 }
 .userImageDiv{
 	position:relative;
 	bottom: 50px;
+}
+.userImage{
+	width: 150px;
+	height: 150px;
 }
 .cookUserid{
 	font-size: 16px;
@@ -73,6 +79,54 @@
 .info, .infoSpan{
 	cursor: pointer;
 }
+.stepDiv{
+	margin-top: 30px;
+}
+.cookTipTitle{
+	color: rgba(248, 56, 1);
+	font-size: 28px;
+}
+.cookTipEx{
+	font-size: 20px;
+	margin: 30px;
+}
+.stepContent{
+	font-size: 20px;
+	margin-top: 70px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 30px;
+	
+}
+.stepPicDiv, .userImageInfo{
+	text-align: center;
+}
+.stepCount{
+	float: right;
+	color: rgba(248, 56, 1);
+	font-size: 25px;
+	font-weight: bold;
+}
+.stepPicture{
+	width: 900px;
+	height: 450px;
+}
+.userImage2{
+	width: 120px;
+	height: 120px;
+}
+.userInfomation{
+	margin: 30px;
+	font-size: 20px;
+}
+.userInfos{
+	margin-top: 15px;
+}
+.userEmail{
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 17px;
+}
 </style>
 <div class="row">
 	<div class="col-md-2"></div>
@@ -80,7 +134,7 @@
 		<div class="cookP cookCenterDiv">
 			<img class="mainImage" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
 			<div class="userImageDiv">
-				<img class="userImage" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /><br>
+				<img class="userImage rounded-circle img-thumbnail" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /><br>
 				<span class="cookUserid">${memberVo.username }</span>
 			</div>
 			<div class="row">
@@ -131,33 +185,47 @@
 		<div class="cookP">
 			<span class="cookTitleP">조리순서</span>
 			<span class="cookSecondTitleP">Steps</span>
-			<div>
-			<c:forEach items=""> 
-				
+			<div class="stepDiv">
+			<c:forEach items="${recipeStepVoList }" var="recipeStepVo" varStatus="index"> 
+				<div class="stepContent">
+					<div class="row">
+						<div class="col-md-1">
+							<span class="stepCount">${index.count }</span>
+						</div>
+						<div class="col-md-10">${recipeStepVo.r_content }</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+				<div class="stepPicDiv">
+					<img class="stepPicture img-thumbnail" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
+<%-- 					${recipeStepVo.r_picture } --%>
+				</div>
 			</c:forEach>
 			</div>
 		</div>
 		<hr class="createHr2">
 		
-		<div>
-			<span># 팁/주의사항</span>
-			<div>${recipeBoardVo.r_cooktip }</div>
+		<div class="cookP">
+			<i class="fa-solid fa-circle-exclamation fa-2x cookTipTitle"></i>
+			<span class="cookTipTitle" style="margin-left: 10px">팁/주의사항 </span>
+			<div class="cookTipEx">${recipeBoardVo.r_cooktip }</div>
 		</div>
 		<hr class="createHr2">
 		
 		<div class="cookP">
 			<span class="cookTitleP">레시피 작성자</span>
 			<span class="cookSecondTitleP">Writer</span>
-			<div class="row">
-				<div class="col-md-2">
-					${memberVo.m_picture }
+			<div class="row userInfomation">
+				<div class="col-md-2 userImageInfo">
+					<img class="userImage2 rounded-circle" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
+<%-- 					${memberVo.m_picture } --%>
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-10 userInfos">
 					<div>
 						<span>${memberVo.username }</span>
 						<a class="btn btn-primary">쪽지 보내기</a>
 					</div>
-					<div>${memberVo.email }</div>
+					<div class="userEmail">${memberVo.email }</div>
 				</div>
 			</div>
 		</div>
@@ -165,7 +233,7 @@
 		
 		<div class="cookP">
 			<span class="cookTitleP">댓글달기</span>
-			<span class="cookSecondTitleP">영어 부제목</span>
+			<span class="cookSecondTitleP">comment</span>
 		</div>
 		<hr class="createHr2">
 	</div>

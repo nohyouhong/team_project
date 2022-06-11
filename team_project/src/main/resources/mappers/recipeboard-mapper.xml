@@ -38,7 +38,9 @@
 	</insert>
 	
 	<select id="read" resultType="RecipeBoardVo">
-		select * from tbl_recipe_board
+		select * from 
+		tbl_recipe_board b join tbl_foodtype_code c
+			on b.f_code = c.f_code
 		where r_bno = #{r_bno}
 	</select>
 	

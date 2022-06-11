@@ -1,9 +1,11 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -146,6 +148,16 @@ public class RecipeBoardController {
 		System.out.println("saveFilename: " + saveFilename);
 		
 		return saveFilename;
+	}
+	
+	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception{
+		System.out.println(filename);
+		FileInputStream fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
 	}
 	
 	@RequestMapping(value="/deleteFile", method=RequestMethod.GET)

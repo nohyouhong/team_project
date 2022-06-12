@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.comment">
+
+	<select id="getNextCno" resultType="int">
+		select seq_recipe_comment_cno.nextval from dual
+	</select>
+
+<!-- 	댓글 목록 -->
+	<select id="recipeCommentList" resultType="RecipeCommentVo">
+		select * from
+		(select r_cno, r_bno, r_comment, username, c.userid, r_regdate,
+			re_group, re_level, declarecnt, r_userpic from 
+		tbl_recipe_comment c join tbl_member m
+		on c.userid = m.userid
+		where r_bno = #{r_bno}
+		order by re_group desc, re_level, r_cno)
+<!-- 		where rownum between 1 and 3 -->
+	</select>
+	
+<!-- 	댓글 목록 숫자 -->
+	<select id="recipeCommentListNum" resultType="int">
+		select count(*) from tbl_recipe_comment
+		where r_bno = #{r_bno}
+	</select>
+	
+<!-- 	댓글 등록 -->
+	<insert id="insertRecipeComment">
+		insert into tbl_recipe_comment
+			(r_cno, r_bno, r_comment, userid, re_group, r_userpic)
+		values
+			(seq_recipe_comment_cno.nextval, #{r_bno}, #{r_comment}, #{userid}, seq_recipe_comment_cno.nextval, #{r_userpic, jdbcType=VARCHAR})
+	</insert>
+	
+<!-- 	답글 등록 -->
+	<insert id="replyRecipeComment">
+		insert into tbl_recipe_comment
+			(r_cno, r_bno, r_comment, userid, re_group, r_userpic)
+		values
+			(#{r_cno}, #{r_bno}, #{r_comment}, #{userid}, #{re_group}, #{r_userpic, jdbcType=VARCHAR})
+	</insert>
+	
+<!-- 	레벨 업데이트 -->
+	<update id="updateReLevel">
+		update tbl_recipe_comment 
+		set re_level = 1
+		where r_cno = #{r_cno}		
+	</update>
+
+<!-- 	댓글 삭제 -->
+	<delete id="deleteRecipeComment">
+		delete from tbl_recipe_comment
+		where r_cno = #{r_cno}
+	</delete>
+
+</mapper>

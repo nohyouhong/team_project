@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.RecipeCommentVo;
+import com.kh.team.vo.RecipeReviewVo;
 
 
 @Repository
@@ -65,6 +66,66 @@ public class CommentDaoImpl implements CommentDao{
 	@Override
 	public boolean deleteRecipeComment(int r_cno) {
 		int count = sqlSession.delete(NAMESPACE + "deleteRecipeComment", r_cno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int getNextrno() {
+		int r_rno = sqlSession.selectOne(NAMESPACE + "getNextrno");
+		return r_rno;
+	}
+
+	@Override
+	public List<RecipeReviewVo> recipeReviewList(int r_bno) {
+		List<RecipeReviewVo> recipeReviewList = sqlSession.selectList(NAMESPACE + "recipeReviewList", r_bno);
+		return recipeReviewList;
+	}
+
+	@Override
+	public int recipeReviewListNum(int r_bno) {
+		int recipeReviewListNum = sqlSession.selectOne(NAMESPACE + "recipeReviewListNum", r_bno);
+		return recipeReviewListNum;
+	}
+
+	@Override
+	public int recipeReviewandImageListNum(int r_bno) {
+		int recipeReviewandImageListNum = sqlSession.selectOne(NAMESPACE + "recipeReviewandImageListNum", r_bno);
+		return recipeReviewandImageListNum;
+	}
+
+	@Override
+	public boolean insertRecipeReview(RecipeReviewVo recipeReviewVo) {
+		int count = sqlSession.insert(NAMESPACE + "insertRecipeReview", recipeReviewVo);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean replyRecipeReview(RecipeReviewVo recipeReviewVo) {
+		int count = sqlSession.insert(NAMESPACE + "replyRecipeReview", recipeReviewVo);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean reviewUpdateReLevel(int r_rno) {
+		int count = sqlSession.update(NAMESPACE + "reviewUpdateReLevel", r_rno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteRecipeReview(int r_rno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteRecipeReview", r_rno);
 		if(count > 0) {
 			return true;
 		}

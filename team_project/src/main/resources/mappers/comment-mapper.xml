@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.comment">
-
+<!-- 요리댓글 -->
 	<select id="getNextCno" resultType="int">
 		select seq_recipe_comment_cno.nextval from dual
 	</select>
@@ -54,6 +54,70 @@
 	<delete id="deleteRecipeComment">
 		delete from tbl_recipe_comment
 		where r_cno = #{r_cno}
+	</delete>
+
+
+
+
+<!-- 요리후기 -->
+	<select id="getNextrno" resultType="int">
+		select seq_recipe_review_rno.nextval from dual
+	</select>
+
+<!-- 	리뷰 목록 -->
+	<select id="recipeReviewList" resultType="RecipeReviewVo">
+		select * from
+		(select r_rno, r_bno, r_comment, username, c.userid, r_regdate,
+			m_picture, re_group, re_level, r_desc, r_reviewpic from 
+		tbl_recipe_review r join tbl_member m
+			on r.userid = m.userid
+		join tbl_recipe_review_code c
+			on r.r_code = c.r_code
+		where r_bno = #{r_bno}
+		order by re_group desc, re_level, r_rno)
+<!-- 		where rownum between 1 and 3 -->
+	</select>
+	
+<!-- 	목록 숫자 -->
+	<select id="recipeReviewListNum" resultType="int">
+		select count(*) from tbl_recipe_review
+		where r_bno = #{r_bno}
+	</select>
+	
+<!-- 	그림이 있는 목록 숫자 -->
+	<select id="recipeReviewandImageListNum" resultType="int">
+		select count(*) from tbl_recipe_review
+		where r_bno = #{r_bno}
+		and r_reviewpic is not null
+	</select>
+	
+<!-- 	리뷰 등록 -->
+	<insert id="insertRecipeReview">
+		insert into tbl_recipe_review
+			(r_cno, r_bno, r_comment, userid, re_group, r_reviewpic, r_code)
+		values
+			(seq_recipe_review_rno.nextval, #{r_bno}, #{r_comment}, #{userid}, seq_recipe_review_rno.nextval, #{r_reviewpic, jdbcType=VARCHAR}, #{r_code})
+	</insert>
+	
+<!-- 	답글 등록 -->
+	<insert id="replyRecipeReview">
+		insert into tbl_recipe_review
+			(r_rno, r_bno, r_comment, userid, re_group)
+		values
+			(#{r_rno}, #{r_bno}, #{r_comment}, #{userid}, #{re_group})
+	</insert>
+	
+<!-- 	레벨 업데이트 -->
+	<update id="reviewUpdateReLevel">
+		update tbl_recipe_review 
+		set re_level = 1
+		where r_rno = #{r_rno}		
+	</update>
+
+<!-- 	댓글 삭제 -->
+	<delete id="deleteRecipeReview">
+		delete from tbl_recipe_review
+		where r_rno = #{r_rno}
 	</delete>
 
 </mapper>

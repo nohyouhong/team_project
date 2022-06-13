@@ -211,17 +211,17 @@
 	font-size: 18px;
 	color: white;
 }
-#cookCommentDiv{
+#cookCommentDiv, #cookRecipeReDiv{
 margin-top: 70px;
 }
-.oneComment{
+.oneComment, .oneRecipeReview{
 margin-left: 80px;
 margin-right: 80px;
 border-bottom: 1px solid #C9C3C3;
 margin-top: 20px;
 padding-bottom: 20px;
 }
-.commentUserImageDiv{
+.commentUserImageDiv, .reviewUserImageDiv{
 	display: inline-block;
 }
 .commentUserImage{
@@ -230,51 +230,55 @@ padding-bottom: 20px;
 	margin-top: -50px;
 	margin-left: 20px;
 }
-.commentUserInfo{
+.reviewUserImage{
+	width: 60px;
+	height: 60px;
+}
+.commentUserInfo, .reviewUserInfo{
 	display: inline-block;
 	width: 70%;
 	margin-left: 15px;
 }
-.commentUser{
+.commentUser, .reviewUser{
 	font-size: 20px;
 	color: rgba(248, 56, 1);
 	margin-right: 12px;
 }
-.commentDate, .smallHr,.commentReply, .commentDeclare, .commentDelete{
+.commentDate, .smallHr, .commentReply, .commentDeclare, .commentDelete, .reviewDate, .reviewReply, .reviewDelete{
 	font-size: 16px;
 	color: #BEB6B6;
 	margin-right: 10px;
 }
-.userCommentVal{
+.userCommentVal, .userReviewVal{
 	margin-top: 12px;
 	font-size: 16px;
 }
-.cookCommentInputDiv{
+.cookCommentInputDiv, .cookReviewInputDiv{
 	margin-left: 80px;
 	margin-right: 130px;
 	margin-top: 30px;
 }
-.cookCommentInputDiv2{
+.cookCommentInputDiv2, .cookReviewInputDiv2{
 	margin-left: 120px;
 	margin-right: 130px;
 	margin-top: 15px;
 	margin-bottom: 40px;
 }
-.commentImage{
+.commentImage, .reviewImage{
 	height: 100px;
 	width: 100px;
 	border: 2px solid #BEB6B6;
 	cursor: pointer;
 	background: #D4D4D4;
 }
-.commentButton{
+.commentButton, .reviewButton{
 	height: 101px;
 	width: 100px;
 	border: 2px solid #BEB6B6;
 	margin-left: -1px;
 	background-color: white;
 }
-.commentTextarea{
+.commentTextarea, .reviewTextarea{
 	height: 100px;
 	width:100%;
 	margin-left:30px;
@@ -286,6 +290,12 @@ padding-bottom: 20px;
 	border: 1px solid #BEB6B6;
 	background-color: white;
 	margin: 20px;
+}
+.yellowStar{
+	color: #EAE909;
+}
+.grayStar{
+	color: #BEB6B6
 }
 </style>
 <script>
@@ -366,6 +376,23 @@ $(function(){
 		console.log(file);
 	});
 	$("#cookCommentAll").on("change", ".commentUserImageFile" , function() {
+		var inputImg = $(this).parent().find("img");
+    	if (this.files && this.files[0]) {
+       		var reader = new FileReader();
+    			reader.onload = function (e) {
+    			inputImg.attr("src", e.target.result);
+    			}
+            reader.readAsDataURL(this.files[0]);
+    	}
+    });
+	//요리후기 사진
+	$("#cookReviewAll").on("click", ".reviewImage" , function() {
+		var inputFile = $(this).parent().find("input");
+		inputFile.trigger("click");
+		var file = inputFile.val();
+		console.log(file);
+	});
+	$("#cookReviewAll").on("change", ".reviewUserImageFile" , function() {
 		var inputImg = $(this).parent().find("img");
     	if (this.files && this.files[0]) {
        		var reader = new FileReader();
@@ -456,13 +483,19 @@ $(function(){
 		});
 	});
 	
+	
+	
+	
+	
+	
+	
 	//모달창 저장버튼
 	$("#btnModalSave").click(function() {
-		var content = $("#modalContent").val();
-		var cno = $(this).attr("data-cno");
+		var comment = $("#modalContent").val();
+		var r_cno = $(this).attr("data-r_cno");
 		var sData = {
-			"content" : content,
-			"cno" : cno
+			"comment" : comment,
+			"r_cno" : r_cno
 		};
 		var url = "/comment/updateComment";
 		$.post(url, sData, function(rData) {
@@ -659,18 +692,55 @@ $(function(){
 		</div>
 		<hr class="createHr2">
 		
-		<div class="cookP">
+		<div class="cookP" id="cookReviewAll">
 			<span class="cookTitleP">요리후기</span>
 			<span class="cookTitleExNum">comment</span>
 			<div id="cookRecipeReDiv">
-				<c:forEach items="">
-					<div class="row">
-						<div class="col-md-1"></div>
-						<div class="col-md-10"></div>
-						<div class="col-md-1"></div>
+				<div class="row oneRecipeReview">
+					<div class="reviewUserImageDiv">
+						<img class="reviewUserImage rounded-circle"
+							src="/resources/main_mypage/images/userImageM.png">
 					</div>
-				</c:forEach>
+					<div class="reviewUserInfo">
+						<div class="UserInfoDiv">
+							<span class="reviewUser">노유홍</span> 
+							<span class="reviewDate">2022-06-12</span>
+							<span class="reviewScore">
+								<i class="fas fa-star yellowStar"></i>
+								<i class="fas fa-star yellowStar"></i>
+								<i class="fas fa-star yellowStar"></i>
+								<i class="fas fa-star grayStar"></i>
+								<i class="fas fa-star grayStar"></i>
+							</span>
+						</div>
+						<div class="userCommentVal">코멘트를 달아주세용 코멘트를 달아주세용</div>
+					</div>
+				</div>
 			</div>
+			<div class="showHideDiv">
+				<button class="showButton">더보기</button>
+				<button class="hideButton" style="display: none;">줄여보기</button>
+			</div>
+			<form id="cookReviewForm">
+				<div class="cookReviewInputDiv row">
+					<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
+					<input type="hidden" name="userid" value="${loginVo.userid}">
+					<input type="hidden" name="f_code">
+					<div class="col-md-1">
+						<img class="reviewImage" id="reviewImage"
+							src="/resources/main_mypage/images/cook.png"> <input
+							class="reviewUserImageFile" type="file" id="file3" name="file"
+							style="display: none;">
+					</div>
+					<div class="col-md-10">
+						<textarea rows="4" id="r_comment3" name="r_comment"
+							class="reviewTextarea"></textarea>
+					</div>
+					<div class="col-md-1">
+						<button type="button" class="reviewButton" id="reviewButton">등록</button>
+					</div>
+				</div>
+			</form>
 		</div>
 		<hr class="createHr2">
 		
@@ -685,8 +755,10 @@ $(function(){
 					</div>
 					<div class="commentUserInfo">
 						<div class="UserInfoDiv">
-							<span class="commentUser">이름</span> <span class="commentDate">날짜</span>
-							<span class="smallHr">|</span> <a class="commentReply" href="#">답글</a>
+							<span class="commentUser">이름</span> 
+							<span class="commentDate">날짜</span>
+							<span class="smallHr">|</span> 
+							<a class="commentReply" href="#">답글</a>
 							<span class="smallHr">|</span>
 						</div>
 						<div class="userCommentVal">코멘트</div>

@@ -69,6 +69,16 @@
 	color: 	#F83801;
 	font-size: 35px;
 }
+.ingredIconX{
+	margin-left: 10px;
+	margin-top: 17px;
+}
+.stepIconX{
+	position: relative;
+	left: 130px;
+	bottom: 40px;
+	cursor: pointer;
+}
 </style>
 <script>
 $(function() {
@@ -81,6 +91,11 @@ $(function() {
 		$("#addIngredList").append(cloneIngredDiv);
 	});
 
+//재료 삭제
+	$("#addIngredList").on("click", ".ingredRemove", function(){
+		$(this).parent().remove();
+	});
+
 // 	요리스텝추가
 	var index = 2;
 	$("#addStep").click(function() {
@@ -89,6 +104,22 @@ $(function() {
 		cloneCookStepDiv.find("textarea").val("");
 		cloneCookStepDiv.find("img").attr("src", "/resources/main_mypage/images/plus.png");
 		$("#addCookStepList").append(cloneCookStepDiv);
+	});
+	
+//  요리스텝삭제
+	$("#addCookStepList").on("click", ".stepRemove", function() {
+		var index2 = 1;
+		var addCookStepList = $(this).parents("div#addCookStepList");
+// 		console.log(addCookStepList);
+		$(this).parent().parent().remove();
+		var addCookStepSpans = addCookStepList.find("span");
+		console.log(addCookStepSpans);
+		
+		$.each(addCookStepSpans, function() {
+			var indexStep = "step" + index2++;
+			$(this).text(indexStep);
+		});
+		index = index2;
 	});
 	
 // 	대표요리사진넣기
@@ -127,6 +158,7 @@ $(function() {
             reader.readAsDataURL(this.files[0]);
     	}
     });
+	
 	
 });
 </script>
@@ -202,6 +234,7 @@ $(function() {
 									placeholder="예)소고기" name="i_names">
 								<input type="text" class="form-control inputVal" 
 									placeholder="예)1000g" name="i_amounts">
+								<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i>
 							</div>
 						</div>
 						<div style="text-align: center;">
@@ -218,7 +251,7 @@ $(function() {
 						<span class="explain">국간장을 넣어주세요. ▶ 물이 끓고 있을때 간장을 넣어주세요.</span><br>
       				</div>
       				<div id="addCookStepList">
-						<div class="row addCookStepDiv">      				
+						<div class="row addCookStepDiv">    				
 							<div class="col-md-3 cookStepTitle">
 								<span class="cookStepTitle">step1</span>
 							</div>
@@ -229,9 +262,11 @@ $(function() {
 								<img class="inputImage stepCookImage" alt="요리사진을 등록해주세요."
 								src="/resources/main_mypage/images/plus.png"/>
 								<input type="file" class="cookFile cookStepFile" name="files"/>
+								<i class="fas fa-times-circle fa-2x stepIconX stepRemove"></i>
 							</div>
 						</div>
-					</div>
+					</div> 
+<!-- 					여기 -->
 					<div style="text-align: center;">
 						<span class="addButton btn btn-info" id="addStep">순서 추가</span>
 					</div>

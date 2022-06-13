@@ -39,24 +39,21 @@ public class ColumnController {
 	public String column_create_run(ColumnVo columnVo, RedirectAttributes rttr) {
 		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
 		String[] c_pictures = columnVo.getPictures();
-//		for (String c_picture : c_pictures) {
-//		System.out.println("c_picture: " + c_picture);
-//		}
 		boolean result = columnService.insertColumn(columnVo);
-		System.out.println("ColumController, column_run, result: " + result);
+//		System.out.println("ColumController, column_run, result: " + result);
 		return "redirect: /column/column_list";
 	}
 	
 	@RequestMapping(value="/uploadColumnImage", method=RequestMethod.POST)
 	@ResponseBody
 	public String uploadColumnImage(@RequestParam("file")MultipartFile file, HttpSession session) throws Exception {
-		System.out.println("ColumController, uploadColumnImage, file: " + file);
+//		System.out.println("ColumController, uploadColumnImage, file: " + file);
 		String file_root = "C:/boardattach";
 		String originalFilename = file.getOriginalFilename();
-		System.out.println("ColumController, uploadColumnImage, originalFilename: " + originalFilename);
+//		System.out.println("ColumController, uploadColumnImage, originalFilename: " + originalFilename);
 		byte[] fileData = file.getBytes();
 		String saveFilename = MyFileUploader.uploadFile(file_root, originalFilename, fileData);
-		System.out.println("ColumController, uploadColumnImage, saveFilename: " + saveFilename);
+//		System.out.println("ColumController, uploadColumnImage, saveFilename: " + saveFilename);
 		session.setAttribute("saveFilename", saveFilename);
 		String url = "/column/displayImage?column_image=" + saveFilename;
         return url;
@@ -79,7 +76,7 @@ public class ColumnController {
 			int c_bno = columnVo.getC_bno();
 			String c_content = columnVo.getC_content();
 			String tagC_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-//			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
+			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
 			columnVo.setC_content(tagC_content);
 			List<ColumnVo> columnTitlePics = columnService.getColumnTitlePic(c_bno);
 			for (ColumnVo columnPicVo : columnTitlePics) {
@@ -100,15 +97,16 @@ public class ColumnController {
 
 	@RequestMapping(value="/column_modify_run", method=RequestMethod.POST)
 	public String column_modify_run(ColumnVo columnVo) {
-		System.out.println("columnVo: " + columnVo);
+//		System.out.println("columnVo: " + columnVo);
 		columnService.modifyColumn(columnVo);
 		return "redirect: /column/readColumn?c_bno=" + columnVo.getC_bno();
 	}
 
 	@RequestMapping(value="/column_delete", method=RequestMethod.GET)
 	public String column_delete(int c_bno) {
-		System.out.println("c_bno: " + c_bno);
+//		System.out.println("c_bno: " + c_bno);
 		columnService.deleteColumn(c_bno);
+//		MyFileUploader.deleteFile(filename);
 		return "redirect: /column/column_list";
 	}
 	
@@ -117,7 +115,7 @@ public class ColumnController {
 		ColumnVo columnVo = columnService.readColumn(c_bno);
 		model.addAttribute("columnVo", columnVo);
 		List<ColumnVo> columnList = columnService.getColumnList();
-		System.out.println("ColumnController, readColumn, columnList: " + columnList);
+//		System.out.println("ColumnController, readColumn, columnList: " + columnList);
 		model.addAttribute("columnList", columnList);
 		return "column/column_content";
 	}
@@ -125,10 +123,10 @@ public class ColumnController {
 	@RequestMapping(value="/column_like", method=RequestMethod.POST)
 	@ResponseBody
 	public String likeColumn(int c_bno, String userid, HttpSession session) {
-		System.out.println("c_bno: " + c_bno);
-		System.out.println("userid: " + userid);
+//		System.out.println("c_bno: " + c_bno);
+//		System.out.println("userid: " + userid);
 		boolean isLikeResult = columnService.isColumnLike(c_bno, userid);
-		System.out.println("isLikeResult: " + isLikeResult);
+//		System.out.println("isLikeResult: " + isLikeResult);
 		if (isLikeResult) {
 			columnService.deleteColumnLike(c_bno, userid);
 			columnService.updateColumnLikeCount(c_bno, ColumnDao.COLUMNDISLIKE);

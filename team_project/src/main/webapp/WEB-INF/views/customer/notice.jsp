@@ -32,6 +32,7 @@ $(document).ready(function(){
 		$(".notice_delete").show();
 	}else{
 		$(".notice_modify").hide();
+		$(".notice_delete").hide();
 		$(".notice_modify_run").hide();
 	};
 	
@@ -59,7 +60,18 @@ $(document).ready(function(){
 		var input = notice_content.find(".n_title_input");
 		textarea.attr("readonly", false);
 		modify_run.fadeIn();
+		$(".n_title_input").show();
+		$(".n_title").hide();
 		$(this).fadeOut();
+	});
+	
+	$(".notice_delete").click(function(e){
+		e.preventDefault();
+		var n_bno  = $(this).attr("href");
+		frmPaging.find("input[name=n_bno]").val(n_bno);
+		frmPaging.attr("action", "/customer/notice_delete");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
 	});
 	
 });
@@ -93,9 +105,9 @@ $(document).ready(function(){
 							<form role="form" method="post" action="/customer/notice_modify_run">
 							<input type="hidden" value="${noticeVo.n_bno}" name="n_bno">
 							<section>
-								<div>
 									<input type="text" value="${noticeVo.n_title}" name="n_title"
 										class="form-control n_title_input" style="display:none;">
+								<div>
 									<h3 class="n_title" >${noticeVo.n_title}</h3>
 									<p><span class="span_username">${noticeVo.username}</span>  ${noticeVo.n_regdate}
 									</p>
@@ -108,7 +120,7 @@ $(document).ready(function(){
 											class="btn btn-outline-warning notice_modify_run">
 											공지사항 수정완료
 										</button>
-										<a href="/customer/notice_delete" 
+										<a href="${noticeVo.n_bno}"
 											class="btn btn-outline-danger notice_delete">
 											공지사항 삭제
 										</a>

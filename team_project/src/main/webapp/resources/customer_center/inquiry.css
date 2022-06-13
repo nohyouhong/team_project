@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#inquirybtn{
+	float:right;
+}
+#inquiry_submit{
+	clear:both;
+	float:right;
+}
+
+#fileDrop{
+	height:100px;
+	background-color: #fff4eb;
+	margin: 20px auto;
+	border: 1.5px dashed #c0c0c0;
+}
+.divUploaded{
+	width:150px;
+	float:left;
+	display: none;
+}
+
+.inq{
+	margin-top:10px;
+}

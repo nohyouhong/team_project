@@ -143,9 +143,6 @@ li{
 #notice_modify{
 	float:right;
 }
-#inquirybtn{
-	margin-left:550px;
-}
 #notice_top{
 	font-family:'jua';
 	font-size:25px;
@@ -171,4 +168,23 @@ section{
 }
 .notice_modify_run{
 	display:none;
+}
+#inquirybtn{
+	float:right;
+}
+
+#inquiry_submit{
+	clear:both;
+}
+
+#fileDrop{
+	width:800px;
+	height:100px;
+	background-color: aliceblue;
+	margin: 20px auto;
+	border: 1.5px dashed gray;
+}
+.divUploaded{
+	width:150px;
+	float:left;
 }

@@ -221,8 +221,14 @@ border-bottom: 1px solid #C9C3C3;
 margin-top: 20px;
 padding-bottom: 20px;
 }
-.commentUserImageDiv, .reviewUserImageDiv{
+.commentUserImageDiv, .reviewUserImageDiv, .reviewUserCookImageDiv{
 	display: inline-block;
+}
+.reviewUserCookImageDiv{
+	width: 20%;
+	text-align: right;
+	padding-top:5px;
+	padding-right: 20px;
 }
 .commentUserImage{
 	width: 60px;
@@ -297,9 +303,41 @@ padding-bottom: 20px;
 .grayStar{
 	color: #BEB6B6
 }
+.starReviewEx{
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+}
+.starsDiv{
+	position: relative;
+	left: 150px;
+}
+.starRating {
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:50px;
+  justify-content:space-around;
+  width:180px;
+  text-align:center;
+}
+.starRating input {
+  display:none;
+}
+.starRating label {
+  color:#BEB6B6;
+  cursor:pointer;
+}
+.starRating :checked ~ label {
+  color:#EAE909;
+}
+.starRating label:hover,
+.starRating label:hover ~ label {
+  color:#EAE909;
+}
 </style>
 <script>
 $(function(){
+	
 	//스텝보이는방식 바꾸기
 	$("#stepStyle1").click(function(){
 		$("#stepStyle1").css("background", "#8C8C8C");
@@ -483,33 +521,131 @@ $(function(){
 		});
 	});
 	
-	
-	
-	
-	
-	
-	
-	//모달창 저장버튼
-	$("#btnModalSave").click(function() {
-		var comment = $("#modalContent").val();
-		var r_cno = $(this).attr("data-r_cno");
-		var sData = {
-			"comment" : comment,
-			"r_cno" : r_cno
-		};
-		var url = "/comment/updateComment";
-		$.post(url, sData, function(rData) {
-			console.log(rData);		
-			if(rData == "true") {
-				getCommentList();
-				$("#btnModalClose").trigger("click");
+	//요리후기 완료
+	$("#reviewButton").click(function() {
+		$("#modal-269785").trigger("click");
+		
+	});
+	//평점 완료버튼
+	$("#starRatingFinish").click(function() {
+		$("#modal-269785").trigger("click");
+		var ratingVal = $('input:radio[name="rating"]:checked').val();
+		$("#cookReviewForm").find("input#f_code").val(ratingVal);
+		
+		var form = $("#cookReviewForm");
+		var formData = new FormData(form[0]);
+		console.log(formData);
+		var url = "/comment/insertRecipeReview";
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				if(rData == "true"){
+					console.log(rData);
+					getReviewList();
+				}
 			}
 		});
+		//비우기
+		$("#commentImage").attr("src", "/resources/main_mypage/images/userImagePlus.png");
+		$("#file").val("");
+		$("#r_comment").val("");
 	});
 	
+	//리뷰리스트
+	getReviewList();
+	function getReviewList() {
+		var r_bno = "${recipeBoardVo.r_bno}";
+		var url = "/comment/recipeReviewandImageListNum/" + r_bno;
+		var url2 = "/comment/recipeReviewListNum/" + r_bno;
+		var url3 = "/comment/recipeReviewList/" + r_bno;
+		$.get(url, function(rData) {
+			$("#imageListNum").text(rData);
+			$("#imageListNum2").text(rData);
+		});
+		$.get(url2, function(rData) {
+			$("#reviewListNum").text(rData);
+		});
+		$.get(url3, function(rData) {
+			console.log(rData);
+			$(".oneRecipeReview:gt(0)").remove();
+			$.each(rData, function() {
+				var oneReviewDiv = $(".oneRecipeReview").eq(0).clone();
+				oneReviewDiv.show();
+				var UserInfoDiv = oneReviewDiv.find(".UserInfoDiv");
+				if(this.userid == "${loginVo.userid}") {
+					UserInfoDiv.append('<a class="commentDelete" href="#">삭제</a>');
+				} else {
+					UserInfoDiv.append('<a class="commentDeclare" href="#">신고</a>');
+				}
+				if(this.r_userpic != null) {
+					var r_userpic = this.r_userpic;
+					var imageFile = "/recipeboard/displayImage/?filename=" + r_userpic;
+					oneCommentDiv.find("img").attr("src", imageFile);
+				}
+				//답글 띄우기
+				if(this.re_level > 0) {
+					oneCommentDiv.css("margin-left", "120px");
+				}
+				var spans = oneCommentDiv.find("span");
+				spans.eq(0).text(this.username);
+				spans.eq(1).text(this.r_regdate);
+				oneCommentDiv.find("div.userCommentVal").text(this.r_comment);
+				oneCommentDiv.find(".commentReply").attr("data-re_group", this.re_group);
+				oneCommentDiv.find(".commentDeclare").attr("data-r_cno", this.r_cno);
+				oneCommentDiv.find(".commentDelete").attr("data-r_cno", this.r_cno);
+				$("#cookCommentDiv").append(oneCommentDiv);
+			});
+		});
+	}
 	
 });
 </script>
+<!-- 모달리스트 -->
+<div class="row">
+	<div class="col-md-12">
+		<a id="modal-269785" style="display: none;" href="#modal-container-269785" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+			
+		<div class="modal fade" id="modal-container-269785" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">평점을 매겨주세요.</h4>
+					</div>
+					<div class="modal-body modalReview">
+						<div class="starReviewEx">당신의 평점은?</div>
+						<div class="starsDiv">
+							<div class="starRating">
+							  <input type="radio" id="stars5" name="rating" value="5" />
+							  <label for="stars5" class="star">&#9733;</label>
+							  <input type="radio" id="stars4" name="rating" value="4" />
+							  <label for="stars4" class="star">&#9733;</label>
+							  <input type="radio" id="stars3" name="rating" value="3" />
+							  <label for="stars3" class="star">&#9733;</label>
+							  <input type="radio" id="stars2" name="rating" value="2" />
+							  <label for="stars2" class="star">&#9733;</label>
+							  <input type="radio" id="star1" name="rating" value="1" />
+							  <label for="star1" class="star">&#9733;</label>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer modalReview">
+						<button type="button" id="starRatingFinish" class="btn btn-primary">평점등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 모달리스트 -->
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -677,7 +813,7 @@ $(function(){
 		
 		<div class="cookP">
 			<span class="cookTitleP">포토리뷰</span>
-			<span class="cookTitleExNum">comment</span>
+			<span id="imageListNum" class="cookTitleExNum">comment</span>
 			<div id="cookRecipeReImageDiv">
 				<c:forEach begin="1" end="6">
 					<img class="cookRecipeReImage" src="/resources/main_mypage/images/cookSample.jpg">
@@ -686,7 +822,7 @@ $(function(){
 			<div class="imageListButtonDiv">
 				<button class="imageListButton">
 					<span class="imageListbuttonChar">+더보기</span><br>
-					<span class="imageListbuttonChar">숫자</span>
+					<span id="imageListNum2" class="imageListbuttonChar">숫자</span>
 				</button>
 			</div>
 		</div>
@@ -694,9 +830,9 @@ $(function(){
 		
 		<div class="cookP" id="cookReviewAll">
 			<span class="cookTitleP">요리후기</span>
-			<span class="cookTitleExNum">comment</span>
+			<span id="reviewListNum" class="cookTitleExNum">comment</span>
 			<div id="cookRecipeReDiv">
-				<div class="row oneRecipeReview">
+				<div class="row oneRecipeReview" style="display: none;">
 					<div class="reviewUserImageDiv">
 						<img class="reviewUserImage rounded-circle"
 							src="/resources/main_mypage/images/userImageM.png">
@@ -712,8 +848,13 @@ $(function(){
 								<i class="fas fa-star grayStar"></i>
 								<i class="fas fa-star grayStar"></i>
 							</span>
+							<span class="smallHr">|</span> 
 						</div>
-						<div class="userCommentVal">코멘트를 달아주세용 코멘트를 달아주세용</div>
+						<div class="userReviewVal">코멘트를 달아주세용 코멘트를 달아주세용</div>
+					</div>
+					<div class="reviewUserCookImageDiv">
+						<img class="reviewUserImage"
+							src="/resources/main_mypage/images/cookSample.jpg">
 					</div>
 				</div>
 			</div>
@@ -722,10 +863,10 @@ $(function(){
 				<button class="hideButton" style="display: none;">줄여보기</button>
 			</div>
 			<form id="cookReviewForm">
+				<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
+				<input type="hidden" name="userid" value="${loginVo.userid}">
+				<input type="hidden" id="f_code" name="f_code">
 				<div class="cookReviewInputDiv row">
-					<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
-					<input type="hidden" name="userid" value="${loginVo.userid}">
-					<input type="hidden" name="f_code">
 					<div class="col-md-1">
 						<img class="reviewImage" id="reviewImage"
 							src="/resources/main_mypage/images/cook.png"> <input

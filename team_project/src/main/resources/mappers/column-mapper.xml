@@ -5,21 +5,23 @@
   
 <mapper namespace="com.kh.team.mappers.column">
 	
-	<!-- column CRUD -->
-	<insert id="insertColumn">
-		insert into tbl_column_board(c_bno, c_title, c_content)
-		values (#{c_bno}, #{c_title}, #{c_content})
-	</insert>
-	
+	<!-- column insert -->
 	<select id="getNextC_bno" resultType="int">
 		select seq_column_bno.nextval from dual
 	</select>
+	
+	<insert id="insertColumn">
+		insert into tbl_column_board(c_bno, c_title, c_content, userid)
+		values (#{c_bno}, #{c_title}, #{c_content}, #{userid})
+	</insert>
+	
 	
 	<insert id="insertColumnPicture">
 		insert into tbl_column_pic(c_pno, c_bno, c_picture)
 		values(seq_column_pno.nextval, #{c_bno}, #{c_picture})
 	</insert>
 	
+	<!-- column read -->
 	<select id="readColumn" resultType="ColumnVo">
 		select * from tbl_column_board
 		where c_bno = #{c_bno}
@@ -31,6 +33,7 @@
 		where c_bno = #{c_bno}
 	</update>
 	
+	<!-- column list -->
 	<select id="getColumnList" resultType="ColumnVo">
 		select * from tbl_column_board
 		order by c_bno
@@ -44,16 +47,33 @@
 		where rownum = 1
 	</select>
 	
+	<!-- column modify -->
 	<update id="modifyColumn">
 		update tbl_column_board set
 			c_title = #{c_title}, 
 			c_content = #{c_content}
 		where c_bno = #{c_bno}
 	</update>
-
+	
+	<!-- column delete -->
 	<delete id="deleteColumn">
 		delete from tbl_column_board
 		where c_bno = #{c_bno}	
+	</delete>
+	
+	<select id="getdeletefiles" resultType="String">
+		select c_picture from tbl_column_pic
+		where c_bno = #{c_bno}
+	</select>
+	
+	<delete id="deleteColumnPic">
+		delete from tbl_column_pic
+		where c_bno = #{c_bno}
+	</delete>
+	
+	<delete id="deleteColumnLikes">	
+		delete from tbl_column_like
+		where c_bno = #{c_bno}
 	</delete>
 	
 	<!-- Column Like -->

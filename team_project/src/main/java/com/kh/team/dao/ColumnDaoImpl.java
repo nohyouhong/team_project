@@ -18,6 +18,12 @@ public class ColumnDaoImpl implements ColumnDao {
 	private SqlSession sqlSession;
 	
 	@Override
+	public int getNextC_bno() {
+		int c_bno = sqlSession.selectOne(NAMESPACE + "getNextC_bno");
+		return c_bno;
+	}
+	
+	@Override
 	public boolean insertColumn(ColumnVo columnVo) {
 		int count = sqlSession.insert(NAMESPACE + "insertColumn", columnVo);
 		if (count > 0) {
@@ -37,23 +43,12 @@ public class ColumnDaoImpl implements ColumnDao {
 		}
 		return false;
 	}
-	
-	@Override
-	public int getNextC_bno() {
-		int c_bno = sqlSession.selectOne(NAMESPACE + "getNextC_bno");
-		return c_bno;
-	}
 
 	@Override
 	public ColumnVo readColumn(int c_bno) {
 		ColumnVo columnVo = sqlSession.selectOne(NAMESPACE + "readColumn", c_bno);
 		sqlSession.update(NAMESPACE + "increaseColumnViewcnt", c_bno);
 		return columnVo;
-	}
-	
-	@Override
-	public void increaseColumnViewcnt(int c_bno) {
-		
 	}
 
 
@@ -80,10 +75,36 @@ public class ColumnDaoImpl implements ColumnDao {
 
 	@Override
 	public boolean deleteColumn(int c_bno) {
+		sqlSession.delete(NAMESPACE + "deleteColumnPic", c_bno);
+		sqlSession.delete(NAMESPACE + "deleteColumnLikes", c_bno);
 		int count = sqlSession.delete(NAMESPACE + "deleteColumn", c_bno);
 		if (count > 0) {
 			return true;
 		}
+		return false;
+	}
+	
+	@Override
+	public List<String> getdeletefiles(int c_bno) {
+		List<String> deletefiles = sqlSession.selectList(NAMESPACE + "getdeletefiles", c_bno);
+		return deletefiles;
+	}
+	
+	@Override
+	public boolean deleteColumnPic(int c_bno) {
+//		int count = sqlSession.delete(NAMESPACE + "deleteColumnPic", c_bno);
+//		if (count > 0) {
+//			return true;
+//		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteColumnLikes(int c_bno) {
+//		int count = sqlSession.delete(NAMESPACE + "deleteColumnLikes", c_bno);
+//		if (count > 0) {
+//			return true;
+//		}
 		return false;
 	}
 
@@ -133,6 +154,11 @@ public class ColumnDaoImpl implements ColumnDao {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public void increaseColumnViewcnt(int c_bno) {
+		
 	}
 
 }

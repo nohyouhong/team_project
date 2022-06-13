@@ -4,9 +4,6 @@
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 
 <style>
-#column_content_div {
-	margin-bottom: 100px;
-}
 
 #column_like_div {
 	text-align: center;
@@ -26,10 +23,14 @@
 }
 .div_column {
 	margin-top: 50px;
+	margin-bottom: 50px;
 }
 .column_regdate {
 	font-size: 18px;
 }
+ .column_content_div { 
+ 	font-size: 25px; 
+ } 
 </style>
 
 <script>
@@ -80,20 +81,24 @@ $(document).ready(function(){
 			$(".fa-thumbs-up").css("color", "black");			
 		}
 	});
+	
+	$(".column_content_div").children("p").css("font-size", "20px");
 });
 </script>
 
 
 <div class="row div_column">
 	<div class="col-md-2"></div>
-	<div class="col-md-8" id="column_content_div">
+	<div class="col-md-8">
 		<h1>${columnVo.c_title}</h1>
 		<p class="column_regdate">${columnVo.c_regdate}</p>
-		${columnVo.c_content}
-		<div id="column_manage_btn_div">
-			<a href="/column/column_modify_form?c_bno=${columnVo.c_bno}" class="btn btn-info">수정</a>
-			<a href="/column/column_delete?c_bno=${columnVo.c_bno}" class="btn btn-danger">삭제</a>
-		</div>
+		<div class="column_content_div">${columnVo.c_content}</div>
+		<c:if test="${loginVo.m_code == 101}">
+			<div id="column_manage_btn_div">
+				<a href="/column/column_modify_form?c_bno=${columnVo.c_bno}" class="btn btn-info">수정</a>
+				<a href="/column/column_delete?c_bno=${columnVo.c_bno}" class="btn btn-danger">삭제</a>
+			</div>
+		</c:if>
 		<div id="column_like_div">
 			<i class="fa-regular fa-thumbs-up" data-c_bno="${columnVo.c_bno}"></i>
 			<span id="column_like_span">${columnVo.c_likecnt}</span>

@@ -86,4 +86,10 @@ public class ColumnServiceImpl implements ColumnService {
 		return result;
 	}
 
+	@Override
+	public List<String> getdeletefiles(int c_bno) {
+		List<String> deleteFiles = columnDao.getdeletefiles(c_bno);
+		return deleteFiles;
+	}
+
 }

@@ -66,7 +66,6 @@
 	<div class="col-md-8">
 		<div class="column_list_area" id="column_list_area">
 		
-			<h4>Column List</h4>
 			<c:if test="${loginVo.m_code == 101}">
 				<a class="btn btn-primary" id="insertColumn" href="/column/column_create_form">칼럼 작성</a>
 			</c:if>

@@ -10,9 +10,10 @@
 
 #fileDrop{
 	height:100px;
-	background-color: #fff4eb;
+	background-color: #fff4eb; 
 	margin: 20px auto;
 	border: 1.5px dashed #c0c0c0;
+	padding:10px;
 }
 .divUploaded{
 	width:150px;

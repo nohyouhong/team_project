@@ -62,7 +62,7 @@ public class CustomerController {
 	@RequestMapping(value="/notice_run", method=RequestMethod.POST)
 	public String noticeRun(NoticeVo noticeVo, RedirectAttributes rttr) {
 		System.out.println("notice_run, noticeVo:" + noticeVo);
-		boolean result = noticeService.insertNotice(noticeVo);
+		noticeService.insertNotice(noticeVo);
 		return "redirect:/customer/notice";
 	}
 	
@@ -89,7 +89,14 @@ public class CustomerController {
 		String originalFilename = file.getOriginalFilename();
 		byte[] fileData = file.getBytes();
 		String saveFilename = MyFileUploader.uploadFile("C:/boardattach", originalFilename, fileData);
-		System.out.println("saveFilename: " + saveFilename);
+//		System.out.println("saveFilename: " + saveFilename);
 		return saveFilename;
+	}
+	
+	@RequestMapping(value="/deleteFile", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteFile(String filename) {
+		boolean result = MyFileUploader.deleteFile(filename);
+		return String.valueOf(result);
 	}
 }

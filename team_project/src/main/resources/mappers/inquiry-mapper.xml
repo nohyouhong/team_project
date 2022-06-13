@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.team.mappers.inquiry">
+	<select id="getNexta_bno" resultType="int">
+		select seq_inquiry_a_bno.nextval from dual
+	</select>
+	<insert id="insertAttach">
+		insert into tbl_ask_board_pic(a_picture, a_bno)
+		values(#{a_picture}, #{a_bno})
+	</insert>
+	<insert id="insertInquiry">
+		insert into tbl_ask_board(a_bno, a_title, a_content, userid)
+		values (#{a_bno}, #{a_title}, #{a_content}, #{userid})
+	</insert>
+	<select id="readInquiry" resultType="InquiryVo">
+		select * from tbl_ask_board
+		where a_bno = #{a_bno}
+	</select>
+	<update id="updateInquiry">
+		update tbl_ask_board set
+			a_title = ${a_title},
+			a_content = ${a_content}
+		where a_bno = #{a_bno}
+	</update>
+	<delete id="deleteInquiry">
+		delete from tbl_ask_board
+		where a_bno = #{a_bno}
+	</delete>
+	<select id="listInquiry" resultType="InquiryVo">
+		select * from(select rownum rnum, a.* from
+             (select * from tbl_ask_board) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_ask_board
+	</select>
+</mapper>

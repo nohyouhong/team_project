@@ -8,26 +8,52 @@
 
 <script src="/resources/js/myscript.js"></script>
 <script>
-$(document).ready(function(){
+$(function(){
 	$("#fileDrop").on("dragenter dragover", function(e){
 		e.preventDefault();
 	});
 	$("#fileDrop").on("drop", function(e){
 		e.preventDefault();
-		var file = e.originalEvent.dataTransfer.files[0];
-		var formData = new FormData();
-		formData.append("file", file);
-		var url = "/customer/uploadFile"
+// 		var file = e.originalEvent.dataTransfer.files[0];
+		var file = e.originalEvent.dataTransfer.files;
+		$.each(file, function(){
+			var formData = new FormData();
+			formData.append("file", this);
+			var url = "/customer/uploadFile";
+			$.ajax({
+				"processData" : false,
+				"contentType" : false,
+				"url"         : url,
+				"method"      : "post",
+				"data"        : formData,
+				"success"     : function(rData){
+					var cloneDiv = $(".divUploaded").eq(0).clone();
+					var filename = getFilename(rData);
+					cloneDiv.find("span").text(filename);
+					cloneDiv.attr("data-filename", rData);
+					if(isImage(filename)){
+						cloneDiv.find("img").attr("src","/member/displayImage?filename=" + rData);
+					}
+					$("#fileDrop").append(cloneDiv).show();
+					cloneDiv.appendTo($("#fileDrop")).show();
+				}
+			});
+		});
 	});
-	$.ajax({
-		"processData" : false,
-		"contentType" : false,
-		"url" 		  : url,
-		"method" 	  : "post",
-		"data"		  : formData,
-		"success"     : function(rData){
-			console.log("rData: " + rData)
+	$("#fileDrop").on("click",".a_delete",function(e){
+		e.preventDefault();
+		var that = $(this);
+		var filename = that.attr("data-filename");
+		console.log("filename: "+filename);
+		var url = "/customer/deleteFile";
+		var sData = {
+				"filename" : filename
 		}
+		$.get(url, sData, function(rData){
+			if(rData == "true"){
+				that.parent().remove();
+			}
+		});
 	});
 });
 </script>
@@ -63,12 +89,11 @@ $(document).ready(function(){
 								<div id="fileDrop"></div>
 							</div>
 							<div class="divUploaded">
-								<img src="/resources/customer_center/images/default.png" height="100"><br>
+								<img src="/resources/customer_center/images/default.png" height="50">
 								<span>default.png</span>
-								<a href="#">&times;</a>
+								<a href="#" class="a_delete">&times;</a>
 							</div>
-								<div id="uploadedList">
-							</div>
+<!-- 							<div id="uploadedList"></div> -->
 							<div id="inquiry_submit">
 								<button type="submit" class="btn btn-outline-warning">문의등록</button>
 							</div>

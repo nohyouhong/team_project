@@ -23,11 +23,7 @@ $(document).ready(function(){
 	        }
 	    });
 	};
-	if(${loginVo.m_code == 101}){
-		$("#inquirybtn").show();
-	}else{
-		$("#inquirybtn").hide();
-	};
+	
 });
 </script>
 
@@ -52,8 +48,8 @@ $(document).ready(function(){
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
 								<li><a href="/customer/notice">공지사항</a></li>
 							</ul>
-							<div>
-							<a href="/customer/inquiry_form" class="btn btn-outline-danger" id="inquirybtn"><i class="fa-light fa-messages-question"></i>1:1문의하기</a>
+							<div id="inquirydiv">
+							<a href="/customer/inquiry_form" class="btn btn-outline-danger" id="inquirybtn">1:1문의하기</a>
 							</div>
 							<section class="faq-container">
 								<div class="faq-one">

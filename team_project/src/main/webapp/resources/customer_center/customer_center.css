@@ -177,14 +177,7 @@ section{
 	clear:both;
 }
 
-#fileDrop{
-	width:800px;
-	height:100px;
-	background-color: aliceblue;
-	margin: 20px auto;
-	border: 1.5px dashed gray;
-}
-.divUploaded{
-	width:150px;
-	float:left;
+#inquirydiv{
+	text-align:right;
+	height:10px;
 }

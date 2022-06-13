@@ -15,7 +15,7 @@
 					<nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
 						<div class="user-info">
 							<img src="/resources/main_mypage/images/face.jpg" alt="">
-							<p class="name">Richard V.Welsh</p>
+							<p class="name">${loginVo.username}</p>
 							<p class="designation">Manager</p>
 
 						</div>

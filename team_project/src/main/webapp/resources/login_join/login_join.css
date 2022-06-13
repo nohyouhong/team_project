@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/* #login_form{ */
+/* 	margin-top:80px; */
+/* 	margin-bottom:100px; */
+/* } */
+
+#pwlabel, #idlabel, #chklabel{
+	margin-top:10px;
+	font-family:'jua';
+	font-size:15px;
+}
+
+@font-face{
+	font-family: 'jua';
+	src: url("../fonts/icomoon/BMJUA_ttf.ttf");
+}
+
+#chklabel{
+	font-size:12px;
+}
+
+#login_form{
+	border:medium ridge rgb(255,227,219);
+	border-radius:5px;
+	box-shadow: 10px 5px 5px rgb(255,227,219);
+	padding:10px 5px 20px 5px;
+}
+
+#subdiv{
+	text-align:center;
+}

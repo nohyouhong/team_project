@@ -1,6 +1,7 @@
 package com.kh.team.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class NoticeVo {
 	private int n_bno;
@@ -9,6 +10,7 @@ public class NoticeVo {
 	private String userid;
 	private String username;
 	private Date n_regdate;
+	
 	public NoticeVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -40,6 +42,8 @@ public class NoticeVo {
 		this.username = username;
 		this.n_regdate = n_regdate;
 	}
+	
+	
 
 	public int getN_bno() {
 		return n_bno;
@@ -86,5 +90,6 @@ public class NoticeVo {
 				+ ", username=" + username + ", n_regdate=" + n_regdate + "]";
 	}
 	
+
 	
 }

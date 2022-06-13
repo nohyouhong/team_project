@@ -31,11 +31,13 @@ $(function(){
 					var filename = getFilename(rData);
 					cloneDiv.find("span").text(filename);
 					cloneDiv.attr("data-filename", rData);
+					cloneDiv.find("a.a_delete").attr("data-filename", rData);
 					if(isImage(filename)){
 						cloneDiv.find("img").attr("src","/member/displayImage?filename=" + rData);
 					}
-					$("#fileDrop").append(cloneDiv).show();
+					$("#uploadedList").append(cloneDiv).show();
 					cloneDiv.appendTo($("#fileDrop")).show();
+					
 				}
 			});
 		});
@@ -93,7 +95,7 @@ $(function(){
 								<span>default.png</span>
 								<a href="#" class="a_delete">&times;</a>
 							</div>
-<!-- 							<div id="uploadedList"></div> -->
+							<div id="uploadedList"></div>
 							<div id="inquiry_submit">
 								<button type="submit" class="btn btn-outline-warning">문의등록</button>
 							</div>

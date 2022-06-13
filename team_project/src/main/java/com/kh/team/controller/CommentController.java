@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.team.service.CommentService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.RecipeCommentVo;
+import com.kh.team.vo.RecipeReviewVo;
 
 @RestController
 @RequestMapping("/comment")
@@ -77,6 +78,72 @@ public class CommentController {
 		System.out.println("r_cno받음");
 		boolean result = commentService.deleteRecipeComment(r_cno);
 		System.out.println("r_cno실행");
+		return String.valueOf(result);
+	}
+	
+//	요리후기
+	
+	@RequestMapping( value="/recipeReviewList/{r_bno}", method = RequestMethod.GET)
+	public List<RecipeReviewVo> recipeReviewList(@PathVariable("r_bno")int r_bno) {
+		List<RecipeReviewVo> recipeReviewList = commentService.recipeReviewList(r_bno);
+		System.out.println(r_bno);
+		System.out.println(recipeReviewList);
+		return recipeReviewList;
+	}
+	
+	@RequestMapping( value="/recipeReviewListNum/{r_bno}", method = RequestMethod.GET)
+	public int recipeReviewListNum(@PathVariable("r_bno")int r_bno) {
+		int recipeReviewListNum = commentService.recipeReviewListNum(r_bno);
+		return recipeReviewListNum;
+	}
+	
+	@RequestMapping( value="/recipeReviewandImageListNum/{r_bno}", method = RequestMethod.GET)
+	public int recipeReviewandImageListNum(@PathVariable("r_bno")int r_bno) {
+		int recipeReviewandImageListNum = commentService.recipeReviewandImageListNum(r_bno);
+		return recipeReviewandImageListNum;
+	}
+	
+	@RequestMapping( value="/insertRecipeReview", method = RequestMethod.POST)
+	public String insertRecipeReview(RecipeReviewVo recipeReviewVo, MultipartFile file) {
+		System.out.println(file);
+		try {
+			String originalFilename = file.getOriginalFilename();
+			System.out.println(originalFilename);
+			if(originalFilename != null && !originalFilename.equals("")) {
+				String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach",
+						originalFilename, file.getBytes());
+				recipeReviewVo.setR_reviewpic(saveFilename);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(recipeReviewVo);
+		boolean result = commentService.insertRecipeReview(recipeReviewVo);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping( value="/replyRecipeReview", method = RequestMethod.POST)
+	public String replyRecipeReview(RecipeReviewVo recipeReviewVo, MultipartFile file) {
+		try {
+			String originalFilename = file.getOriginalFilename();
+			System.out.println(originalFilename);
+			if(originalFilename != null && !originalFilename.equals("")) {
+				String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach",
+						originalFilename, file.getBytes());
+				recipeReviewVo.setM_picture(saveFilename);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(recipeReviewVo);
+		boolean result = commentService.replyRecipeReview(recipeReviewVo);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping( value="/deleteRecipeReview/{r_rno}", method = RequestMethod.GET)
+	public String deleteRecipeReview(@PathVariable("r_rno") int r_rno) {
+		System.out.println("r_rno받음");
+		boolean result = commentService.deleteRecipeReview(r_rno);
 		return String.valueOf(result);
 	}
 }

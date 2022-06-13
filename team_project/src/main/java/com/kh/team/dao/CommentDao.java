@@ -6,11 +6,6 @@ import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeReviewVo;
 
 public interface CommentDao {
-	public static final int REVIEW_1SCORE_CODE = 1001;
-	public static final int REVIEW_2SCORE_CODE = 1002;
-	public static final int REVIEW_3SCORE_CODE = 1003;
-	public static final int REVIEW_4SCORE_CODE = 1004;
-	public static final int REVIEW_5SCORE_CODE = 1005;
 	
 	public int getNextCno();
 	public List<RecipeCommentVo> recipeCommentList(int r_bno);

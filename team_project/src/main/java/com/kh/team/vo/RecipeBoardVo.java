@@ -12,6 +12,7 @@ public class RecipeBoardVo {
 	private String userid;
 	private Date r_regdate;
 	private int f_code;
+	private String f_type;
 	private int r_viewcnt;
 	private int r_likecnt;
 	private String r_titlepic;
@@ -35,7 +36,7 @@ public class RecipeBoardVo {
 	}
 
 	public RecipeBoardVo(int r_bno, String r_title, String r_explain, String[] r_contents, String r_cooktip,
-			String userid, Date r_regdate, int f_code, int r_viewcnt, int r_likecnt, String r_titlepic,
+			String userid, Date r_regdate, int f_code, String f_type, int r_viewcnt, int r_likecnt, String r_titlepic,
 			String[] pictures) {
 		super();
 		this.r_bno = r_bno;
@@ -46,6 +47,7 @@ public class RecipeBoardVo {
 		this.userid = userid;
 		this.r_regdate = r_regdate;
 		this.f_code = f_code;
+		this.f_type = f_type;
 		this.r_viewcnt = r_viewcnt;
 		this.r_likecnt = r_likecnt;
 		this.r_titlepic = r_titlepic;
@@ -148,11 +150,19 @@ public class RecipeBoardVo {
 		this.pictures = pictures;
 	}
 
+	public String getF_type() {
+		return f_type;
+	}
+
+	public void setF_type(String f_type) {
+		this.f_type = f_type;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeBoardVo [r_bno=" + r_bno + ", r_title=" + r_title + ", r_explain=" + r_explain + ", r_contents="
 				+ Arrays.toString(r_contents) + ", r_cooktip=" + r_cooktip + ", userid=" + userid + ", r_regdate="
-				+ r_regdate + ", f_code=" + f_code + ", r_viewcnt=" + r_viewcnt + ", r_likecnt=" + r_likecnt
-				+ ", r_titlepic=" + r_titlepic + ", pictures=" + Arrays.toString(pictures) + "]";
+				+ r_regdate + ", f_code=" + f_code + ", f_type=" + f_type + ", r_viewcnt=" + r_viewcnt + ", r_likecnt="
+				+ r_likecnt + ", r_titlepic=" + r_titlepic + ", pictures=" + Arrays.toString(pictures) + "]";
 	}
 }

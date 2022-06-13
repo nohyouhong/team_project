@@ -3,13 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 <style>
+.titleP{
+	margin-top: 60px;
+}
+.createTitleSpan{
+	font-size: 30px;
+	font-style: italic;
+}
 .addButton{
 	cursor: pointer;
 }
 .createCookDiv{
 	width: 75%;
 }
+.createCookDiv2{
+	width: 80%;
+}
 #mainCookImage{
+	margin-top: 40px;
 	border: 1px solid #DFD9D8;
 	width: 250px;
 	height: 250px;
@@ -120,11 +131,12 @@ $(function() {
 });
 </script>
 <div class="container-fluid">
-	<div class="row">
+	<div class="row titleP">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+			<span class="createTitleSpan">레시피 등록</span>
+			<hr class="createHr">
 			<form role="form" action="/recipeboard/createRun" method="post" enctype="multipart/form-data">
-				<h3>레시피 등록</h3><hr class="createHr">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
@@ -225,7 +237,7 @@ $(function() {
 					</div>
 				</div>
 				<hr class="createHr">
-				<div class="form-group createCookDiv">
+				<div class="form-group createCookDiv2">
 					<label for="title" class="createTitle">요리팁</label>
 					<textarea rows="4" class="form-control inputVal" id="r_cooktip" name="r_cooktip"></textarea>
 				</div><hr class="createHr">

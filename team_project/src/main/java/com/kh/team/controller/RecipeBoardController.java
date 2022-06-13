@@ -1,12 +1,15 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,9 +63,14 @@ public class RecipeBoardController {
 			String[] pictures = new String[files.size()];
 			for(MultipartFile onefile : files) {
 				String oneOriginalFilename = onefile.getOriginalFilename();
-				String picture = MyFileUploader.uploadFile(
-						"//192.168.0.110/boardattach", oneOriginalFilename, onefile.getBytes());
-				pictures[index++] = picture;
+				System.out.println(index + oneOriginalFilename);
+				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
+					String picture = MyFileUploader.uploadFile(
+							"//192.168.0.110/boardattach", oneOriginalFilename, onefile.getBytes());
+					pictures[index++] = picture;
+				} else{
+					pictures[index++] = "";
+				}
 			}
 			recipeBoardVo.setPictures(pictures);
 //			System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
@@ -85,6 +93,8 @@ public class RecipeBoardController {
 		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
 		MemberVo memberVo = recipeBoardService.getMemberVoByBno(r_bno);
 		System.out.println(recipeBoardVo);
+		System.out.println(ingredientVoList);
+		System.out.println(recipeStepVoList);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
 		model.addAttribute("ingredientVoList", ingredientVoList);
 		model.addAttribute("recipeStepVoList", recipeStepVoList);
@@ -144,6 +154,16 @@ public class RecipeBoardController {
 		System.out.println("saveFilename: " + saveFilename);
 		
 		return saveFilename;
+	}
+	
+	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception{
+//		System.out.println(filename);
+		FileInputStream fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
 	}
 	
 	@RequestMapping(value="/deleteFile", method=RequestMethod.GET)

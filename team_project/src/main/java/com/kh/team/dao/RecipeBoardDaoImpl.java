@@ -49,6 +49,7 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	@Override
 	public List<RecipeStepVo> readStepVos(int r_bno){
 		List<RecipeStepVo> recipeStepVoList = sqlSession.selectList(NAMESPACE + "readStepVos", r_bno);
+		System.out.println("다오임플" + recipeStepVoList);
 		return recipeStepVoList;
 	}
 	

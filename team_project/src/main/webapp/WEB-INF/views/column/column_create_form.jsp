@@ -7,6 +7,21 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
+$(function(){
+	$(".note-remove").on("click", "button", function(e){
+		e.preventDefault;
+		console.log(e);
+		var filename = $("input[name=pictures]").val();
+		console.log("filename: " + filename);
+		var url = "/column/deleteImage";
+		var sData = {
+			"filename" : filename
+		}
+		$.post(url, sData, function(rData){
+			console.log("rData: " + rData)
+		});	
+	});
+});
 function isImage(filename) {
 	// 확장자 체크 - png, jpg, gif
 	var dotIndex = filename.lastIndexOf(".");
@@ -30,15 +45,14 @@ function uploadColumnImageFile(file, el) {
 		enctype : 'multipart/form-data',
 		processData : false,
 		success : function(rData) {
-			console.log("rData: ", rData)
+// 			console.log("rData: ", rData)
 			$(el).summernote('editor.insertImage', rData);
 			var index = rData.indexOf(":");
-			console.log("index: " + index);
+// 			console.log("index: " + index);
 			var filename = rData.substring(49);
-			console.log("filename: ", filename);
+// 			console.log("filename: ", filename);
 			var html = "<input type='hidden' name='pictures' value=" + filename + ">"
 			$("#frmColumn").prepend(html);
-			
 		}
 	});
 }
@@ -86,8 +100,8 @@ function uploadColumnImageFile(file, el) {
 				        			alert("5mb미만의 이미지를 넣어주세요");
 				            	} else {
 				            		if (isImage(files[i].name)){
-				            			console.log(isImage(files[i].name))
-					            		uploadColumnImageFile(files[i], this);				            			
+// 				            			console.log(isImage(files[i].name))
+					            		uploadColumnImageFile(files[i], this);
 				            		}
 				            	}
 				    		}

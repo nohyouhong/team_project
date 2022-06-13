@@ -69,6 +69,14 @@ public class ColumnController {
 		return data;
 	}
 	
+	@RequestMapping(value = "/deleteImage", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteImage(String filename) throws Exception {
+		String deleteFilename = "C:/boardattach/" + filename;
+		boolean result = MyFileUploader.deleteFile(deleteFilename);
+		return String.valueOf(result);
+	}
+	
 	@RequestMapping(value="/column_list", method=RequestMethod.GET) 
 	public String column_list(Model model) {
 		List<ColumnVo> columnList = columnService.getColumnList();

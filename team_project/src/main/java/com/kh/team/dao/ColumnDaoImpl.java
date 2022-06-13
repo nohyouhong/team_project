@@ -54,14 +54,20 @@ public class ColumnDaoImpl implements ColumnDao {
 
 	@Override
 	public List<ColumnVo> getColumnList() {
-		List<ColumnVo> ColumnList = sqlSession.selectList(NAMESPACE + "getColumnList");
-		return ColumnList;
+		List<ColumnVo> columnList = sqlSession.selectList(NAMESPACE + "getColumnList");
+		return columnList;
 	}
 	
 	@Override
 	public List<ColumnVo> getColumnTitlePic(int c_bno) {
-		List<ColumnVo> ColumnTitlePic = sqlSession.selectList(NAMESPACE + "getColumnTitlePic", c_bno);
-		return ColumnTitlePic;
+		List<ColumnVo> columnTitlePic = sqlSession.selectList(NAMESPACE + "getColumnTitlePic", c_bno);
+		return columnTitlePic;
+	}
+	
+	@Override
+	public List<ColumnVo> getMainColumnList() {
+		List<ColumnVo> mainColumnList = sqlSession.selectList(NAMESPACE + "getMainColumnList");
+		return mainColumnList;
 	}
 
 	@Override

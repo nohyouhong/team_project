@@ -50,15 +50,18 @@
 .column_title {
 	font-size: 30px;
 	font-weight: bold;
+	font-family: jua;
 }
 
 .column_regdate {
 	font-size: 15px;
+	font-family: jua;
 }
 
 .column_contents {
 	font-size: 20px;
-	}
+	font-family: jua;
+}
 
 </style>
 <div class="row div_column" id="div_column_list">

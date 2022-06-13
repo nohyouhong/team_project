@@ -11,6 +11,7 @@ public interface ColumnService {
 	
 	public List<ColumnVo> getColumnList();
 	public List<ColumnVo> getColumnTitlePic(int c_bno);
+	public List<ColumnVo> getMainColumnList();
 	
 	public boolean modifyColumn(ColumnVo columnVo);
 	

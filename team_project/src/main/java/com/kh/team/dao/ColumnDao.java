@@ -20,6 +20,9 @@ public interface ColumnDao {
 	public List<ColumnVo> getColumnList();
 	public List<ColumnVo> getColumnTitlePic(int c_bno);
 	
+	// viewcnt 상위 4개 리스트
+	public List<ColumnVo> getMainColumnList();
+	
 	// 칼럼 수정
 	public boolean modifyColumn(ColumnVo columnVo);
 	

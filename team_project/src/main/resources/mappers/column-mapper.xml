@@ -47,6 +47,13 @@
 		where rownum = 1
 	</select>
 	
+	<select id="getMainColumnList" resultType="ColumnVo">
+		select * from
+			(select * from tbl_column_board 
+			order by c_viewcnt desc)
+		where rownum between 1 and 4
+	</select>
+	
 	<!-- column modify -->
 	<update id="modifyColumn">
 		update tbl_column_board set

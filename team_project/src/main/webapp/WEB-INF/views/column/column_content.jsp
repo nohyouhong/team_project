@@ -48,24 +48,28 @@ $(document).ready(function(){
 			"userid" : userid
 		};
 		var thumbs_up = $(this);
-		$.post(url, sendData, function(rData) {
-			console.log("rData: " + rData);
-			console.log("is_column_like: " + is_column_like);
-	 		var span = $("#column_like_span");
-			if (rData == "success") {
-				if (is_column_like == "true") {
-					thumbs_up.css("color", "black");
-					span.css("color", "black");
-			 		span.text(parseInt(span.text().trim()) - 1);
-			 		is_column_like = "false";										
-				} else {
-					thumbs_up.css("color", "rgb(248,56,1)");
-					span.css("color", "rgb(248,56,1)");
-			 		span.text(parseInt(span.text().trim()) + 1);
-			 		is_column_like = "true";
-				}
-			};
-		});
+		if (userid == null || userid == "") {
+			alert("로그인이 필요합니다.");
+		} else {
+			$.post(url, sendData, function(rData) {
+				console.log("rData: " + rData);
+				console.log("is_column_like: " + is_column_like);
+		 		var span = $("#column_like_span");
+				if (rData == "success") {
+					if (is_column_like == "true") {
+						thumbs_up.css("color", "black");
+						span.css("color", "black");
+				 		span.text(parseInt(span.text().trim()) - 1);
+				 		is_column_like = "false";										
+					} else {
+						thumbs_up.css("color", "rgb(248,56,1)");
+						span.css("color", "rgb(248,56,1)");
+				 		span.text(parseInt(span.text().trim()) + 1);
+				 		is_column_like = "true";
+					}
+				};
+			});	
+		}
 	});
 	var sData = {
 			"c_bno" : c_bno, 
@@ -82,7 +86,8 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(".column_content_div").children("p").css("font-size", "20px");
+	$(".column_content_div").children().css("font-size", "20px")
+									   .css("font-family", "jua");
 });
 </script>
 

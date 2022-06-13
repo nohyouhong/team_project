@@ -84,8 +84,9 @@ public class ColumnController {
 			int c_bno = columnVo.getC_bno();
 			String c_content = columnVo.getC_content();
 			String tagC_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+			String cContent = tagC_content.replaceAll("/一-龥/", "");
 //			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
-			columnVo.setC_content(tagC_content);
+			columnVo.setC_content(cContent);
 			List<ColumnVo> columnTitlePics = columnService.getColumnTitlePic(c_bno);
 			for (ColumnVo columnPicVo : columnTitlePics) {
 				String columnTitlePic = columnPicVo.getC_picture();
@@ -139,10 +140,10 @@ public class ColumnController {
 	@RequestMapping(value="/column_like", method=RequestMethod.POST)
 	@ResponseBody
 	public String likeColumn(int c_bno, String userid, HttpSession session) {
-//		System.out.println("c_bno: " + c_bno);
-//		System.out.println("userid: " + userid);
+		System.out.println("c_bno: " + c_bno);
+		System.out.println("userid: " + userid);
 		boolean isLikeResult = columnService.isColumnLike(c_bno, userid);
-//		System.out.println("isLikeResult: " + isLikeResult);
+		System.out.println("isLikeResult: " + isLikeResult);
 		if (isLikeResult) {
 			columnService.deleteColumnLike(c_bno, userid);
 			columnService.updateColumnLikeCount(c_bno, ColumnDao.COLUMNDISLIKE);

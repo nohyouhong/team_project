@@ -49,6 +49,12 @@ public class ColumnServiceImpl implements ColumnService {
 		List<ColumnVo> ColumnTitlePic = columnDao.getColumnTitlePic(c_bno);
 		return ColumnTitlePic;
 	}
+	
+	@Override
+	public List<ColumnVo> getMainColumnList() {
+		List<ColumnVo> mainColumnList = columnDao.getMainColumnList();
+		return mainColumnList;
+	}
 
 	@Override
 	public boolean modifyColumn(ColumnVo columnVo) {

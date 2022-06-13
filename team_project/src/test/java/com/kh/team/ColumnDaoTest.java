@@ -1,6 +1,7 @@
 package com.kh.team;
 
 
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -49,6 +50,13 @@ public class ColumnDaoTest {
 		int c_bno = 8;
 		boolean result = columnDao.updateColumnLikeCount(c_bno, ColumnDao.COLUMNLIKE);
 		System.out.println("result: " + result);
+	}
+
+	@Test
+	public void getdeletefiles() {
+		int c_bno = 32;
+		List<String> deletefiles = columnDao.getdeletefiles(c_bno);
+		System.out.println("deletefiles: " + deletefiles);
 	}
 	
 	@Test

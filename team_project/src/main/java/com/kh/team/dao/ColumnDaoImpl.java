@@ -85,6 +85,12 @@ public class ColumnDaoImpl implements ColumnDao {
 	}
 	
 	@Override
+	public List<String> getdeletefiles(int c_bno) {
+		List<String> deletefiles = sqlSession.selectList(NAMESPACE + "getdeletefiles", c_bno);
+		return deletefiles;
+	}
+	
+	@Override
 	public boolean deleteColumnPic(int c_bno) {
 //		int count = sqlSession.delete(NAMESPACE + "deleteColumnPic", c_bno);
 //		if (count > 0) {

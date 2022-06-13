@@ -76,7 +76,7 @@ public class ColumnController {
 			int c_bno = columnVo.getC_bno();
 			String c_content = columnVo.getC_content();
 			String tagC_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
+//			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
 			columnVo.setC_content(tagC_content);
 			List<ColumnVo> columnTitlePics = columnService.getColumnTitlePic(c_bno);
 			for (ColumnVo columnPicVo : columnTitlePics) {
@@ -104,9 +104,17 @@ public class ColumnController {
 
 	@RequestMapping(value="/column_delete", method=RequestMethod.GET)
 	public String column_delete(int c_bno) {
-//		System.out.println("c_bno: " + c_bno);
+		System.out.println("c_bno: " + c_bno);
+		String file_root = "C:/boardattach/";
+		List<String> deletefiles = columnService.getdeletefiles(c_bno);
+		for (String deletefile : deletefiles) {
+			System.out.println("deletefile: " + deletefile);
+			String filename = file_root + deletefile;
+			System.out.println("filename: " + filename);			
+			boolean deleteFile_result = MyFileUploader.deleteFile(filename);
+			System.out.println("deleteFile_result: " + deleteFile_result);
+		}
 		columnService.deleteColumn(c_bno);
-//		MyFileUploader.deleteFile(filename);
 		return "redirect: /column/column_list";
 	}
 	

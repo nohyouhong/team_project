@@ -27,6 +27,7 @@ public interface ColumnDao {
 	public boolean deleteColumn(int c_bno);
 	public boolean deleteColumnPic(int c_bno);
 	public boolean deleteColumnLikes(int c_bno);
+	public List<String> getdeletefiles(int c_bno);
 	
 	// 칼럼 좋아요
 	public boolean insertColumnLike(int c_bno, String userid);

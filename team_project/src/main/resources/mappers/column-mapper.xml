@@ -61,6 +61,11 @@
 		where c_bno = #{c_bno}	
 	</delete>
 	
+	<select id="getdeletefiles" resultType="String">
+		select c_picture from tbl_column_pic
+		where c_bno = #{c_bno}
+	</select>
+	
 	<delete id="deleteColumnPic">
 		delete from tbl_column_pic
 		where c_bno = #{c_bno}

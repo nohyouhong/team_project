@@ -29,7 +29,7 @@
 	font-size: 18px;
 }
  .column_content_div { 
- 	font-size: 25px; 
+ 	margin-top: 80px; 
  } 
 </style>
 
@@ -86,8 +86,14 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(".column_content_div").children().css("font-size", "20px")
-									   .css("font-family", "jua");
+// 	$(".column_content_div > p").removeProp();
+// 	.children().css("font-size", "20px")
+// 						    .css("font-family", "jua");
+
+	$(".column_content_div").find("*").each(function() {
+		$(this).css("font-family", "jua")
+		.css("font-size", "20px");
+	});
 });
 </script>
 
@@ -110,7 +116,7 @@ $(document).ready(function(){
 		</div>
 		<table class="table">
 			<tbody>
-				<c:forEach var="columnvo" items="${columnList}" begin="${columnvo.c_bno}" end="${columnvo.c_bno + 5}">
+				<c:forEach var="columnvo" items="${columnList}" begin="${columnvo.c_bno}" end="${columnvo.c_bno + 2}">
 					<tr>
 						<td>${columnvo.c_bno}</td>
 						<td><a href="/column/readColumn?c_bno=${columnvo.c_bno}">${columnvo.c_title}</a></td>
@@ -121,5 +127,6 @@ $(document).ready(function(){
 	</div>
 	<div class="col-md-2"></div>
 </div>
-
+<%-- ${columnvo.c_bno} --%>
+<%-- ${columnList} --%>
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

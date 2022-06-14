@@ -79,17 +79,17 @@ function uploadColumnImageFile(file, el) {
 		        	maxHeight: null,
 		        	focus: true,
 					lang: "ko-KR", 
-					toolbar: [
-// 					    ['style', ['style']],
-					    ['font', ['bold', 'italic', 'underline', 'clear']],
-					    ['fontname', ['fontname']],
-					    ['color', ['color']],
-					    ['para', ['ul', 'ol', 'paragraph']],
-					    ['height', ['height']],
-					    ['table', ['table']],
-					    ['insert', ['link', 'picture', 'hr']],
-					    ['help', ['help']]
-					  ], 
+// 					toolbar: [
+// // 					    ['style', ['style']],
+// 					    ['font', ['bold', 'italic', 'underline', 'clear']],
+// 					    ['fontname', ['fontname']],
+// 					    ['color', ['color']],
+// 					    ['para', ['ul', 'ol', 'paragraph']],
+// 					    ['height', ['height']],
+// 					    ['table', ['table']],
+// 					    ['insert', ['link', 'picture', 'hr']],
+// 					    ['help', ['help']]
+// 					  ], 
 					//콜백 함수
 		            callbacks: { 
 		            	onImageUpload : function(files, editor, welEditable) {

@@ -51,8 +51,8 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#"> 
-									<span class="menu-title">1:1문의하기</span>
+								<a class="nav-link" href="/inquiry/inquiry_list"> 
+									<span class="menu-title">1:1문의</span>
 								</a>
 							</li>
 						</ul>

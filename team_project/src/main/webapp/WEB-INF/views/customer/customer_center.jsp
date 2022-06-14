@@ -49,7 +49,7 @@ $(document).ready(function(){
 								<li><a href="/customer/notice">공지사항</a></li>
 							</ul>
 							<div id="inquirydiv">
-							<a href="/customer/inquiry_form" class="btn btn-outline-danger" id="inquirybtn">1:1문의하기</a>
+							<a href="/inquiry/inquiry_form" class="btn btn-outline-danger" id="inquirybtn">1:1문의하기</a>
 							</div>
 							<section class="faq-container">
 								<div class="faq-one">

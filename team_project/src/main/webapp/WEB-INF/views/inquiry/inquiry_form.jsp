@@ -14,7 +14,6 @@ $(function(){
 	});
 	$("#fileDrop").on("drop", function(e){
 		e.preventDefault();
-// 		var file = e.originalEvent.dataTransfer.files[0];
 		var file = e.originalEvent.dataTransfer.files;
 		$.each(file, function(){
 			var formData = new FormData();

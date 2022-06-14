@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.service.InquiryService;
 import com.kh.team.service.NoticeService;
 import com.kh.team.util.MyFileUploader;
+import com.kh.team.vo.InquiryVo;
 import com.kh.team.vo.NoticeVo;
 import com.kh.team.vo.PagingDto;
 
@@ -48,11 +50,6 @@ public class CustomerController {
 		return "customer/notice";
 	}
 	
-	
-	@RequestMapping(value="/inquiry_form", method=RequestMethod.GET)
-	public String inquiry() {
-		return "customer/inquiry_form";
-	}
 	
 	@RequestMapping(value="/notice_form", method=RequestMethod.GET)
 	public String noticeForm() {

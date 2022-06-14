@@ -40,4 +40,9 @@
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_ask_board
 	</select>
+	<select id="getInquiryImages" resultType="string">
+		select * from tbl_ask_board_pic
+		where a_bno = #{a_bno}
+	</select>
+	
 </mapper>

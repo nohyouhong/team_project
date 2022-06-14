@@ -13,4 +13,5 @@ public interface InquiryService {
 	public List<InquiryVo> InquiryList(String userid);
 	public List<InquiryVo> allInquiryList();
 	public int getCount(PagingDto pagingDto);
+	public List<String> getInquiryImages(int a_bno);
 }

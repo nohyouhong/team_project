@@ -50,7 +50,9 @@ public class InquiryController {
 	@RequestMapping(value="/inquiry_read", method=RequestMethod.GET)
 	public String inquiryRead(int a_bno, Model model) {
 		InquiryVo inquiryVo = inquiryService.readInquiry(a_bno);
+		List<String> inquiryImages = inquiryService.getInquiryImages(a_bno);
 		model.addAttribute("inquiryVo", inquiryVo);
+		model.addAttribute("inquiryImages", inquiryImages);
 		return "inquiry/inquiry_read";
 	}
 	
@@ -62,9 +64,9 @@ public class InquiryController {
 	
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody
-	public byte[] displayImage(String column_image) throws Exception {
+	public byte[] displayImage(String filename) throws Exception {
 		FileInputStream fis;
-		fis = new FileInputStream(column_image);
+		fis = new FileInputStream(filename);
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
 		return data;

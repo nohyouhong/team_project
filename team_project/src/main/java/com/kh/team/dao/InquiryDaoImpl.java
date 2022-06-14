@@ -87,4 +87,10 @@ public class InquiryDaoImpl implements InquiryDao{
 		return allInquiryList;
 	}
 
+	@Override
+	public List<String> getInquiryImages(int a_bno) {
+		List<String> InquiryImages = sqlSession.selectList(NAMESPACE+"getInquiryImages", a_bno);
+		return InquiryImages;
+	}
+
 }

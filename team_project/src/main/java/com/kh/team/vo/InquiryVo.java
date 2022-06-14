@@ -12,11 +12,9 @@ public class InquiryVo {
 	private Date a_regdate;
 	private String[] files;
 	
-	
-	
 	public InquiryVo() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

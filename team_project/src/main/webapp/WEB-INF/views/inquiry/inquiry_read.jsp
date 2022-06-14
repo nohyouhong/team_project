@@ -7,6 +7,12 @@
 
 <link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
 
+<style>
+.inquiryImage{
+	width: 150px;
+	height: 150px;
+}
+</style>
 <script>
 $(document).ready(function(){
 	var frmPaging = $("#frmPaging");
@@ -50,6 +56,11 @@ $(document).ready(function(){
 				</form>
 				</div>
 			</div>
+		</div>
+		<div>
+			<c:forEach items="${ inquiryImages}" var="inquiryImage">
+				<img class="inquiryImage" src="/inquiry/displayImage?filename=${inquiryImage }">
+			</c:forEach>
 		</div>
 	</div>
 </div>

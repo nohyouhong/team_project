@@ -71,4 +71,10 @@ public class InquiryServiceImpl implements InquiryService{
 		return allInquiryList;
 	}
 
+	@Override
+	public List<String> getInquiryImages(int a_bno) {
+		List<String> InquiryImages = inquiryDao.getInquiryImages(a_bno);
+		return InquiryImages;
+	}
+
 }

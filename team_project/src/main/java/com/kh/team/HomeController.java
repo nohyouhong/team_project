@@ -21,7 +21,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		List<ColumnVo> mainColumnList = columnService.getMainColumnList();
-		System.out.println("mainColumnList: " + mainColumnList);
+//		System.out.println("mainColumnList: " + mainColumnList);
 		for (ColumnVo columnVo : mainColumnList) {
 			int c_bno = columnVo.getC_bno();
 			String c_content = columnVo.getC_content();

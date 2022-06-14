@@ -21,11 +21,29 @@
 	th{
 		background-color: aliceblue;
 	}
+	#pointdiv{
+		margin:auto;
+		display:flex;
+	}
+	.pointh5{
+		margin:60px auto 50px auto;
+	}
+	#betweenh5{
+		border-right:1px solid #DFD9D8;
+		height:150px;
+		margin:10px auto 10px auto;
+	}
 </style>
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="tabbable" id="tabs-667120">
+			<div class="col-md-6" id="pointdiv">
+				
+				<h5 class="pointh5">현재 포인트</h5>
+				<div id="betweenh5"></div>
+				<h5 class="pointh5">누적 포인트</h5>
+			</div>
 			<ul class="nav nav-tabs">
 				<li class="nav-item"><a class="nav-link active show"
 					href="#tab1" data-toggle="tab">포인트 획득 내역</a></li>

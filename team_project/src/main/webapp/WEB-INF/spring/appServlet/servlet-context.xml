@@ -40,6 +40,7 @@
 		<interceptor>
 			<mapping path="/member/**/*"/>
 			<mapping path="/culumn/**/*"/>
+			<mapping path="/inquiry/**/*"/>
 			<mapping path="/column/column_form"/>
 			<mapping path="/customer/inquiry_form"/>
 			<exclude-mapping path="/member/login_form"/>

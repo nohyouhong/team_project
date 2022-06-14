@@ -14,22 +14,12 @@
 					<!-- partial:partials/_sidebar.html -->
 					<nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
 						<div class="user-info">
-							<img src="/resources/main_mypage/images/face.jpg" alt="">
+							<img src="/resources/main_mypage/images/face.jpg" alt="프로필 이미지">
 							<p class="name">${loginVo.username}</p>
 							<p class="designation">Manager</p>
 
 						</div>
 						<ul class="nav">
-							<li class="nav-item active">
-								<a class="nav-link" href="#">
-									<span class="menu-title">멤버등급</span> <span class="menu-answer">1</span>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/message/receive_list?page=1"> 
-									<span class="menu-title">쪽지함</span>
-								</a>
-							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="index.html">
 									<span class="attendance"> 
@@ -41,13 +31,18 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#"> 
-									<span class="menu-title">내 정보 수정</span>
+								<a class="nav-link" href="/message/receive_list?page=1"> 
+									<span class="menu-title">쪽지함</span>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/member/point_list?userid=${loginVo.userid }"> 
 									<span class="menu-title">포인트 내역</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#"> 
+									<span class="menu-title">내 정보 수정</span>
 								</a>
 							</li>
 							<li class="nav-item">

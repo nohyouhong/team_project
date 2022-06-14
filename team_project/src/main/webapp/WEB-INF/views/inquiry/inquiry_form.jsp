@@ -68,7 +68,7 @@ $(function(){
 					<div class="col-md-3">
 						<div class="cus-info">
 							<a href="/customer/customer_center">
-							<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
+							<img id="cus_img2" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
 							</a>
 						</div>	
 					</div>

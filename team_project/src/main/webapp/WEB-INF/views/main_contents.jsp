@@ -129,10 +129,12 @@
 				<div class="col-lg-6">
 					<div class="top-recipe-item large-item">
 						<div>
-							<img src="/column/displayImage?column_image=C:/boardattach/${topColumnVo.c_picture}" class="main_column_big_img">	
+							<a href="/column/readColumn?c_bno=${topColumnVo.c_bno}">
+								<img src="/column/displayImage?column_image=C:/boardattach/${topColumnVo.c_picture}" class="main_column_big_img">	
+							</a>
 						</div>
 						<div class="top-recipe-text">
-							<a href="#">
+							<a href="/column/readColumn?c_bno=${topColumnVo.c_bno}">
 								<c:choose>
 									<c:when test="${fn:length(topColumnVo.c_title) gt 33}">
 										<h4 class="top_column_title">${fn:substring(topColumnVo.c_title, 0, 18)}...</h4>												
@@ -152,12 +154,14 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<div>
-										<img src="/column/displayImage?column_image=C:/boardattach/${subColumnVo.c_picture}" class="main_column_small_img">	
+										<a href="/column/readColumn?c_bno=${subColumnVo.c_bno}">
+											<img src="/column/displayImage?column_image=C:/boardattach/${subColumnVo.c_picture}" class="main_column_small_img">	
+										</a>
 									</div>
 								</div>
 								<div class="col-sm-8">
 									<div class="top-recipe-text">
-										<a href="#">
+										<a href="/column/readColumn?c_bno=${subColumnVo.c_bno}">
 											<c:choose>
 												<c:when test="${fn:length(subColumnVo.c_title) gt 18}">
 													<h4 class="sub_column_title">${fn:substring(subColumnVo.c_title, 0, 18)}...</h4>												

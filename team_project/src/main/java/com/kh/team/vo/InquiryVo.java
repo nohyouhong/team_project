@@ -1,15 +1,15 @@
 package com.kh.team.vo;
 
+import java.sql.Date;
 import java.util.Arrays;
 
-import javax.xml.crypto.Data;
 
 public class InquiryVo {
 	private int a_bno;
 	private String a_title;
 	private String a_content;
 	private String userid;
-	private Data a_regdate;
+	private Date a_regdate;
 	private String[] files;
 	
 	
@@ -20,8 +20,7 @@ public class InquiryVo {
 	}
 
 
-
-	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Data a_regdate) {
+	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Date a_regdate) {
 		super();
 		this.a_bno = a_bno;
 		this.a_title = a_title;
@@ -29,10 +28,9 @@ public class InquiryVo {
 		this.userid = userid;
 		this.a_regdate = a_regdate;
 	}
-	
 
 
-	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Data a_regdate, String[] files) {
+	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Date a_regdate, String[] files) {
 		super();
 		this.a_bno = a_bno;
 		this.a_title = a_title;
@@ -43,6 +41,7 @@ public class InquiryVo {
 	}
 
 
+	
 
 	public int getA_bno() {
 		return a_bno;
@@ -84,21 +83,19 @@ public class InquiryVo {
 	}
 
 
-	public Data getA_regdate() {
+	public Date getA_regdate() {
 		return a_regdate;
 	}
 
 
-	public void setA_regdate(Data a_regdate) {
+	public void setA_regdate(Date a_regdate) {
 		this.a_regdate = a_regdate;
 	}
 
-	
 
 	public String[] getFiles() {
 		return files;
 	}
-
 
 
 	public void setFiles(String[] files) {
@@ -106,13 +103,11 @@ public class InquiryVo {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "InquiryVo [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", userid=" + userid
 				+ ", a_regdate=" + a_regdate + ", files=" + Arrays.toString(files) + "]";
 	}
-
 
 
 	

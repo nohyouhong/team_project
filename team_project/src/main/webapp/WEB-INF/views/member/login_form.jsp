@@ -11,11 +11,18 @@
 	height: auto;
 	width:100%;
 }
+#login_top{
+	margin-top:100px;
+}
+#login_bottom {
+	margin-bottom:220px;
+}
 </style>
 	<div class="container-fluid window">
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
+				<div id="login_top"></div>
 				<form role="form" id="login_form" action="/member/login_run" method="post">
 					<div class="form-group">
 						<label for="userid" id="idlabel">아이디</label> 
@@ -35,6 +42,7 @@
 						<a class="btn  btn-outline-secondary" href="/member/join_form">회원가입</a>
 					</div>
 				</form>
+				<div id="login_bottom"></div>
 			</div>
 			<div class="col-md-4"></div>
 		</div>

@@ -22,8 +22,8 @@ public class InquiryServiceImpl implements InquiryService{
 		boolean result = inquiryDao.insertInquiry(inquiryVo);
 		String[] files = inquiryVo.getFiles();
 		if(files != null && files.length != 0) {
-			for(String filename : files) {
-				inquiryDao.insertAttach(filename, a_bno);
+			for(String a_picture : files) {
+				inquiryDao.insertAttach(a_picture, a_bno);
 			}
 		}
 		return result;

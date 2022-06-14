@@ -13,5 +13,5 @@ public interface InquiryDao {
 	public List<InquiryVo> InquiryList(String userid);
 	public int getCount(PagingDto pagingDto);
 	public int getNexta_bno();
-	public void insertAttach(String filename, int a_bno);
+	public void insertAttach(String a_picture, int a_bno);
 }

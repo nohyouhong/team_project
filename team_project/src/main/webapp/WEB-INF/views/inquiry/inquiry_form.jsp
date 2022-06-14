@@ -56,6 +56,15 @@ $(function(){
 			}
 		});
 	});
+	$("#frmCreate").submit(function(){
+		var divs = $("#fileDrop > .a_delete");
+		divs.each(function(i){
+			var filename = $(this).attr("data-filename");
+			var inputHtml = "<input type = 'hidden' name ='files' value='"+ filename +"'>";
+			$("#frmCreate").prepend(inputHtml);
+		});
+	});
+
 });
 </script>
 
@@ -73,7 +82,7 @@ $(function(){
 						</div>	
 					</div>
 					<div class="col-md-9">
-						<form role="form" method="post" action="/inquiry/inquiry_run">
+						<form role="form" method="post" action="/inquiry/inquiry_run" id="frmCreate">
 						<input type="hidden" value="${loginVo.userid}" name="userid">
 						<span id="notice_top">1:1 문의</span>
 						

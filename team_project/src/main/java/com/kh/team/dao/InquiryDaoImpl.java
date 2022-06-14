@@ -73,9 +73,9 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public void insertAttach(String filename, int a_bno) {
+	public void insertAttach(String a_picture, int a_bno) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("filename", filename);
+		map.put("a_picture", a_picture);
 		map.put("a_bno", a_bno);
 		sqlSession.insert(NAMESPACE+"insertAttach", map);
 		

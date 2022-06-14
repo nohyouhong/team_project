@@ -31,6 +31,7 @@ public class InquiryController {
 	public String inquiryRun(InquiryVo inquiryVo, RedirectAttributes rttr) {
 		System.out.println("inquiry_run, inquiryVo:" + inquiryVo);
 		inquiryService.insertInquiry(inquiryVo);
+		
 		return "redirect:/inquiry/inquiry_list";
 	}
 	

@@ -317,26 +317,33 @@ padding-bottom: 20px;
 	left: 150px;
 }
 .starRating {
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:50px;
-  justify-content:space-around;
-  width:180px;
-  text-align:center;
+	display:flex;
+	flex-direction: row-reverse;
+	font-size:50px;
+	justify-content:space-around;
+	width:180px;
+	text-align:center;
 }
 .starRating input {
-  display:none;
+	display:none;
 }
 .starRating label {
-  color:#BEB6B6;
-  cursor:pointer;
+	color:#BEB6B6;
+	cursor:pointer;
 }
 .starRating :checked ~ label {
-  color:#EAE909;
+	color:#EAE909;
 }
 .starRating label:hover,
 .starRating label:hover ~ label {
-  color:#EAE909;
+	color:#EAE909;
+}
+.reviewUserImageBtn{
+	cursor: pointer;
+}
+#modalReviewImage{
+	width: 470px;
+	height: 400px;
 }
 </style>
 <script>
@@ -594,7 +601,7 @@ $(function(){
 					var r_reviewpic = this.r_reviewpic;
 					
 					var imageFileHtml = 
-						'<img class="reviewUserImage" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
+						'<img class="reviewUserImage reviewUserImageBtn" data-filename="' + r_reviewpic + '" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
 					oneReviewDiv.find("div.reviewUserCookImageDiv").append(imageFileHtml);
 				}
 				if(this.m_picture != null) {
@@ -659,15 +666,24 @@ $(function(){
 		});
 	});
 	
-	$("#modal-531767").click(function(){
-		
+	$("#cookRecipeReDiv").on("click", ".reviewUserImageBtn", function(){
+		$("#modal-531767").trigger("click");
+		var filename = $(this).attr("data-filename");
+// 		console.log(filename);
+		var imageVal = "/recipeboard/displayImage?filename=" + filename;
+		$("#modalReviewImage").attr("src", imageVal);
 	});
 	
+	$("#cookRecipeReImageDiv").on("click", ".cookRecipeReImage", function() {
+		var filename = $(this).attr("data-filename");
+		var imageVal = "/recipeboard/displayImage?filename=" + filename;
+	});
 });
 </script>
 <!-- 모달리스트 -->
 <div class="row">
 	<div class="col-md-12">
+<!-- 	모달 -->
 		<a id="modal-269785" style="display: none;" href="#modal-container-269785" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 			
@@ -701,7 +717,8 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		<a id="modal-531767" href="#modal-container-531767" role="button"
+<!-- 		모달 -->
+		<a id="modal-531767" style="display: none;" href="#modal-container-531767" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 
 		<div class="modal fade" id="modal-container-531767" role="dialog"
@@ -709,22 +726,46 @@ $(function(){
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="myModalLabel">Modal title</h5>
+						<h5 class="modal-title" id="myModalLabel">사 진</h5>
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">...</div>
+					<div class="modal-body">
+						<img id="modalReviewImage" src="#">
+					</div>
 					<div class="modal-footer">
-
-						<button type="button" class="btn btn-primary">Save
-							changes</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
+							data-dismiss="modal">닫기</button>
 					</div>
 				</div>
 			</div>
 		</div>
+<!-- 		모달 -->
+		<a id="modal-533333" style="display: none;" href="#modal-container-531767" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+
+		<div class="modal fade" id="modal-container-531767" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">포토 리뷰 전체보기</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<img id="modalReviewImage" src="#">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		모달 -->
 	</div>
 </div>
 

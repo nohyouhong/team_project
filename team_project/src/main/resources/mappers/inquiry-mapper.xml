@@ -13,7 +13,7 @@
 	</insert>
 	<insert id="insertInquiry">
 		insert into tbl_ask_board(a_bno, a_title, a_content, userid)
-		values (#{a_bno}, #{a_title}, #{a_content}, #{userid})
+		values(#{a_bno}, #{a_title}, #{a_content}, #{userid})
 	</insert>
 	<select id="readInquiry" resultType="InquiryVo">
 		select * from tbl_ask_board
@@ -30,9 +30,9 @@
 		where a_bno = #{a_bno}
 	</delete>
 	<select id="listInquiry" resultType="InquiryVo">
-		select * from(select rownum rnum, a.* from
-             (select * from tbl_ask_board) a)
-		where rnum between #{startRow} and #{endRow}
+		select * from tbl_ask_board
+		where userid = #{userid}
+		order by a_bno desc
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_ask_board

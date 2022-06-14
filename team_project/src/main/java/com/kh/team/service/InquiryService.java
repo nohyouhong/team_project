@@ -10,6 +10,6 @@ public interface InquiryService {
 	public boolean updateInquiry(InquiryVo inquiryVo);
 	public boolean deleteInquiry(int a_bno);
 	public InquiryVo readInquiry(int a_bno);
-	public List<InquiryVo> InquiryList(PagingDto pagingDto);
+	public List<InquiryVo> InquiryList(String userid);
 	public int getCount(PagingDto pagingDto);
 }

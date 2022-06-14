@@ -13,6 +13,14 @@ public class InquiryVo {
 	private String[] files;
 	
 	
+	
+	public InquiryVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Data a_regdate) {
 		super();
 		this.a_bno = a_bno;

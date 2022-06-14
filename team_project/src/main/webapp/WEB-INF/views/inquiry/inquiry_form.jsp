@@ -73,7 +73,7 @@ $(function(){
 						</div>	
 					</div>
 					<div class="col-md-9">
-						<form role="form" method="post" action="/customer/notice_run">
+						<form role="form" method="post" action="/inquiry/inquiry_run">
 						<input type="hidden" value="${loginVo.userid}" name="userid">
 						<span id="notice_top">1:1 문의</span>
 						

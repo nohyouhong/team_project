@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.service.InquiryService;
 import com.kh.team.service.NoticeService;
 import com.kh.team.util.MyFileUploader;
-import com.kh.team.vo.InquiryVo;
 import com.kh.team.vo.NoticeVo;
 import com.kh.team.vo.PagingDto;
 

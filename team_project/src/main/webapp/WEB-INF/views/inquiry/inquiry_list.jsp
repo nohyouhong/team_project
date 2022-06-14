@@ -3,10 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
+<%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
 
 <script>
-
+$(document).ready(function(){
+	var frmpaging = $("#frmPaging");
+	$(".td_list").click(function(){
+		var a_bno = $(this).attr("data-a_bno");
+		frmpaging.find("input[name=a_bno]").val(a_bno);
+		frmpaging.attr("action", "/inquiry/inquiry_read");
+		frmpaging.attr("method", "get");
+		frmpaging.submit();
+	});
+});
 </script>
 <div class="row">
 	<div class="col-md-12">
@@ -20,29 +30,38 @@
 							<a id="btnWriteMessage" href="/inquiry/inquiry_form" class="btn btn-outline-success">1:1문의하기</a>
 						</div>
 					</div>
-					${inquiryList}
 					<table class="table inquiry_table">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>문의제목</th>
-							<c:if test="${loginVo.m_code == 101}">
 								<th>작성자</th>
-							</c:if>
 								<th>작성일</th>
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="inquiryVo" items="${inquiryList}" varStatus="inquiry_status">
-							<tr class="tr_list">
-								<td>${inquiry_status.count}</td>
-								<td class="td_list">${inquiryVo.a_title}</td>
-							<c:if test="${loginVo.m_code == 101}">
-								<td>${inquiryVo.userid}</td>
-							</c:if>
-								<td>${inquiryVo.a_regdate}</td>
-							</tr>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${loginVo.m_code ==101}">
+								<c:forEach var="inquiryVo" items="${allInquiryList}" varStatus="allInquiry_status">
+									<tr class="tr_list">
+										<td>${allInquiry_status.count}</td>
+										<td class="td_list" data-a_bno="${inquiryVo.a_bno}">${inquiryVo.a_title}</td>
+										<td>${inquiryVo.userid}</td>
+										<td>${inquiryVo.a_regdate}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="inquiryVo" items="${inquiryList}" varStatus="inquiry_status">
+									<tr class="tr_list">
+										<td>${inquiry_status.count}</td>
+										<td class="td_list" data-a_bno="${inquiryVo.a_bno}">${inquiryVo.a_title}</td>
+										<td>${inquiryVo.userid}</td>
+										<td>${inquiryVo.a_regdate}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 						</tbody>
 					</table>
 				</div>

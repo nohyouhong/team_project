@@ -34,6 +34,9 @@
 		where userid = #{userid}
 		order by a_bno desc
 	</select>
+	<select id="allListInquiry" resultType="InquiryVo">
+		select * from tbl_ask_board
+	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_ask_board
 	</select>

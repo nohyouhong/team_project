@@ -112,7 +112,7 @@
 					</div>
 					<div class="form-group message_read text-left">
 						 내용 
-						<textarea class="form-control" id="message" name="message"
+						<textarea class="form-control" id="message" name="message" rows="8"
 							 readonly >${messageVo.message}</textarea>
 					</div>
 				</form>

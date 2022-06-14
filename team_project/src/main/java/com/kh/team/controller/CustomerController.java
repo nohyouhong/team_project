@@ -1,7 +1,9 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,5 +95,14 @@ public class CustomerController {
 	public String deleteFile(String filename) {
 		boolean result = MyFileUploader.deleteFile(filename);
 		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception{
+		FileInputStream fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
 	}
 }

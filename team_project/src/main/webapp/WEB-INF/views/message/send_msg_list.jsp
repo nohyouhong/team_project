@@ -34,6 +34,10 @@ th {
 #modal-693650 {
 	text-align: left;
 }
+
+#msgsend {
+	float: right;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -84,8 +88,9 @@ $(document).ready(function(){
 </script>
 <div class="row">
 	<div class="col-md-12">
-		<a id="btnWriteMessage" class="btn btn-outline-danger">쪽지쓰기</a>
-		<hr>
+		<div id="msgsend">
+			<a id="btnWriteMessage" class="btn btn-outline-danger">쪽지쓰기</a>
+		</div>
 		<div class="modal fade" id="modal-container-693650" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<a id="modal-693650" href="#modal-container-693650" role="button"

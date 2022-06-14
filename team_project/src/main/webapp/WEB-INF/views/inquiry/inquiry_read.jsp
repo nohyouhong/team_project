@@ -58,8 +58,8 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div>
-			<c:forEach items="${ inquiryImages}" var="inquiryImage">
-				<img class="inquiryImage" src="/inquiry/displayImage?filename=${inquiryImage }">
+			<c:forEach items="${inquiryImages}" var="inquiryImage">
+				<img class="inquiryImage" src="/inquiry/displayImage?filename=${inquiryImage}">
 			</c:forEach>
 		</div>
 	</div>

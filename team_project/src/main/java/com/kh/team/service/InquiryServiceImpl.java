@@ -54,8 +54,8 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String userid) {
-		List<InquiryVo> inquiryList = inquiryDao.InquiryList(userid);
+	public List<InquiryVo> InquiryList(String userid, String mType) {
+		List<InquiryVo> inquiryList = inquiryDao.InquiryList(userid, mType);
 		return inquiryList;
 	}
 

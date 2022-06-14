@@ -10,7 +10,7 @@ public interface InquiryDao {
 	public boolean updateInquiry(InquiryVo inquiryVo);
 	public boolean deleteInquiry(int a_bno);
 	public InquiryVo readInquiry(int a_bno);
-	public List<InquiryVo> InquiryList(String userid);
+	public List<InquiryVo> InquiryList(String userid, String mType);
 	public List<InquiryVo> allInquiryList();
 	public int getCount(PagingDto pagingDto);
 	public int getNexta_bno();

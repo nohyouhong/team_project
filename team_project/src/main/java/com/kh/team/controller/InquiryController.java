@@ -40,7 +40,7 @@ public class InquiryController {
 	public String inquiryList(HttpSession session, InquiryVo inquiryVo, Model model) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
-		List<InquiryVo> inquiryList = inquiryService.InquiryList(userid);
+		List<InquiryVo> inquiryList = inquiryService.InquiryList(userid,inquiryService.TYPE_SENDER);
 		List<InquiryVo> allInquiryList = inquiryService.allInquiryList();
 		model.addAttribute("inquiryList", inquiryList);
 		model.addAttribute("allInquiryList", allInquiryList);

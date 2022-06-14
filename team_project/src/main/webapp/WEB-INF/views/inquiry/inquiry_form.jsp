@@ -83,7 +83,8 @@ $(function(){
 					</div>
 					<div class="col-md-9">
 						<form role="form" method="post" action="/inquiry/inquiry_run" id="frmCreate">
-						<input type="hidden" value="${loginVo.userid}" name="userid">
+						<input type="hidden" value="${loginVo.userid}" name="a_sender">
+						<input type="hidden" value="admin" name="a_receiver">
 						<span id="notice_top">1:1 문의</span>
 						
 						<hr>

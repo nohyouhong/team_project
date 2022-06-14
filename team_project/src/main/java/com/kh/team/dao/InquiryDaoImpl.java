@@ -52,11 +52,11 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String userid) {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("startRow", pagingDto.getStartRow());
-//		map.put("endRow", pagingDto.getEndRow());
-		List<InquiryVo> InquiryList = sqlSession.selectList(NAMESPACE+"listInquiry", userid);
+	public List<InquiryVo> InquiryList(String userid, String mType) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("mType", mType);
+		List<InquiryVo> InquiryList = sqlSession.selectList(NAMESPACE+"listInquiry", map);
 		return InquiryList;
 	}
 

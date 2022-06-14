@@ -12,25 +12,24 @@ public class RecipeReviewVo {
 	private Date r_regdate;
 	private int re_group;
 	private int re_level;
-	private int r_code;
-	private int r_desc;
+	private int r_rating;
 	
 	public RecipeReviewVo() {
 		super();
 	}
 
-	public RecipeReviewVo(int r_bno, String r_comment, String userid, String r_reviewpic, int re_group, int r_code) {
+	public RecipeReviewVo(int r_bno, String r_comment, String userid, String r_reviewpic, int re_group, int r_rating) {
 		super();
 		this.r_bno = r_bno;
 		this.r_comment = r_comment;
 		this.userid = userid;
 		this.r_reviewpic = r_reviewpic;
 		this.re_group = re_group;
-		this.r_code = r_code;
+		this.r_rating = r_rating;
 	}
 
 	public RecipeReviewVo(int r_rno, int r_bno, String r_comment, String userid, String r_reviewpic, String m_picture,
-			Date r_regdate, int re_group, int re_level, int r_code, int r_desc) {
+			Date r_regdate, int re_group, int re_level, int r_rating) {
 		super();
 		this.r_rno = r_rno;
 		this.r_bno = r_bno;
@@ -41,8 +40,7 @@ public class RecipeReviewVo {
 		this.r_regdate = r_regdate;
 		this.re_group = re_group;
 		this.re_level = re_level;
-		this.r_code = r_code;
-		this.r_desc = r_desc;
+		this.r_rating = r_rating;
 	}
 
 	public int getR_rno() {
@@ -109,22 +107,6 @@ public class RecipeReviewVo {
 		this.re_level = re_level;
 	}
 
-	public int getR_code() {
-		return r_code;
-	}
-
-	public void setR_code(int r_code) {
-		this.r_code = r_code;
-	}
-
-	public int getR_desc() {
-		return r_desc;
-	}
-
-	public void setR_desc(int r_desc) {
-		this.r_desc = r_desc;
-	}
-
 	public String getM_picture() {
 		return m_picture;
 	}
@@ -133,11 +115,18 @@ public class RecipeReviewVo {
 		this.m_picture = m_picture;
 	}
 
+	public int getR_rating() {
+		return r_rating;
+	}
+
+	public void setR_rating(int r_rating) {
+		this.r_rating = r_rating;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeReviewVo [r_rno=" + r_rno + ", r_bno=" + r_bno + ", r_comment=" + r_comment + ", userid=" + userid
 				+ ", r_reviewpic=" + r_reviewpic + ", m_picture=" + m_picture + ", r_regdate=" + r_regdate
-				+ ", re_group=" + re_group + ", re_level=" + re_level + ", r_code=" + r_code + ", r_desc=" + r_desc
-				+ "]";
+				+ ", re_group=" + re_group + ", re_level=" + re_level + ", r_rating=" + r_rating + "]";
 	}
 }

@@ -530,7 +530,7 @@ $(function(){
 	$("#starRatingFinish").click(function() {
 		$("#modal-269785").trigger("click");
 		var ratingVal = $('input:radio[name="rating"]:checked').val();
-		$("#cookReviewForm").find("input#f_code").val(ratingVal);
+		$("#cookReviewForm").find("input#r_rating").val(ratingVal);
 		
 		var form = $("#cookReviewForm");
 		var formData = new FormData(form[0]);
@@ -552,9 +552,9 @@ $(function(){
 			}
 		});
 		//비우기
-		$("#commentImage").attr("src", "/resources/main_mypage/images/userImagePlus.png");
-		$("#file").val("");
-		$("#r_comment").val("");
+		$("#reviewImage").attr("src", "/resources/main_mypage/images/cook.png");
+		$("#file3").val("");
+		$("#r_comment3").val("");
 	});
 	
 	//리뷰리스트
@@ -579,31 +579,96 @@ $(function(){
 				oneReviewDiv.show();
 				var UserInfoDiv = oneReviewDiv.find(".UserInfoDiv");
 				if(this.userid == "${loginVo.userid}") {
-					UserInfoDiv.append('<a class="commentDelete" href="#">삭제</a>');
-				} else {
-					UserInfoDiv.append('<a class="commentDeclare" href="#">신고</a>');
+					UserInfoDiv.append('<span class="smallHr">|</span>');
+					UserInfoDiv.append('<a class="reviewDelete" href="#">삭제</a>');
+				}  
+				if("${memberVo.userid}" == "${loginVo.userid}") {
+					UserInfoDiv.append('<span class="smallHr">|</span>');
+					UserInfoDiv.append('<a class="reviewReply" href="#">답글</a>');
 				}
-				if(this.r_userpic != null) {
-					var r_userpic = this.r_userpic;
-					var imageFile = "/recipeboard/displayImage/?filename=" + r_userpic;
-					oneCommentDiv.find("img").attr("src", imageFile);
+				if(this.r_reviewpic != null) {
+					var r_reviewpic = this.r_reviewpic;
+					var imageFile = "/recipeboard/displayImage/?filename=" + r_reviewpic;
+					oneReviewDiv.find("div.reviewUserCookImageDiv").find("img").attr("src", imageFile);
 				}
 				//답글 띄우기
 				if(this.re_level > 0) {
-					oneCommentDiv.css("margin-left", "120px");
+					oneReviewDiv.css("margin-left", "120px");
 				}
-				var spans = oneCommentDiv.find("span");
+				var spans = oneReviewDiv.find("span");
 				spans.eq(0).text(this.username);
 				spans.eq(1).text(this.r_regdate);
-				oneCommentDiv.find("div.userCommentVal").text(this.r_comment);
-				oneCommentDiv.find(".commentReply").attr("data-re_group", this.re_group);
-				oneCommentDiv.find(".commentDeclare").attr("data-r_cno", this.r_cno);
-				oneCommentDiv.find(".commentDelete").attr("data-r_cno", this.r_cno);
-				$("#cookCommentDiv").append(oneCommentDiv);
+				var yellowStarNum = this.r_rating;
+				var grayStarNum = 5 - yellowStarNum;
+				for(var i = 1; i <= yellowStarNum; i++) {
+					spans.eq(2).append('<i class="fas fa-star yellowStar"></i>');
+				}
+				for(var i = 1; i <= grayStarNum; i++) {
+					spans.eq(2).append('<i class="fas fa-star grayStar"></i>');
+				}
+				oneReviewDiv.find("div.userReviewVal").text(this.r_comment);
+				oneReviewDiv.find(".reviewReply").attr("data-re_group", this.re_group);
+				oneReviewDiv.find(".reviewDelete").attr("data-r_rno", this.r_rno);
+				$("#cookRecipeReDiv").append(oneReviewDiv);
 			});
 		});
 	}
 	
+	//답글 완료 버튼
+	$("#reviewButton2").click(function() {
+		
+		var form = $("#cookreviewForm2");
+		var formData = new FormData(form[0]);
+		console.log(formData);
+		var url = "/comment/replyRecipeReview";
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				if(rData == "true"){
+					console.log(rData);
+					getReviewList();
+				}
+			}
+		});
+		//비우기
+		form.hide();
+		if("${memberVo.m_picture}" != null) {
+			$("#reviewImage2").attr("src", "/recipeboard/displayImage/?filename=${memberVo.m_picture }");
+		} else{
+			$("#reviewImage2").attr("src", "/resources/main_mypage/images/userImagePlus.png");
+		}
+		$("#file4").val("");
+		$("#r_comment4").val("");
+	});
+	
+	//댓글답글버튼
+	$("#cookRecipeReDiv").on("click", ".reviewReply", function(e) {
+		e.preventDefault();
+		var re_group = $(this).attr("data-re_group");
+		var cookReviewForm2 = $("#cookReviewForm2");
+		cookReviewForm2.show();
+		$("#re_group").val(re_group);
+		$(this).parents("div.oneRecipeReview").after(cookReviewForm2);
+	});
+	
+	//댓글삭제버튼
+	$("#cookRecipeReDiv").on("click", ".reviewDelete", function(e) {
+		e.preventDefault();
+		var r_rno = $(this).attr("data-r_rno");
+		var url = "/comment/deleteRecipeReview/" + r_rno;
+		$.get(url, function(rData) {
+			console.log(rData);
+			if(rData == "true") {
+				getReviewList();
+			}
+		});
+	});
 });
 </script>
 <!-- 모달리스트 -->
@@ -834,30 +899,54 @@ $(function(){
 			<div id="cookRecipeReDiv">
 				<div class="row oneRecipeReview" style="display: none;">
 					<div class="reviewUserImageDiv">
-						<img class="reviewUserImage rounded-circle"
-							src="/resources/main_mypage/images/userImageM.png">
+						<c:choose>
+							<c:when test="${not empty loginVo.m_picture }">
+								<img class="reviewUserImage rounded-circle"
+									src="/recipeboard/displayImage/?filename=${loginVo.m_picture }">								
+							</c:when>
+							<c:otherwise>
+								<img class="reviewUserImage rounded-circle"
+									src="/resources/main_mypage/images/userImageM.png">
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="reviewUserInfo">
 						<div class="UserInfoDiv">
 							<span class="reviewUser">노유홍</span> 
 							<span class="reviewDate">2022-06-12</span>
-							<span class="reviewScore">
-								<i class="fas fa-star yellowStar"></i>
-								<i class="fas fa-star yellowStar"></i>
-								<i class="fas fa-star yellowStar"></i>
-								<i class="fas fa-star grayStar"></i>
-								<i class="fas fa-star grayStar"></i>
-							</span>
-							<span class="smallHr">|</span> 
+							<span class="reviewScore"></span>
 						</div>
-						<div class="userReviewVal">코멘트를 달아주세용 코멘트를 달아주세용</div>
+						<div class="userReviewVal">코멘트를 달아주세용</div>
 					</div>
 					<div class="reviewUserCookImageDiv">
 						<img class="reviewUserImage"
 							src="/resources/main_mypage/images/cookSample.jpg">
 					</div>
 				</div>
+				<!-- 				<이동용> -->
+				<form id="cookReviewForm2" style="display: none;">
+					<div class="cookCommentInputDiv2 row">
+						<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
+						<input type="hidden" id="re_group" name="re_group"> <input
+							type="hidden" name="userid" value="${loginVo.userid}">
+						<div class="col-md-1">
+							<img class="reviewImage" id="reviewImage2"
+								src="/resources/main_mypage/images/userImagePlus.png"> 
+							<input class="reviewUserImageFile" type="file" id="file4" name="file"
+								style="display: none;">
+						</div>
+						<div class="col-md-10">
+							<textarea rows="4" id="r_comment4" name="r_comment"
+								class="commentTextarea"></textarea>
+						</div>
+						<div class="col-md-1">
+							<button type="button" class="reviewButton" id="reviewButton2">등록</button>
+						</div>
+					</div>
+				</form>
 			</div>
+<!-- 				<이동용> -->
+				
 			<div class="showHideDiv">
 				<button class="showButton">더보기</button>
 				<button class="hideButton" style="display: none;">줄여보기</button>
@@ -865,7 +954,8 @@ $(function(){
 			<form id="cookReviewForm">
 				<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
 				<input type="hidden" name="userid" value="${loginVo.userid}">
-				<input type="hidden" id="f_code" name="f_code">
+				<input type="hidden" name="m_picture" value="${loginVo.m_picture}">
+				<input type="hidden" id="r_rating" name="r_rating">
 				<div class="cookReviewInputDiv row">
 					<div class="col-md-1">
 						<img class="reviewImage" id="reviewImage"

@@ -67,12 +67,10 @@
 <!-- 	리뷰 목록 -->
 	<select id="recipeReviewList" resultType="RecipeReviewVo">
 		select * from
-		(select r_rno, r_bno, r_comment, username, c.userid, r_regdate,
-			m_picture, re_group, re_level, r_desc, r_reviewpic from 
+		(select r_rno, r_bno, r_comment, username, r.userid, r_regdate,
+			m_picture, re_group, re_level, r_rating, r_reviewpic from 
 		tbl_recipe_review r join tbl_member m
 			on r.userid = m.userid
-		join tbl_recipe_review_code c
-			on r.r_code = c.r_code
 		where r_bno = #{r_bno}
 		order by re_group desc, re_level, r_rno)
 <!-- 		where rownum between 1 and 3 -->
@@ -94,9 +92,9 @@
 <!-- 	리뷰 등록 -->
 	<insert id="insertRecipeReview">
 		insert into tbl_recipe_review
-			(r_cno, r_bno, r_comment, userid, re_group, r_reviewpic, r_code)
+			(r_rno, r_bno, r_comment, userid, re_group, r_reviewpic, r_rating)
 		values
-			(seq_recipe_review_rno.nextval, #{r_bno}, #{r_comment}, #{userid}, seq_recipe_review_rno.nextval, #{r_reviewpic, jdbcType=VARCHAR}, #{r_code})
+			(seq_recipe_review_rno.nextval, #{r_bno}, #{r_comment}, #{userid}, seq_recipe_review_rno.nextval, #{r_reviewpic, jdbcType=VARCHAR}, #{r_rating})
 	</insert>
 	
 <!-- 	답글 등록 -->

@@ -45,15 +45,21 @@ public class ColumnServiceImpl implements ColumnService {
 	}
 	
 	@Override
-	public List<ColumnVo> getColumnTitlePic(int c_bno) {
-		List<ColumnVo> ColumnTitlePic = columnDao.getColumnTitlePic(c_bno);
+	public ColumnVo getColumnTitlePic(int c_bno) {
+		ColumnVo ColumnTitlePic = columnDao.getColumnTitlePic(c_bno);
 		return ColumnTitlePic;
 	}
 	
 	@Override
-	public List<ColumnVo> getMainColumnList() {
-		List<ColumnVo> mainColumnList = columnDao.getMainColumnList();
-		return mainColumnList;
+	public ColumnVo getTopColumn() {
+		ColumnVo topColumn = columnDao.getTopColumn();
+		return topColumn;
+	}
+	
+	@Override
+	public List<ColumnVo> getSubColumnList() {
+		List<ColumnVo> subColumnList = columnDao.getSubColumnList();
+		return subColumnList;
 	}
 
 	@Override

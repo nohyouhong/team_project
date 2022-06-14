@@ -18,10 +18,13 @@ public interface ColumnDao {
 	
 	// 칼럼 리스트
 	public List<ColumnVo> getColumnList();
-	public List<ColumnVo> getColumnTitlePic(int c_bno);
+	public ColumnVo getColumnTitlePic(int c_bno);
 	
-	// viewcnt 상위 4개 리스트
-	public List<ColumnVo> getMainColumnList();
+	// viewcnt 1위 column
+	public ColumnVo getTopColumn();
+	// viewcnt 상위 2~4위 리스트
+	public List<ColumnVo> getSubColumnList();
+	
 	
 	// 칼럼 수정
 	public boolean modifyColumn(ColumnVo columnVo);

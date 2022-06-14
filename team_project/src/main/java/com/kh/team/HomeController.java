@@ -20,21 +20,31 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<ColumnVo> mainColumnList = columnService.getMainColumnList();
-//		System.out.println("mainColumnList: " + mainColumnList);
-		for (ColumnVo columnVo : mainColumnList) {
-			int c_bno = columnVo.getC_bno();
-			String c_content = columnVo.getC_content();
-			String inval_tag_C_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-//			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
-			columnVo.setC_content(inval_tag_C_content);
-			List<ColumnVo> column_main_title_pics = columnService.getColumnTitlePic(c_bno);
-			for (ColumnVo column_pic_vo : column_main_title_pics) {
-				String column_main_title_pic = column_pic_vo.getC_picture();
-				columnVo.setC_picture(column_main_title_pic);
-			}
+				
+		// main_content에 1위 칼럼 목록
+		ColumnVo topColumnVo = columnService.getTopColumn();
+		String top_c_content = topColumnVo.getC_content().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+//		System.out.println("top_c_content: " + top_c_content);
+		topColumnVo.setC_content(top_c_content);
+		int top_c_bno = topColumnVo.getC_bno();
+		ColumnVo topColumnPic = columnService.getColumnTitlePic(top_c_bno);
+		topColumnVo.setC_picture(topColumnPic.getC_picture());
+//		System.out.println("topColumnVo: " + topColumnVo);
+		model.addAttribute("topColumnVo", topColumnVo);
+		
+		// main_content에 2~4위 칼럼 목록
+		List<ColumnVo> subColumnList = columnService.getSubColumnList();
+//		System.out.println("subColumnList: " + subColumnList);
+		for (ColumnVo subColumnVo : subColumnList) {
+//			System.out.println("subColumn: " + subColumn);
+			String sub_c_content = subColumnVo.getC_content().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+			subColumnVo.setC_content(sub_c_content);
+			int sub_c_bno = subColumnVo.getC_bno();
+			ColumnVo subColumnPic = columnService.getColumnTitlePic(sub_c_bno);
+			subColumnVo.setC_picture(subColumnPic.getC_picture());
 		}
-		model.addAttribute("mainColumnList", mainColumnList);
+//		System.out.println("subColumnList: " + subColumnList);
+		model.addAttribute("subColumnList", subColumnList);
 		return "main_contents";
 	}
 	

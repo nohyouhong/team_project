@@ -10,8 +10,10 @@ public interface ColumnService {
 	public ColumnVo readColumn(int c_bno);
 	
 	public List<ColumnVo> getColumnList();
-	public List<ColumnVo> getColumnTitlePic(int c_bno);
-	public List<ColumnVo> getMainColumnList();
+	public ColumnVo getColumnTitlePic(int c_bno);
+	
+	public ColumnVo getTopColumn();
+	public List<ColumnVo> getSubColumnList();
 	
 	public boolean modifyColumn(ColumnVo columnVo);
 	

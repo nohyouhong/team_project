@@ -1,9 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
-<%-- ${mainColumnList} --%>
 
+<style>
+.top-recipe {
+	margin-bottom: 50px;
+}
+.top-recipe-item {
+	margin-top: 80px;
+}
+.top_column_title {
+	font-family: jua;
+	font-size: 30px;
+}
+.top_column_content {
+	font-family: jua;
+	font-size: 18px;
+}
+.sub_column_title {
+	font-family: jua;
+	font-size: 25px;
+}
+.sub_column_content {
+	font-family: jua;
+	font-size: 15px;
+}
+</style>
 <body>
 
 	<div class="row">
@@ -105,91 +129,50 @@
 				<div class="col-lg-6">
 					<div class="top-recipe-item large-item">
 						<div>
-							<img src="/resources/main_column/custom_images/recipe-1.jpg" class="main_column_big_img">	
+							<img src="/column/displayImage?column_image=C:/boardattach/${topColumnVo.c_picture}" class="main_column_big_img">	
 						</div>
 						<div class="top-recipe-text">
 							<a href="#">
-								<h2>가나다라마바사아자차카타파하</h2>
+								<c:choose>
+									<c:when test="${fn:length(topColumnVo.c_title) gt 33}">
+										<h4 class="top_column_title">${fn:substring(topColumnVo.c_title, 0, 18)}...</h4>												
+									</c:when>
+									<c:otherwise>
+										<h4 class="top_column_title">${topColumnVo.c_title}</h4>												
+									</c:otherwise>
+								</c:choose>
+								<p class="top_column_content">${fn:substring(topColumnVo.c_content, 0, 180) }...</p>
 							</a>
-							<p>나라의 말이 중국과 달라
-								한자와 서로 통하지 아니하므로
-								이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
-								마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
-								내가 이를 위해 가엽게 여겨
-								새로 스물여덟 글자를 만드노니
-								사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6" style="align-content: center">
-					<div class="top-recipe-item">
-						<div class="row">
-							<div class="col-sm-4">
-								<div>
-									<img src="/resources/main_column/custom_images/recipe-2.jpg" class="main_column_small_img">	
+					<c:forEach items="${subColumnList}" var="subColumnVo">
+						<div class="top-recipe-item">
+							<div class="row">
+								<div class="col-sm-4">
+									<div>
+										<img src="/column/displayImage?column_image=C:/boardattach/${subColumnVo.c_picture}" class="main_column_small_img">	
+									</div>
 								</div>
-							</div>
-							<div class="col-sm-8">
-								<div class="top-recipe-text">
-									<a href="#">
-										<h4>가나다라마바사아자차카타파하</h4>
-									</a>
-									<p>나라의 말이 중국과 달라
-										한자와 서로 통하지 아니하므로
-										이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
-										마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
-										내가 이를 위해 가엽게 여겨
-										새로 스물여덟 글자를 만드노니
-										사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="top-recipe-item">
-						<div class="row">
-							<div class="col-sm-4">
-								<div>
-									<img src="/resources/main_column/custom_images/recipe-3.jpg" class="main_column_small_img">	
-								</div>
-							</div>
-							<div class="col-sm-8">
-								<div class="top-recipe-text">
-									<a href="#">
-										<h4>가나다라마바사아자차카타파하</h4>
-									</a>
-									<p>나라의 말이 중국과 달라
-										한자와 서로 통하지 아니하므로
-										이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
-										마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
-										내가 이를 위해 가엽게 여겨
-										새로 스물여덟 글자를 만드노니
-										사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
+								<div class="col-sm-8">
+									<div class="top-recipe-text">
+										<a href="#">
+											<c:choose>
+												<c:when test="${fn:length(subColumnVo.c_title) gt 18}">
+													<h4 class="sub_column_title">${fn:substring(subColumnVo.c_title, 0, 18)}...</h4>												
+												</c:when>
+												<c:otherwise>
+													<h4 class="sub_column_title">${subColumnVo.c_title}</h4>												
+												</c:otherwise>
+											</c:choose>
+											<p class="sub_column_content">${fn:substring(subColumnVo.c_content, 0, 100)}...</p>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="top-recipe-item">
-						<div class="row">
-							<div class="col-sm-4">
-								<div>
-									<img src="/resources/main_column/custom_images/recipe-4.jpg" class="main_column_small_img">	
-								</div>
-							</div>
-							<div class="col-sm-8">
-								<div class="top-recipe-text">
-									<a href="#">
-										<h4>가나다라마바사아자차카타파하</h4>
-									<p>나라의 말이 중국과 달라
-										한자와 서로 통하지 아니하므로
-										이런 까닭으로 어리석은 백성들이 이르고자 할 바가 있어도
-										마침내 제 뜻을 능히 펴지 못하는 사람이 많노라.
-										내가 이를 위해 가엽게 여겨
-										새로 스물여덟 글자를 만드노니
-										사람마다 하여금 쉽게 익혀 날마다 쓰는 것이 편안하게 하고자 할 따름이니라.</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 			<div>

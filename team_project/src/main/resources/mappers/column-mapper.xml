@@ -41,17 +41,25 @@
 	
 	<select id="getColumnTitlePic" resultType="ColumnVo">
 		select a.* from
-		(select * from tbl_column_pic
-		where c_bno=#{c_bno}
-		order by c_pno desc) a
+			(select * from tbl_column_pic
+			where c_bno=#{c_bno}
+			order by c_pno desc) a
 		where rownum = 1
 	</select>
 	
-	<select id="getMainColumnList" resultType="ColumnVo">
-		select * from
-			(select * from tbl_column_board 
+	<select id="getTopColumn" resultType="ColumnVo">
+		select * from 
+			(select * from tbl_column_board
 			order by c_viewcnt desc)
-		where rownum between 1 and 4
+		where rownum = 1
+	</select>
+	
+	<select id="getSubColumnList" resultType="ColumnVo">
+		select * from 
+			(select rownum rnum, a.* from
+			        (select * from tbl_column_board 
+			        order by c_viewcnt desc)a)
+		where rnum between 2 and 4
 	</select>
 	
 	<!-- column modify -->

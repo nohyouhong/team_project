@@ -84,14 +84,13 @@ public class ColumnController {
 			int c_bno = columnVo.getC_bno();
 			String c_content = columnVo.getC_content();
 			String tagC_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-			String cContent = tagC_content.replaceAll("/一-龥/", "");
-//			System.out.println("ColumnController, column_list, tagc_content: " + tagC_content);
-			columnVo.setC_content(cContent);
-			List<ColumnVo> columnTitlePics = columnService.getColumnTitlePic(c_bno);
-			for (ColumnVo columnPicVo : columnTitlePics) {
-				String columnTitlePic = columnPicVo.getC_picture();
-				columnVo.setC_picture(columnTitlePic);
-			}
+			columnVo.setC_content(tagC_content);
+			ColumnVo columnTitlePics = columnService.getColumnTitlePic(c_bno);
+			String columnTitlePic = columnTitlePics.getC_picture();
+			columnVo.setC_picture(columnTitlePic);
+			System.out.println("ColumnController, column_list, columnTitlePic: " + columnTitlePic);
+//			for (ColumnVo columnPicVo : columnTitlePics) {
+//			}
 		}
 		model.addAttribute("columnList", columnList);
 		return "column/column_list";

@@ -31,11 +31,6 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#"> 
-									<span class="menu-title">안 정해짐</span>
-								</a>
-							</li>
-							<li class="nav-item">
 								<a class="nav-link" href="index.html">
 									<span class="attendance"> 
 										<span>2</span><br> <span>이번달 출석</span>
@@ -47,22 +42,12 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#"> 
-									<span class="menu-title">내 정보</span>
+									<span class="menu-title">내 정보 수정</span>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/member/point_list?userid=${loginVo.userid }"> 
 									<span class="menu-title">포인트 내역</span>
-								</a>
-							</li>
-							<li class="nav-item hidden">
-								<a class="nav-link" href="#">
-									<span class="menu-title">hidden</span>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#"> 
-									<span class="menu-title">1:1문의하기</span>
 								</a>
 							</li>
 							<li class="nav-item">

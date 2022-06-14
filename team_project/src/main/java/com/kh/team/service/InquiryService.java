@@ -11,5 +11,6 @@ public interface InquiryService {
 	public boolean deleteInquiry(int a_bno);
 	public InquiryVo readInquiry(int a_bno);
 	public List<InquiryVo> InquiryList(String userid);
+	public List<InquiryVo> allInquiryList();
 	public int getCount(PagingDto pagingDto);
 }

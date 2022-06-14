@@ -81,4 +81,10 @@ public class InquiryDaoImpl implements InquiryDao{
 		
 	}
 
+	@Override
+	public List<InquiryVo> allInquiryList() {
+		List<InquiryVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListInquiry");
+		return allInquiryList;
+	}
+
 }

@@ -65,4 +65,10 @@ public class InquiryServiceImpl implements InquiryService{
 		return count;
 	}
 
+	@Override
+	public List<InquiryVo> allInquiryList() {
+		List<InquiryVo> allInquiryList = inquiryDao.allInquiryList();
+		return allInquiryList;
+	}
+
 }

@@ -32,7 +32,7 @@ $(function(){
 					cloneDiv.attr("data-filename", rData);
 					cloneDiv.find("a.a_delete").attr("data-filename", rData);
 					if(isImage(filename)){
-						cloneDiv.find("img").attr("src","/member/displayImage?filename=" + rData);
+						cloneDiv.find("img").attr("src","/customer/displayImage?filename=" + rData);
 					}
 					$("#uploadedList").append(cloneDiv).show();
 					cloneDiv.appendTo($("#fileDrop")).show();
@@ -57,7 +57,7 @@ $(function(){
 		});
 	});
 	$("#frmCreate").submit(function(){
-		var divs = $("#fileDrop > .a_delete");
+		var divs = $("#fileDrop .a_delete");
 		divs.each(function(i){
 			var filename = $(this).attr("data-filename");
 			var inputHtml = "<input type = 'hidden' name ='files' value='"+ filename +"'>";

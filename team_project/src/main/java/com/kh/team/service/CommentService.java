@@ -13,9 +13,9 @@ public interface CommentService {
 	public boolean deleteRecipeComment(int r_cno);
 
 	public List<RecipeReviewVo> recipeReviewList(int r_bno);
+	public List<RecipeReviewVo> recipeReviewImageList(int r_bno);
 	public int recipeReviewListNum(int r_bno);
 	public int recipeReviewandImageListNum(int r_bno);
 	public boolean insertRecipeReview(RecipeReviewVo recipeReviewVo);
-	public boolean replyRecipeReview(RecipeReviewVo recipeReviewVo);
 	public boolean deleteRecipeReview(int r_rno);
 }

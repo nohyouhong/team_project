@@ -55,6 +55,11 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
+	public List<RecipeReviewVo> recipeReviewImageList(int r_bno) {
+		return commentDao.recipeReviewImageList(r_bno);
+	}
+	
+	@Override
 	public int recipeReviewListNum(int r_bno) {
 		return commentDao.recipeReviewListNum(r_bno);
 	}
@@ -70,19 +75,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 	
 	@Override
-	@Transactional
-	public boolean replyRecipeReview(RecipeReviewVo recipeReviewVo) {
-		int r_rno = commentDao.getNextrno();
-		recipeReviewVo.setR_rno(r_rno);
-		commentDao.replyRecipeReview(recipeReviewVo);
-		boolean result = commentDao.updateReLevel(r_rno);
-		return result;
-	}
-
-	@Override
 	public boolean deleteRecipeReview(int r_rno) {
 		return commentDao.deleteRecipeReview(r_rno);
 	}
 	
-
 }

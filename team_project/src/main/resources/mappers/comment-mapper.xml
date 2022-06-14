@@ -68,11 +68,24 @@
 	<select id="recipeReviewList" resultType="RecipeReviewVo">
 		select * from
 		(select r_rno, r_bno, r_comment, username, r.userid, r_regdate,
-			m_picture, re_group, re_level, r_rating, r_reviewpic from 
+			m_picture, r_rating, r_reviewpic from 
 		tbl_recipe_review r join tbl_member m
 			on r.userid = m.userid
 		where r_bno = #{r_bno}
-		order by re_group desc, re_level, r_rno)
+		order by r_rno desc)
+<!-- 		where rownum between 1 and 3 -->
+	</select>
+	
+<!-- 	그림만 리뷰 목록 -->
+	<select id="recipeReviewImageList" resultType="RecipeReviewVo">
+		select * from
+		(select r_rno, r_bno, r_comment, username, r.userid, r_regdate,
+			m_picture, r_rating, r_reviewpic from 
+		tbl_recipe_review r join tbl_member m
+			on r.userid = m.userid
+		where r_bno = #{r_bno}
+		and r.r_reviewpic is not null
+		order by r_rno desc)
 <!-- 		where rownum between 1 and 3 -->
 	</select>
 	
@@ -92,25 +105,10 @@
 <!-- 	리뷰 등록 -->
 	<insert id="insertRecipeReview">
 		insert into tbl_recipe_review
-			(r_rno, r_bno, r_comment, userid, re_group, r_reviewpic, r_rating)
+			(r_rno, r_bno, r_comment, userid, r_reviewpic, r_rating)
 		values
-			(seq_recipe_review_rno.nextval, #{r_bno}, #{r_comment}, #{userid}, seq_recipe_review_rno.nextval, #{r_reviewpic, jdbcType=VARCHAR}, #{r_rating})
+			(seq_recipe_review_rno.nextval, #{r_bno}, #{r_comment}, #{userid}, #{r_reviewpic, jdbcType=VARCHAR}, #{r_rating})
 	</insert>
-	
-<!-- 	답글 등록 -->
-	<insert id="replyRecipeReview">
-		insert into tbl_recipe_review
-			(r_rno, r_bno, r_comment, userid, re_group)
-		values
-			(#{r_rno}, #{r_bno}, #{r_comment}, #{userid}, #{re_group})
-	</insert>
-	
-<!-- 	레벨 업데이트 -->
-	<update id="reviewUpdateReLevel">
-		update tbl_recipe_review 
-		set re_level = 1
-		where r_rno = #{r_rno}		
-	</update>
 
 <!-- 	댓글 삭제 -->
 	<delete id="deleteRecipeReview">

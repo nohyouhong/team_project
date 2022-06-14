@@ -91,6 +91,12 @@ public class CommentController {
 		return recipeReviewList;
 	}
 	
+	@RequestMapping( value="/recipeReviewImageList/{r_bno}", method = RequestMethod.GET)
+	public List<RecipeReviewVo> recipeReviewImageList(@PathVariable("r_bno")int r_bno) {
+		List<RecipeReviewVo> recipeReviewImageList = commentService.recipeReviewImageList(r_bno);
+		return recipeReviewImageList;
+	}
+	
 	@RequestMapping( value="/recipeReviewListNum/{r_bno}", method = RequestMethod.GET)
 	public int recipeReviewListNum(@PathVariable("r_bno")int r_bno) {
 		int recipeReviewListNum = commentService.recipeReviewListNum(r_bno);
@@ -100,6 +106,7 @@ public class CommentController {
 	@RequestMapping( value="/recipeReviewandImageListNum/{r_bno}", method = RequestMethod.GET)
 	public int recipeReviewandImageListNum(@PathVariable("r_bno")int r_bno) {
 		int recipeReviewandImageListNum = commentService.recipeReviewandImageListNum(r_bno);
+		System.out.println("recipeReviewandImageListNum" + recipeReviewandImageListNum);
 		return recipeReviewandImageListNum;
 	}
 	
@@ -119,24 +126,6 @@ public class CommentController {
 		}
 		System.out.println(recipeReviewVo);
 		boolean result = commentService.insertRecipeReview(recipeReviewVo);
-		return String.valueOf(result);
-	}
-	
-	@RequestMapping( value="/replyRecipeReview", method = RequestMethod.POST)
-	public String replyRecipeReview(RecipeReviewVo recipeReviewVo, MultipartFile file) {
-		try {
-			String originalFilename = file.getOriginalFilename();
-			System.out.println(originalFilename);
-			if(originalFilename != null && !originalFilename.equals("")) {
-				String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach",
-						originalFilename, file.getBytes());
-				recipeReviewVo.setM_picture(saveFilename);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(recipeReviewVo);
-		boolean result = commentService.replyRecipeReview(recipeReviewVo);
 		return String.valueOf(result);
 	}
 	

@@ -17,7 +17,7 @@ public class RecipeReviewVo {
 	public RecipeReviewVo() {
 		super();
 	}
-
+	
 	public RecipeReviewVo(int r_bno, String r_comment, String userid, String r_reviewpic, int re_group, int r_rating) {
 		super();
 		this.r_bno = r_bno;
@@ -29,7 +29,7 @@ public class RecipeReviewVo {
 	}
 
 	public RecipeReviewVo(int r_rno, int r_bno, String r_comment, String userid, String r_reviewpic, String m_picture,
-			Date r_regdate, int re_group, int re_level, int r_rating) {
+			 Date r_regdate, int re_group, int re_level, int r_rating) {
 		super();
 		this.r_rno = r_rno;
 		this.r_bno = r_bno;

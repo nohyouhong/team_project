@@ -83,6 +83,12 @@ public class CommentDaoImpl implements CommentDao{
 		List<RecipeReviewVo> recipeReviewList = sqlSession.selectList(NAMESPACE + "recipeReviewList", r_bno);
 		return recipeReviewList;
 	}
+	
+	@Override
+	public List<RecipeReviewVo> recipeReviewImageList(int r_bno) {
+		List<RecipeReviewVo> recipeReviewImageList = sqlSession.selectList(NAMESPACE + "recipeReviewImageList", r_bno);
+		return recipeReviewImageList;
+	}
 
 	@Override
 	public int recipeReviewListNum(int r_bno) {
@@ -99,15 +105,6 @@ public class CommentDaoImpl implements CommentDao{
 	@Override
 	public boolean insertRecipeReview(RecipeReviewVo recipeReviewVo) {
 		int count = sqlSession.insert(NAMESPACE + "insertRecipeReview", recipeReviewVo);
-		if(count > 0) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean replyRecipeReview(RecipeReviewVo recipeReviewVo) {
-		int count = sqlSession.insert(NAMESPACE + "replyRecipeReview", recipeReviewVo);
 		if(count > 0) {
 			return true;
 		}

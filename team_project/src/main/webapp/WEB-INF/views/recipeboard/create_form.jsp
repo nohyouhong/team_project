@@ -159,7 +159,6 @@ $(function() {
     	}
     });
 	
-	
 });
 </script>
 <div class="container-fluid">

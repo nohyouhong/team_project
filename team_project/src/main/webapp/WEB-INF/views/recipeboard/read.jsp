@@ -187,16 +187,20 @@
 	margin-left: 5px;
 }
 #cookRecipeReImageDiv{
-	text-align: center;
 	margin-top: 60px;
 	margin-bottom: 30px;
-	margin-left: 80px;
-	margin-right: 80px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
-.cookRecipeReImage, .imageListButton{
+.cookRecipeReImage{
 	width: 150px;
 	height: 150px;
 	margin-right: 5px;
+}
+.imageListButton{
+	width: 150px;
+	height: 150px;
+	margin-right: 20px;
 }
 .imageListButtonDiv{
 	float: right;
@@ -549,6 +553,7 @@ $(function(){
 				if(rData == "true"){
 					console.log(rData);
 					getReviewList();
+					getReviewImageList();
 				}
 			}
 		});
@@ -616,25 +621,28 @@ $(function(){
 				$("#cookRecipeReDiv").append(oneReviewDiv);
 			});
 		});
-		$.get(url4, function(rData) {
-			console.log("url4", rData);
-			var rDataIndex = rData.length;
-			if(rData.length > 6){
-				rDataIndex = 6;
-				$("#imageListButtonDiv").show();
-			}
-			for(var i = 0; i < rDataIndex; i++){
-				var reImage = $(".cookRecipeReImage").eq(0).clone();
-				reImage.show();
-				var reImageVal = rData[i].r_reviewpic;
-				var reImageHtml = "/recipeboard/displayImage?filename=" + reImageVal;
-				
-				reImage.attr("src", reImageHtml);
-				console.log("reImage",reImage);
-				$("#cookRecipeReImageDiv").append(reImage);
-			}
-			
-		});
+		//포토리뷰 사진
+		getReviewImageList();
+		function getReviewImageList() {
+			$.get(url4, function(rData) {
+				var rDataIndex = rData.length;
+				if(rData.length > 6){
+					rDataIndex = 6;
+					$("#imageListButtonDiv").show();
+				}
+				$(".cookRecipeReImage:gt(0)").remove();
+				for(var i = 0; i < rDataIndex; i++){
+					var reImage = $(".cookRecipeReImage").eq(0).clone();
+					reImage.show();
+					var reImageVal = rData[i].r_reviewpic;
+					var reImageHtml = "/recipeboard/displayImage?filename=" + reImageVal;
+					
+					reImage.attr("src", reImageHtml);
+					console.log("reImage",reImage);
+					$("#cookRecipeReImageDiv").append(reImage);
+				}
+			});
+		}
 	}
 	
 	//댓글삭제버튼
@@ -646,9 +654,15 @@ $(function(){
 			console.log(rData);
 			if(rData == "true") {
 				getReviewList();
+				getReviewImageList()
 			}
 		});
 	});
+	
+	$("#modal-531767").click(function(){
+		
+	});
+	
 });
 </script>
 <!-- 모달리스트 -->
@@ -683,6 +697,30 @@ $(function(){
 					</div>
 					<div class="modal-footer modalReview">
 						<button type="button" id="starRatingFinish" class="btn btn-primary">평점등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a id="modal-531767" href="#modal-container-531767" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+
+		<div class="modal fade" id="modal-container-531767" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">...</div>
+					<div class="modal-footer">
+
+						<button type="button" class="btn btn-primary">Save
+							changes</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
@@ -963,6 +1001,7 @@ $(function(){
 					</div>
 				</form>
 			</div>
+			
 <!-- 				<이동용> -->
 			<div class="showHideDiv">
 				<button class="showButton">더보기</button>

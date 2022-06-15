@@ -406,10 +406,9 @@ $(function(){
 				oneCommentDiv.show();
 				var UserInfoDiv = oneCommentDiv.find(".UserInfoDiv");
 				if(this.userid == "${loginVo.userid}") {
+					UserInfoDiv.append('<span class="smallHr">|</span>');
 					UserInfoDiv.append('<a class="commentDelete" href="#">삭제</a>');
-				} else {
-					UserInfoDiv.append('<a class="commentDeclare" href="#">신고</a>');
-				}
+				} 
 				if(this.r_userpic != null) {
 					var r_userpic = this.r_userpic;
 					var imageFile = "/recipeboard/displayImage/?filename=" + r_userpic;
@@ -648,6 +647,7 @@ $(function(){
 		//포토리뷰 사진
 		getReviewImageList();
 		function getReviewImageList() {
+			var url4 = "/comment/recipeReviewImageList/" + r_bno;
 			$.get(url4, function(rData) {
 				var rDataIndex = rData.length;
 				if(rData.length > 6){
@@ -663,12 +663,8 @@ $(function(){
 					var reImageHtml = "/recipeboard/displayImage?filename=" + reImageVal;
 					
 					if(i == 5) {
-						$("#imageListButtonDiv").attr("data-filename", reImageVal);
-						$("#imageListButtonDiv").attr("data-rData", rData);
 						$("#imageListButtonDiv").attr("data-index", i);
 					}else{
-						reImage.attr("data-filename", reImageVal);
-						reImage.attr("data-rData", rData);
 						reImage.attr("data-index", i);
 					}
 					reImage.attr("src", reImageHtml);
@@ -761,7 +757,6 @@ $(function(){
 		}
 	}
 	
-	
 	//모달 리뷰사진 하나 보기
 	$("#cookRecipeReDiv").on("click", ".reviewUserImageBtn", function(){
 		$("#modal-531767").trigger("click");
@@ -771,18 +766,39 @@ $(function(){
 		$("#modalReviewImage").attr("src", imageVal);
 	});
 	
+	//모달 안에서 사진옮기기
+	function modalImageRun(i, rData){
+		var reImageVal = rData[i].r_reviewpic;
+		var reImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
+		$("#modalReviewImageList").attr("src", reImageSrc);
+	}
+	
 	//모달 포토리뷰
 	function modalReviewImageList(that) {
 		$("#modal-533333").trigger("click");
 		
-		var rData = that.attr("data-rData");
-		var i = that.attr("data-index");
-		var filename = that.attr("data-filename");
-		var imageVal = "/recipeboard/displayImage?filename=" + filename;
-		$("#modalReviewImageList").attr("src", imageVal);
-		console.log("rData", rData);
-		console.log("index", i);
-		console.log("rData[i]", rData[i]);
+		var r_bno = "${recipeBoardVo.r_bno}";
+		var url = "/comment/recipeReviewImageList/" + r_bno;
+		$.get(url, function(rData) {
+			var i = that.attr("data-index");
+			var reImageVal = rData[i].r_reviewpic;
+			var reImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
+			$("#modalReviewImageList").attr("src", reImageSrc);
+			
+			//왼쪽버튼
+			$("#modalLeftBtn").click(function() {
+// 				console.log("왼쪽버튼 클림됨");
+				var i = that.attr("data-index");
+				var reImageVal = rData[i].r_reviewpic;
+				var reImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
+				$("#modalReviewImageList").attr("src", reImageSrc);
+			});
+			//오른쪽버튼
+			$("#modalRightBtn").click(function() {
+// 				console.log("오른쪽버튼 클림됨");
+
+			});
+		});
 		
 	};
 	$("#imageListButtonDiv").on("click", ".imageListButton", function() {
@@ -872,9 +888,9 @@ $(function(){
 					</div>
 					<div class="modal-body mymodalBody">
 						<div class="modalImageDiv">
-							<i class="fas fa-chevron-circle-left fa-4x"></i>
+							<i id="modalLeftBtn" class="fas fa-chevron-circle-left fa-4x"></i>
 							<img id="modalReviewImageList" src="#">
-							<i class="fas fa-chevron-circle-right fa-4x"></i>
+							<i id="modalRightBtn" class="fas fa-chevron-circle-right fa-4x"></i>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -1133,7 +1149,6 @@ $(function(){
 							<span class="commentDate">날짜</span>
 							<span class="smallHr">|</span> 
 							<a class="commentReply" href="#">답글</a>
-							<span class="smallHr">|</span>
 						</div>
 						<div class="userCommentVal">코멘트</div>
 					</div>

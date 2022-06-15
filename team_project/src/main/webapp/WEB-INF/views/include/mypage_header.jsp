@@ -21,7 +21,7 @@
 						</div>
 						<ul class="nav">
 							<li class="nav-item">
-								<a class="nav-link" href="index.html">
+								<a class="nav-link menuEx" href="index.html">
 									<span class="attendance"> 
 										<span>2</span><br> <span>이번달 출석</span>
 									</span> 
@@ -31,22 +31,22 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/message/receive_list?page=1"> 
+								<a class="nav-link menuEx" href="/message/receive_list?page=1"> 
 									<span class="menu-title">쪽지함</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/member/point_list?userid=${loginVo.userid }"> 
+								<a class="nav-link menuEx" href="/member/point_list?userid=${loginVo.userid }"> 
 									<span class="menu-title">포인트 내역</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#"> 
+								<a class="nav-link menuEx" href="#"> 
 									<span class="menu-title">내 정보 수정</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/inquiry/inquiry_list"> 
+								<a class="nav-link menuEx" href="/inquiry/inquiry_list"> 
 									<span class="menu-title">1:1문의</span>
 								</a>
 							</li>

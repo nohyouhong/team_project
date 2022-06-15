@@ -6,13 +6,13 @@
 <link rel="stylesheet" href="/resources/login_join/login_join.css" type="text/css">
 <script>
 $(document).ready(function(){
-	$("#profileImg").on("click", ".commentImage", function() {
+	$("#profileImg").on("click", ".joinImage", function() {
 		var inputFile = $(this).parent().find("input");
 		inputFile.trigger("click");
 		var file = inputFile.val();
-		console.log(file);
+// 		console.log(file);
 	});
-	$("#joinImage").on("change", ".joinImageFile", function() {
+	$("#profileImg").on("change", ".joinImageFile", function() {
 		var inputImg = $(this).parent().find("img");
 		if (this.files && this.files[0]) {
 			var reader = new FileReader();
@@ -33,9 +33,8 @@ $(document).ready(function(){
 					<div class="form-group" id="profileImg">
 <!-- 						<label for="exampleInputFile" id="filename">프로필 사진</label>  -->
 						<img class="joinImage" id="joinImg" src="/resources/login_join/images/join.png">
-						<input class="joinImageFile" type="file" id="file3" name="file"
+						<input class="joinImageFile" type="file" id="file" name="file"
 							style="display: none;">
-						<input type="file" class="form-control-file" id="file" name="file"/><br>
 						<p class="help-block" id="filecomment">프로필 사진을 등록해주세요.</p>
 					</div>
 					

@@ -249,17 +249,18 @@ padding-bottom: 20px;
 	width: 70%;
 	margin-left: 15px;
 }
-.commentUser, .reviewUser{
+.commentUser, .reviewUser, #modalReviewUser{
 	font-size: 20px;
 	color: rgba(248, 56, 1);
 	margin-right: 12px;
 }
-.commentDate, .smallHr, .commentReply, .commentDeclare, .commentDelete, .reviewDate, .reviewReply, .reviewDelete{
+.commentDate, .smallHr, .commentReply, .commentDeclare, .commentDelete,
+	 .reviewDate, .reviewReply, .reviewDelete, #modalReviewDate{
 	font-size: 16px;
 	color: #BEB6B6;
 	margin-right: 10px;
 }
-.userCommentVal, .userReviewVal{
+.userCommentVal, .userReviewVal, #modalReviewComment{
 	margin-top: 12px;
 	font-size: 16px;
 }
@@ -358,6 +359,19 @@ padding-bottom: 20px;
 }
 .modalImageDiv{
 	padding-left: 37px;
+}
+#modalReviewPic{
+	width: 50px;
+	height: 50px;
+}
+.modalReviewInfo{
+	margin-left: 80px;
+	margin-right: 80px;
+	margin-top: 20px;
+}
+#modalMessageText{
+	width: 470px;
+	height: 260px;
 }
 </style>
 <script>
@@ -757,20 +771,46 @@ $(function(){
 		}
 	}
 	
-	//모달 리뷰사진 하나 보기
+	//모달 리뷰사진 정보 보기
 	$("#cookRecipeReDiv").on("click", ".reviewUserImageBtn", function(){
 		$("#modal-531767").trigger("click");
 		var filename = $(this).attr("data-filename");
 // 		console.log(filename);
 		var imageVal = "/recipeboard/displayImage?filename=" + filename;
 		$("#modalReviewImage").attr("src", imageVal);
+		
+		
 	});
 	
-	//모달 안에서 사진옮기기
+	//모달 포터리뷰안에서의 작업
 	function modalImageRun(i, rData){
 		var reImageVal = rData[i].r_reviewpic;
 		var reImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
+		var userImageVal = rData[i].m_picture;
+		var userImageSrc = "";
+		if(userImageVal != null && userImageVal != ""){
+			userImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
+		}else{
+			userImageSrc = "/resources/main_mypage/images/userImageM.png";
+		}
+		var userid = rData[i].userid;
+		var r_regdate = rData[i].r_regdate;
+		var r_comment = rData[i].r_comment;
+		var yellowStarNum = rData[i].r_rating;
+		var grayStarNum = 5 - yellowStarNum;
+		
 		$("#modalReviewImageList").attr("src", reImageSrc);
+		$("#modalReviewPic").attr("src", userImageSrc);
+		$("#modalReviewUser").text(userid);
+		$("#modalReviewDate").text(r_regdate);
+		$("#modalReviewScore").text("");
+		for(var i = 0; i < yellowStarNum; i++){
+			$("#modalReviewScore").append('<i class="fas fa-star yellowStar"></i>');
+		}
+		for(var i = 0; i < grayStarNum; i++){
+			$("#modalReviewScore").append('<i class="fas fa-star grayStar"></i>');
+		}
+		$("#modalReviewComment").text(r_comment);
 	}
 	
 	//모달 포토리뷰
@@ -781,22 +821,17 @@ $(function(){
 		var url = "/comment/recipeReviewImageList/" + r_bno;
 		$.get(url, function(rData) {
 			var i = that.attr("data-index");
-			var reImageVal = rData[i].r_reviewpic;
-			var reImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
-			$("#modalReviewImageList").attr("src", reImageSrc);
+			modalImageRun(i, rData);
 			
 			//왼쪽버튼
 			$("#modalLeftBtn").click(function() {
 // 				console.log("왼쪽버튼 클림됨");
-				var i = that.attr("data-index");
-				var reImageVal = rData[i].r_reviewpic;
-				var reImageSrc = "/recipeboard/displayImage?filename=" + reImageVal;
-				$("#modalReviewImageList").attr("src", reImageSrc);
+				modalImageRun(--i, rData);
 			});
 			//오른쪽버튼
 			$("#modalRightBtn").click(function() {
 // 				console.log("오른쪽버튼 클림됨");
-
+				modalImageRun(++i, rData);
 			});
 		});
 		
@@ -809,12 +844,22 @@ $(function(){
 		var that = $(this);
 		modalReviewImageList(that);
 	});
+	
+	//모달로 쪽지보내기
+	$("#sendMessageBtn").click(function(){
+		$("#modal-522222").trigger("click");
+		
+		$("#modalSendBtn").click(function() {
+			
+		});
+	});
+	
 });
 </script>
 <!-- 모달리스트 -->
 <div class="row">
 	<div class="col-md-12">
-<!-- 	모달 -->
+<!-- 	모달 별 평점매기기-->
 		<a id="modal-269785" style="display: none;" href="#modal-container-269785" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 			
@@ -848,7 +893,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
-<!-- 		모달 -->
+<!-- 		모달 사진만 -->
 		<a id="modal-531767" style="display: none;" href="#modal-container-531767" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 
@@ -872,7 +917,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
-<!-- 		모달 -->
+<!-- 		모달 리뷰이미지리스트 -->
 		<a id="modal-533333" style="display: none;" href="#modal-container-533333" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 
@@ -892,6 +937,15 @@ $(function(){
 							<img id="modalReviewImageList" src="#">
 							<i id="modalRightBtn" class="fas fa-chevron-circle-right fa-4x"></i>
 						</div>
+						<div id="modalReviewInfo" class="modalReviewInfo">
+							<div class="UserInfoDiv">
+								<span><img id="modalReviewPic" class="rounded-circle" src="#"></span>
+								<span id="modalReviewUser">노유홍</span> 
+								<span id="modalReviewDate">2022-06-12</span>
+								<span id="modalReviewScore"></span>
+							</div>
+							<div id="modalReviewComment">코멘트를 달아주세용</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -900,7 +954,34 @@ $(function(){
 				</div>
 			</div>
 		</div>
-<!-- 		모달 -->
+<!-- 		모달 쪽지보내기 -->
+		<a id="modal-522222" style="display: none;" href="#modal-container-522222" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+
+		<div class="modal fade" id="modal-container-522222" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">쪽지 보내기</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<textarea id="modalMessageText" 
+							placeholder="쪽지내용을 입력해주세요."></textarea>
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="modalSendBtn" class="btn btn-secondary"
+							>보내기</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -1062,7 +1143,7 @@ $(function(){
 				<div class="col-md-10 userInfos">
 					<div>
 						<span>${memberVo.username }</span>
-						<a class="btn btn-primary btn-outline-* btn-sm" style="margin-left: 10px;">쪽지 보내기</a>
+						<a id="sendMessageBtn" class="btn btn-outline-primary" style="margin-left: 10px;">쪽지 보내기</a>
 					</div>
 					<div class="userEmail">${memberVo.email }</div>
 				</div>

@@ -19,6 +19,8 @@ public interface ColumnDao {
 	// 칼럼 리스트
 	public List<ColumnVo> getColumnList();
 	public ColumnVo getColumnTitlePic(int c_bno);
+	public int getColumnC_rnum(int c_bno);
+	public int getColumnCount();
 	
 	// viewcnt 1위 column
 	public ColumnVo getTopColumn();

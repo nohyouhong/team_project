@@ -317,26 +317,47 @@ padding-bottom: 20px;
 	left: 150px;
 }
 .starRating {
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:50px;
-  justify-content:space-around;
-  width:180px;
-  text-align:center;
+	display:flex;
+	flex-direction: row-reverse;
+	font-size:50px;
+	justify-content:space-around;
+	width:180px;
+	text-align:center;
 }
 .starRating input {
-  display:none;
+	display:none;
 }
 .starRating label {
-  color:#BEB6B6;
-  cursor:pointer;
+	color:#BEB6B6;
+	cursor:pointer;
 }
 .starRating :checked ~ label {
-  color:#EAE909;
+	color:#EAE909;
 }
 .starRating label:hover,
 .starRating label:hover ~ label {
-  color:#EAE909;
+	color:#EAE909;
+}
+.reviewUserImageBtn{
+	cursor: pointer;
+}
+#modalReviewImage{
+	width: 470px;
+	height: 320px;
+}
+#modalReviewImageList{
+	width: 570px;
+	height: 400px;
+}
+.cookRecipeReImage{
+	cursor: pointer;
+}
+.mymodalBody{
+	width: 800px;
+	heght: 800px;
+}
+.modalImageDiv{
+	padding-left: 37px;
 }
 </style>
 <script>
@@ -407,6 +428,7 @@ $(function(){
 				oneCommentDiv.find(".commentDelete").attr("data-r_cno", this.r_cno);
 				$("#cookCommentDiv").append(oneCommentDiv);
 			});
+			runByCommentState();
 		});
 	}
 	
@@ -594,7 +616,7 @@ $(function(){
 					var r_reviewpic = this.r_reviewpic;
 					
 					var imageFileHtml = 
-						'<img class="reviewUserImage" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
+						'<img class="reviewUserImage reviewUserImageBtn" data-filename="' + r_reviewpic + '" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
 					oneReviewDiv.find("div.reviewUserCookImageDiv").append(imageFileHtml);
 				}
 				if(this.m_picture != null) {
@@ -620,6 +642,8 @@ $(function(){
 				oneReviewDiv.find(".reviewDelete").attr("data-r_rno", this.r_rno);
 				$("#cookRecipeReDiv").append(oneReviewDiv);
 			});
+			//하이드 실행
+			runByReviewState();
 		});
 		//포토리뷰 사진
 		getReviewImageList();
@@ -635,8 +659,18 @@ $(function(){
 					var reImage = $(".cookRecipeReImage").eq(0).clone();
 					reImage.show();
 					var reImageVal = rData[i].r_reviewpic;
+					var onerData = rData[i];
 					var reImageHtml = "/recipeboard/displayImage?filename=" + reImageVal;
 					
+					if(i == 5) {
+						$("#imageListButtonDiv").attr("data-filename", reImageVal);
+						$("#imageListButtonDiv").attr("data-rData", rData);
+						$("#imageListButtonDiv").attr("data-index", i);
+					}else{
+						reImage.attr("data-filename", reImageVal);
+						reImage.attr("data-rData", rData);
+						reImage.attr("data-index", i);
+					}
 					reImage.attr("src", reImageHtml);
 					console.log("reImage",reImage);
 					$("#cookRecipeReImageDiv").append(reImage);
@@ -658,16 +692,113 @@ $(function(){
 			}
 		});
 	});
-	
-	$("#modal-531767").click(function(){
-		
+	//요리후기 더보기 줄여보기
+	//(false가 줄여보기 상태)
+	var reviewState = false;
+// 	$("#reviewShowButton").click(function() {
+// 		//전환버튼
+// 		reviewState = !reviewState;
+// 		runByReviewState();
+// 	});
+	$("#reviewShowButton").click(function() {
+		//전환버튼
+		reviewState = !reviewState;
+		runByReviewState();
+		$(this).hide();
+		$("#reviewHideButton").show();
+	});
+	$("#reviewHideButton").click(function() {
+		//전환버튼
+		reviewState = !reviewState;
+		runByReviewState();
+		$(this).hide();
+		$("#reviewShowButton").show();
 	});
 	
+	//상태에따라 계속 하이드시키기 쇼우하기
+	function runByReviewState() {
+		var recipeReviews = $(".oneRecipeReview");
+		if(reviewState) {
+		//show시키기
+			for(var i = 1; i < recipeReviews.length; i++){
+				$(recipeReviews[i]).show();
+// 				console.log(i, "쇼우");
+			}
+		} else if(!reviewState){
+		//hide시키기
+			for(var i = 4; i < recipeReviews.length; i++){
+// 				console.log(i, "하이드");
+// 				console.log(recipeReviews[i], "recipeReviews[i]");
+				$(recipeReviews[i]).hide();
+			}
+		}
+	}
+	
+	//댓글
+	var commentState = false;
+	$("#commentShowButton").click(function() {
+		commentState = !commentState;
+		runByCommentState();
+		$(this).hide();
+		$("#commentHideButton").show();
+	});
+	$("#commentHideButton").click(function() {
+		commentState = !commentState;
+		runByCommentState();
+		$(this).hide();
+		$("#commentShowButton").show();
+	});
+	function runByCommentState() {
+		var recipeComments = $(".oneComment");
+		if(commentState) {
+			for(var i = 1; i < recipeComments.length; i++){
+				$(recipeComments[i]).show();
+			}
+		} else if(!commentState){
+			for(var i = 4; i < recipeComments.length; i++){
+				$(recipeComments[i]).hide();
+			}
+		}
+	}
+	
+	
+	//모달 리뷰사진 하나 보기
+	$("#cookRecipeReDiv").on("click", ".reviewUserImageBtn", function(){
+		$("#modal-531767").trigger("click");
+		var filename = $(this).attr("data-filename");
+// 		console.log(filename);
+		var imageVal = "/recipeboard/displayImage?filename=" + filename;
+		$("#modalReviewImage").attr("src", imageVal);
+	});
+	
+	//모달 포토리뷰
+	function modalReviewImageList(that) {
+		$("#modal-533333").trigger("click");
+		
+		var rData = that.attr("data-rData");
+		var i = that.attr("data-index");
+		var filename = that.attr("data-filename");
+		var imageVal = "/recipeboard/displayImage?filename=" + filename;
+		$("#modalReviewImageList").attr("src", imageVal);
+		console.log("rData", rData);
+		console.log("index", i);
+		console.log("rData[i]", rData[i]);
+		
+	};
+	$("#imageListButtonDiv").on("click", ".imageListButton", function() {
+		var that = $("#imageListButtonDiv");
+		modalReviewImageList(that);
+	});
+	$("#cookRecipeReImageDiv").on("click", ".cookRecipeReImage", function() {
+		var that = $(this);
+		modalReviewImageList(that);
+	});
 });
 </script>
 <!-- 모달리스트 -->
 <div class="row">
 	<div class="col-md-12">
+<!-- 	모달 -->
 		<a id="modal-269785" style="display: none;" href="#modal-container-269785" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 			
@@ -701,7 +832,8 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		<a id="modal-531767" href="#modal-container-531767" role="button"
+<!-- 		모달 -->
+		<a id="modal-531767" style="display: none;" href="#modal-container-531767" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 
 		<div class="modal fade" id="modal-container-531767" role="dialog"
@@ -709,22 +841,50 @@ $(function(){
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="myModalLabel">Modal title</h5>
+						<h5 class="modal-title" id="myModalLabel">사 진</h5>
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">...</div>
+					<div class="modal-body">
+						<img id="modalReviewImage" src="#">
+					</div>
 					<div class="modal-footer">
-
-						<button type="button" class="btn btn-primary">Save
-							changes</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
+							data-dismiss="modal">닫기</button>
 					</div>
 				</div>
 			</div>
 		</div>
+<!-- 		모달 -->
+		<a id="modal-533333" style="display: none;" href="#modal-container-533333" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+
+		<div class="modal fade" id="modal-container-533333" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg"" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">포토 리뷰 전체보기</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body mymodalBody">
+						<div class="modalImageDiv">
+							<i class="fas fa-chevron-circle-left fa-4x"></i>
+							<img id="modalReviewImageList" src="#">
+							<i class="fas fa-chevron-circle-right fa-4x"></i>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		모달 -->
 	</div>
 </div>
 
@@ -931,8 +1091,8 @@ $(function(){
 				</div>
 			</div>
 			<div class="showHideDiv">
-				<button class="showButton">더보기</button>
-				<button class="hideButton" style="display: none;">줄여보기</button>
+				<button id="reviewShowButton" class="showButton">더보기</button>
+				<button id="reviewHideButton" class="hideButton" style="display: none;">줄여보기</button>
 			</div>
 			<form id="cookReviewForm">
 				<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
@@ -1004,8 +1164,8 @@ $(function(){
 			
 <!-- 				<이동용> -->
 			<div class="showHideDiv">
-				<button class="showButton">더보기</button>
-				<button class="hideButton" style="display: none;">줄여보기</button>
+				<button id="commentShowButton" class="showButton">더보기</button>
+				<button id="commentHideButton" class="hideButton" style="display: none;">줄여보기</button>
 			</div>
 			<form id="cookCommentForm">
 				<div class="cookCommentInputDiv row">

@@ -14,6 +14,8 @@ public interface ColumnService {
 	
 	public ColumnVo getTopColumn();
 	public List<ColumnVo> getSubColumnList();
+	public int getColumnC_rnum(int c_bno);
+	public int getColumnCount();
 	
 	public boolean modifyColumn(ColumnVo columnVo);
 	

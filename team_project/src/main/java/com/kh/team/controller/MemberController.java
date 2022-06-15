@@ -42,9 +42,8 @@ public class MemberController {
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	@ResponseBody
 	public int checkId(String userid) {
-		System.out.println("memberController 작동됨");
+//		System.out.println("memberController 작동됨");
 		int cnt = memberService.checkId(userid);
-		System.out.println("cnt: " + cnt);
 		return cnt;
 	}
 	

@@ -9,7 +9,10 @@ $(document).ready(function(){
 	const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,10}$/);
 	const getPwCheck = RegExp(/^[a-zA-Z0-9]{6,14}$/);
     const getNameCheck = RegExp(/^[가-힣]+$/);
-    $('#idChk').html('<b style="font-size: 14px; color: yellowgreen">[아이디를 입력해주세요]');
+    $('#idChk').html('<b style=" color: yellowgreen">[아이디를 입력해주세요]');
+    $('#pwChk').html('<b style=" color: yellowgreen">[비밀번호를 입력해주세요]</b>');
+    $('#pwSameChk').html('<b style=" color: yellowgreen">[비밀번호를 한번 더 입력해주세요]');
+    var isPushed = "false";
     
     $('#userid').keyup(function() {
         if($(this).val() === '' ) {
@@ -31,6 +34,7 @@ $(document).ready(function(){
 					if(rData != 1){
 						$(this).css('background-color', 'aliceblue');
 			            $('#idChk').html('<b style=" color: #75daff">[사용가능한 아이디입니다.]</b>');
+			            isPushed="true";
 		            } else {
 		            	$(this).css('background-color', 'pink');
 			            $('#idChk').html('<b style=" color: red">[사용중인 아이디입니다.]</b>');
@@ -61,11 +65,7 @@ $(document).ready(function(){
 	    	$('#pwSameChk').html('<b style=" color: red">[비밀번호가 일치하지 않습니다]');
 	    }
     });
-    if(pwInput != '' && pwInputCheck != ''){
-    	$(this).css('background-color', 'pink');
-    	$('#pwSameChk').html('<b style=" color: red">[비밀번호를 한번 더 입력해주세요]');
-    }
-//     $("#join_form").submit();
+    
     
 	$("#profileImg").on("click", ".joinImage", function() {
 		var inputFile = $(this).parent().find("input");
@@ -83,7 +83,67 @@ $(document).ready(function(){
 			$("#filecomment").hide();
 		}
 	});
+	$("#email3").change(function(){
+		if($(this).val()==9){
+			$("#emailAdInput").removeAttr("disabled");
+		}else{
+			$("#emailAdInput").val($("#email3").val());
+			$("#emailAdInput").attr("disabled", true);
+		}
+    });
 	
+	$("#userid").keyup(function(){
+		console.log("아이디 변경중");
+		isPushed = "false";
+	});
+	
+	$("#emailAdInput").change(function(){
+		email();
+	});
+	$("#emailIdInput").blur(function(){
+		email();
+	});
+	
+	
+	function email(){
+		const email = $("#emailIdInput").val();
+		const middle = $("#emailB").text();
+		const address = $("#emailAdInput").val();
+		if(email != "" && address != "") {
+			$("#totalemail").val(email+middle+address);
+			console.log($("#totalemail").val());
+		}
+	};
+	
+	$("#joinBtn").click(function(){
+		if($("#userid").val() ==""){
+			alert("ID를 입력해주세요");
+			$("#userid").focus();
+		}else if($("#userpwInput").val() == ""){
+			alert("비밀번호를 입력해주세요");
+			$("#userpwInput").focus();
+		}else if($("#userpwInput").val() != $("#userpwInputCheck").val()){
+			alert("비밀번호 확인을 비밀번호와 일치하게 입력해주세요");
+			$("#userpwInputCheck").val('').focus();
+		}else if($("#usernameInput").val() == ""){
+			alert("이름을 입력해주세요");
+			$("#usernameInput").focus();
+		}else if($("#emailIdInput").val() == ""){
+			alert("이메일을 입력해주세요");
+			$("#emailIdInput").focus();
+		}else if($("#emailAdInput").val() == ""){
+			alert("이메일 주소를 선택하거나 직접입력을 통해 입력해주세요");
+		}else if($('input[name=gender]:checked').val() == ""){
+			alert("성별을 선택해주세요");
+		}else if(isPushed == "false"){
+			$("#userid").val("").focus;
+			alert("아이디를 확인하세요");
+		}else{
+			$("#join_form").submit();
+// 			console.log($("#totalemail").val());
+		}
+	});
+		
 });
 </script>
 <div class="container-fluid window">
@@ -94,14 +154,14 @@ $(document).ready(function(){
 						<img class="joinImage" id="writeImg" src="/resources/login_join/images/jointitle.png">
 					</form>
 				</div>
-				<form id="join_form" role="form" action="/member/" method="post">
+				<form id="join_form" role="form" action="/member/join_run" method="post">
 					<div class="form-group" id="profileImg">
 						<img class="joinImage" id="joinImg" src="/resources/login_join/images/join.png">
 						<input class="joinImageFile" type="file" id="file" name="file"
 							style="display: none;">
 					</div>
 					<p class="help-block" id="filecomment">프로필 사진을 등록해주세요.</p>
-					<div class="form-group">
+					<div class="join-form">
 						<label for="userid" id="useridlabel">아이디</label> 
 						<input type="text" class="form-control" name="userid" id="userid" placeholder="숫자와 영어로 4~10글자"/>
 						<div id="checkdiv">
@@ -110,36 +170,48 @@ $(document).ready(function(){
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="join-form">
 						<label for="userpw" id="userpw">비밀번호</label> 
 						<input type="password" class="form-control" name="userpw" id="userpwInput" placeholder="영어와 숫자를 포함해서 6~14글자"/>
 						<span id="pwChk"></span>
 					</div>
 
-					<div class="form-group">
+					<div class="join-form">
 						<label for="userpw2" id="userpw2">비밀번호 확인</label> 
 						<input type="password" class="form-control" id="userpwInputCheck" placeholder="위의 비밀번호와 일치하게 작성"/>
 						<span id="pwSameChk"></span>
 					</div>
 
-					<div class="form-group">
+					<div class="join-form">
 						<label for="username" id="username">이름</label> 
-						<input type="text" class="form-control" name="username" />
+						<input type="text" class="form-control" name="username" id="usernameInput"/>
 					</div>
-
-					<div class="form-group">
+					<div class="join-form">
 						<label for="email" id="email">이메일</label> 
-						<input type="email" class="form-control" name="email" />
+						<div id="emailDiv">
+							<input type="hidden" name="email" id="totalemail">
+							<input type="text" class="form-control" name="email1" id="emailIdInput" /><span id="emailB">@</span>
+							<input type="text" class="form-control" name="email2" id="emailAdInput" disabled/>
+							<select name="email3" id="email3">
+								<option value=''>메일 선택</option>
+								<option value='9'>직접 입력하기</option>
+								<option value="naver.com">naver.com</option>
+								<option value="daum.net">daum.net</option>
+								<option value="gmail.com">gmail.com</option>
+								<option value="kakao.com">kakao.com</option>
+							</select>
+						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="join-form">
 						<label for="gender" id="gender">성별</label>
 						<div id="genderRadio">
 						<input type="radio" class="gender" name="gender" value="M" /><p id="genderMan">남</p> 
 						<input type="radio" class="gender" name="gender" value="F" /><p id="genderWoman">여</p>
 						</div> 
 					</div>
-						<button type="button" class="btn btn-outline-danger">가입하기</button>
+						<button type="button" class="btn btn-outline-danger" id="joinBtn">가입하기</button>
+						<span id="joinBtnSpan"></span>
 				</form>
 			</div>
 			<div id="join_bottom"></div>

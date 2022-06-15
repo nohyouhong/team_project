@@ -30,6 +30,7 @@
 }
 .column_regdate {
 	font-size: 18px;
+	font-family: Chosunilbo_myungjo;
 }
 .column_content_div { 
  	margin-top: 80px; 
@@ -37,6 +38,10 @@
 .tbl_column_sub_list {
 	text-align: center;
 	margin: auto;
+}
+
+.column_title_div {
+	font-family: Chosunilbo_myungjo;
 }
 </style>
 
@@ -93,13 +98,12 @@ $(document).ready(function(){
 		}
 	});
 	
-// 	$(".column_content_div > p").removeProp();
-// 	.children().css("font-size", "20px")
-// 						    .css("font-family", "jua");
-
+	
 	$(".column_content_div").find("*").each(function() {
-		$(this).css("font-family", "jua")
-		.css("font-size", "20px");
+		var content = $(this).text();
+		console.log("content: ", content);
+		$(this).css("font-size", "20px")
+			   .css("font-family", "Chosunilbo_myungjo");
 	});
 });
 </script>
@@ -108,7 +112,7 @@ $(document).ready(function(){
 <div class="row div_column">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<h1>${columnVo.c_title}</h1>
+		<h1 class="column_title_div">${columnVo.c_title}</h1>
 		<p class="column_regdate">${columnVo.c_regdate}</p>
 		<div class="column_content_div">${columnVo.c_content}</div>
 		<c:if test="${loginVo.m_code == 101}">

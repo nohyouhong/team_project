@@ -22,7 +22,7 @@ public class PagingDto {
 		this.startRow = this.endRow - (this.perPage-1);
 		totalPage = (int)(Math.ceil((double)count/perPage));
 		startPage = ((page - 1)/PAGE_BLOCK)*PAGE_BLOCK + 1;
-		endPage = startPage + (PAGE_BLOCK -1);
+		endPage = startPage + (PAGE_BLOCK - 1);
 		if(endPage > totalPage) {
 			endPage = totalPage;
 		}

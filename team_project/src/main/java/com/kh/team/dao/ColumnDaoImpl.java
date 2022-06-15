@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.ColumnVo;
+import com.kh.team.vo.PagingDto;
 
 @Repository
 public class ColumnDaoImpl implements ColumnDao {
@@ -53,8 +54,8 @@ public class ColumnDaoImpl implements ColumnDao {
 
 
 	@Override
-	public List<ColumnVo> getColumnList() {
-		List<ColumnVo> columnList = sqlSession.selectList(NAMESPACE + "getColumnList");
+	public List<ColumnVo> getColumnList(PagingDto pagingDto) {
+		List<ColumnVo> columnList = sqlSession.selectList(NAMESPACE + "getColumnList", pagingDto);
 		return columnList;
 	}
 	
@@ -62,6 +63,12 @@ public class ColumnDaoImpl implements ColumnDao {
 	public ColumnVo getColumnTitlePic(int c_bno) {
 		ColumnVo columnTitlePic = sqlSession.selectOne(NAMESPACE + "getColumnTitlePic", c_bno);
 		return columnTitlePic;
+	}
+	
+	@Override
+	public List<ColumnVo> getRowColumnList() {
+		List<ColumnVo> rowColumnList = sqlSession.selectList(NAMESPACE + "getRowColumnList");
+		return rowColumnList;
 	}
 	
 	@Override

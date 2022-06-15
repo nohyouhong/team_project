@@ -10,6 +10,7 @@
 }
 .top-recipe-item {
 	margin-top: 80px;
+	border-radius: 10px;
 }
 .top_column_title {
 	font-family: jua;
@@ -180,7 +181,7 @@
 				</div>
 			</div>
 			<div>
-				<a href="/column/column_list" style="float: right;">more</a>
+				<a href="/column/column_list?page=1" style="float: right;">more</a>
 			</div>
 		</div>
 	</section>

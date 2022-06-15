@@ -35,11 +35,11 @@
 	
 	<!-- column list -->
 	<select id="getColumnList" resultType="ColumnVo">
-		select * from 
-    		(select rownum c_rnum, a.* from
-            	(select * from tbl_column_board 
-           		 order by c_bno)a)
-		order by c_rnum
+		select * from
+    		(select rownum rnum, a.* from
+        		(select * from tbl_column_board
+        		order by c_bno desc) a)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="getColumnTitlePic" resultType="ColumnVo">
@@ -49,12 +49,20 @@
 			order by c_pno desc) a
 		where rownum = 1
 	</select>
+	
+	<select id="getRowColumnList" resultType="ColumnVo">
+		select * from
+    		(select rownum c_rnum, a.* from
+        		(select * from tbl_column_board
+        		order by c_bno desc) a)
+        order by c_rnum
+	</select>
 
 	<select id="getColumnC_rnum" resultType="int">
 		select rnum from
 			(select rownum rnum, a.*from
 				(select * from tbl_column_board
-				order by c_bno)a)
+				order by c_bno desc)a)
 		where c_bno = #{c_bno}
 	</select>
 	

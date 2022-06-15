@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.ColumnDao;
 import com.kh.team.vo.ColumnVo;
+import com.kh.team.vo.PagingDto;
 
 @Service
 public class ColumnServiceImpl implements ColumnService {
@@ -39,8 +40,8 @@ public class ColumnServiceImpl implements ColumnService {
 	}
 
 	@Override
-	public List<ColumnVo> getColumnList() {
-		List<ColumnVo> columnList = columnDao.getColumnList();
+	public List<ColumnVo> getColumnList(PagingDto pagingDto) {
+		List<ColumnVo> columnList = columnDao.getColumnList(pagingDto);
 		return columnList;
 	}
 	
@@ -48,6 +49,12 @@ public class ColumnServiceImpl implements ColumnService {
 	public ColumnVo getColumnTitlePic(int c_bno) {
 		ColumnVo ColumnTitlePic = columnDao.getColumnTitlePic(c_bno);
 		return ColumnTitlePic;
+	}
+	
+	@Override
+	public List<ColumnVo> getRowColumnList() {
+		List<ColumnVo> rowColumnList = columnDao.getRowColumnList();
+		return rowColumnList;
 	}
 	
 	@Override

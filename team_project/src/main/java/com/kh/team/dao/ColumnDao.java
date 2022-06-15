@@ -3,6 +3,7 @@ package com.kh.team.dao;
 import java.util.List;
 
 import com.kh.team.vo.ColumnVo;
+import com.kh.team.vo.PagingDto;
 
 public interface ColumnDao {
 	public static final int COLUMNLIKE = 1;
@@ -17,8 +18,11 @@ public interface ColumnDao {
 	public ColumnVo readColumn(int c_bno);
 	
 	// 칼럼 리스트
-	public List<ColumnVo> getColumnList();
+	public List<ColumnVo> getColumnList(PagingDto pagingDto);
 	public ColumnVo getColumnTitlePic(int c_bno);
+	
+	// 컨텐츠 내의 칼럼 리스트
+	public List<ColumnVo> getRowColumnList();
 	public int getColumnC_rnum(int c_bno);
 	public int getColumnCount();
 	

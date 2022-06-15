@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.ColumnDao;
 import com.kh.team.vo.ColumnVo;
+import com.kh.team.vo.PagingDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*.xml")
@@ -57,6 +58,16 @@ public class ColumnDaoTest {
 		int c_bno = 32;
 		List<String> deletefiles = columnDao.getdeletefiles(c_bno);
 		System.out.println("deletefiles: " + deletefiles);
+	}
+	
+	@Test
+	public void getColumnListTest() {
+		int page = 1;
+		PagingDto pagingDto = new PagingDto();
+		pagingDto.setPage(page);
+		System.out.println("pagingDto: " + pagingDto);
+		List<ColumnVo> column_list = columnDao.getColumnList(pagingDto);
+		System.out.println("column_list: " + column_list);
 	}
 	
 	@Test
@@ -172,8 +183,10 @@ public class ColumnDaoTest {
 			String filename = "dummy_test_pic.png";
 			int c_bno = columnDao.getNextC_bno();
 			ColumnVo columnVo = new ColumnVo(c_bno, "Dummy Column title - " + i, Column_content, "admin");
-			columnDao.insertColumn(columnVo);
+			boolean result = columnDao.insertColumn(columnVo);
 			columnDao.insertColumnPicture(filename, c_bno);
+			System.out.println("result: " + result);
+			
 		}
 	}
 }

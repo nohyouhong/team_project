@@ -11,10 +11,6 @@
 	background-color: rgb(248, 56, 1);
 }
 
-.col-md-2 {
-	background-color: rgb(240, 240, 240);
-}
-
 .div_column {
 	margin-top: 50px;
 }
@@ -63,6 +59,10 @@
 	font-family: jua;
 }
 
+.page-item {
+	width: 40px;
+}
+
 </style>
 <div class="row div_column" id="div_column_list">
 	<div class="col-md-2"></div>
@@ -93,6 +93,29 @@
 				</div>
 			</c:forEach>
 		</div>
+	</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<nav>
+			<ul class="pagination justify-content-center">
+			<c:if test="${pagingDto.startPage != 1}">
+				<li class="page-item">
+					<a class="page-link" href="/column/column_list?page=${pagingDto.startPage -1}">이전</a>
+				</li>
+			</c:if>
+			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
+				<li class="page-item">
+					<a class="page-link" href="/column/column_list?page=${v}">${v}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+				<li class="page-item">
+					<a class="page-link" href="/column/column_list?page=${pagingDto.endPage + 1}">다음</a>
+				</li>
+			</c:if>
+			</ul>
+		</nav>
 	</div>
 	<div class="col-md-2"></div>
 </div>

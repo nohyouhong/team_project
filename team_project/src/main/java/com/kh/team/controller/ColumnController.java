@@ -20,6 +20,7 @@ import com.kh.team.dao.ColumnDao;
 import com.kh.team.service.ColumnService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.ColumnVo;
+import com.kh.team.vo.PagingDto;
 
 @Controller
 @RequestMapping("/column")
@@ -78,8 +79,12 @@ public class ColumnController {
 	}
 	
 	@RequestMapping(value="/column_list", method=RequestMethod.GET) 
-	public String column_list(Model model) {
-		List<ColumnVo> columnList = columnService.getColumnList();
+	public String column_list(PagingDto pagingDto, Model model) {
+		pagingDto.setCount(columnService.getColumnCount());
+		pagingDto.setPage(pagingDto.getPage());
+//		System.out.println("ColumnController, Column_list, page: " + page);
+//		System.out.println("ColumnController, Column_list, pagingDto: " + pagingDto);
+		List<ColumnVo> columnList = columnService.getColumnList(pagingDto);
 		for (ColumnVo columnVo : columnList) {
 			int c_bno = columnVo.getC_bno();
 			String c_content = columnVo.getC_content();
@@ -113,7 +118,7 @@ public class ColumnController {
 	@RequestMapping(value="/column_delete", method=RequestMethod.GET)
 	public String column_delete(int c_bno) {
 		System.out.println("c_bno: " + c_bno);
-		String file_root = "//192.168.0.110/boardattach";
+		String file_root = "//192.168.0.110/boardattach/";
 		List<String> deletefiles = columnService.getdeletefiles(c_bno);
 		for (String deletefile : deletefiles) {
 			System.out.println("deletefile: " + deletefile);
@@ -127,10 +132,10 @@ public class ColumnController {
 	}
 	
 	@RequestMapping(value="/readColumn", method=RequestMethod.GET) 
-	public String readColumn(int c_bno, Model model) {
+	public String readColumn(int c_bno, PagingDto pagingDto, Model model) {
 		ColumnVo columnVo = columnService.readColumn(c_bno);
-		List<ColumnVo> columnList = columnService.getColumnList();
-//		System.out.println("ColumnController, readColumn, columnList: " + columnList);
+		List<ColumnVo> columnList = columnService.getRowColumnList();
+		System.out.println("ColumnController, readColumn, columnList: " + columnList);
 		int c_rnum = columnService.getColumnC_rnum(c_bno);
 		int c_count = columnService.getColumnCount();
 		model.addAttribute("columnVo", columnVo);

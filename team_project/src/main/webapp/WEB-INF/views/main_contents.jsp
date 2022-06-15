@@ -86,7 +86,7 @@
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
-		                                <a href="#" class="post-title">Korean food</a>
+		                                <a href="#" class="post-title">한식 레시피</a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -99,7 +99,7 @@
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
-		                                <a href="#" class="post-title">Chinese food</a>
+		                                <a href="#" class="post-title">중식 레시피</a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -112,7 +112,7 @@
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
-		                                <a href="#" class="post-title">Western food</a>
+		                                <a href="#" class="post-title">양식 레시피</a>
 		                            </div>
 		                        </div>
 		                    </div>

@@ -61,7 +61,7 @@ public class ColumnDaoTest {
 	
 	@Test
 	public void insertTestColumn() {
-		for (int i = 31; i <= 500; i++) {
+		for (int i = 1; i <= 500; i++) {
 			String Column_content = "힘이되는 100가지 명언 모음\r\n" + 
 					" 세상사는데 도움이되는 명언들 힘이되는 명언 용기를 주는 명언 위로가되는 명언 좋은명언 글귀 모음 100가지  자주 보면 좋을듯 하여 선별 했습니다.\r\n" + 
 					"\r\n" + 

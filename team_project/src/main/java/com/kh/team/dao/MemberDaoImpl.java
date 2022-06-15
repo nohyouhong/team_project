@@ -66,4 +66,11 @@ public class MemberDaoImpl implements MemberDao{
 				NAMESPACE + "getMemberByIdAndPw", parameter);
 		return memberVo;
 	}
+
+	@Override
+	public boolean checkId(String userid) {
+		boolean result = sqlSession.selectOne(NAMESPACE, userid);
+		System.out.println("ckeckId result: " + result);
+		return result;
+	}
 }

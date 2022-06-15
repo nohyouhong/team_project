@@ -1,27 +1,41 @@
 @charset "UTF-8";
 
-/* #login_form{ */
-/* 	margin-top:80px; */
-/* 	margin-bottom:100px; */
-/* } */
-
 #pwlabel, #idlabel, #chklabel{
 	margin-top:10px;
 	font-family:'jua';
 	font-size:15px;
 }
-#userid, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename, #filecomment{
+#userid, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
 	font-family:'jua';
 	font-size:17px;
+}
+#filecomment{
+	font-family:'jua';
+	font-size:15px;
+	text-align:center;
+	margin-top:5px;
+}
+#checkdiv{
+	display:flex;
 }
 
 @font-face{
 	font-family: 'jua';
-	src: url("../fonts/icomoon/BMJUA_ttf.ttf");
+/* 	src: url("../fonts/icomoon/BMJUA_ttf.ttf"); */
 }
 
 #chklabel{
 	font-size:12px;
+}
+#id_used{
+	color:red;
+	font-size:8px;
+	display:none;
+}
+#id_ok{
+	color:#70c1fa;
+	font-size:8px;
+	display:none;
 }
 
 #login_form{
@@ -35,6 +49,15 @@
 	border-radius:5px;
 	box-shadow: 10px 5px 5px rgb(255,227,219);
 	padding:10px 5px 20px 5px;
+	width:650px;
+	margin:0 auto;
+}
+#writeImg{
+	height:80px;
+	margin-top:-100px;
+}
+#joinTitleForm{
+	margin: 0 68% 0 32%;
 }
 #subdiv{
 	text-align:center;
@@ -75,6 +98,5 @@
 	background: white;
 }
 #profileImg{
-display: flex;
-margin:auto;
+	text-align:center;
 }

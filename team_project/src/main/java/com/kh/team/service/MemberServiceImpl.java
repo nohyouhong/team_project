@@ -62,4 +62,10 @@ public class MemberServiceImpl implements MemberService{
 		List<PointVo> point_list = pointDao.getPoint_list(userid);
 		return point_list;
 	}
+
+	@Override
+	public boolean checkId(String userid) {
+		boolean result = memberDao.checkId(userid);
+		return result;
+	}
 }

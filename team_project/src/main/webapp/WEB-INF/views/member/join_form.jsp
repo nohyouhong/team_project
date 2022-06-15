@@ -10,7 +10,6 @@ $(document).ready(function(){
 		var inputFile = $(this).parent().find("input");
 		inputFile.trigger("click");
 		var file = inputFile.val();
-// 		console.log(file);
 	});
 	$("#profileImg").on("change", ".joinImageFile", function() {
 		var inputImg = $(this).parent().find("img");
@@ -22,26 +21,42 @@ $(document).ready(function(){
 			reader.readAsDataURL(this.files[0]);
 		}
 	});
+	
+	$("#overlapIdCheckBtn").click(function(){
+		var userid = $("#userid").val();
+		var sData = {
+				"userid" : userid
+		};
+		var url = "/member/checkId";
+		$.post(url, sData, function(rData){
+			console.log(rData)
+		});
+	});
 });
 </script>
 <div class="container-fluid window">
 	<div class="row">
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
 			<div class="col-md-12 myjoinForm">
+				<div id="joinTitle">
+					<form id="joinTitleForm">
+						<img class="joinImage" id="writeImg" src="/resources/login_join/images/jointitle.png">
+					</form>
+				</div>
 				<form id="join_form" role="form" action="/member/" method="post">
 					<div class="form-group" id="profileImg">
-<!-- 						<label for="exampleInputFile" id="filename">프로필 사진</label>  -->
 						<img class="joinImage" id="joinImg" src="/resources/login_join/images/join.png">
 						<input class="joinImageFile" type="file" id="file" name="file"
 							style="display: none;">
-						<p class="help-block" id="filecomment">프로필 사진을 등록해주세요.</p>
 					</div>
-					
+					<p class="help-block" id="filecomment">프로필 사진을 등록해주세요.</p>
 					<div class="form-group">
 						<label for="userid" id="userid">아이디</label> 
 						<input type="text" class="form-control" name="userid" />
-						<button type="button" class="btn btn-outline-secondary" id="overlapIdCheckBtn">아이디 중복확인</button>
+						<div id="checkdiv">
+							<button type="button" class="btn btn-outline-secondary" id="overlapIdCheckBtn">아이디 중복확인</button>
+							<span id="id_used">사용중인 아이디입니다.</span>
+							<span id="id_ok">사용 가능한 아이디입니다.</span>
+						</div>
 					</div>
 
 					<div class="form-group">
@@ -77,8 +92,6 @@ $(document).ready(function(){
 				</form>
 			</div>
 			<div id="join_bottom"></div>
-		</div>
-		<div class="col-md-4"></div>
 	</div>
 </div>
 <%@include file="/WEB-INF/views/include/main_footer.jsp" %>

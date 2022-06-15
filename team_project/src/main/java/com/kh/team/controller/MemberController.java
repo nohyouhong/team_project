@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.dao.MemberDao;
 import com.kh.team.service.MemberService;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PointVo;
@@ -38,6 +37,14 @@ public class MemberController {
 		MemberVo memberVo = memberService.getMemberById(userid);
 		model.addAttribute("memberVo", memberVo);
 		return "member/info";
+	}
+	
+	@RequestMapping(value="/checkId", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkId(String userid) {
+		boolean result = memberService.checkId(userid);
+		System.out.println("result: " + result);
+		return String.valueOf(result);
 	}
 	
 	@RequestMapping(value="/join_form", method=RequestMethod.GET)

@@ -12,13 +12,14 @@ public class RecipeBoardVo {
 	private String userid;
 	private Date r_regdate;
 	private int f_code;
-	private int f_time;
-	private String f_level;
 	private String f_type;
+	private String r_time;
+	private String r_level;
 	private int r_viewcnt;
-	private int r_likecnt;
+	private float avgRating;
 	private String r_titlepic;
 	private String[] pictures;
+	private String[] r_tags;
 	
 	public RecipeBoardVo() {
 		super();
@@ -38,7 +39,7 @@ public class RecipeBoardVo {
 	}
 	
 	public RecipeBoardVo(String r_title, String r_explain, String[] r_contents, String r_cooktip, String userid,
-			int f_code, int f_time, String f_level, String r_titlepic, String[] pictures) {
+			int f_code, String r_time, String r_level, String r_titlepic, String[] pictures) {
 		super();
 		this.r_title = r_title;
 		this.r_explain = r_explain;
@@ -46,15 +47,15 @@ public class RecipeBoardVo {
 		this.r_cooktip = r_cooktip;
 		this.userid = userid;
 		this.f_code = f_code;
-		this.f_time = f_time;
-		this.f_level = f_level;
+		this.r_time = r_time;
+		this.r_level = r_level;
 		this.r_titlepic = r_titlepic;
 		this.pictures = pictures;
 	}
 
 	public RecipeBoardVo(int r_bno, String r_title, String r_explain, String[] r_contents, String r_cooktip,
-			String userid, Date r_regdate, int f_code, int f_time, String f_level, String f_type, int r_viewcnt,
-			int r_likecnt, String r_titlepic, String[] pictures) {
+			String userid, Date r_regdate, int f_code, String f_type, String r_time, String r_level, int r_viewcnt,
+			float avgRating, String r_titlepic, String[] pictures, String[] r_tags) {
 		super();
 		this.r_bno = r_bno;
 		this.r_title = r_title;
@@ -64,13 +65,14 @@ public class RecipeBoardVo {
 		this.userid = userid;
 		this.r_regdate = r_regdate;
 		this.f_code = f_code;
-		this.f_time = f_time;
-		this.f_level = f_level;
 		this.f_type = f_type;
+		this.r_time = r_time;
+		this.r_level = r_level;
 		this.r_viewcnt = r_viewcnt;
-		this.r_likecnt = r_likecnt;
+		this.avgRating = avgRating;
 		this.r_titlepic = r_titlepic;
 		this.pictures = pictures;
+		this.r_tags = r_tags;
 	}
 
 	public int getR_bno() {
@@ -137,20 +139,36 @@ public class RecipeBoardVo {
 		this.f_code = f_code;
 	}
 
+	public String getF_type() {
+		return f_type;
+	}
+
+	public void setF_type(String f_type) {
+		this.f_type = f_type;
+	}
+
+	public String getR_time() {
+		return r_time;
+	}
+
+	public void setR_time(String r_time) {
+		this.r_time = r_time;
+	}
+
+	public String getR_level() {
+		return r_level;
+	}
+
+	public void setR_level(String r_level) {
+		this.r_level = r_level;
+	}
+
 	public int getR_viewcnt() {
 		return r_viewcnt;
 	}
 
 	public void setR_viewcnt(int r_viewcnt) {
 		this.r_viewcnt = r_viewcnt;
-	}
-
-	public int getR_likecnt() {
-		return r_likecnt;
-	}
-
-	public void setR_likecnt(int r_likecnt) {
-		this.r_likecnt = r_likecnt;
 	}
 
 	public String getR_titlepic() {
@@ -169,38 +187,28 @@ public class RecipeBoardVo {
 		this.pictures = pictures;
 	}
 
-	public String getF_type() {
-		return f_type;
+	public float getAvgRating() {
+		return avgRating;
 	}
 
-	public void setF_type(String f_type) {
-		this.f_type = f_type;
+	public void setAvgRating(float avgRating) {
+		this.avgRating = avgRating;
 	}
 
-	public int getF_time() {
-		return f_time;
+	public String[] getR_tags() {
+		return r_tags;
 	}
 
-	public void setF_time(int f_time) {
-		this.f_time = f_time;
-	}
-
-	public String getF_level() {
-		return f_level;
-	}
-
-	public void setF_level(String f_level) {
-		this.f_level = f_level;
+	public void setR_tags(String[] r_tags) {
+		this.r_tags = r_tags;
 	}
 
 	@Override
 	public String toString() {
 		return "RecipeBoardVo [r_bno=" + r_bno + ", r_title=" + r_title + ", r_explain=" + r_explain + ", r_contents="
 				+ Arrays.toString(r_contents) + ", r_cooktip=" + r_cooktip + ", userid=" + userid + ", r_regdate="
-				+ r_regdate + ", f_code=" + f_code + ", f_time=" + f_time + ", f_level=" + f_level + ", f_type="
-				+ f_type + ", r_viewcnt=" + r_viewcnt + ", r_likecnt=" + r_likecnt + ", r_titlepic=" + r_titlepic
-				+ ", pictures=" + Arrays.toString(pictures) + "]";
+				+ r_regdate + ", f_code=" + f_code + ", f_type=" + f_type + ", r_time=" + r_time + ", r_level="
+				+ r_level + ", r_viewcnt=" + r_viewcnt + ", avgRating=" + avgRating + ", r_titlepic=" + r_titlepic
+				+ ", pictures=" + Arrays.toString(pictures) + ", r_tags=" + Arrays.toString(r_tags) + "]";
 	}
-
-	
 }

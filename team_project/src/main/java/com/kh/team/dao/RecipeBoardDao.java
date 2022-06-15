@@ -12,9 +12,11 @@ import com.kh.team.vo.MemberVo;
 public interface RecipeBoardDao {
 	public boolean create(RecipeBoardVo recipeBoardVo);
 	public boolean ingredCreate(IngredientVo ingredintVo);
+	public boolean tagCreate(String r_tag, int r_bno);
 	public RecipeBoardVo read(int r_bno);
 	public List<RecipeStepVo> readStepVos(int r_bno);
 	public List<IngredientVo> readIngreds(int r_bno);
+	public List<String> getTags(int r_bno);
 	public boolean update(RecipeBoardVo recipeBoardVo);
 	public boolean delete(int r_bno);
 	public List<RecipeBoardVo> list(PagingDto pagingDto);
@@ -22,7 +24,9 @@ public interface RecipeBoardDao {
 	public void updateViewCnt(int r_bno); 
 	public int getNextBno();
 	public int getNextCno();
+	public float getAvgRating();
 	public void insertContent(String content, int r_bno, int r_cno);
 	public void insertPicture(String picture, int r_cno);
 	public String getUseridByBno(int r_bno);
+
 }

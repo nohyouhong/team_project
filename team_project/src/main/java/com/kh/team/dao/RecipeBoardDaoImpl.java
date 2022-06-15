@@ -23,6 +23,7 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	
 	@Override
 	public boolean create(RecipeBoardVo recipeBoardVo) {
+		System.out.println("다오임플" + recipeBoardVo);
 		int count = sqlSession.insert(NAMESPACE + "create", recipeBoardVo);
 		if(count > 0) {
 			return true;
@@ -106,6 +107,13 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		int r_cno = sqlSession.selectOne(NAMESPACE + "getNextCno");
 		return r_cno;
 	}
+	
+	@Override
+	public float getAvgRating() {
+		float avgRating = sqlSession.selectOne(NAMESPACE + "getAvgRating");
+		System.out.println(avgRating);
+		return avgRating;
+	}
 
 	@Override
 	public void insertPicture(String r_picture, int r_cno) {
@@ -128,5 +136,23 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	public String getUseridByBno(int r_bno) {
 		String userid = sqlSession.selectOne(NAMESPACE + "getUseridByBno", r_bno);
 		return userid;
+	}
+
+	@Override
+	public boolean tagCreate(String r_tag, int r_bno) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("r_bno", r_bno);
+		parameter.put("r_tag", r_tag);
+		int count = sqlSession.insert(NAMESPACE + "tagCreate", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<String> getTags(int r_bno) {
+		List<String> tags = sqlSession.selectList(NAMESPACE + "getTags", r_bno);
+		return tags;
 	}
 }

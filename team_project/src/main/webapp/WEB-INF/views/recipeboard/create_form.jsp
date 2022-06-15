@@ -79,6 +79,30 @@
 	bottom: 40px;
 	cursor: pointer;
 }
+#tagDiv{
+	margin-left: 20px;
+}
+.oneTag{
+	margin-right: 20px;
+}
+.tagFront{
+	font-size: 22px;
+	color: #F83801;
+}
+.tagName{
+	font-size: 17px;
+}
+.tagRemove, .ingredIconX{
+	cursor: pointer;
+}
+#tagBtn{
+	margin-left: 10px;	
+}
+.tagInput{
+	display: inline;
+	width: 40%;
+	margin-left: 10px;
+}
 </style>
 <script>
 $(function() {
@@ -158,7 +182,32 @@ $(function() {
             reader.readAsDataURL(this.files[0]);
     	}
     });
+	//태그 넣기
+	$("#tagBtn").click(function() {
+		var tag = $("#tagInput").val();
+		var tagSpan = $(".oneTag").eq(0).clone();
+		tagSpan.show();
+		tagSpan.find("span.tagName").text(tag);
+		$("#tagDiv").append(tagSpan);
+		$("#tagInput").val("");
+	});
 	
+	//태그 삭제
+	$(".createCookDiv2").on("click", ".tagRemove", function() {
+		$(this).parent().remove();
+	});
+	
+	//태그 히든으로 보내고 폼전송
+	$("#recipeFormBtn").click(function() {
+		var tags = $(".tagName");
+		for(var i = 1; i < tags.length; i++) {
+			var tag = $(".tagName").eq(i).text();
+			console.log(tag);
+			var tagHtml = "<input type='hidden' name='r_tags' value=" + tag + ">";
+			$("#recipeForm").prepend(tagHtml);
+		}
+// 		$("#recipeForm").submit();
+	});
 });
 </script>
 <div class="container-fluid">
@@ -167,7 +216,7 @@ $(function() {
 		<div class="col-md-8">
 			<span class="createTitleSpan">레시피 등록</span>
 			<hr class="createHr">
-			<form role="form" action="/recipeboard/createRun" method="post" enctype="multipart/form-data">
+			<form role="form" id="recipeForm" action="/recipeboard/createRun" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
@@ -190,16 +239,16 @@ $(function() {
 									</select>
 								</div>
 		   						<div class="col">
-									<select class="custom-select inputVal" name="f_time">
+									<select class="custom-select inputVal" name="r_time">
 										<option selected>종류별</option>
-										<option value="5">5분이내</option>
-										<option value="30">30분이내</option>
-										<option value="1">1시간이내</option>
-										<option value="12">1시간이상</option>
+										<option value="5분이내">5분이내</option>
+										<option value="30분이내">30분이내</option>
+										<option value="1시간이내">1시간이내</option>
+										<option value="1시간이상">1시간이상</option>
 									</select>
 								</div>
 		   						<div class="col">
-									<select class="custom-select inputVal" name="f_level">
+									<select class="custom-select inputVal" name="r_level">
 										<option selected>종류별</option>
 										<option value="쉬움">쉬움</option>
 										<option value="보통">보통</option>
@@ -238,7 +287,7 @@ $(function() {
 							</div>
 						</div>
 						<div style="text-align: center;">
-							<span class="addButton btn btn-info" id="addIngred">재료 추가</span>
+							<span class="addButton btn btn-outline-info" id="addIngred">재료 추가</span>
 						</div>
 					</div>
 					<div class="col-md-1"></div>
@@ -268,17 +317,29 @@ $(function() {
 					</div> 
 <!-- 					여기 -->
 					<div style="text-align: center;">
-						<span class="addButton btn btn-info" id="addStep">순서 추가</span>
+						<span class="addButton btn btn-outline-info" id="addStep">순서 추가</span>
 					</div>
 				</div>
 				<hr class="createHr">
 				<div class="form-group createCookDiv2">
-					<label for="title" class="createTitle">요리팁</label>
+					<label for="r_cooktip" class="createTitle">요리팁</label>
 					<textarea rows="4" class="form-control inputVal" id="r_cooktip" name="r_cooktip"></textarea>
 				</div><hr class="createHr">
+				<div class="form-group createCookDiv2">
+					<label for="title" class="createTitle">태그</label>
+					<input id="tagInput" class="form-control inputVal tagInput" type="text">
+					<button id="tagBtn" type="button" class="btn btn-outline-primary">태그추가</button>
+					<div id="tagDiv">
+						<span class="oneTag" style="display: none;">
+							<span class="tagFront">#</span>
+							<span class="tagName"></span>
+							<i class="fas fa-times-circle ingredIconX tagRemove"></i>
+						</span>
+					</div>
+				</div><hr class="createHr">
 				<div style="text-align: center;">
-					<button type="submit" class="btn btn-success btn-lg">저장하기</button>
-					<a href="#" class="btn btn-secondary btn-lg">취소하기</a>
+					<button type="button" id="recipeFormBtn" class="btn btn-outline-success btn-lg">저장하기</button>
+					<a href="#" class="btn btn-outline-secondary btn-lg">취소하기</a>
 				</div>
 			</form>
 		</div>

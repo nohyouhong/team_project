@@ -54,6 +54,14 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 				recipeBoardDao.ingredCreate(ingredientVo);
 			}
 		}
+		String[] r_tags = recipeBoardVo.getR_tags();
+		System.out.println("tags" + r_tags);
+		if(r_tags != null && r_tags.length != 0) {
+			for(int i = 0; i < r_tags.length; i++) {
+				recipeBoardDao.tagCreate(r_tags[i], r_bno);
+			}
+		}
+		
 		return result;
 	}
 
@@ -61,17 +69,9 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	public RecipeBoardVo read(int r_bno) {
 		recipeBoardDao.updateViewCnt(r_bno);
 		RecipeBoardVo recipeBoardVo = recipeBoardDao.read(r_bno);
-//		List<String> r_contents = recipeBoardDao.readContents(r_bno);
-//		List<String> pictures = recipeBoardDao.readPictures(r_bno);
-//		if(r_contents != null && r_contents.size() != 0) {
-//			String[] contentVals = r_contents.toArray(new String[r_contents.size()]);
-//			recipeBoardVo.setR_contents(contentVals);
-//		}
-//		if(pictures != null && pictures.size() != 0) {
-//			String[] pictureVals = pictures.toArray(new String[pictures.size()]);
-//			recipeBoardVo.setPictures(pictureVals);
-//		}
-//		
+		float avgRating = recipeBoardDao.getAvgRating();
+		recipeBoardVo.setAvgRating(avgRating);
+		
 		return recipeBoardVo;
 	}
 	
@@ -85,6 +85,12 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	public List<IngredientVo> readIngreds(int r_bno) {
 		List<IngredientVo> ingredientVoList = recipeBoardDao.readIngreds(r_bno);
 		return ingredientVoList;
+	}
+	
+	@Override
+	public List<String> getTags(int r_bno) {
+		List<String> tagList = recipeBoardDao.getTags(r_bno);
+		return tagList;
 	}
 	
 	@Override

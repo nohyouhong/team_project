@@ -14,6 +14,7 @@ public interface RecipeBoardService {
 	public RecipeBoardVo read(int r_bno);
 	public List<RecipeStepVo> readStepVos(int r_bno);
 	public List<IngredientVo> readIngreds(int r_bno);
+	public List<String> getTags(int r_bno);
 	public boolean update(RecipeBoardVo recipeBoardVo);
 	public boolean delete(int r_bno);
 	public List<RecipeBoardVo> list(PagingDto pagingDto);

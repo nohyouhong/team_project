@@ -30,6 +30,8 @@ $(document).ready(function(){
 							<a id="btnWriteMessage" href="/inquiry/inquiry_form" class="btn btn-outline-success">1:1문의하기</a>
 						</div>
 					</div>
+					${inquiryList}
+					${allInquiryList}
 					<table class="table inquiry_table">
 						<thead>
 							<tr>

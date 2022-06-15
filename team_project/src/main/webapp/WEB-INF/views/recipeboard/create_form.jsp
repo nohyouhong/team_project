@@ -190,19 +190,20 @@ $(function() {
 									</select>
 								</div>
 		   						<div class="col">
-									<select class="custom-select inputVal">
+									<select class="custom-select inputVal" name="f_time">
 										<option selected>종류별</option>
-										<option>한식</option>
-										<option>한식</option>
-										<option>한식</option>
+										<option value="5">5분이내</option>
+										<option value="30">30분이내</option>
+										<option value="1">1시간이내</option>
+										<option value="12">1시간이상</option>
 									</select>
 								</div>
 		   						<div class="col">
-									<select class="custom-select inputVal">
+									<select class="custom-select inputVal" name="f_level">
 										<option selected>종류별</option>
-										<option>한식</option>
-										<option>한식</option>
-										<option>한식</option>
+										<option value="쉬움">쉬움</option>
+										<option value="보통">보통</option>
+										<option value="어려움">어려움</option>
 									</select>
 								</div>
 							</div>

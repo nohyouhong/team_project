@@ -15,6 +15,11 @@
 		where userid = #{userid}
 	</select>
 	
+	<select id="checkId" resultType="int">
+		select count(*) from tbl_member
+		where userid = #{userid}
+	</select>
+	
 	<select id="getMemberByIdAndPw" resultType="MemberVo">
 		select * from tbl_member
 		where userid = #{userid}

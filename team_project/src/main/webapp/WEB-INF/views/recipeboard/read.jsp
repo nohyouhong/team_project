@@ -16,7 +16,8 @@
 	top: 48px;
 	width: 680px;
 	height: 400px;
-	border: 2px solid #BEB6B6;
+	border: 1px solid #BEB6B6;
+	border-radius: 10px;
 }
 .userImageDiv{
 	position:relative;
@@ -1053,11 +1054,21 @@ $(function(){
 							<div class="iconExplain">${recipeBoardVo.f_type }</div>
 						</div>
 						<div class="col-md-4 iconDiv">
-							<span><i class="fa-solid fa-bowl-rice fa-3x cookIcon"></i></span> 
+							<span><i class="fas fa-clock fa-3x cookIcon"></i></span> 
 							<div class="iconExplain">${recipeBoardVo.f_type }</div>
 						</div>
 						<div class="col-md-4 iconDiv">
-							<span><i class="fa-solid fa-bowl-rice fa-3x cookIcon"></i></span> 
+							<c:choose>
+								<c:when test="${recipeBoardVo == '어려움'}">
+									<span><i class="fas fa-tired fa-3x cookIcon"></i></span>
+								</c:when>
+								<c:when test="${recipeBoardVo == '보통'}">
+									<span><i class="fas fa-grin-beam-sweat fa-3x cookIcon"></i></span>
+								</c:when>
+								<c:when test="${recipeBoardVo == '쉬움'}">
+									<span><i class="fas fa-grin-alt fa-3x cookIcon"></i></span>
+								</c:when>
+							</c:choose>
 							<div class="iconExplain">${recipeBoardVo.f_type }</div>
 						</div>
 					</div>

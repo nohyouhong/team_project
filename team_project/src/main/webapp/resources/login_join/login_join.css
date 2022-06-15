@@ -27,15 +27,10 @@
 #chklabel{
 	font-size:12px;
 }
-#id_used{
-	color:red;
-	font-size:8px;
-	display:none;
-}
-#id_ok{
-	color:#70c1fa;
-	font-size:8px;
-	display:none;
+#idChk, #pwChk, #pwSameChk{
+	font-size:14px;
+	margin-top:12px;
+	margin-left:5px;
 }
 
 #login_form{

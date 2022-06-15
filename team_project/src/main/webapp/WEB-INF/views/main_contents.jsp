@@ -7,10 +7,11 @@
 <style>
 .top-recipe {
 	margin-bottom: 50px;
+ 	background-color: white; 
+ 	border-top: 3px solid silver;
 }
 .top-recipe-item {
 	margin-top: 80px;
-	border-radius: 10px;
 }
 .top_column_title {
 	font-family: jua;
@@ -27,6 +28,13 @@
 .sub_column_content {
 	font-family: jua;
 	font-size: 15px;
+}
+.main_column_big_img {
+	border-radius: 10px;
+}
+
+.main_column_small_img {
+	border-radius: 10px;
 }
 </style>
 <body>

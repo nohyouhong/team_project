@@ -13,6 +13,7 @@ public class ColumnVo {
 	private int c_likecnt;
 	private String[] pictures;
 	private String c_picture;
+	private int c_rnum;
 	
 	
 	public ColumnVo() {
@@ -111,11 +112,19 @@ public class ColumnVo {
 		this.c_picture = c_picture;
 	}
 
+	public int getC_rnum() {
+		return c_rnum;
+	}
+
+	public void setC_rnum(int c_rnum) {
+		this.c_rnum = c_rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "ColumnVo [c_bno=" + c_bno + ", c_title=" + c_title + ", c_content=" + c_content + ", userid=" + userid
 				+ ", c_regdate=" + c_regdate + ", c_viewcnt=" + c_viewcnt + ", c_likecnt=" + c_likecnt + ", pictures="
-				+ Arrays.toString(pictures) + ", c_picture=" + c_picture + "]";
+				+ Arrays.toString(pictures) + ", c_picture=" + c_picture + ", c_rnum=" + c_rnum + "]";
 	}
 	
 }

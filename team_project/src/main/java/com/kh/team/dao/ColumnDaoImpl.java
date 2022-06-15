@@ -65,6 +65,18 @@ public class ColumnDaoImpl implements ColumnDao {
 	}
 	
 	@Override
+	public int getColumnC_rnum(int c_bno) {
+		int c_rnum = sqlSession.selectOne(NAMESPACE + "getColumnC_rnum", c_bno);
+		return c_rnum;
+	}
+	
+	@Override
+	public int getColumnCount() {
+		int c_count = sqlSession.selectOne(NAMESPACE + "getColumnCount");
+		return c_count;
+	}
+	
+	@Override
 	public ColumnVo getTopColumn() {
 		ColumnVo topColumn = sqlSession.selectOne(NAMESPACE + "getTopColumn");
 		return topColumn;

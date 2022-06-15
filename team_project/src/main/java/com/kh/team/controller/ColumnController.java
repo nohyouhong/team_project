@@ -37,7 +37,7 @@ public class ColumnController {
 	
 	@RequestMapping(value="/column_create_run", method=RequestMethod.POST)
 	public String column_create_run(ColumnVo columnVo, RedirectAttributes rttr) {
-		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
+//		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
 		String[] c_pictures = columnVo.getPictures();
 		boolean result = columnService.insertColumn(columnVo);
 //		System.out.println("ColumController, column_run, result: " + result);
@@ -88,7 +88,7 @@ public class ColumnController {
 			ColumnVo columnTitlePics = columnService.getColumnTitlePic(c_bno);
 			String columnTitlePic = columnTitlePics.getC_picture();
 			columnVo.setC_picture(columnTitlePic);
-			System.out.println("ColumnController, column_list, columnTitlePic: " + columnTitlePic);
+//			System.out.println("ColumnController, column_list, columnTitlePic: " + columnTitlePic);
 //			for (ColumnVo columnPicVo : columnTitlePics) {
 //			}
 		}
@@ -129,10 +129,15 @@ public class ColumnController {
 	@RequestMapping(value="/readColumn", method=RequestMethod.GET) 
 	public String readColumn(int c_bno, Model model) {
 		ColumnVo columnVo = columnService.readColumn(c_bno);
-		model.addAttribute("columnVo", columnVo);
 		List<ColumnVo> columnList = columnService.getColumnList();
 //		System.out.println("ColumnController, readColumn, columnList: " + columnList);
+		int c_rnum = columnService.getColumnC_rnum(c_bno);
+		int c_count = columnService.getColumnCount();
+		model.addAttribute("columnVo", columnVo);
 		model.addAttribute("columnList", columnList);
+		model.addAttribute("c_rnum", c_rnum);
+		model.addAttribute("c_count", c_count);
+		
 		return "column/column_content";
 	}
 	

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 
 <style>
 
 #column_like_div {
 	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .fa-thumbs-up { 
@@ -28,9 +31,13 @@
 .column_regdate {
 	font-size: 18px;
 }
- .column_content_div { 
+.column_content_div { 
  	margin-top: 80px; 
- } 
+ }
+.tbl_column_sub_list {
+	text-align: center;
+	margin: auto;
+}
 </style>
 
 <script>
@@ -114,19 +121,121 @@ $(document).ready(function(){
 			<i class="fa-regular fa-thumbs-up" data-c_bno="${columnVo.c_bno}"></i>
 			<span id="column_like_span">${columnVo.c_likecnt}</span>
 		</div>
-		<table class="table">
+		<table class="table table-borderless tbl_column_sub_list">
 			<tbody>
-				<c:forEach var="columnvo" items="${columnList}" begin="${columnvo.c_bno}" end="${columnvo.c_bno + 2}">
-					<tr>
-						<td>${columnvo.c_bno}</td>
-						<td><a href="/column/readColumn?c_bno=${columnvo.c_bno}">${columnvo.c_title}</a></td>
-					</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${c_rnum <= 3}">
+						<c:forEach var="column_sub_list" items="${columnList}" begin="0" end="4">
+							<tr>
+								<c:choose>
+									<c:when test="${column_sub_list.c_rnum == c_rnum }">
+										<td style="background-color: #ffe6e6">
+											<a href="/column/readColumn?c_bno=${column_sub_list.c_bno}" style="font-weight: bold;">
+											<c:choose>
+												<c:when test="${fn:length(column_sub_list.c_title) gt 30}">
+													${fn:substring(column_sub_list.c_title, 0, 30)}...
+												</c:when>
+												<c:otherwise>
+													${fn:substring(column_sub_list.c_title, 0, 30)}												
+												</c:otherwise>
+											</c:choose>
+											</a>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td>
+											<a href="/column/readColumn?c_bno=${column_sub_list.c_bno}">
+												<c:choose>
+													<c:when test="${fn:length(column_sub_list.c_title) gt 30}">
+														${fn:substring(column_sub_list.c_title, 0, 30)}...
+													</c:when>
+													<c:otherwise>
+														${fn:substring(column_sub_list.c_title, 0, 30)}												
+													</c:otherwise>
+												</c:choose>
+											</a>
+										</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:when test="${c_rnum >= c_count - 2}">
+						<c:forEach var="column_sub_list" items="${columnList}" begin="${c_count - 5}" end="${c_count - 1}">
+							<tr>
+								<c:choose>
+									<c:when test="${column_sub_list.c_rnum == c_rnum }">
+										<td style="background-color: #ffe6e6">
+											<a href="/column/readColumn?c_bno=${column_sub_list.c_bno}" style="font-weight: bold;">
+											<c:choose>
+												<c:when test="${fn:length(column_sub_list.c_title) gt 30}">
+													${fn:substring(column_sub_list.c_title, 0, 30)}...
+												</c:when>
+												<c:otherwise>
+													${fn:substring(column_sub_list.c_title, 0, 30)}												
+												</c:otherwise>
+											</c:choose>
+											</a>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td>
+											<a href="/column/readColumn?c_bno=${column_sub_list.c_bno}">
+											<c:choose>
+												<c:when test="${fn:length(column_sub_list.c_title) gt 30}">
+													${fn:substring(column_sub_list.c_title, 0, 30)}...
+												</c:when>
+												<c:otherwise>
+													${fn:substring(column_sub_list.c_title, 0, 30)}												
+												</c:otherwise>
+											</c:choose>
+											</a>
+										</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="column_sub_list" items="${columnList}" begin="${c_rnum - 3}" end="${c_rnum + 1}">
+							<tr>
+								<c:choose>
+									<c:when test="${column_sub_list.c_rnum == c_rnum }">
+										<td style="background-color: #ffe6e6">
+											<a href="/column/readColumn?c_bno=${column_sub_list.c_bno}" style="font-weight: bold;">
+											<c:choose>
+												<c:when test="${fn:length(column_sub_list.c_title) gt 30}">
+													${fn:substring(column_sub_list.c_title, 0, 30)}...
+												</c:when>
+												<c:otherwise>
+													${fn:substring(column_sub_list.c_title, 0, 30)}												
+												</c:otherwise>
+											</c:choose>
+											</a>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td>
+											<a href="/column/readColumn?c_bno=${column_sub_list.c_bno}">
+											<c:choose>
+												<c:when test="${fn:length(column_sub_list.c_title) gt 30}">
+													${fn:substring(column_sub_list.c_title, 0, 30)}...
+												</c:when>
+												<c:otherwise>
+													${fn:substring(column_sub_list.c_title, 0, 30)}												
+												</c:otherwise>
+											</c:choose>
+											</a>
+										</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 		</table>
 	</div>
 	<div class="col-md-2"></div>
 </div>
-<%-- ${columnvo.c_bno} --%>
-<%-- ${columnList} --%>
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

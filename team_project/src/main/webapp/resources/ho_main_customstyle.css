@@ -8,15 +8,23 @@
 
 .single-post-catagory .catagory-content-bg::after {
 	border-color: rgb(248,56,1);
+	border-radius: 10px;
+}
+.single-post-catagory .catagory-content-bg {
+	border-radius: 10px;
 }
 
 .post-title {
 	color: rgb(248,56,1);
+	padding-left: 15px;
+	font-family: jua;
+	letter-spacing: 3px;
 }
 
 .single-post-catagory img {
 	width: 350px;
 	height: 300px;
+	border-radius: 5px;
 }
 
 .carousel-item img {

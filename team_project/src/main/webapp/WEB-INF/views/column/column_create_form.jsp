@@ -50,7 +50,7 @@ function uploadColumnImageFile(file, el) {
 			var index = rData.indexOf(":");
 // 			console.log("index: " + index);
 			var filename = rData.substring(62);
-			console.log("filename: ", filename);
+// 			console.log("filename: ", filename);
 			var html = "<input type='hidden' name='pictures' value=" + filename + ">"
 			$("#frmColumn").prepend(html);
 		}

@@ -54,8 +54,8 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String userid) {
-		List<InquiryVo> inquiryList = inquiryDao.InquiryList(userid);
+	public List<InquiryVo> InquiryList(String userid, String mType) {
+		List<InquiryVo> inquiryList = inquiryDao.InquiryList(userid, mType);
 		return inquiryList;
 	}
 
@@ -63,6 +63,18 @@ public class InquiryServiceImpl implements InquiryService{
 	public int getCount(PagingDto pagingDto) {
 		int count = inquiryDao.getCount(pagingDto);
 		return count;
+	}
+
+	@Override
+	public List<InquiryVo> allInquiryList() {
+		List<InquiryVo> allInquiryList = inquiryDao.allInquiryList();
+		return allInquiryList;
+	}
+
+	@Override
+	public List<String> getInquiryImages(int a_bno) {
+		List<String> InquiryImages = inquiryDao.getInquiryImages(a_bno);
+		return InquiryImages;
 	}
 
 }

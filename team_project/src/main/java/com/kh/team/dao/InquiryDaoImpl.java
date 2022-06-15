@@ -52,11 +52,11 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String userid) {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("startRow", pagingDto.getStartRow());
-//		map.put("endRow", pagingDto.getEndRow());
-		List<InquiryVo> InquiryList = sqlSession.selectList(NAMESPACE+"listInquiry", userid);
+	public List<InquiryVo> InquiryList(String userid, String mType) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("mType", mType);
+		List<InquiryVo> InquiryList = sqlSession.selectList(NAMESPACE+"listInquiry", map);
 		return InquiryList;
 	}
 
@@ -79,6 +79,18 @@ public class InquiryDaoImpl implements InquiryDao{
 		map.put("a_bno", a_bno);
 		sqlSession.insert(NAMESPACE+"insertAttach", map);
 		
+	}
+
+	@Override
+	public List<InquiryVo> allInquiryList() {
+		List<InquiryVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListInquiry");
+		return allInquiryList;
+	}
+
+	@Override
+	public List<String> getInquiryImages(int a_bno) {
+		List<String> InquiryImages = sqlSession.selectList(NAMESPACE+"getInquiryImages", a_bno);
+		return InquiryImages;
 	}
 
 }

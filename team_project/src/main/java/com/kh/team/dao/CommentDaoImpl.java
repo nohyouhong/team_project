@@ -99,6 +99,7 @@ public class CommentDaoImpl implements CommentDao{
 	@Override
 	public int recipeReviewandImageListNum(int r_bno) {
 		int recipeReviewandImageListNum = sqlSession.selectOne(NAMESPACE + "recipeReviewandImageListNum", r_bno);
+		System.out.println(recipeReviewandImageListNum);
 		return recipeReviewandImageListNum;
 	}
 

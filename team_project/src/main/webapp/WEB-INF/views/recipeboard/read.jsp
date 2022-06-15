@@ -187,16 +187,20 @@
 	margin-left: 5px;
 }
 #cookRecipeReImageDiv{
-	text-align: center;
 	margin-top: 60px;
 	margin-bottom: 30px;
-	margin-left: 80px;
-	margin-right: 80px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
-.cookRecipeReImage, .imageListButton{
+.cookRecipeReImage{
 	width: 150px;
 	height: 150px;
 	margin-right: 5px;
+}
+.imageListButton{
+	width: 150px;
+	height: 150px;
+	margin-right: 20px;
 }
 .imageListButtonDiv{
 	float: right;
@@ -313,26 +317,33 @@ padding-bottom: 20px;
 	left: 150px;
 }
 .starRating {
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:50px;
-  justify-content:space-around;
-  width:180px;
-  text-align:center;
+	display:flex;
+	flex-direction: row-reverse;
+	font-size:50px;
+	justify-content:space-around;
+	width:180px;
+	text-align:center;
 }
 .starRating input {
-  display:none;
+	display:none;
 }
 .starRating label {
-  color:#BEB6B6;
-  cursor:pointer;
+	color:#BEB6B6;
+	cursor:pointer;
 }
 .starRating :checked ~ label {
-  color:#EAE909;
+	color:#EAE909;
 }
 .starRating label:hover,
 .starRating label:hover ~ label {
-  color:#EAE909;
+	color:#EAE909;
+}
+.reviewUserImageBtn{
+	cursor: pointer;
+}
+#modalReviewImage{
+	width: 470px;
+	height: 400px;
 }
 </style>
 <script>
@@ -549,6 +560,7 @@ $(function(){
 				if(rData == "true"){
 					console.log(rData);
 					getReviewList();
+					getReviewImageList();
 				}
 			}
 		});
@@ -589,7 +601,7 @@ $(function(){
 					var r_reviewpic = this.r_reviewpic;
 					
 					var imageFileHtml = 
-						'<img class="reviewUserImage" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
+						'<img class="reviewUserImage reviewUserImageBtn" data-filename="' + r_reviewpic + '" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
 					oneReviewDiv.find("div.reviewUserCookImageDiv").append(imageFileHtml);
 				}
 				if(this.m_picture != null) {
@@ -616,25 +628,28 @@ $(function(){
 				$("#cookRecipeReDiv").append(oneReviewDiv);
 			});
 		});
-		$.get(url4, function(rData) {
-			console.log("url4", rData);
-			var rDataIndex = rData.length;
-			if(rData.length > 6){
-				rDataIndex = 6;
-				$("#imageListButtonDiv").show();
-			}
-			for(var i = 0; i < rDataIndex; i++){
-				var reImage = $(".cookRecipeReImage").eq(0).clone();
-				reImage.show();
-				var reImageVal = rData[i].r_reviewpic;
-				var reImageHtml = "/recipeboard/displayImage?filename=" + reImageVal;
-				
-				reImage.attr("src", reImageHtml);
-				console.log("reImage",reImage);
-				$("#cookRecipeReImageDiv").append(reImage);
-			}
-			
-		});
+		//포토리뷰 사진
+		getReviewImageList();
+		function getReviewImageList() {
+			$.get(url4, function(rData) {
+				var rDataIndex = rData.length;
+				if(rData.length > 6){
+					rDataIndex = 6;
+					$("#imageListButtonDiv").show();
+				}
+				$(".cookRecipeReImage:gt(0)").remove();
+				for(var i = 0; i < rDataIndex; i++){
+					var reImage = $(".cookRecipeReImage").eq(0).clone();
+					reImage.show();
+					var reImageVal = rData[i].r_reviewpic;
+					var reImageHtml = "/recipeboard/displayImage?filename=" + reImageVal;
+					
+					reImage.attr("src", reImageHtml);
+					console.log("reImage",reImage);
+					$("#cookRecipeReImageDiv").append(reImage);
+				}
+			});
+		}
 	}
 	
 	//댓글삭제버튼
@@ -646,14 +661,29 @@ $(function(){
 			console.log(rData);
 			if(rData == "true") {
 				getReviewList();
+				getReviewImageList()
 			}
 		});
+	});
+	
+	$("#cookRecipeReDiv").on("click", ".reviewUserImageBtn", function(){
+		$("#modal-531767").trigger("click");
+		var filename = $(this).attr("data-filename");
+// 		console.log(filename);
+		var imageVal = "/recipeboard/displayImage?filename=" + filename;
+		$("#modalReviewImage").attr("src", imageVal);
+	});
+	
+	$("#cookRecipeReImageDiv").on("click", ".cookRecipeReImage", function() {
+		var filename = $(this).attr("data-filename");
+		var imageVal = "/recipeboard/displayImage?filename=" + filename;
 	});
 });
 </script>
 <!-- 모달리스트 -->
 <div class="row">
 	<div class="col-md-12">
+<!-- 	모달 -->
 		<a id="modal-269785" style="display: none;" href="#modal-container-269785" role="button"
 			class="btn" data-toggle="modal">Launch demo modal</a>
 			
@@ -687,6 +717,55 @@ $(function(){
 				</div>
 			</div>
 		</div>
+<!-- 		모달 -->
+		<a id="modal-531767" style="display: none;" href="#modal-container-531767" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+
+		<div class="modal fade" id="modal-container-531767" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">사 진</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<img id="modalReviewImage" src="#">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		모달 -->
+		<a id="modal-533333" style="display: none;" href="#modal-container-531767" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
+
+		<div class="modal fade" id="modal-container-531767" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">포토 리뷰 전체보기</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<img id="modalReviewImage" src="#">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		모달 -->
 	</div>
 </div>
 
@@ -963,6 +1042,7 @@ $(function(){
 					</div>
 				</form>
 			</div>
+			
 <!-- 				<이동용> -->
 			<div class="showHideDiv">
 				<button class="showButton">더보기</button>

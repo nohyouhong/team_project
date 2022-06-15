@@ -8,40 +8,40 @@ public class InquiryVo {
 	private int a_bno;
 	private String a_title;
 	private String a_content;
-	private String userid;
+	private String a_sender;
+	private String a_receiver;
 	private Date a_regdate;
 	private String[] files;
 	
-	
-	
 	public InquiryVo() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
-	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Date a_regdate) {
+	public InquiryVo(int a_bno, String a_title, String a_content, String a_sender, String a_receiver, Date a_regdate) {
 		super();
 		this.a_bno = a_bno;
 		this.a_title = a_title;
 		this.a_content = a_content;
-		this.userid = userid;
+		this.a_sender = a_sender;
+		this.a_receiver = a_receiver;
 		this.a_regdate = a_regdate;
 	}
 
 
-	public InquiryVo(int a_bno, String a_title, String a_content, String userid, Date a_regdate, String[] files) {
+	public InquiryVo(int a_bno, String a_title, String a_content, String a_sender, String a_receiver, Date a_regdate,
+			String[] files) {
 		super();
 		this.a_bno = a_bno;
 		this.a_title = a_title;
 		this.a_content = a_content;
-		this.userid = userid;
+		this.a_sender = a_sender;
+		this.a_receiver = a_receiver;
 		this.a_regdate = a_regdate;
 		this.files = files;
 	}
 
-
-	
 
 	public int getA_bno() {
 		return a_bno;
@@ -73,13 +73,24 @@ public class InquiryVo {
 	}
 
 
-	public String getUserid() {
-		return userid;
+
+	public String getA_sender() {
+		return a_sender;
 	}
 
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setA_sender(String a_sender) {
+		this.a_sender = a_sender;
+	}
+
+
+	public String getA_receiver() {
+		return a_receiver;
+	}
+
+
+	public void setA_receiver(String a_receiver) {
+		this.a_receiver = a_receiver;
 	}
 
 
@@ -105,10 +116,12 @@ public class InquiryVo {
 
 	@Override
 	public String toString() {
-		return "InquiryVo [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", userid=" + userid
-				+ ", a_regdate=" + a_regdate + ", files=" + Arrays.toString(files) + "]";
+		return "InquiryVo [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", a_sender="
+				+ a_sender + ", a_receiver=" + a_receiver + ", a_regdate=" + a_regdate + ", files="
+				+ Arrays.toString(files) + "]";
 	}
 
+		
 
 	
 }

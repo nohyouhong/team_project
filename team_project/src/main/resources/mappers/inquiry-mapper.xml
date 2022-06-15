@@ -13,7 +13,7 @@
 	</insert>
 	<insert id="insertInquiry">
 		insert into tbl_ask_board(a_bno, a_title, a_content, writer, re_group)
-		values(#{a_bno}, #{a_title}, #{a_content}, #{writer}, #{a_bno})
+		values(#{a_bno}, #{a_title}, #{a_content}, #{writer}, #{re_group})
 	</insert>
 
 	

@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.InquiryService;
 import com.kh.team.vo.InquiryVo;
@@ -47,6 +46,7 @@ public class InquiryController {
 		List<InquiryVo> allInquiryList = inquiryService.allInquiryList(pagingDto);
 		model.addAttribute("inquiryList", inquiryList);
 		model.addAttribute("allInquiryList", allInquiryList);
+		model.addAttribute("pagingDto", pagingDto);
 		return "inquiry/inquiry_list";
 	}
 	

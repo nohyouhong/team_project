@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
-#pwlabel, #idlabel, #chklabel{
+#pwlabel, #idlabel, #chklabel, #joinBtnSpan{
 	margin-top:10px;
 	font-family:'jua';
 	font-size:15px;
+}
+#joinBtnSpan{
+	color:yellowgreen;
 }
 #useridlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
 	font-family:'jua';
@@ -15,10 +18,31 @@
 	text-align:center;
 	margin-top:5px;
 }
-#checkdiv{
+#checkdiv, #emailDiv{
 	display:flex;
 }
-
+#joinBtn{
+	margin-top:5px;
+	margin-left:10px;
+}
+#emailDiv, #usernameInput{
+	margin-bottom:5px;
+}
+#usernameInput{
+	width:200px;
+}
+#emailIdInput{
+	width:100px;
+}
+#emailAdInput{
+	width:200px;
+}
+#emailB{
+	margin-top:5px;
+}
+.join-form{
+	margin-left:20px;
+}
 @font-face{
 	font-family: 'jua';
 /* 	src: url("../fonts/icomoon/BMJUA_ttf.ttf"); */

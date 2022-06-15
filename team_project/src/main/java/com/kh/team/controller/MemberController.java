@@ -74,7 +74,7 @@ public class MemberController {
 	@RequestMapping(value="/join_run", method=RequestMethod.POST)
 	public String joinRun(MemberVo memberVo) {
 		memberService.insertMember(memberVo);
-		return "/";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/login_run", method=RequestMethod.POST)

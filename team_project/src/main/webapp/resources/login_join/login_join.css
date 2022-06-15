@@ -5,7 +5,7 @@
 	font-family:'jua';
 	font-size:15px;
 }
-#userid, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
+#useridlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
 	font-family:'jua';
 	font-size:17px;
 }

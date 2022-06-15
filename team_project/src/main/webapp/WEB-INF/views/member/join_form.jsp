@@ -50,8 +50,8 @@ $(document).ready(function(){
 					</div>
 					<p class="help-block" id="filecomment">프로필 사진을 등록해주세요.</p>
 					<div class="form-group">
-						<label for="userid" id="userid">아이디</label> 
-						<input type="text" class="form-control" name="userid" />
+						<label for="userid" id="useridlabel">아이디</label> 
+						<input type="text" class="form-control" name="userid" id="userid"/>
 						<div id="checkdiv">
 							<button type="button" class="btn btn-outline-secondary" id="overlapIdCheckBtn">아이디 중복확인</button>
 							<span id="id_used">사용중인 아이디입니다.</span>

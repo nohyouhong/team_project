@@ -51,6 +51,18 @@ public class ColumnServiceImpl implements ColumnService {
 	}
 	
 	@Override
+	public int getColumnC_rnum(int c_bno) {
+		int c_rnum = columnDao.getColumnC_rnum(c_bno);
+		return c_rnum;
+	}
+	
+	@Override
+	public int getColumnCount() {
+		int c_count = columnDao.getColumnCount();
+		return c_count;
+	}
+	
+	@Override
 	public ColumnVo getTopColumn() {
 		ColumnVo topColumn = columnDao.getTopColumn();
 		return topColumn;

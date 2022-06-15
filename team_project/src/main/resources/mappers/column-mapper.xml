@@ -35,8 +35,11 @@
 	
 	<!-- column list -->
 	<select id="getColumnList" resultType="ColumnVo">
-		select * from tbl_column_board
-		order by c_bno
+		select * from 
+    		(select rownum c_rnum, a.* from
+            	(select * from tbl_column_board 
+           		 order by c_bno)a)
+		order by c_rnum
 	</select>
 	
 	<select id="getColumnTitlePic" resultType="ColumnVo">
@@ -46,6 +49,18 @@
 			order by c_pno desc) a
 		where rownum = 1
 	</select>
+
+	<select id="getColumnC_rnum" resultType="int">
+		select rnum from
+			(select rownum rnum, a.*from
+				(select * from tbl_column_board
+				order by c_bno)a)
+		where c_bno = #{c_bno}
+	</select>
+	
+	<select id="getColumnCount" resultType="int">
+		select count(*) from tbl_column_board
+	</select>
 	
 	<select id="getTopColumn" resultType="ColumnVo">
 		select * from 
@@ -53,6 +68,7 @@
 			order by c_viewcnt desc)
 		where rownum = 1
 	</select>
+	
 	
 	<select id="getSubColumnList" resultType="ColumnVo">
 		select * from 

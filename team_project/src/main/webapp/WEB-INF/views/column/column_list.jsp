@@ -78,7 +78,7 @@
 				<div class="single_column_post d-flex">
 					<!-- Blog Thumbnail -->
 					<div class="column_title_pic">
-						<img class="column_img" src="/column/displayImage?column_image=C:/boardattach/${columnVo.c_picture}" alt="">
+						<img class="column_img" src="/column/displayImage?column_image=//192.168.0.110/boardattach/${columnVo.c_picture}" alt="">
 					</div>
 					<!-- Blog Content -->
 					<div class="column_content">

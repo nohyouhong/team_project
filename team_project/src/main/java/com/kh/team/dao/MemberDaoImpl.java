@@ -68,9 +68,8 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public boolean checkId(String userid) {
-		boolean result = sqlSession.selectOne(NAMESPACE, userid);
-		System.out.println("ckeckId result: " + result);
-		return result;
+	public int checkId(String userid) {
+		int cnt = sqlSession.selectOne(NAMESPACE+"checkId", userid);
+		return cnt;
 	}
 }

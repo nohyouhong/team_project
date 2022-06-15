@@ -41,10 +41,11 @@ public class MemberController {
 	
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	@ResponseBody
-	public String checkId(String userid) {
-		boolean result = memberService.checkId(userid);
-		System.out.println("result: " + result);
-		return String.valueOf(result);
+	public int checkId(String userid) {
+		System.out.println("memberController 작동됨");
+		int cnt = memberService.checkId(userid);
+		System.out.println("cnt: " + cnt);
+		return cnt;
 	}
 	
 	@RequestMapping(value="/join_form", method=RequestMethod.GET)

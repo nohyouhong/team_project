@@ -64,8 +64,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean checkId(String userid) {
-		boolean result = memberDao.checkId(userid);
-		return result;
+	public int checkId(String userid) {
+		int cnt = memberDao.checkId(userid);
+		return cnt;
 	}
 }

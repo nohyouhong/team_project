@@ -373,6 +373,9 @@ padding-bottom: 20px;
 	width: 470px;
 	height: 260px;
 }
+#modalReviewComment{
+	margin-left: 5px;
+}
 </style>
 <script>
 $(function(){
@@ -847,11 +850,39 @@ $(function(){
 	
 	//모달로 쪽지보내기
 	$("#sendMessageBtn").click(function(){
-		$("#modal-522222").trigger("click");
-		
-		$("#modalSendBtn").click(function() {
+		if("${loginVo}" != null && "${loginVo}" != ""){
+			$("#modal-522222").trigger("click");
 			
-		});
+			$("#modalSendBtn").click(function() {
+				var sender = "${loginVo.userid}";
+				var receiver = "${memberVo.userid}";
+				var textVal = $("#modalMessageText").val();
+				$("#sender").val(sender);
+				$("#receiver").val(receiver);
+				$("#message").val(textVal);
+				var form = $("#messageForm");
+				var formData = new FormData(form[0]);
+				var url = "/message/modalSendMessage";
+				
+				$.ajax({
+					"enctype" : "multipart/form-data",  
+					"processData" : false,
+					"contentType" : false,
+					"url" : url,
+					"method" : "post",
+					"data" : formData,
+					"success" : function(rData) {
+						if(rData == "true"){
+							console.log(rData);
+						}
+					}
+				});
+				$("#modalMessageText").val("");
+				$("#modal-522222").trigger("click");
+			});	
+		}else{
+			alert("로그인 해주세요.");
+		}
 	});
 	
 });
@@ -971,10 +1002,9 @@ $(function(){
 					<div class="modal-body">
 						<textarea id="modalMessageText" 
 							placeholder="쪽지내용을 입력해주세요."></textarea>
-						
 					</div>
 					<div class="modal-footer">
-						<button type="button" id="modalSendBtn" class="btn btn-secondary"
+						<button type="submit" id="modalSendBtn" class="btn btn-secondary"
 							>보내기</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">취소</button>
@@ -986,6 +1016,15 @@ $(function(){
 </div>
 
 <!-- 모달리스트 -->
+<!-- 쪽지폼 -->
+<form id="messageForm" method="post">
+	<input type="hidden" id="sender" name="sender">
+	<input type="hidden" id="receiver" name="receiver">
+	<input type="hidden" id="message" name="message">
+	<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno }">
+</form>
+<!-- 쪽지폼 -->
+
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">

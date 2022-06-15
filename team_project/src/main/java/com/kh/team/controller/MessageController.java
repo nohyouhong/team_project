@@ -64,9 +64,17 @@ public class MessageController {
 	
 	@RequestMapping(value="/sendMessage", method = RequestMethod.POST)
 	public String sendMessage(MessageVo messageVo, RedirectAttributes rttr) {
+		System.out.println(messageVo);
 		boolean result = messageService.sendMessage(messageVo);
 		System.out.println("result" +result);
 		rttr.addFlashAttribute("sendMessage", result);
 		return "redirect:/message/send_list";
+	}
+	
+	@RequestMapping(value="/modalSendMessage", method = RequestMethod.POST)
+	public String modalSendMessage(MessageVo messageVo, RedirectAttributes rttr, int r_bno) {
+		boolean result = messageService.sendMessage(messageVo);
+		rttr.addFlashAttribute("sendMessage", result);
+		return "redirect:/recipeboard/read?r_bno=" + r_bno;
 	}
 }

@@ -130,7 +130,7 @@
 					<div class="top-recipe-item large-item">
 						<div>
 							<a href="/column/readColumn?c_bno=${topColumnVo.c_bno}">
-								<img src="/column/displayImage?column_image=C:/boardattach/${topColumnVo.c_picture}" class="main_column_big_img">	
+								<img src="/column/displayImage?column_image=//192.168.0.110/boardattach${topColumnVo.c_picture}" class="main_column_big_img">	
 							</a>
 						</div>
 						<div class="top-recipe-text">
@@ -155,7 +155,7 @@
 								<div class="col-sm-4">
 									<div>
 										<a href="/column/readColumn?c_bno=${subColumnVo.c_bno}">
-											<img src="/column/displayImage?column_image=C:/boardattach/${subColumnVo.c_picture}" class="main_column_small_img">	
+											<img src="/column/displayImage?column_image=//192.168.0.110/boardattach/${subColumnVo.c_picture}" class="main_column_small_img">	
 										</a>
 									</div>
 								</div>

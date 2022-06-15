@@ -48,7 +48,7 @@ public class ColumnController {
 	@ResponseBody
 	public String uploadColumnImage(@RequestParam("file")MultipartFile file, HttpSession session) throws Exception {
 //		System.out.println("ColumController, uploadColumnImage, file: " + file);
-		String file_root = "C:/boardattach";
+		String file_root = "//192.168.0.110/boardattach";
 		String originalFilename = file.getOriginalFilename();
 //		System.out.println("ColumController, uploadColumnImage, originalFilename: " + originalFilename);
 		byte[] fileData = file.getBytes();
@@ -72,7 +72,7 @@ public class ColumnController {
 	@RequestMapping(value = "/deleteImage", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteImage(String filename) throws Exception {
-		String deleteFilename = "C:/boardattach/" + filename;
+		String deleteFilename = "//192.168.0.110/boardattach" + filename;
 		boolean result = MyFileUploader.deleteFile(deleteFilename);
 		return String.valueOf(result);
 	}
@@ -113,7 +113,7 @@ public class ColumnController {
 	@RequestMapping(value="/column_delete", method=RequestMethod.GET)
 	public String column_delete(int c_bno) {
 		System.out.println("c_bno: " + c_bno);
-		String file_root = "C:/boardattach/";
+		String file_root = "//192.168.0.110/boardattach";
 		List<String> deletefiles = columnService.getdeletefiles(c_bno);
 		for (String deletefile : deletefiles) {
 			System.out.println("deletefile: " + deletefile);

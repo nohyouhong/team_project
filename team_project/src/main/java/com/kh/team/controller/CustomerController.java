@@ -85,7 +85,7 @@ public class CustomerController {
 	public String uploadFile(MultipartFile file) throws Exception{
 		String originalFilename = file.getOriginalFilename();
 		byte[] fileData = file.getBytes();
-		String saveFilename = MyFileUploader.uploadFile("C:/boardattach", originalFilename, fileData);
+		String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach", originalFilename, fileData);
 //		System.out.println("saveFilename: " + saveFilename);
 		return saveFilename;
 	}

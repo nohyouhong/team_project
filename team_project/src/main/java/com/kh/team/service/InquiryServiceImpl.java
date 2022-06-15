@@ -19,6 +19,7 @@ public class InquiryServiceImpl implements InquiryService{
 	public boolean insertInquiry(InquiryVo inquiryVo) {
 		int a_bno = inquiryDao.getNexta_bno();
 		inquiryVo.setA_bno(a_bno);
+		inquiryVo.setRe_group(a_bno);
 		boolean result = inquiryDao.insertInquiry(inquiryVo);
 		String[] files = inquiryVo.getFiles();
 		if(files != null && files.length != 0) {
@@ -54,8 +55,8 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String userid, String mType) {
-		List<InquiryVo> inquiryList = inquiryDao.InquiryList(userid, mType);
+	public List<InquiryVo> InquiryList(String writer, PagingDto pagingDto) {
+		List<InquiryVo> inquiryList = inquiryDao.InquiryList(writer, pagingDto);
 		return inquiryList;
 	}
 
@@ -66,8 +67,8 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 
 	@Override
-	public List<InquiryVo> allInquiryList() {
-		List<InquiryVo> allInquiryList = inquiryDao.allInquiryList();
+	public List<InquiryVo> allInquiryList(PagingDto pagingDto) {
+		List<InquiryVo> allInquiryList = inquiryDao.allInquiryList(pagingDto);
 		return allInquiryList;
 	}
 
@@ -75,6 +76,16 @@ public class InquiryServiceImpl implements InquiryService{
 	public List<String> getInquiryImages(int a_bno) {
 		List<String> InquiryImages = inquiryDao.getInquiryImages(a_bno);
 		return InquiryImages;
+	}
+
+	@Override
+	public boolean insertInquiryReply(InquiryVo inquiryVo) {
+		inquiryDao.updateInquiryReSeq(inquiryVo);
+		boolean result = inquiryDao.insertInquiryReply(inquiryVo);
+		if(result) {
+			return true;
+		}
+		return false;
 	}
 
 }

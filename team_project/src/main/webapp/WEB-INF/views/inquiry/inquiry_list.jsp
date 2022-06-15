@@ -46,7 +46,7 @@ $(document).ready(function(){
 									<tr class="tr_list">
 										<td>${allInquiry_status.count}</td>
 										<td class="td_list" data-a_bno="${inquiryVo.a_bno}">${inquiryVo.a_title}</td>
-										<td>${inquiryVo.userid}</td>
+										<td>${inquiryVo.writer}</td>
 										<td>${inquiryVo.a_regdate}</td>
 									</tr>
 								</c:forEach>
@@ -56,7 +56,7 @@ $(document).ready(function(){
 									<tr class="tr_list">
 										<td>${inquiry_status.count}</td>
 										<td class="td_list" data-a_bno="${inquiryVo.a_bno}">${inquiryVo.a_title}</td>
-										<td>${inquiryVo.userid}</td>
+										<td>${inquiryVo.writer}</td>
 										<td>${inquiryVo.a_regdate}</td>
 									</tr>
 								</c:forEach>
@@ -68,6 +68,29 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<nav>
+			<ul class="pagination justify-content-center">
+			<c:if test="${pagingDto.startPage != 1}">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.startPage -1}">이전</a>
+				</li>
+			</c:if>
+			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
+				<li class="page-item">
+					<a class="page-link" href="${v}">${v}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.endPage +1}">다음</a>
+				</li>
+			</c:if>
+			</ul>
+		</nav>
+	</div>
+	<div class="col-md-2"></div>
 </div>
 
 <%@ include file="/WEB-INF/views/include/mypage_footer.jsp" %>

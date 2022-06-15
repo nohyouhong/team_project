@@ -37,6 +37,9 @@ $(document).ready(function(){
 					<h2 id="iquiryh2">나의 문의 내역</h2>
 						<div id="inquirysend">
 							<a href="/inquiry/inquiry_list" class="btn btn-outline-warning">목록으로</a>
+							<c:if test="${loginVo.m_code == 101}">
+								<a href="/inquiry/inquiryReplyForm?a_bno=${inquiryVo.a_bno}" class="btn btn-outline-primary">답글달기</a>
+							</c:if>
 						</div>
 					</div>
 					<form role="form">

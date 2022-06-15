@@ -52,10 +52,12 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String userid, String mType) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("userid", userid);
-		map.put("mType", mType);
+	public List<InquiryVo> InquiryList(String writer, PagingDto pagingDto) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("writer", writer);
+		map.put("pagingDto", pagingDto);
+		map.put("startRow", pagingDto.getStartRow());
+		map.put("endRow", pagingDto.getEndRow());
 		List<InquiryVo> InquiryList = sqlSession.selectList(NAMESPACE+"listInquiry", map);
 		return InquiryList;
 	}
@@ -82,8 +84,8 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public List<InquiryVo> allInquiryList() {
-		List<InquiryVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListInquiry");
+	public List<InquiryVo> allInquiryList(PagingDto pagingDto) {
+		List<InquiryVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListInquiry",pagingDto);
 		return allInquiryList;
 	}
 
@@ -91,6 +93,20 @@ public class InquiryDaoImpl implements InquiryDao{
 	public List<String> getInquiryImages(int a_bno) {
 		List<String> InquiryImages = sqlSession.selectList(NAMESPACE+"getInquiryImages", a_bno);
 		return InquiryImages;
+	}
+
+	@Override
+	public boolean insertInquiryReply(InquiryVo inquiryVo) {
+		int count = sqlSession.insert(NAMESPACE+"insertInquiryReply", inquiryVo);
+		if(count >0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void updateInquiryReSeq(InquiryVo inquiryVo) {
+		sqlSession.update(NAMESPACE+"updateReSeq", inquiryVo);
 	}
 
 }

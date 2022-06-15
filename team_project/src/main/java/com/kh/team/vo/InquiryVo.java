@@ -8,120 +8,122 @@ public class InquiryVo {
 	private int a_bno;
 	private String a_title;
 	private String a_content;
-	private String a_sender;
-	private String a_receiver;
+	private String writer;
 	private Date a_regdate;
+	private int re_group;
+	private int re_level;
+	private int re_seq;
 	private String[] files;
 	
 	public InquiryVo() {
 		super();
 		
 	}
+	
 
-
-	public InquiryVo(int a_bno, String a_title, String a_content, String a_sender, String a_receiver, Date a_regdate) {
+	public InquiryVo(int a_bno, String a_title, String a_content, String writer, Date a_regdate, String[] files) {
 		super();
 		this.a_bno = a_bno;
 		this.a_title = a_title;
 		this.a_content = a_content;
-		this.a_sender = a_sender;
-		this.a_receiver = a_receiver;
-		this.a_regdate = a_regdate;
-	}
-
-
-	public InquiryVo(int a_bno, String a_title, String a_content, String a_sender, String a_receiver, Date a_regdate,
-			String[] files) {
-		super();
-		this.a_bno = a_bno;
-		this.a_title = a_title;
-		this.a_content = a_content;
-		this.a_sender = a_sender;
-		this.a_receiver = a_receiver;
+		this.writer = writer;
 		this.a_regdate = a_regdate;
 		this.files = files;
 	}
 
+	public InquiryVo(int a_bno, String a_title, String a_content, String writer, Date a_regdate, int re_group,
+			int re_level, int re_seq, String[] files) {
+		super();
+		this.a_bno = a_bno;
+		this.a_title = a_title;
+		this.a_content = a_content;
+		this.writer = writer;
+		this.a_regdate = a_regdate;
+		this.re_group = re_group;
+		this.re_level = re_level;
+		this.re_seq = re_seq;
+		this.files = files;
+	}
 
 	public int getA_bno() {
 		return a_bno;
 	}
 
-
 	public void setA_bno(int a_bno) {
 		this.a_bno = a_bno;
 	}
-
 
 	public String getA_title() {
 		return a_title;
 	}
 
-
 	public void setA_title(String a_title) {
 		this.a_title = a_title;
 	}
-
 
 	public String getA_content() {
 		return a_content;
 	}
 
-
 	public void setA_content(String a_content) {
 		this.a_content = a_content;
 	}
 
-
-
-	public String getA_sender() {
-		return a_sender;
+	public String getWriter() {
+		return writer;
 	}
 
-
-	public void setA_sender(String a_sender) {
-		this.a_sender = a_sender;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-
-
-	public String getA_receiver() {
-		return a_receiver;
-	}
-
-
-	public void setA_receiver(String a_receiver) {
-		this.a_receiver = a_receiver;
-	}
-
 
 	public Date getA_regdate() {
 		return a_regdate;
 	}
 
-
 	public void setA_regdate(Date a_regdate) {
 		this.a_regdate = a_regdate;
 	}
 
+	public int getRe_group() {
+		return re_group;
+	}
+
+	public void setRe_group(int re_group) {
+		this.re_group = re_group;
+	}
+
+	public int getRe_level() {
+		return re_level;
+	}
+
+	public void setRe_level(int re_level) {
+		this.re_level = re_level;
+	}
+
+	public int getRe_seq() {
+		return re_seq;
+	}
+
+	public void setRe_seq(int re_seq) {
+		this.re_seq = re_seq;
+	}
 
 	public String[] getFiles() {
 		return files;
 	}
 
-
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
 
-
 	@Override
 	public String toString() {
-		return "InquiryVo [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", a_sender="
-				+ a_sender + ", a_receiver=" + a_receiver + ", a_regdate=" + a_regdate + ", files="
-				+ Arrays.toString(files) + "]";
+		return "InquiryVo [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", writer=" + writer
+				+ ", a_regdate=" + a_regdate + ", re_group=" + re_group + ", re_level=" + re_level + ", re_seq="
+				+ re_seq + ", files=" + Arrays.toString(files) + "]";
 	}
 
-		
-
+	
 	
 }

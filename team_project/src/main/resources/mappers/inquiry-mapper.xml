@@ -12,9 +12,11 @@
 		values(#{a_picture}, #{a_bno})
 	</insert>
 	<insert id="insertInquiry">
-		insert into tbl_ask_board(a_bno, a_title, a_content, a_sender, a_receiver)
-		values(#{a_bno}, #{a_title}, #{a_content}, #{a_sender}, #{a_receiver})
+		insert into tbl_ask_board(a_bno, a_title, a_content, writer, re_group)
+		values(#{a_bno}, #{a_title}, #{a_content}, #{writer}, #{a_bno})
 	</insert>
+
+	
 	<select id="readInquiry" resultType="InquiryVo">
 		select * from tbl_ask_board
 		where a_bno = #{a_bno}
@@ -30,12 +32,16 @@
 		where a_bno = #{a_bno}
 	</delete>
 	<select id="listInquiry" resultType="InquiryVo">
-		select * from tbl_ask_board
-		 where ${mType} = #{userid}
-		order by a_bno desc
+		select * from(select rownum rnum, a.* from(
+			select * from tbl_ask_board
+			where writer = #{writer}
+			order by re_group desc, re_seq asc) a)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	<select id="allListInquiry" resultType="InquiryVo">
-		select * from tbl_ask_board
+		select * from(select rownum rnum, a.* from(
+			select * from tbl_ask_board) a)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_ask_board
@@ -44,5 +50,15 @@
 		select * from tbl_ask_board_pic
 		where a_bno = #{a_bno}
 	</select>
-	
+	<!-- 	답글 -->
+	<insert id="insertInquiryReply">
+		insert into tbl_ask_board(a_bno, a_title, a_content, writer, re_group, re_level, re_seq)
+		values(#{a_bno}, #{a_title}, #{a_content}, #{writer}, #{re_group}, #{re_level}+1, #{re_seq}+1)
+	</insert>
+	<update id="updateReSeq">
+		update tbl_ask_board set
+			re_seq = re_seq + 1
+		where re_group = #{re_group}
+		and re_seq &gt; #{re_seq}
+	</update>
 </mapper>

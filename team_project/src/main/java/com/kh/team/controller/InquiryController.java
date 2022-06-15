@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.service.InquiryService;
 import com.kh.team.vo.InquiryVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -31,17 +32,19 @@ public class InquiryController {
 	}
 	
 	@RequestMapping(value="/inquiry_run", method=RequestMethod.POST)
-	public String inquiryRun(InquiryVo inquiryVo, RedirectAttributes rttr) {
+	public String inquiryRun(InquiryVo inquiryVo) {
 		inquiryService.insertInquiry(inquiryVo);
 		return "redirect:/inquiry/inquiry_list";
 	}
 	
 	@RequestMapping(value="/inquiry_list", method=RequestMethod.GET)
-	public String inquiryList(HttpSession session, InquiryVo inquiryVo, Model model) {
+	public String inquiryList(HttpSession session, InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = loginVo.getUserid();
-		List<InquiryVo> inquiryList = inquiryService.InquiryList(userid,inquiryService.TYPE_SENDER);
-		List<InquiryVo> allInquiryList = inquiryService.allInquiryList();
+		String writer = loginVo.getUserid();
+		pagingDto.setCount(inquiryService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<InquiryVo> inquiryList = inquiryService.InquiryList(writer, pagingDto);
+		List<InquiryVo> allInquiryList = inquiryService.allInquiryList(pagingDto);
 		model.addAttribute("inquiryList", inquiryList);
 		model.addAttribute("allInquiryList", allInquiryList);
 		return "inquiry/inquiry_list";
@@ -58,7 +61,7 @@ public class InquiryController {
 	
 	@RequestMapping(value="/inquiry_delete", method=RequestMethod.GET)
 	public String inquiryDelete(int a_bno) {
-		boolean result = inquiryService.deleteInquiry(a_bno);
+		inquiryService.deleteInquiry(a_bno);
 		return "redirect:/inquiry/inquiry_list";
 	}
 	
@@ -70,5 +73,18 @@ public class InquiryController {
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
 		return data;
+	}
+	
+	@RequestMapping(value="/inquiryReplyForm", method=RequestMethod.GET)
+	public String inquiryReplyForm(int a_bno, Model model) {
+		InquiryVo inquiryVo = inquiryService.readInquiry(a_bno);
+		model.addAttribute("inquiryVo", inquiryVo);
+		return "/inquiry/inquiryReply_form";
+	}
+	
+	@RequestMapping(value="/inquiryReplyRun", method=RequestMethod.POST)
+	public String inquiryReplyRun(InquiryVo inquiryVo) {
+		inquiryService.insertInquiryReply(inquiryVo);
+		return "redirect:/inquiry/inquiry_list";
 	}
 }

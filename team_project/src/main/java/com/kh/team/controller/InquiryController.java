@@ -31,7 +31,11 @@ public class InquiryController {
 	}
 	
 	@RequestMapping(value="/inquiry_run", method=RequestMethod.POST)
-	public String inquiryRun(InquiryVo inquiryVo) {
+	public String inquiryRun(HttpSession session, InquiryVo inquiryVo) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String writer = loginVo.getUserid();
+		inquiryVo.setWriter(writer);
+		System.out.println("inquiryVo: "+inquiryVo);
 		inquiryService.insertInquiry(inquiryVo);
 		return "redirect:/inquiry/inquiry_list";
 	}

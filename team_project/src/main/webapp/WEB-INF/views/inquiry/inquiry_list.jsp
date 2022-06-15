@@ -30,8 +30,6 @@ $(document).ready(function(){
 							<a id="btnWriteMessage" href="/inquiry/inquiry_form" class="btn btn-outline-success">1:1문의하기</a>
 						</div>
 					</div>
-					${inquiryList}
-					${allInquiryList}
 					<table class="table inquiry_table">
 						<thead>
 							<tr>
@@ -76,17 +74,17 @@ $(document).ready(function(){
 			<ul class="pagination justify-content-center">
 			<c:if test="${pagingDto.startPage != 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pagingDto.startPage -1}">이전</a>
+					<a class="page-link in_page_link" href="${pagingDto.startPage -1}">이전</a>
 				</li>
 			</c:if>
 			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
 				<li class="page-item">
-					<a class="page-link" href="${v}">${v}</a>
+					<a class="page-link in_page_link" href="${v}">${v}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pagingDto.endPage +1}">다음</a>
+					<a class="page-link in_page_link" href="${pagingDto.endPage +1}">다음</a>
 				</li>
 			</c:if>
 			</ul>

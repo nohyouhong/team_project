@@ -44,6 +44,7 @@
 			<mapping path="/column/column_form"/>
 			<mapping path="/customer/inquiry_form"/>
 			<exclude-mapping path="/member/login_form"/>
+			<exclude-mapping path="/member/join_form"/>
 			<exclude-mapping path="/member/login_run"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>

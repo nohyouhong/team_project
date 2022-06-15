@@ -64,6 +64,12 @@ public class MemberController {
 		return "point/point_list";
 	};
 	
+	@RequestMapping(value="/join_run", method=RequestMethod.POST)
+	public String joinRun(MemberVo memberVo) {
+		memberService.insertMember(memberVo);
+		return "/";
+	}
+	
 	@RequestMapping(value="/login_run", method=RequestMethod.POST)
 	public String login(String userid, String userpw, String saveId, 
 			HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {

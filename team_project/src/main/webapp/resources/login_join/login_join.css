@@ -10,6 +10,10 @@
 	font-family:'jua';
 	font-size:15px;
 }
+#userid, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename, #filecomment{
+	font-family:'jua';
+	font-size:17px;
+}
 
 @font-face{
 	font-family: 'jua';
@@ -26,7 +30,51 @@
 	box-shadow: 10px 5px 5px rgb(255,227,219);
 	padding:10px 5px 20px 5px;
 }
-
+#join_form{
+	border:medium ridge rgb(255,227,219);
+	border-radius:5px;
+	box-shadow: 10px 5px 5px rgb(255,227,219);
+	padding:10px 5px 20px 5px;
+}
 #subdiv{
 	text-align:center;
+}
+.gender{
+	margin-left: 20px; 
+}
+.window{
+	margin-top:100px;
+	margin-bottom:30px;
+}
+.myjoinForm {
+	text-align: left;
+}
+#join_bottom{
+	margin-bottom:50px;
+}
+#overlapIdCheckBtn{
+	border-radius: 10px;
+	margin-top:5px;
+	padding:5px 15px;
+}
+#genderRadio{
+	display: flex
+}
+.gender{
+	margin: 6px 10px;
+}
+#file{
+	display:none;
+}
+#joinImg{
+	height: 100px;
+	width: 100px;
+	border: 2px solid gray;
+	border-radius: 50px;
+	cursor: pointer;
+	background: white;
+}
+#profileImg{
+display: flex;
+margin:auto;
 }

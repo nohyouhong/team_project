@@ -31,10 +31,7 @@ span{
 	margin-top:100px;
 	margin-bottom:30px;
 }
-#message_read{
-	border-top-style: solid;
-	border-top-color: rgb(255,227,219); 
-}
+
 .message_read{
 	padding:10px;
 }

@@ -83,10 +83,8 @@ $(function(){
 					</div>
 					<div class="col-md-9">
 						<form role="form" method="post" action="/ask/ask_run" id="frmCreate">
-						<input type="hidden" value="${loginVo.userid}" name="a_sender">
-						<input type="hidden" value="admin" name="a_receiver">
+						<input type="hidden" value="${loginVo.userid}" name="writer">
 						<span id="notice_top">1:1 문의 글작성</span>
-						
 						<hr>
 							<div class="form-group inq">
 								<b>문의 제목</b><input type="text" class="form-control" name="a_title" />

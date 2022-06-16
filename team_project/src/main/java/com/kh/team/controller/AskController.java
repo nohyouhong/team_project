@@ -66,8 +66,8 @@ public class AskController {
 	public String askAdminList(AskVo askVo, Model model, PagingDto pagingDto) {
 		pagingDto.setCount(askService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
-		List<AskVo> allaskList = askService.allAskList(pagingDto);
-		model.addAttribute("allaskList", allaskList);
+		List<AskVo> allAskList = askService.allAskList(pagingDto);
+		model.addAttribute("allAskList", allAskList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "ask/ask_admin_list";
 	}
@@ -101,7 +101,7 @@ public class AskController {
 	public String askReplyForm(int a_bno, Model model) {
 		AskVo askVo = askService.readAsk(a_bno);
 		model.addAttribute("askVo", askVo);
-		return "/ask/askReply_form";
+		return "/ask/ask_reply_form";
 	}
 	
 	@RequestMapping(value="/askReplyRun", method=RequestMethod.POST)

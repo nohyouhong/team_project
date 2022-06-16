@@ -20,7 +20,9 @@
 	float:left;
 	display: none;
 }
-
+#read-title-writer{
+	display:flex;
+}
 .inq{
 	margin-top:10px;
 }
@@ -53,14 +55,26 @@ th {
 	height:150px;
 }
 
-#iquiryh2 {
+.iquiryh2 {
 	margin-left: 50px;
 }
 
-.ask_table {
+#read-title-writer, #reply-title{
+	border-top-style: solid;
+	border-top-color: rgb(255,227,219); 
+}
+#read-title{
+	width:80%;
+}
+#read-writer{
+	width:20%;
+}
+.ask_table{
 	margin-top: 20px;
 }
-
+#reply-title{
+	padding-top:20px;
+}
 #asksend {
 	float: right;
 }

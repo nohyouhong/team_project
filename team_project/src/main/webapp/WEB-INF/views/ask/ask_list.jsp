@@ -44,7 +44,10 @@ $(document).ready(function(){
 								<c:forEach var="askVo" items="${askList}" varStatus="ask_status">
 									<tr class="tr_list">
 										<td>${ask_status.count}</td>
-										<td class="td_list" data-a_bno="${askVo.a_bno}">${askVo.a_title}</td>
+										<td class="td_list" data-a_bno="${askVo.a_bno}" 
+											style="padding-left:${askVo.re_level * 45}">
+											${askVo.a_title}
+										</td>
 										<td>${askVo.writer}</td>
 										<td>${askVo.a_regdate}</td>
 										<td>

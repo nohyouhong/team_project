@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.adminsidebar {
+  width: 280px;
+  text-align:center;
+}
+
+#admin-img {
+	max-width: 85px;
+	width: 100%;
+	border-radius: 100%;
+	margin: 0 auto 15px;
+	border: 3px solid #fff;
+}
+#admin_form{
+	border:medium ridge rgb(255,227,219);
+	border-radius:5px;
+	margin-top:0px;
+	width:280px;
+}
+#admin_div{
+	float:left;
+	display:flex;
+	margin-top:50px;
+	margin-bottom:50px;
+}
+.admin-item{
+	border-top: 1px solid rgb(255,227,219);
+}
+.admin-wrapper {
+    background: white;
+    min-height: 80vh;
+    padding: 2rem 1rem;
+    transition: all .8s ease;
+    width: calc(100% - 315px);
+}
+.admin-title{
+	font-family: 'jua';
+	font-size:18px;
+}
+.admin-info{
+	margin-top:20px;
+	text-align:center;
+}
+.admin-name{
+	font-size:12px;
+	margin-bottom:20px;
+}

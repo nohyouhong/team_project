@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
-<%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
+<c:choose>
+	<c:when test="${loginVo.m_code == 101}">
+		<%@ include file="/WEB-INF/views/include/admin_header.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
+	</c:otherwise>
+</c:choose>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 
 <link rel="stylesheet" href="/resources/customer_center/ask.css" type="text/css">
@@ -34,22 +41,41 @@ $(document).ready(function(){
 				<div class="tab-pane active" id="tab1">
 					<div>
 					<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
-					<h2 id="iquiryh2">나의 문의 내역</h2>
+					<c:choose>
+						<c:when test="${loginVo.m_code == 101}">
+							<h2 class="iquiryh2">1:1 문의 내역</h2>
+						</c:when>
+						<c:otherwise>
+							<h2 class="iquiryh2">나의 문의 내역</h2>
+						</c:otherwise>
+					</c:choose>
 						<div id="asksend">
-							<a href="/ask/ask_list" class="btn btn-outline-warning">목록으로</a>
-							<c:if test="${loginVo.m_code == 101}">
-								<a href="/ask/askReplyForm?a_bno=${askVo.a_bno}" class="btn btn-outline-primary">답글달기</a>
-							</c:if>
+							<c:choose>
+								<c:when test="${loginVo.m_code == 101}">
+									<a href="/ask/ask_admin_list" class="btn btn-outline-warning">목록으로</a>
+									<a href="/ask/askReplyForm?a_bno=${askVo.a_bno}" class="btn btn-outline-primary">답글달기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/ask/ask_list" class="btn btn-outline-warning">목록으로</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<form role="form">
 					<a href="${askVo.a_bno}" class="btn btn-sm btn-outline-danger" id="ask_del_btn">
 						삭제하기
 					</a>
-					<div class="form-group message_read text-left" id="message_read">
+					<div id="read-title-writer">
+						<div class="form-group message_read text-left" id="read-title">
 							문의 제목
 							<input type="text" class="form-control" id="receiver"
 							value="${askVo.a_title}" readonly />
+						</div>
+						<div class="form-group message_read text-left" id="read-writer">
+							작성자
+							<input type="text" class="form-control" id="writer"
+							value="${askVo.writer}" readonly />
+						</div>
 					</div>
 					<div class="form-group message_read text-left">
 						 내용 
@@ -62,6 +88,7 @@ $(document).ready(function(){
 		</div>
 		<div>
 			<c:forEach items="${askImages}" var="askImage">
+				<p>첨부한 이미지 파일</p>
 				<img class="askImage" src="/ask/displayImage?filename=${askImage}">
 			</c:forEach>
 		</div>

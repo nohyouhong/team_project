@@ -14,7 +14,13 @@
 	</select>
 	
 	<select id="getAvgRating" resultType="float">
-		select avg(r_rating) from tbl_recipe_review
+		select nvl(avg(r_rating), 0) from tbl_recipe_review
+		where r_bno = #{r_bno}
+	</select>
+	
+	<select id="getRatingNum" resultType="int">
+		select count(*) from tbl_recipe_review
+		where r_bno = #{r_bno}
 	</select>
 	
 	<insert id="insertPicture">
@@ -101,10 +107,10 @@
   		  (select * from 
   		  tbl_recipe_board b join tbl_member m
   		  	on b.userid = m.userid
-  		  <include refid="search"></include>
-   			order by r_regdate desc) a)
+   			 order by r_regdate desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
+<!--   		  <include refid="search"></include> -->
 	
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_recipe_board

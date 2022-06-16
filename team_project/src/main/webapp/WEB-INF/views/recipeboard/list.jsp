@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 <style>
 .recipeListNumDiv{
@@ -29,6 +30,7 @@
 	width: 280px;
 	height: 280px;
 	border-radius: 10px;
+	cursor: pointer;
 }
 .listUserImage{
 	width: 25px;
@@ -42,6 +44,7 @@
 	margin-bottom: 10px;
 	font-size: 16px;
 	font-weight: bold;
+	height: 50px;
 }
 .oneRecipeInfo{
 	margin-top: 10px;
@@ -71,33 +74,76 @@
 		<div class="col-md-8">
 			<div class="recipeListNumDiv">
 				<span>총</span>
-				<span class="listNumVal">100350</span>
+				<span class="listNumVal">${boardCount }</span>
 				<span>개의 맛있는 레시피가 있습니다.</span>
 			</div>
 			<div class="recipeListDiv">
 				<c:forEach items="${recipeBoardList }" var="recipeBoardVo">
 					<div class="oneRecipe">
 						<div>
-							<img class="oneRecipeImage" src="/recipeboard/displayImage/?filename=${reciepBoardVo.r_title }">
-							<img class="oneRecipeImage" src="/resources/main_mypage/images/cookSample.jpg">
+							<a href="/recipeboard/read?r_bno=${recipeBoardVo.r_bno }">
+								<img class="oneRecipeImage" src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic}">
+							</a>
 						</div>
 						<div>
-							<div class="oneRecipeTitle">${reciepBoardVo.r_title }</div>
+							<div class="oneRecipeTitle">${fn:substring(recipeBoardVo.r_title, 0, 26 )}...</div>
 							<div>
-								<img class="listUserImage rounded-circle" src="/resources/main_mypage/images/userImageM.png">
-								<span class="listUserName">${reciepBoardVo.userid }</span>
+								<c:choose>
+									<c:when test="${not empty recipeBoardVo.m_picture}">
+										<img class="listUserImage rounded-circle" src="/recipeboard/displayImage?filename=${recipeBoardVo.m_picture}">
+									</c:when>
+									<c:otherwise>
+										<img class="listUserImage rounded-circle" src="/resources/main_mypage/images/userImageM.png">
+									</c:otherwise>
+								</c:choose>
+								<span class="listUserName">${recipeBoardVo.username }</span>
 							</div>
 							<div class="oneRecipeInfo">
 								<span class="listStars">
-									<i class="fas fa-star listYellowStar"></i>
-									<i class="fas fa-star listYellowStar"></i>
-									<i class="fas fa-star listGrayStar"></i>
-									<i class="fas fa-star listGrayStar"></i>
-									<i class="fas fa-star listGrayStar"></i>
+									<c:choose>
+										<c:when test="${recipeBoardVo.avgRating > 4}">
+											<c:forEach begin="1" end="5">
+												<i class="fas fa-star listYellowStar"></i>		
+											</c:forEach>
+										</c:when>
+										<c:when test="${recipeBoardVo.avgRating > 3}">
+											<c:forEach begin="1" end="4">
+												<i class="fas fa-star listYellowStar"></i>		
+											</c:forEach>
+											<i class="fas fa-star listGrayStar"></i>
+										</c:when>
+										<c:when test="${recipeBoardVo.avgRating > 2}">
+											<c:forEach begin="1" end="3">
+												<i class="fas fa-star listYellowStar"></i>		
+											</c:forEach>
+											<c:forEach begin="1" end="2">
+												<i class="fas fa-star listGrayStar"></i>		
+											</c:forEach>
+										</c:when>
+										<c:when test="${recipeBoardVo.avgRating > 1}">
+											<c:forEach begin="1" end="2">
+												<i class="fas fa-star listYellowStar"></i>		
+											</c:forEach>
+											<c:forEach begin="1" end="3">
+												<i class="fas fa-star listGrayStar"></i>		
+											</c:forEach>
+										</c:when>
+										<c:when test="${recipeBoardVo.avgRating > 0}">
+											<c:forEach begin="1" end="4">
+												<i class="fas fa-star listYellowStar"></i>		
+											</c:forEach>
+											<i class="fas fa-star listGrayStar"></i>		
+										</c:when>
+										<c:otherwise>
+											<c:forEach begin="1" end="5">
+												<i class="fas fa-star listGrayStar"></i>		
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 								</span>
-								<span class="listStarNum">(2)</span>
+								<span class="listStarNum">(${recipeBoardVo.ratingNum })</span>
 								<span class="listViewName">조회수</span>
-								<span class="listViewCnt">${reciepBoardVo.r_viewcnt }</span>
+								<span class="listViewCnt">${recipeBoardVo.r_viewcnt }</span>
 							</div>
 						</div>
 					</div>

@@ -69,7 +69,7 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	public RecipeBoardVo read(int r_bno) {
 		recipeBoardDao.updateViewCnt(r_bno);
 		RecipeBoardVo recipeBoardVo = recipeBoardDao.read(r_bno);
-		float avgRating = recipeBoardDao.getAvgRating();
+		float avgRating = recipeBoardDao.getAvgRating(r_bno);
 		recipeBoardVo.setAvgRating(avgRating);
 		
 		return recipeBoardVo;
@@ -108,6 +108,13 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	@Override
 	public List<RecipeBoardVo> list(PagingDto pagingDto) {
 		List<RecipeBoardVo> list = recipeBoardDao.list(pagingDto);
+		for(RecipeBoardVo recipeBoardVo : list) {
+			 int r_bno = recipeBoardVo.getR_bno();
+			 float avgRating = recipeBoardDao.getAvgRating(r_bno);
+			 int ratingNum = recipeBoardDao.getRatingNum(r_bno);
+			 recipeBoardVo.setAvgRating(avgRating);
+			 recipeBoardVo.setRatingNum(ratingNum);
+		}
 		return list;
 	}
 	

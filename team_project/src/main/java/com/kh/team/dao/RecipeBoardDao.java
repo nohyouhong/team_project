@@ -24,7 +24,8 @@ public interface RecipeBoardDao {
 	public void updateViewCnt(int r_bno); 
 	public int getNextBno();
 	public int getNextCno();
-	public float getAvgRating();
+	public float getAvgRating(int r_bno);
+	public int getRatingNum(int r_bno);
 	public void insertContent(String content, int r_bno, int r_cno);
 	public void insertPicture(String picture, int r_cno);
 	public String getUseridByBno(int r_bno);

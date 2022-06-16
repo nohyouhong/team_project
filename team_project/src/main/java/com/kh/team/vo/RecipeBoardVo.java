@@ -76,6 +76,29 @@ public class RecipeBoardVo {
 		this.r_tags = r_tags;
 	}
 
+	public RecipeBoardVo(int r_bno, String r_title, String r_explain, String[] r_contents, String r_cooktip,
+			String userid, String m_picture, Date r_regdate, int f_code, String f_type, String r_time, String r_level,
+			int r_viewcnt, float avgRating, String r_titlepic, String[] pictures, String[] r_tags) {
+		super();
+		this.r_bno = r_bno;
+		this.r_title = r_title;
+		this.r_explain = r_explain;
+		this.r_contents = r_contents;
+		this.r_cooktip = r_cooktip;
+		this.userid = userid;
+		this.m_picture = m_picture;
+		this.r_regdate = r_regdate;
+		this.f_code = f_code;
+		this.f_type = f_type;
+		this.r_time = r_time;
+		this.r_level = r_level;
+		this.r_viewcnt = r_viewcnt;
+		this.avgRating = avgRating;
+		this.r_titlepic = r_titlepic;
+		this.pictures = pictures;
+		this.r_tags = r_tags;
+	}
+
 	public int getR_bno() {
 		return r_bno;
 	}
@@ -204,12 +227,21 @@ public class RecipeBoardVo {
 		this.r_tags = r_tags;
 	}
 
+	public String getM_picture() {
+		return m_picture;
+	}
+
+	public void setM_picture(String m_picture) {
+		this.m_picture = m_picture;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeBoardVo [r_bno=" + r_bno + ", r_title=" + r_title + ", r_explain=" + r_explain + ", r_contents="
-				+ Arrays.toString(r_contents) + ", r_cooktip=" + r_cooktip + ", userid=" + userid + ", r_regdate="
-				+ r_regdate + ", f_code=" + f_code + ", f_type=" + f_type + ", r_time=" + r_time + ", r_level="
-				+ r_level + ", r_viewcnt=" + r_viewcnt + ", avgRating=" + avgRating + ", r_titlepic=" + r_titlepic
-				+ ", pictures=" + Arrays.toString(pictures) + ", r_tags=" + Arrays.toString(r_tags) + "]";
+				+ Arrays.toString(r_contents) + ", r_cooktip=" + r_cooktip + ", userid=" + userid + ", m_picture="
+				+ m_picture + ", r_regdate=" + r_regdate + ", f_code=" + f_code + ", f_type=" + f_type + ", r_time="
+				+ r_time + ", r_level=" + r_level + ", r_viewcnt=" + r_viewcnt + ", avgRating=" + avgRating
+				+ ", r_titlepic=" + r_titlepic + ", pictures=" + Arrays.toString(pictures) + ", r_tags="
+				+ Arrays.toString(r_tags) + "]";
 	}
 }

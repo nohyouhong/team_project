@@ -138,11 +138,16 @@ public class RecipeBoardController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) {
-		pagingDto.setCount(recipeBoardService.getCount(pagingDto));
+		int boardCount = recipeBoardService.getCount(pagingDto);
+		pagingDto.setCount(boardCount);
+		pagingDto.setPerPage(16);
 		pagingDto.setPage(pagingDto.getPage());
+		System.out.println("pagingDto" + pagingDto);
 		List<RecipeBoardVo> recipeBoardList = recipeBoardService.list(pagingDto);
+		System.out.println(recipeBoardList);
 		model.addAttribute("recipeBoardList", recipeBoardList);
 		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("boardCount", boardCount);
 		
 		return "recipeboard/list";
 	}
@@ -162,13 +167,12 @@ public class RecipeBoardController {
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception{
-//		System.out.println(filename);
+		System.out.println("filename" + filename);
 		FileInputStream fis = new FileInputStream(filename);
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
 		return data;
 	}
-	
 	
 	
 	@RequestMapping(value="/deleteFile", method=RequestMethod.GET)

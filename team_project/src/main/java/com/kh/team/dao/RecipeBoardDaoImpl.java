@@ -109,10 +109,15 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 	}
 	
 	@Override
-	public float getAvgRating() {
-		float avgRating = sqlSession.selectOne(NAMESPACE + "getAvgRating");
-		System.out.println(avgRating);
+	public float getAvgRating(int r_bno) {
+		float avgRating = sqlSession.selectOne(NAMESPACE + "getAvgRating", r_bno);
 		return avgRating;
+	}
+	
+	@Override
+	public int getRatingNum(int r_bno) {
+		int ratingNum = sqlSession.selectOne(NAMESPACE + "getRatingNum", r_bno);
+		return ratingNum;
 	}
 
 	@Override

@@ -17,12 +17,12 @@
 
 <!-- 	mypage script -->
 <!-- Required meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/resources/main_mypage/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="/resources/main_mypage/css/perfect-scrollbar.min.css" />
-  <link rel="stylesheet" href="/resources/main_mypage/css/flag-icon.min.css" />
-  <link rel="stylesheet" href="/resources/main_mypage/css/style.css" />
-  <link rel="shortcut icon" href="/resources/main_mypage/images/favicon.png" />
+<!--   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+<!--   <link rel="stylesheet" href="/resources/main_mypage/css/font-awesome.min.css" /> -->
+<!--   <link rel="stylesheet" href="/resources/main_mypage/css/perfect-scrollbar.min.css" /> -->
+<!--   <link rel="stylesheet" href="/resources/main_mypage/css/flag-icon.min.css" /> -->
+<!--   <link rel="stylesheet" href="/resources/main_mypage/css/style.css" /> -->
+<!--   <link rel="shortcut icon" href="/resources/main_mypage/images/favicon.png" /> -->
   <link rel="stylesheet" href="/resources/main_mypage/hongcss.css" />
 
 

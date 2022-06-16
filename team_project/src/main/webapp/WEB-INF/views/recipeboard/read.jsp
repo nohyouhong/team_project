@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 <style>
 .cookP{
@@ -448,7 +449,7 @@ $(function(){
 				} 
 				if(this.r_userpic != null) {
 					var r_userpic = this.r_userpic;
-					var imageFile = "/recipeboard/displayImage/?filename=" + r_userpic;
+					var imageFile = "/recipeboard/displayImage?filename=" + r_userpic;
 					oneCommentDiv.find("img").attr("src", imageFile);
 				}
 				//답글 띄우기
@@ -652,12 +653,12 @@ $(function(){
 					var r_reviewpic = this.r_reviewpic;
 					
 					var imageFileHtml = 
-						'<img class="reviewUserImage reviewUserImageBtn" data-filename="' + r_reviewpic + '" src="/recipeboard/displayImage/?filename=' + r_reviewpic + '">'
+						'<img class="reviewUserImage reviewUserImageBtn" data-filename="' + r_reviewpic + '" src="/recipeboard/displayImage?filename=' + r_reviewpic + '">'
 					oneReviewDiv.find("div.reviewUserCookImageDiv").append(imageFileHtml);
 				}
 				if(this.m_picture != null) {
 					var m_picture = this.m_picture;
-					var imageFile = "/recipeboard/displayImage/?filename=" + m_picture;
+					var imageFile = "/recipeboard/displayImage?filename=" + m_picture;
 					oneReviewDiv.find("div.reviewUserImageDiv").find("img").attr("src", imageFile);
 				} 
 				var spans = oneReviewDiv.find("span");
@@ -1055,13 +1056,21 @@ $(function(){
 			<img class="mainImage" 
 				src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic }"/>
 			<div class="userImageDiv">
-				<img class="userImage rounded-circle img-thumbnail" 
-					src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /><br>
+				<c:choose>
+					<c:when test="${not empty memberVo.m_picture }">
+						<img class="userImage rounded-circle img-thumbnail" 
+							src="/recipeboard/displayImage?filename=${memberVo.m_picture }" /><br>
+					</c:when>
+					<c:otherwise>
+						<img class="userImage rounded-circle img-thumbnail" 
+							src="/resources/main_mypage/images/userImageM.png" /><br>
+					</c:otherwise>
+				</c:choose>
 				<div class="cookUserid">${memberVo.username }</div>
 				<div class="cookViewRatingDiv">
 					<span class="cookavgRating">
 						<i class="fas fa-star fa-lg"></i>
-						<span class="cookavgRatingVal">${recipeBoardVo.avgRating }</span>
+						<span class="cookavgRatingVal">${fn:substring(recipeBoardVo.avgRating, 0, 3 )}</span>
 					</span>
 					<span class="cookViewCntBack">
 						<i class="fas fa-eye fa-lg"></i>

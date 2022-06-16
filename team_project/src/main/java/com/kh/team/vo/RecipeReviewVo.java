@@ -7,6 +7,7 @@ public class RecipeReviewVo {
 	private int r_bno;
 	private String r_comment;
 	private String userid;
+	private String username;
 	private String r_reviewpic;
 	private String m_picture;
 	private Date r_regdate;
@@ -28,13 +29,14 @@ public class RecipeReviewVo {
 		this.r_rating = r_rating;
 	}
 
-	public RecipeReviewVo(int r_rno, int r_bno, String r_comment, String userid, String r_reviewpic, String m_picture,
-			 Date r_regdate, int re_group, int re_level, int r_rating) {
+	public RecipeReviewVo(int r_rno, int r_bno, String r_comment, String userid, String username, String r_reviewpic,
+			String m_picture, Date r_regdate, int re_group, int re_level, int r_rating) {
 		super();
 		this.r_rno = r_rno;
 		this.r_bno = r_bno;
 		this.r_comment = r_comment;
 		this.userid = userid;
+		this.username = username;
 		this.r_reviewpic = r_reviewpic;
 		this.m_picture = m_picture;
 		this.r_regdate = r_regdate;
@@ -123,10 +125,19 @@ public class RecipeReviewVo {
 		this.r_rating = r_rating;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeReviewVo [r_rno=" + r_rno + ", r_bno=" + r_bno + ", r_comment=" + r_comment + ", userid=" + userid
-				+ ", r_reviewpic=" + r_reviewpic + ", m_picture=" + m_picture + ", r_regdate=" + r_regdate
-				+ ", re_group=" + re_group + ", re_level=" + re_level + ", r_rating=" + r_rating + "]";
+				+ ", username=" + username + ", r_reviewpic=" + r_reviewpic + ", m_picture=" + m_picture
+				+ ", r_regdate=" + r_regdate + ", re_group=" + re_group + ", re_level=" + re_level + ", r_rating="
+				+ r_rating + "]";
 	}
 }

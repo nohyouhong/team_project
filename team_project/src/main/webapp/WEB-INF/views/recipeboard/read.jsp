@@ -845,16 +845,20 @@ $(function(){
 		$.get(url, function(rData) {
 			var i = that.attr("data-index");
 			modalImageRun(i, rData);
-			
+
 			//왼쪽버튼
 			$("#modalLeftBtn").click(function() {
 // 				console.log("왼쪽버튼 클림됨");
-				modalImageRun(--i, rData);
+				if(i != 0) {
+					modalImageRun(--i, rData);
+				}
 			});
 			//오른쪽버튼
 			$("#modalRightBtn").click(function() {
 // 				console.log("오른쪽버튼 클림됨");
-				modalImageRun(++i, rData);
+				if(i != (rData.length - 1)) {
+					modalImageRun(++i, rData);
+				}
 			});
 		});
 		

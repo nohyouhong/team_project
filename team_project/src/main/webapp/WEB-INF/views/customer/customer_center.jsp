@@ -44,8 +44,10 @@ $(document).ready(function(){
 								<li><a href="/customer/agreement">이용약관</a></li>
 								<li><a href="/customer/rules">개인정보취급방침</a></li>
 								<li><a href="/customer/notice">공지사항</a></li>
+								<li><a href="/inquiry/inquiryBoard">문의게시판</a></li>
 							</ul>
 							<div id="inquirydiv">
+							<a href="/inquiry/all_inquiry_form" class="btn btn-outline-secondary" id="inquirybtn">문의하기</a>
 							<a href="/inquiry/inquiry_form" class="btn btn-outline-danger" id="inquirybtn">1:1문의하기</a>
 							</div>
 							<section class="faq-container">

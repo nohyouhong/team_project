@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
-<%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
+<%@ include file="/WEB-INF/views/include/admin_header.jsp" %>
 <link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
-
 <script>
 $(document).ready(function(){
 	var frmpaging = $("#frmPaging");
@@ -25,9 +24,8 @@ $(document).ready(function(){
 				<div class="tab-pane active" id="tab1">
 					<div>
 					<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
-					<h2 id="iquiryh2">나의 문의 내역</h2>
+					<h2 id="iquiryh2">1:1문의 내역</h2>
 						<div id="inquirysend">
-							<a id="btnWriteMessage" href="/inquiry/inquiry_form" class="btn btn-outline-success">1:1문의하기</a>
 						</div>
 					</div>
 					<table class="table inquiry_table">
@@ -41,16 +39,16 @@ $(document).ready(function(){
 							</tr>
 						</thead>
 						<tbody>
-								<c:forEach var="inquiryVo" items="${inquiryList}" varStatus="inquiry_status">
+								<c:forEach var="inquiryVo" items="${allInquiryList}" varStatus="allInquiry_status">
 									<tr class="tr_list">
-										<td>${inquiry_status.count}</td>
+										<td>${allInquiry_status.count}</td>
 										<td class="td_list" data-a_bno="${inquiryVo.a_bno}">${inquiryVo.a_title}</td>
 										<td>${inquiryVo.writer}</td>
 										<td>${inquiryVo.a_regdate}</td>
 										<td>
 										<c:choose>
 											<c:when test="${inquiryVo.re_level == 0}">
-												<p class="inquiryAnswer">답변예정</p>
+												답변예정
 											</c:when>
 											<c:otherwise>
 												<b>답변완료</b>
@@ -90,5 +88,5 @@ $(document).ready(function(){
 	<div class="col-md-2"></div>
 </div>
 
-<%@ include file="/WEB-INF/views/include/mypage_footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/admin_footer.jsp" %>
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

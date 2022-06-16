@@ -125,7 +125,7 @@
 						</div>
 						<div class="col-sm-4 col-md-4" id="uldiv">
 			            <ul>
-								<li><a href="#">레시피</a></li>
+								<li><a href="/recipeboard/list">레시피</a></li>
 								<li><a href="#">포인트샵</a></li>
 								<li><a href="/column/column_list">칼럼</a></li>
 <!-- 								<li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li> -->

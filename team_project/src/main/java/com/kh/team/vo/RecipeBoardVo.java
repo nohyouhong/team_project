@@ -10,6 +10,7 @@ public class RecipeBoardVo {
 	private String[] r_contents;
 	private String r_cooktip;
 	private String userid;
+	private String m_picture;
 	private Date r_regdate;
 	private int f_code;
 	private String f_type;

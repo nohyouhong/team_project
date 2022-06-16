@@ -109,6 +109,7 @@ $(function() {
 // 	재료추가
 	$("#addIngred").click(function() {
 		var cloneIngredDiv = $(".addIngredDiv").eq(0).clone();
+		cloneIngredDiv.show();
 		var inputs = cloneIngredDiv.find("input");
 		inputs.eq(0).val("");
 		inputs.eq(1).val("");
@@ -124,6 +125,7 @@ $(function() {
 	var index = 2;
 	$("#addStep").click(function() {
 		var cloneCookStepDiv = $(".addCookStepDiv").eq(0).clone();
+		cloneCookStepDiv.show();
 		cloneCookStepDiv.find("span").text("step" + index++);
 		cloneCookStepDiv.find("textarea").val("");
 		cloneCookStepDiv.find("img").attr("src", "/resources/main_mypage/images/plus.png");
@@ -132,12 +134,12 @@ $(function() {
 	
 //  요리스텝삭제
 	$("#addCookStepList").on("click", ".stepRemove", function() {
-		var index2 = 1;
+		var index2 = 0;
 		var addCookStepList = $(this).parents("div#addCookStepList");
 // 		console.log(addCookStepList);
 		$(this).parent().parent().remove();
 		var addCookStepSpans = addCookStepList.find("span");
-		console.log(addCookStepSpans);
+// 		console.log(addCookStepSpans);
 		
 		$.each(addCookStepSpans, function() {
 			var indexStep = "step" + index2++;
@@ -206,7 +208,10 @@ $(function() {
 			var tagHtml = "<input type='hidden' name='r_tags' value=" + tag + ">";
 			$("#recipeForm").prepend(tagHtml);
 		}
-// 		$("#recipeForm").submit();
+		//클론input삭제
+		$(".addIngredDiv").eq(0).remove();
+		$(".addCookStepDiv").eq(0).remove();
+		$("#recipeForm").submit();
 	});
 });
 </script>
@@ -263,7 +268,7 @@ $(function() {
 					</div>
 					<div class="col-md-4" style="text-align: center;">
 						<img class="inputVal" id="mainCookImage" alt="요리사진을 등록해주세요."
-						src="/resources/main_mypage/images/cook.png" />
+							src="/resources/main_mypage/images/cook.png" />
 						<label for="file"> 대표 요리사진을 등록해주세요. </label>
 						<input type="file" id="mainFile" name="file" class="cookFile"/>
 					</div>
@@ -278,6 +283,15 @@ $(function() {
 					</div>
 					<div class="col-md-8">
 						<div id="addIngredList">
+<!-- 						클론용 -->
+							<div class="input-group mb-2 addIngredDiv" style="display: none;">
+								<input type="text" class="form-control inputVal" 
+									placeholder="예)소고기" name="i_names">
+								<input type="text" class="form-control inputVal" 
+									placeholder="예)1000g" name="i_amounts">
+								<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i>
+							</div>
+<!-- 						클론용 -->
 							<div class="input-group mb-2 addIngredDiv">
 								<input type="text" class="form-control inputVal" 
 									placeholder="예)소고기" name="i_names">
@@ -300,6 +314,22 @@ $(function() {
 						<span class="explain">국간장을 넣어주세요. ▶ 물이 끓고 있을때 간장을 넣어주세요.</span><br>
       				</div>
       				<div id="addCookStepList">
+<!-- 						클론용 -->
+						<div class="row addCookStepDiv" style="display: none;">    				
+							<div class="col-md-3 cookStepTitle">
+								<span class="cookStepTitle">step</span>
+							</div>
+							<div class="col-md-7">
+								<textarea rows="5" class="form-control inputVal" name="r_contents"></textarea>
+							</div>
+							<div class="col-md-2 stepImageDiv">
+								<img class="inputImage stepCookImage" alt="요리사진을 등록해주세요."
+								src="/resources/main_mypage/images/plus.png"/>
+								<input type="file" class="cookFile cookStepFile" name="files"/>
+								<i class="fas fa-times-circle fa-2x stepIconX stepRemove"></i>
+							</div>
+						</div>
+<!-- 						클론용 -->
 						<div class="row addCookStepDiv">    				
 							<div class="col-md-3 cookStepTitle">
 								<span class="cookStepTitle">step1</span>

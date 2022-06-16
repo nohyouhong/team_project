@@ -30,14 +30,24 @@ public class InquiryController {
 		return "inquiry/inquiry_form";
 	}
 	
+	@RequestMapping(value="/all_inquiry_form", method=RequestMethod.GET)
+	public String allInquiry() {
+		return "inquiry/all_inquiry_form";
+	}
+	
 	@RequestMapping(value="/inquiry_run", method=RequestMethod.POST)
 	public String inquiryRun(HttpSession session, InquiryVo inquiryVo) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String writer = loginVo.getUserid();
 		inquiryVo.setWriter(writer);
-		System.out.println("inquiryVo: "+inquiryVo);
+//		System.out.println("inquiryVo: "+inquiryVo);
 		inquiryService.insertInquiry(inquiryVo);
 		return "redirect:/inquiry/inquiry_list";
+	}
+	
+	@RequestMapping(value="/inquiry_board", method=RequestMethod.GET)
+	public String inquiryBoard() {
+		return "inquiry/inquiry_board";
 	}
 	
 	@RequestMapping(value="/inquiry_list", method=RequestMethod.GET)
@@ -47,11 +57,19 @@ public class InquiryController {
 		pagingDto.setCount(inquiryService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<InquiryVo> inquiryList = inquiryService.InquiryList(writer, pagingDto);
-		List<InquiryVo> allInquiryList = inquiryService.allInquiryList(pagingDto);
 		model.addAttribute("inquiryList", inquiryList);
-		model.addAttribute("allInquiryList", allInquiryList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "inquiry/inquiry_list";
+	}
+	
+	@RequestMapping(value="/inquiry_admin_list", method=RequestMethod.GET)
+	public String inquiryAdminList(InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
+		pagingDto.setCount(inquiryService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<InquiryVo> allInquiryList = inquiryService.allInquiryList(pagingDto);
+		model.addAttribute("allInquiryList", allInquiryList);
+		model.addAttribute("pagingDto", pagingDto);
+		return "inquiry/inquiry_admin_list";
 	}
 	
 	@RequestMapping(value="/inquiry_read", method=RequestMethod.GET)

@@ -85,7 +85,7 @@ $(function(){
 						<form role="form" method="post" action="/inquiry/inquiry_run" id="frmCreate">
 						<input type="hidden" value="${loginVo.userid}" name="a_sender">
 						<input type="hidden" value="admin" name="a_receiver">
-						<span id="notice_top">1:1 문의 글작성</span>
+						<span id="notice_top">문의글 작성</span>
 						
 						<hr>
 							<div class="form-group inq">

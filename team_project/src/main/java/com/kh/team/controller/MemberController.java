@@ -71,6 +71,11 @@ public class MemberController {
 		return "point/point_list";
 	};
 	
+	@RequestMapping(value="admin_page", method = RequestMethod.GET)
+	public String adminPage(String userid, Model model) {
+		return "member/admin_page";
+	}
+	
 	@RequestMapping(value="/join_run", method=RequestMethod.POST)
 	public String joinRun(MemberVo memberVo) {
 		memberService.insertMember(memberVo);

@@ -102,8 +102,15 @@
 							</c:when>
 							<c:otherwise>
 								<a href="/member/logout">로그아웃</a>
-								<a href="#">출석체크</a>
-								<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
+								<c:choose>
+									<c:when test="${loginVo.m_code == 101}">
+										<a href="/member/admin_page?userid=${loginVo.userid}">관리자페이지</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">출석체크</a>
+										<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 							<a href="/customer/customer_center">고객센터</a>

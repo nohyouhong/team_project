@@ -50,14 +50,14 @@ $(document).ready(function(){
 										<td>${askVo.a_regdate}</td>
 										<td>
 										<c:choose>
+											<c:when test="${askVo.re_level == 1}">
+												-
+											</c:when>
 											<c:when test="${askVo.a_state == 0}">
 												답변예정
 											</c:when>
-											<c:when test="${askVo.re_level == 1}">
-												답
-											</c:when>
 											<c:when test="${askVo.a_state == 1}">
-												답변완료
+												<b>답변완료</b>
 											</c:when>
 										</c:choose>
 										</td>

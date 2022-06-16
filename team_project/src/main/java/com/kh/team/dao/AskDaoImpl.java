@@ -52,12 +52,13 @@ public class AskDaoImpl implements AskDao{
 	}
 
 	@Override
-	public List<AskVo> askList(String writer, PagingDto pagingDto) {
+	public List<AskVo> askList(String writer, PagingDto pagingDto, int re_group) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("writer", writer);
 		map.put("pagingDto", pagingDto);
 		map.put("startRow", pagingDto.getStartRow());
 		map.put("endRow", pagingDto.getEndRow());
+		map.put("re_group", re_group);
 		List<AskVo> AskList = sqlSession.selectList(NAMESPACE+"listAsk", map);
 //		System.out.println("AskList: "+AskList);
 		return AskList;
@@ -113,6 +114,12 @@ public class AskDaoImpl implements AskDao{
 	@Override
 	public void updateAstate(int a_bno) {
 		sqlSession.update(NAMESPACE+"updateAstate", a_bno);
+	}
+
+	@Override
+	public int getReGroup(String writer) {
+		int reGroup = sqlSession.selectOne(NAMESPACE+"getReGroup", writer);
+		return reGroup;
 	}
 
 }

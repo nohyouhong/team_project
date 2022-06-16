@@ -57,7 +57,8 @@ public class AskServiceImpl implements AskService{
 
 	@Override
 	public List<AskVo> AskList(String writer, PagingDto pagingDto) {
-		List<AskVo> AskList = askDao.askList(writer, pagingDto);
+		int re_group = askDao.getReGroup(writer);
+		List<AskVo> AskList = askDao.askList(writer, pagingDto, re_group);
 		return AskList;
 	}
 

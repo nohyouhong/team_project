@@ -10,7 +10,7 @@ public interface AskDao {
 	public boolean updateAsk(AskVo askVo);
 	public boolean deleteAsk(int a_bno);
 	public AskVo readAsk(int a_bno);
-	public List<AskVo> askList(String writer, PagingDto pagingDto);
+	public List<AskVo> askList(String writer, PagingDto pagingDto, int re_group);
 	public List<AskVo> allAskList(PagingDto pagingDto);
 	public int getCount(PagingDto pagingDto);
 	public int getNexta_bno();
@@ -19,4 +19,5 @@ public interface AskDao {
 	public boolean insertAskReply(AskVo askVo);//답글쓰기
 	public void updateAskReSeq(AskVo askVo);//답글 순서조정
 	public void updateAstate(int a_bno);
+	public int getReGroup(String writer);
 }

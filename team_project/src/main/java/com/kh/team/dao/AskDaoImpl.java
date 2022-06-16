@@ -8,19 +8,19 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.team.vo.InquiryVo;
+import com.kh.team.vo.AskVo;
 import com.kh.team.vo.PagingDto;
 
 @Repository
-public class InquiryDaoImpl implements InquiryDao{
+public class AskDaoImpl implements AskDao{
 	private String NAMESPACE = "com.kh.team.mappers.inquiry.";
 	
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public boolean insertInquiry(InquiryVo inquiryVo) {
-		int count = sqlSession.insert(NAMESPACE+"insertInquiry", inquiryVo);
+	public boolean insertAsk(AskVo askVo) {
+		int count = sqlSession.insert(NAMESPACE+"insertAsk", askVo);
 		if(count>0) {
 			return true;
 		}
@@ -28,8 +28,8 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public boolean updateInquiry(InquiryVo inquiryVo) {
-		int count = sqlSession.update(NAMESPACE+"updateInquiry", inquiryVo);
+	public boolean updateAsk(AskVo askVo) {
+		int count = sqlSession.update(NAMESPACE+"updateAsk", askVo);
 		if(count >0) {
 			return true;
 		}
@@ -37,8 +37,8 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public boolean deleteInquiry(int a_bno) {
-		int count = sqlSession.delete(NAMESPACE+"deleteInquiry", a_bno);
+	public boolean deleteAsk(int a_bno) {
+		int count = sqlSession.delete(NAMESPACE+"deleteAsk", a_bno);
 		if(count >0) {
 			return true;
 		}
@@ -46,19 +46,19 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public InquiryVo readInquiry(int a_bno) {
-		InquiryVo inquiryVo = sqlSession.selectOne(NAMESPACE+"readInquiry", a_bno);
+	public AskVo readAsk(int a_bno) {
+		AskVo inquiryVo = sqlSession.selectOne(NAMESPACE+"readAsk", a_bno);
 		return inquiryVo;
 	}
 
 	@Override
-	public List<InquiryVo> InquiryList(String writer, PagingDto pagingDto) {
+	public List<AskVo> askList(String writer, PagingDto pagingDto) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("writer", writer);
 		map.put("pagingDto", pagingDto);
 		map.put("startRow", pagingDto.getStartRow());
 		map.put("endRow", pagingDto.getEndRow());
-		List<InquiryVo> InquiryList = sqlSession.selectList(NAMESPACE+"listInquiry", map);
+		List<AskVo> InquiryList = sqlSession.selectList(NAMESPACE+"listAsk", map);
 		System.out.println("InquiryList: "+InquiryList);
 		return InquiryList;
 	}
@@ -85,20 +85,20 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public List<InquiryVo> allInquiryList(PagingDto pagingDto) {
-		List<InquiryVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListInquiry",pagingDto);
+	public List<AskVo> allAskList(PagingDto pagingDto) {
+		List<AskVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListAsk",pagingDto);
 		return allInquiryList;
 	}
 
 	@Override
-	public List<String> getInquiryImages(int a_bno) {
-		List<String> InquiryImages = sqlSession.selectList(NAMESPACE+"getInquiryImages", a_bno);
+	public List<String> getAskImages(int a_bno) {
+		List<String> InquiryImages = sqlSession.selectList(NAMESPACE+"getAskImages", a_bno);
 		return InquiryImages;
 	}
 
 	@Override
-	public boolean insertInquiryReply(InquiryVo inquiryVo) {
-		int count = sqlSession.insert(NAMESPACE+"insertInquiryReply", inquiryVo);
+	public boolean insertAskReply(AskVo askVo) {
+		int count = sqlSession.insert(NAMESPACE+"insertAskReply", askVo);
 		if(count >0) {
 			return true;
 		}
@@ -106,8 +106,8 @@ public class InquiryDaoImpl implements InquiryDao{
 	}
 
 	@Override
-	public void updateInquiryReSeq(InquiryVo inquiryVo) {
-		sqlSession.update(NAMESPACE+"updateReSeq", inquiryVo);
+	public void updateAskReSeq(AskVo askVo) {
+		sqlSession.update(NAMESPACE+"updateReSeq", askVo);
 	}
 
 }

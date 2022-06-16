@@ -98,9 +98,11 @@
 	
 	<select id="list" resultType="RecipeBoardVo">
 		select * from(select rownum rnum, a.* from 
-  		  (select * from tbl_recipe_board
+  		  (select * from 
+  		  tbl_recipe_board b join tbl_member m
+  		  	on b.userid = m.userid
   		  <include refid="search"></include>
-   			 order by r_regdate desc) a)
+   			order by r_regdate desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	

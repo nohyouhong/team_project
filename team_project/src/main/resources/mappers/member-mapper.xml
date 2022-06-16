@@ -43,6 +43,12 @@
 			where userid = #{userid}
 	</update>
 	
+	<update id="updateUserImage">
+		update tbl_member set
+			m_picture = #{m_picture, jdbcType=VARCHAR}
+			where userid = #{userid}
+	</update>
+	
 	<delete id="deleteMember">
 		delete from tbl_member
 		where userid = #{userid}
@@ -61,7 +67,7 @@
 	
 	<select id="recogId" resultType="int">
 		select count(*) from tbl_member
-		where username = #{username} and userid = #{userid} and email = #{email}
+		where userid = #{userid} and username = #{username} and email = #{email}
 	</select>
 	
 </mapper>

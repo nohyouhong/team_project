@@ -80,4 +80,15 @@ public class MemberServiceImpl implements MemberService{
 		List<String> userids = memberDao.findId(username, email, cellphone);
 		return userids;
 	}
+
+	@Override
+	public int recogId(String userid, String username, String email) {
+		int count = memberDao.recogId(userid, username, email);
+		return count;
+	}
+
+	@Override
+	public boolean updateUserImage(String filename, String userid) {
+		return memberDao.updateUserImage(filename, userid);
+	}
 }

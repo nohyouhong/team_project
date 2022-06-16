@@ -94,13 +94,25 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int recogId(String username, String email, String cellphone) {
+	public int recogId(String userid, String username, String email) {
 		Map<String, String> map = new HashMap<>();
+		map.put("userid", userid);
 		map.put("username", username);
 		map.put("email", email);
-		map.put("cellphone", cellphone);
 		int count = sqlSession.selectOne(NAMESPACE + "recogId", map);
 		return count;
+	}
+
+	@Override
+	public boolean updateUserImage(String filename, String userid) {
+		Map<String, String> map = new HashMap<>();
+		map.put("m_picture", filename);
+		map.put("userid", userid);
+		int count = sqlSession.update(NAMESPACE + "updateUserImage", map);
+		if( count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

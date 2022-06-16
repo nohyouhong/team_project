@@ -54,9 +54,10 @@ public class AskController {
 	public String askList(HttpSession session, AskVo askVo, Model model, PagingDto pagingDto) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String writer = loginVo.getUserid();
+		int re_group = askVo.getRe_group();
 		pagingDto.setCount(askService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
-		List<AskVo> askList = askService.AskList(writer, pagingDto);
+		List<AskVo> askList = askService.AskList(writer, pagingDto, re_group);
 		model.addAttribute("askList", askList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "ask/ask_list";

@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-#inquirybtn{
+#askbtn{
 	float:right;
 }
-#inquiry_submit{
+#ask_submit{
 	clear:both;
 	float:right;
 }
@@ -57,11 +57,11 @@ th {
 	margin-left: 50px;
 }
 
-.inquiry_table {
+.ask_table {
 	margin-top: 20px;
 }
 
-#inquirysend {
+#asksend {
 	float: right;
 }
 

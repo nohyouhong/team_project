@@ -4,14 +4,14 @@
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <%@ include file="/WEB-INF/views/include/admin_header.jsp" %>
-<link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
+<link rel="stylesheet" href="/resources/customer_center/ask.css" type="text/css">
 <script>
 $(document).ready(function(){
 	var frmpaging = $("#frmPaging");
 	$(".td_list").click(function(){
 		var a_bno = $(this).attr("data-a_bno");
 		frmpaging.find("input[name=a_bno]").val(a_bno);
-		frmpaging.attr("action", "/inquiry/inquiry_read");
+		frmpaging.attr("action", "/ask/ask_read");
 		frmpaging.attr("method", "get");
 		frmpaging.submit();
 	});
@@ -25,10 +25,10 @@ $(document).ready(function(){
 					<div>
 					<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
 					<h2 id="iquiryh2">1:1문의 내역</h2>
-						<div id="inquirysend">
+						<div id="asksend">
 						</div>
 					</div>
-					<table class="table inquiry_table">
+					<table class="table ask_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -39,15 +39,15 @@ $(document).ready(function(){
 							</tr>
 						</thead>
 						<tbody>
-								<c:forEach var="inquiryVo" items="${allInquiryList}" varStatus="allInquiry_status">
+								<c:forEach var="askVo" items="${allAskList}" varStatus="allAsk_status">
 									<tr class="tr_list">
-										<td>${allInquiry_status.count}</td>
-										<td class="td_list" data-a_bno="${inquiryVo.a_bno}">${inquiryVo.a_title}</td>
-										<td>${inquiryVo.writer}</td>
-										<td>${inquiryVo.a_regdate}</td>
+										<td>${allAsk_status.count}</td>
+										<td class="td_list" data-a_bno="${askVo.a_bno}">${askVo.a_title}</td>
+										<td>${askVo.writer}</td>
+										<td>${askVo.a_regdate}</td>
 										<td>
 										<c:choose>
-											<c:when test="${inquiryVo.re_level == 0}">
+											<c:when test="${askVo.re_level == 0}">
 												답변예정
 											</c:when>
 											<c:otherwise>

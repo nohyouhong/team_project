@@ -79,9 +79,11 @@ public class AskServiceImpl implements AskService{
 	}
 
 	@Override
-	public boolean insertAskReply(AskVo AskVo) {
-		AskDao.updateAskReSeq(AskVo);
-		boolean result = AskDao.insertAskReply(AskVo);
+	public boolean insertAskReply(AskVo askVo) {
+		int a_bno = AskDao.getNexta_bno();
+		askVo.setA_bno(a_bno);
+		AskDao.updateAskReSeq(askVo);
+		boolean result = AskDao.insertAskReply(askVo);
 		if(result) {
 			return true;
 		}

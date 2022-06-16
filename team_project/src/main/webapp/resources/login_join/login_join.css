@@ -8,7 +8,7 @@
 #joinBtnSpan{
 	color:yellowgreen;
 }
-#useridlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
+#useridlabel, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
 	font-family:'jua';
 	font-size:17px;
 }
@@ -17,6 +17,12 @@
 	font-size:15px;
 	text-align:center;
 	margin-top:5px;
+}
+.searchclass{
+	font-size:12px;
+}
+.searchclass:hover{
+	color:orange;
 }
 #checkdiv, #emailDiv{
 	display:flex;
@@ -62,6 +68,8 @@
 	border-radius:5px;
 	box-shadow: 10px 5px 5px rgb(255,227,219);
 	padding:10px 5px 20px 5px;
+	width:500px;
+	margin:0 auto;
 }
 #join_form{
 	border:medium ridge rgb(255,227,219);

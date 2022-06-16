@@ -3,12 +3,16 @@ package com.kh.team.controller;
 import java.io.FileInputStream;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +33,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@RequestMapping(value="/mapper", method=RequestMethod.GET) 
 	public String home() {
@@ -155,20 +162,43 @@ public class MemberController {
 //		System.out.println("email: " + email);
 		int count = memberService.recogId(userid, username, email);
 		System.out.println("count: " + count);
+		int rdKey = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
+		System.out.println("rdKey: " + rdKey);
 		if (count > 0) {
-			return "success";			
+			String subject = "비밀번호 재설정 안내 메일입니다."; // 메일 제목
+			String content = "<html>"
+					+ "<h1>비밀번호 재설정 인증번호입니다</h1>"
+					+ "<label>비밀번호 재설정 번호: </label>"
+					+ "<span>" + rdKey + "</span>"
+					+ "<div>인증 번호를 입력하시면 비밀번호를 변경 가능합니다.</div>"
+					+ "</html>"; // 메일 내용
+			String from = "authorxzsad@gmail.com"; // 보내는사람 아이디@주소
+			String to = ""; // 받는사람 아이디@주소
+			try {
+				MimeMessage mail = mailSender.createMimeMessage();
+				MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8"); // true는 멀티파트 메세지를 사용하겠다는 의미
+				mailHelper.setFrom(from);
+				mailHelper.setTo(email);
+				mailHelper.setSubject(subject);
+				mailHelper.setText(content, true); // true는 html을 사용하겠다는 의미입니다.
+				mailSender.send(mail);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+			return String.valueOf(rdKey);			
 		} else {
 			return "fail";
 		}
 	}
 	
 	@RequestMapping(value="/find_pw_run", method=RequestMethod.POST)
-	public String findPwRun(String userid, String username, String email, String verif_code) {
+	public String findPwRun(String userid, String username, String email, String verif_code, String rdKey) {
 		System.out.println("userid: " + userid);
 		System.out.println("username: " + username);
 		System.out.println("email: " + email);
 		System.out.println("verif_code: " + verif_code);
-		return "redirect:/member/login_form";
+		System.out.println("rdKey: " + rdKey);
+		return null;
 	}
 	
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)

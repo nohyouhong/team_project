@@ -97,10 +97,10 @@ $(document).ready(function(){
 		isPushed = "false";
 	});
 	
-	$("#emailAdInput").change(function(){
+	$("#emailIdInput").blur(function(){
 		email();
 	});
-	$("#emailIdInput").blur(function(){
+	$("#email3").change(function(){
 		email();
 	});
 	
@@ -199,6 +199,7 @@ $(document).ready(function(){
 								<option value="daum.net">daum.net</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="kakao.com">kakao.com</option>
+								<option value="nate.com">nate.com</option>
 							</select>
 						</div>
 					</div>

@@ -5,10 +5,10 @@
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 
-<link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
+<link rel="stylesheet" href="/resources/customer_center/ask.css" type="text/css">
 
 <style>
-.inquiryImage{
+.askImage{
 	width: 150px;
 	height: 150px;
 }
@@ -17,11 +17,11 @@
 $(document).ready(function(){
 	var frmPaging = $("#frmPaging");
 	
-	$("#inquiry_del_btn").click(function(e){
+	$("#ask_del_btn").click(function(e){
 		e.preventDefault();
 		var a_bno  = $(this).attr("href");
 		frmPaging.find("input[name=a_bno]").val(a_bno);
-		frmPaging.attr("action", "/inquiry/inquiry_delete");
+		frmPaging.attr("action", "/ask/ask_delete");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -35,34 +35,34 @@ $(document).ready(function(){
 					<div>
 					<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
 					<h2 id="iquiryh2">나의 문의 내역</h2>
-						<div id="inquirysend">
-							<a href="/inquiry/inquiry_list" class="btn btn-outline-warning">목록으로</a>
+						<div id="asksend">
+							<a href="/ask/ask_list" class="btn btn-outline-warning">목록으로</a>
 							<c:if test="${loginVo.m_code == 101}">
-								<a href="/inquiry/inquiryReplyForm?a_bno=${inquiryVo.a_bno}" class="btn btn-outline-primary">답글달기</a>
+								<a href="/ask/askReplyForm?a_bno=${askVo.a_bno}" class="btn btn-outline-primary">답글달기</a>
 							</c:if>
 						</div>
 					</div>
 					<form role="form">
-					<a href="${inquiryVo.a_bno}" class="btn btn-sm btn-outline-danger" id="inquiry_del_btn">
+					<a href="${askVo.a_bno}" class="btn btn-sm btn-outline-danger" id="ask_del_btn">
 						삭제하기
 					</a>
 					<div class="form-group message_read text-left" id="message_read">
 							문의 제목
 							<input type="text" class="form-control" id="receiver"
-							value="${inquiryVo.a_title}" readonly />
+							value="${askVo.a_title}" readonly />
 					</div>
 					<div class="form-group message_read text-left">
 						 내용 
 						<textarea class="form-control" id="message" name="message" rows="8"
-							 readonly >${inquiryVo.a_content}</textarea>
+							 readonly >${askVo.a_content}</textarea>
 					</div>
 				</form>
 				</div>
 			</div>
 		</div>
 		<div>
-			<c:forEach items="${inquiryImages}" var="inquiryImage">
-				<img class="inquiryImage" src="/inquiry/displayImage?filename=${inquiryImage}">
+			<c:forEach items="${askImages}" var="askImage">
+				<img class="askImage" src="/ask/displayImage?filename=${askImage}">
 			</c:forEach>
 		</div>
 	</div>

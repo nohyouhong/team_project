@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <link rel="stylesheet" href="/resources/customer_center/customer_center.css" type="text/css">
-<link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
+<link rel="stylesheet" href="/resources/customer_center/ask.css" type="text/css">
 
 <script src="/resources/js/myscript.js"></script>
 <script>
@@ -82,10 +82,10 @@ $(function(){
 						</div>	
 					</div>
 					<div class="col-md-9">
-						<form role="form" method="post" action="/inquiry/inquiry_run" id="frmCreate">
+						<form role="form" method="post" action="/ask/ask_run" id="frmCreate">
 						<input type="hidden" value="${loginVo.userid}" name="a_sender">
 						<input type="hidden" value="admin" name="a_receiver">
-						<span id="notice_top">1:1 문의</span>
+						<span id="notice_top">1:1 문의 글작성</span>
 						
 						<hr>
 							<div class="form-group inq">
@@ -105,7 +105,7 @@ $(function(){
 								<a href="#" class="a_delete">&times;</a>
 							</div>
 							<div id="uploadedList"></div>
-							<div id="inquiry_submit">
+							<div id="ask_submit">
 								<button type="submit" class="btn btn-outline-warning">문의등록</button>
 							</div>
 						</form>

@@ -3,42 +3,42 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kh.team.mappers.inquiry">
+<mapper namespace="com.kh.team.mappers.ask">
 	<select id="getNexta_bno" resultType="int">
-		select seq_inquiry_a_bno.nextval from dual
+		select seq_ask_a_bno.nextval from dual
 	</select>
 	<insert id="insertAttach">
 		insert into tbl_ask_board_pic(a_picture, a_bno)
 		values(#{a_picture}, #{a_bno})
 	</insert>
-	<insert id="insertInquiry">
+	<insert id="insertAsk">
 		insert into tbl_ask_board(a_bno, a_title, a_content, writer, re_group)
 		values(#{a_bno}, #{a_title}, #{a_content}, #{writer}, #{re_group})
 	</insert>
 
 	
-	<select id="readInquiry" resultType="InquiryVo">
+	<select id="readAsk" resultType="AskVo">
 		select * from tbl_ask_board
 		where a_bno = #{a_bno}
 	</select>
-	<update id="updateInquiry">
+	<update id="updateAsk">
 		update tbl_ask_board set
 			a_title = ${a_title},
 			a_content = ${a_content}
 		where a_bno = #{a_bno}
 	</update>
-	<delete id="deleteInquiry">
+	<delete id="deleteAsk">
 		delete from tbl_ask_board
 		where a_bno = #{a_bno}
 	</delete>
-	<select id="listInquiry" resultType="InquiryVo">
+	<select id="listAsk" resultType="AskVo">
 		select * from(select rownum rnum, a.* from(
 			select * from tbl_ask_board
 			where writer = #{writer}
 			order by re_group desc, re_seq asc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
-	<select id="allListInquiry" resultType="InquiryVo">
+	<select id="allListAsk" resultType="AskVo">
 		select * from(select rownum rnum, a.* from(
 			select * from tbl_ask_board) a)
 		where rnum between #{startRow} and #{endRow}
@@ -46,12 +46,12 @@
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_ask_board
 	</select>
-	<select id="getInquiryImages" resultType="string">
+	<select id="getAskImages" resultType="string">
 		select * from tbl_ask_board_pic
 		where a_bno = #{a_bno}
 	</select>
 	<!-- 	답글 -->
-	<insert id="insertInquiryReply">
+	<insert id="insertAskReply">
 		insert into tbl_ask_board(a_bno, a_title, a_content, writer, re_group, re_level, re_seq)
 		values(#{a_bno}, #{a_title}, #{a_content}, #{writer}, #{re_group}, #{re_level}+1, #{re_seq}+1)
 	</insert>

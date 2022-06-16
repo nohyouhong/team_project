@@ -71,6 +71,11 @@ public class MemberController {
 		return "point/point_list";
 	};
 	
+	@RequestMapping(value="admin_page", method = RequestMethod.GET)
+	public String adminPage(String userid, Model model) {
+		return "member/admin_page";
+	}
+	
 	@RequestMapping(value="/join_run", method=RequestMethod.POST)
 	public String joinRun(MemberVo memberVo) {
 		memberService.insertMember(memberVo);
@@ -110,6 +115,18 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/find_id", method=RequestMethod.GET)
+	public String findId() {
+		
+		return "/member/find_id";
+	}
+	
+	@RequestMapping(value="/find_pw", method=RequestMethod.GET)
+	public String findPw() {
+		
+		return "/member/find_pw";
 	}
 	
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)

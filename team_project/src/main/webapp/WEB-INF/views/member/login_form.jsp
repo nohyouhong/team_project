@@ -17,6 +17,11 @@
 #login_bottom {
 	margin-bottom:220px;
 }
+.findLoginInfo {
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
+}
 </style>
 	<div class="container-fluid window">
 		<div class="row">
@@ -40,6 +45,10 @@
 					<div id="subdiv">
 						<button type="submit" class="btn btn-outline-danger">로그인</button>
 						<a class="btn  btn-outline-secondary" href="/member/join_form">회원가입</a>
+					</div>
+					<div class="findLoginInfo">
+						<a href="/member/find_id">아이디 찾기</a>
+						<a href="/member/find_pw">비밀번호 찾기</a>
 					</div>
 				</form>
 				<div id="login_bottom"></div>

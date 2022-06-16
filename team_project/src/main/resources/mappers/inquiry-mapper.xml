@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.team.mappers.inquiry">
+	<select id="getNexti_bno" resultType="int">
+		select seq_inquiry_i_bno.nextval from dual
+	</select>
+	
+	<insert id="insertInquiry">
+		insert into tbl_inquiry_board(i_bno, i_title, i_content, userid, re_group)
+		values(#{i_bno}, #{i_title}, #{i_content}, #{userid}, #{re_group})
+	</insert>
+	
+	<select id="readInquiry" resultType="InquiryVo">
+		select * from tbl_inquiry_board
+		where i_bno = #{i_bno}
+	</select>
+	
+	<update id="updateInquiry">
+		update tbl_inquiry_board set
+			i_title = ${i_title},
+			i_content = ${i_content}
+		where i_bno = #{i_bno}
+	</update>
+	
+	<delete id="deleteInquiry">
+		delete from tbl_inquiry_board
+		where i_bno = #{i_bno}
+	</delete>
+	
+	<select id="listInquiry" resultType="InquiryVo">
+		select * from(select rownum rnum, a.* from(
+			select * from tbl_inquiry_board) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_inquiry_board
+	</select>
+	
+	<!-- 	답글 -->
+	<insert id="insertInquiryReply">
+		insert into tbl_inquiry_board(i_bno, i_title, i_content, userid, re_group, re_level, re_seq)
+		values(#{i_bno}, #{i_title}, #{i_content}, #{userid}, #{re_group}, #{re_level}+1, #{re_seq}+1)
+	</insert>
+	<update id="updateReSeq">
+		update tbl_inquiry_board set
+			re_seq = re_seq + 1
+		where re_group = #{re_group}
+		and re_seq &gt; #{re_seq}
+	</update>
+</mapper>

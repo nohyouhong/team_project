@@ -16,12 +16,12 @@ public class AskServiceImpl implements AskService{
 	private AskDao AskDao;
 
 	@Override
-	public boolean insertAsk(AskVo AskVo) {
+	public boolean insertAsk(AskVo askVo) {
 		int a_bno = AskDao.getNexta_bno();
-		AskVo.setA_bno(a_bno);
-		AskVo.setRe_group(a_bno);
-		boolean result = AskDao.insertAsk(AskVo);
-		String[] files = AskVo.getFiles();
+		askVo.setA_bno(a_bno);
+		askVo.setRe_group(a_bno);
+		boolean result = AskDao.insertAsk(askVo);
+		String[] files = askVo.getFiles();
 		if(files != null && files.length != 0) {
 			for(String a_picture : files) {
 				AskDao.insertAttach(a_picture, a_bno);
@@ -31,8 +31,8 @@ public class AskServiceImpl implements AskService{
 	}
 
 	@Override
-	public boolean updateAsk(AskVo AskVo) {
-		boolean result = AskDao.updateAsk(AskVo);
+	public boolean updateAsk(AskVo askVo) {
+		boolean result = AskDao.updateAsk(askVo);
 		if(result) {
 			return true;
 		}

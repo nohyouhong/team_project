@@ -18,4 +18,5 @@ public interface AskDao {
 	public List<String> getAskImages(int a_bno);//이미지리스트
 	public boolean insertAskReply(AskVo askVo);//답글쓰기
 	public void updateAskReSeq(AskVo askVo);//답글 순서조정
+	public void updateAstate(int a_bno);
 }

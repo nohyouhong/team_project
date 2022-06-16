@@ -110,4 +110,9 @@ public class AskDaoImpl implements AskDao{
 		sqlSession.update(NAMESPACE+"updateReSeq", askVo);
 	}
 
+	@Override
+	public void updateAstate(int a_bno) {
+		sqlSession.update(NAMESPACE+"updateAstate", a_bno);
+	}
+
 }

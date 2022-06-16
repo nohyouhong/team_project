@@ -13,6 +13,7 @@ public class AskVo {
 	private int re_group;
 	private int re_level;
 	private int re_seq;
+	private int a_state;
 	private String[] files;
 	
 	public AskVo() {
@@ -31,8 +32,10 @@ public class AskVo {
 		this.files = files;
 	}
 
-	public AskVo(int a_bno, String a_title, String a_content, String writer, Date a_regdate, int re_group,
-			int re_level, int re_seq, String[] files) {
+	
+
+	public AskVo(int a_bno, String a_title, String a_content, String writer, Date a_regdate, int re_group, int re_level,
+			int re_seq, int a_state, String[] files) {
 		super();
 		this.a_bno = a_bno;
 		this.a_title = a_title;
@@ -42,8 +45,10 @@ public class AskVo {
 		this.re_group = re_group;
 		this.re_level = re_level;
 		this.re_seq = re_seq;
+		this.a_state = a_state;
 		this.files = files;
 	}
+
 
 	public int getA_bno() {
 		return a_bno;
@@ -116,14 +121,24 @@ public class AskVo {
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
+	
+	public int getA_state() {
+		return a_state;
+	}
+
+
+	public void setA_state(int a_state) {
+		this.a_state = a_state;
+	}
+
 
 	@Override
 	public String toString() {
 		return "AskVo [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", writer=" + writer
 				+ ", a_regdate=" + a_regdate + ", re_group=" + re_group + ", re_level=" + re_level + ", re_seq="
-				+ re_seq + ", files=" + Arrays.toString(files) + "]";
+				+ re_seq + ", a_state=" + a_state + ", files=" + Arrays.toString(files) + "]";
 	}
 
-	
+
 	
 }

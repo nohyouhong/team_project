@@ -62,4 +62,9 @@
 		where re_group = #{re_group}
 		and re_seq &gt; #{re_seq}
 	</update>
+	<update id="updateAstate">
+		update tbl_ask_board set
+			a_state = a_state + 1
+		where a_bno = #{a_bno}
+	</update>
 </mapper>

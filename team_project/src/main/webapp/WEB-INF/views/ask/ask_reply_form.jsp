@@ -17,6 +17,7 @@
 				<form role="form" action="/ask/askReplyRun" method="post">
 					<input type="hidden" name="writer" value="${loginVo.userid}">
 					<input type="hidden" name="re_group" value="${askVo.re_group}">
+					<input type="hidden" name="a_bno" value="${askVo.a_bno}">
 					<div id="read-title-writer">
 						<div class="form-group message_read text-left" id="read-title">
 							문의 제목

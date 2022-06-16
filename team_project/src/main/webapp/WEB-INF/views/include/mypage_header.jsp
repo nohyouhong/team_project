@@ -46,7 +46,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link menuEx" href="/inquiry/inquiry_list"> 
+								<a class="nav-link menuEx" href="/ask/ask_list"> 
 									<span class="menu-title">1:1문의</span>
 								</a>
 							</li>

@@ -13,7 +13,7 @@ import com.kh.team.vo.PagingDto;
 
 @Repository
 public class AskDaoImpl implements AskDao{
-	private String NAMESPACE = "com.kh.team.mappers.inquiry.";
+	private String NAMESPACE = "com.kh.team.mappers.ask.";
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -47,8 +47,8 @@ public class AskDaoImpl implements AskDao{
 
 	@Override
 	public AskVo readAsk(int a_bno) {
-		AskVo inquiryVo = sqlSession.selectOne(NAMESPACE+"readAsk", a_bno);
-		return inquiryVo;
+		AskVo askVo = sqlSession.selectOne(NAMESPACE+"readAsk", a_bno);
+		return askVo;
 	}
 
 	@Override
@@ -58,9 +58,9 @@ public class AskDaoImpl implements AskDao{
 		map.put("pagingDto", pagingDto);
 		map.put("startRow", pagingDto.getStartRow());
 		map.put("endRow", pagingDto.getEndRow());
-		List<AskVo> InquiryList = sqlSession.selectList(NAMESPACE+"listAsk", map);
-		System.out.println("InquiryList: "+InquiryList);
-		return InquiryList;
+		List<AskVo> AskList = sqlSession.selectList(NAMESPACE+"listAsk", map);
+//		System.out.println("AskList: "+AskList);
+		return AskList;
 	}
 
 	@Override
@@ -86,14 +86,14 @@ public class AskDaoImpl implements AskDao{
 
 	@Override
 	public List<AskVo> allAskList(PagingDto pagingDto) {
-		List<AskVo> allInquiryList = sqlSession.selectList(NAMESPACE+"allListAsk",pagingDto);
-		return allInquiryList;
+		List<AskVo> allAskList = sqlSession.selectList(NAMESPACE+"allListAsk",pagingDto);
+		return allAskList;
 	}
 
 	@Override
 	public List<String> getAskImages(int a_bno) {
-		List<String> InquiryImages = sqlSession.selectList(NAMESPACE+"getAskImages", a_bno);
-		return InquiryImages;
+		List<String> AskImages = sqlSession.selectList(NAMESPACE+"getAskImages", a_bno);
+		return AskImages;
 	}
 
 	@Override

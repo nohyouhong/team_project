@@ -21,7 +21,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link menuEx" href="/inquiry/inquiry_admin_list"> 
+								<a class="nav-link menuEx" href="/ask/ask_admin_list"> 
 									<span class="menu-title">1:1문의내역</span>
 								</a>
 							</li>

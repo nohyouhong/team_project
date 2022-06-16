@@ -169,15 +169,11 @@ section{
 .notice_modify_run{
 	display:none;
 }
-#inquirybtn{
-	float:right;
-}
 
-#inquiry_submit{
+#ask_submit{
 	clear:both;
 }
 
-#inquirydiv{
-	text-align:right;
-	height:10px;
+#askdiv{
+	float:right;
 }

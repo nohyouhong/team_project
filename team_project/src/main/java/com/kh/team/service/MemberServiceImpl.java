@@ -86,4 +86,9 @@ public class MemberServiceImpl implements MemberService{
 		int count = memberDao.recogId(userid, username, email);
 		return count;
 	}
+
+	@Override
+	public boolean updateUserImage(String filename, String userid) {
+		return memberDao.updateUserImage(filename, userid);
+	}
 }

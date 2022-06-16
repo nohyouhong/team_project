@@ -14,10 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.MemberService;
+import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.MessageVo;
 import com.kh.team.vo.PointVo;
 
 @Controller
@@ -176,4 +179,26 @@ public class MemberController {
 		fis.close();
 		return data;
 	}
+	
+	@RequestMapping(value="/updateUserImage", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateUserImage(String filename, HttpSession session) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		boolean result = memberService.updateUserImage(filename, userid);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
+	@ResponseBody
+	public String uploadFile(MultipartFile file) throws Exception{
+		System.out.println("file: " + file);
+		String originalFilename = file.getOriginalFilename();
+		byte[] fileData = file.getBytes();
+		String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach", originalFilename, fileData);
+		System.out.println("saveFilename: " + saveFilename);
+		
+		return saveFilename;
+	}
+	
 }

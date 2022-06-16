@@ -103,4 +103,16 @@ public class MemberDaoImpl implements MemberDao{
 		return count;
 	}
 
+	@Override
+	public boolean updateUserImage(String filename, String userid) {
+		Map<String, String> map = new HashMap<>();
+		map.put("m_picture", filename);
+		map.put("userid", userid);
+		int count = sqlSession.update(NAMESPACE + "updateUserImage", map);
+		if( count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

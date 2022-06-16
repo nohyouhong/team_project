@@ -155,6 +155,24 @@ $(function() {
 		var file = inputFile.val();
 		console.log("클릭됨");
 		console.log(file);
+		var form = $("#messageForm");
+		var formData = new FormData(form[0]);
+		var url = "/message/modalSendMessage";
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				if(rData == "true"){
+					console.log(rData);
+				}
+			}
+		});
+		
 	});
 	$("#mainFile").on("change", function(){
 // 		console.log(this.files);
@@ -166,6 +184,7 @@ $(function() {
             reader.readAsDataURL(this.files[0]);
     	}
     });
+	
 // 	스텝요리사진넣기
 	$("#addCookStepList").on("click", ".stepCookImage" , function() {
 		var inputFile = $(this).parent().find("input");

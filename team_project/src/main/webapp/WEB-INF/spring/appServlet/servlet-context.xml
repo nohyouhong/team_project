@@ -48,6 +48,8 @@
 			<exclude-mapping path="/member/checkId"/>
 			<exclude-mapping path="/member/login_run"/>
 			<exclude-mapping path="/member/join_run"/>
+			<exclude-mapping path="/member/find_id"/>
+			<exclude-mapping path="/member/find_pw"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

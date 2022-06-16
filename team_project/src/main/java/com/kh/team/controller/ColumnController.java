@@ -81,6 +81,7 @@ public class ColumnController {
 	@RequestMapping(value="/column_list", method=RequestMethod.GET) 
 	public String column_list(PagingDto pagingDto, Model model) {
 		pagingDto.setCount(columnService.getColumnCount());
+		pagingDto.setPerPage(5);
 		pagingDto.setPage(pagingDto.getPage());
 //		System.out.println("ColumnController, Column_list, page: " + page);
 //		System.out.println("ColumnController, Column_list, pagingDto: " + pagingDto);

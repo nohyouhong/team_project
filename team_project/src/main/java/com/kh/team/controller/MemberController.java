@@ -112,6 +112,18 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/find_id", method=RequestMethod.GET)
+	public String findId() {
+		
+		return "/member/find_id";
+	}
+	
+	@RequestMapping(value="/find_pw", method=RequestMethod.GET)
+	public String findPw() {
+		
+		return "/member/find_pw";
+	}
+	
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception{

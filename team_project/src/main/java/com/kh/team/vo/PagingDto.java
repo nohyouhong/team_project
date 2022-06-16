@@ -85,6 +85,7 @@ public class PagingDto {
 	public int getPAGE_BLOCK() {
 		return PAGE_BLOCK;
 	}
+	
 	@Override
 	public String toString() {
 		return "PagingDto [page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", searchType="

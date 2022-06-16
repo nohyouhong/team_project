@@ -7,10 +7,11 @@
 
 
 .single-post-catagory .catagory-content-bg::after {
-	border-color: rgb(248,56,1);
+	border-color: rgb(248, 114, 98);
 	border-radius: 10px;
 }
 .single-post-catagory .catagory-content-bg {
+/* 	border-color: rgb(248, 114, 98); */
 	border-radius: 10px;
 }
 

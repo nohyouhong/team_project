@@ -48,4 +48,20 @@
 		where userid = #{userid}
 	</delete>
 	
+	<select id="recogExistId" resultType="int">
+		select count(*) from tbl_member
+		where username = #{username} and (email = #{email} or cellphone = #{cellphone})
+	</select>
+	
+	<select id="findId" resultType="String">
+		select userid from tbl_member
+		where username = #{username} and (email = #{email} or cellphone = #{cellphone})
+		order by m_regdate desc
+	</select>
+	
+	<select id="recogId" resultType="int">
+		select count(*) from tbl_member
+		where username = #{username} and userid = #{userid} and email = #{email}
+	</select>
+	
 </mapper>

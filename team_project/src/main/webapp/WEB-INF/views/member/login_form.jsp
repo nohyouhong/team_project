@@ -47,8 +47,8 @@
 						<a class="btn  btn-outline-secondary" href="/member/join_form">회원가입</a>
 					</div>
 					<div class="findLoginInfo">
-						<a href="/member/find_id">아이디 찾기</a>
-						<a href="/member/find_pw">비밀번호 찾기</a>
+						<a href="/member/find_id_form">아이디 찾기</a>
+						<a href="/member/find_pw_form">비밀번호 찾기</a>
 					</div>
 				</form>
 				<div id="login_bottom"></div>

@@ -68,4 +68,16 @@ public class MemberServiceImpl implements MemberService{
 		int cnt = memberDao.checkId(userid);
 		return cnt;
 	}
+
+	@Override
+	public int recogExistId(String username, String email, String cellphone) {
+		int count = memberDao.recogExistId(username, email, cellphone);
+		return count;
+	}
+
+	@Override
+	public List<String> findId(String username, String email, String cellphone) {
+		List<String> userids = memberDao.findId(username, email, cellphone);
+		return userids;
+	}
 }

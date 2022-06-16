@@ -51,12 +51,15 @@ public class MemberDaoTest {
 	
 	@Test
 	public void testFindId() {
+		String userid = "user01";
 		String username = "홍길동";
-		String email = " ";
+		String email = "";
 		String cellphone = "01022334455";
 		int count = memberDao.recogExistId(username, email, cellphone);
+		int count2 = memberDao.recogId(userid, username, email);
 //		List<String> userid = memberDao.findId(username, email, cellphone);
 		System.out.println("count: " + count);
 //		System.out.println("userid: " + userid);
 	}
+	
 }

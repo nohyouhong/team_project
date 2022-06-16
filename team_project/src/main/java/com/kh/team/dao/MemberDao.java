@@ -15,5 +15,5 @@ public interface MemberDao {
 	public MemberVo getMemberByIdAndPw(String userid, String userpw);
 	public int recogExistId(String username, String email, String cellphone);
 	public List<String> findId(String username, String email, String cellphone);
-	public int recogId(String username, String email, String cellphone);
+	public int recogId(String userid, String username, String email);
 }

@@ -94,11 +94,11 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int recogId(String username, String email, String cellphone) {
+	public int recogId(String userid, String username, String email) {
 		Map<String, String> map = new HashMap<>();
+		map.put("userid", userid);
 		map.put("username", username);
 		map.put("email", email);
-		map.put("cellphone", cellphone);
 		int count = sqlSession.selectOne(NAMESPACE + "recogId", map);
 		return count;
 	}

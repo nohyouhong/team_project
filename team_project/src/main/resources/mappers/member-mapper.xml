@@ -61,7 +61,7 @@
 	
 	<select id="recogId" resultType="int">
 		select count(*) from tbl_member
-		where username = #{username} and userid = #{userid} and email = #{email}
+		where userid = #{userid} and username = #{username} and email = #{email}
 	</select>
 	
 </mapper>

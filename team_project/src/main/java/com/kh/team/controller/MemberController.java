@@ -144,11 +144,27 @@ public class MemberController {
 		return "/member/find_pw";
 	}
 
+	@RequestMapping(value="/chk_find_pw", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkforFindPw(String userid, String username, String email) {
+//		System.out.println("userid: " + userid);
+//		System.out.println("username: " + username);
+//		System.out.println("email: " + email);
+		int count = memberService.recogId(userid, username, email);
+		System.out.println("count: " + count);
+		if (count > 0) {
+			return "success";			
+		} else {
+			return "fail";
+		}
+	}
+	
 	@RequestMapping(value="/find_pw_run", method=RequestMethod.POST)
-	public String findPwRun(String userid, String username, String email) {
+	public String findPwRun(String userid, String username, String email, String verif_code) {
 		System.out.println("userid: " + userid);
 		System.out.println("username: " + username);
 		System.out.println("email: " + email);
+		System.out.println("verif_code: " + verif_code);
 		return "redirect:/member/login_form";
 	}
 	

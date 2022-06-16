@@ -15,4 +15,5 @@ public interface MemberService {
 	public List<PointVo> getPoint_list(String userid);
 	public int recogExistId(String username, String email, String cellphone);
 	public List<String> findId(String username, String email, String cellphone);
+	public int recogId(String userid, String username, String email);
 }

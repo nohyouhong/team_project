@@ -72,4 +72,35 @@ public class MemberDaoImpl implements MemberDao{
 		int cnt = sqlSession.selectOne(NAMESPACE+"checkId", userid);
 		return cnt;
 	}
+
+	@Override
+	public int recogExistId(String username, String email, String cellphone) {
+		Map<String, String> map = new HashMap<>();
+		map.put("username", username);
+		map.put("email", email);
+		map.put("cellphone", cellphone);
+		int count = sqlSession.selectOne(NAMESPACE + "recogExistId", map);
+		return count;
+	}
+
+	@Override
+	public List<String> findId(String username, String email, String cellphone) {
+		Map<String, String> map = new HashMap<>();
+		map.put("username", username);
+		map.put("email", email);
+		map.put("cellphone", cellphone);
+		List<String> userid = sqlSession.selectList(NAMESPACE + "findId", map);
+		return userid;
+	}
+
+	@Override
+	public int recogId(String username, String email, String cellphone) {
+		Map<String, String> map = new HashMap<>();
+		map.put("username", username);
+		map.put("email", email);
+		map.put("cellphone", cellphone);
+		int count = sqlSession.selectOne(NAMESPACE + "recogId", map);
+		return count;
+	}
+
 }

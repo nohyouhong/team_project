@@ -117,16 +117,39 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/find_id", method=RequestMethod.GET)
+	@RequestMapping(value="/find_id_form", method=RequestMethod.GET)
 	public String findId() {
 		
 		return "/member/find_id";
 	}
 	
-	@RequestMapping(value="/find_pw", method=RequestMethod.GET)
+	@RequestMapping(value="/find_id_run", method=RequestMethod.POST)
+	@ResponseBody
+	public List<String> findIdRun(String username, String email, String cellphone) {
+		System.out.println("username: " + username);
+		System.out.println("email: " + email);
+		System.out.println("cellphone: " + cellphone);
+		int count = memberService.recogExistId(username, email, cellphone);
+		if (count > 0) {
+			List<String> userids = memberService.findId(username, email, cellphone);
+			return userids;				
+		} else {
+			return null;
+		}
+	}
+	
+	@RequestMapping(value="/find_pw_form", method=RequestMethod.GET)
 	public String findPw() {
 		
 		return "/member/find_pw";
+	}
+
+	@RequestMapping(value="/find_pw_run", method=RequestMethod.POST)
+	public String findPwRun(String userid, String username, String email) {
+		System.out.println("userid: " + userid);
+		System.out.println("username: " + username);
+		System.out.println("email: " + email);
+		return "redirect:/member/login_form";
 	}
 	
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)

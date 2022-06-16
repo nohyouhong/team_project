@@ -107,6 +107,6 @@ public class AskController {
 	@RequestMapping(value="/askReplyRun", method=RequestMethod.POST)
 	public String askReplyRun(AskVo askVo) {
 		askService.insertAskReply(askVo);
-		return "redirect:/ask/ask_list";
+		return "redirect:/ask/ask_admin_list";
 	}
 }

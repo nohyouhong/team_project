@@ -39,9 +39,9 @@ $(document).ready(function(){
 							</tr>
 						</thead>
 						<tbody>
-								<c:forEach var="askVo" items="${allAskList}" varStatus="allAsk_status">
+								<c:forEach var="askVo" items="${allAskList}" varStatus="status">
 									<tr class="tr_list">
-										<td>${allAsk_status.count}</td>
+										<td>${status.count}</td>
 										<td class="td_list" data-a_bno="${askVo.a_bno}" 
 											style="padding-left:${askVo.re_level * 45}">
 											${askVo.a_title}

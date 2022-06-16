@@ -50,13 +50,13 @@
 	font-size: 19px;
 	color: #BEB6B6;
 }
-.cookViewCnt{
+.cookViewRatingDiv{
 	position: relative;
 	bottom: 130px;
 	padding-right: 250px;
 	float: right;
 }
-.cookViewCntBack{
+.cookViewCntBack, .cookavgRating{
 	padding:7px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -64,7 +64,10 @@
 	color: white;
 	border-radius: 40px;
 }
-.cookViewCntVal{
+.cookavgRating{
+	margin-right: 10px;
+}
+.cookViewCntVal, .cookavgRatingVal{
 	color: white;
 }
 .createHr2{
@@ -376,6 +379,22 @@ padding-bottom: 20px;
 }
 #modalReviewComment{
 	margin-left: 5px;
+}
+#tagDiv{
+	margin: 30px;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+.oneTag{
+	margin-right: 10px;
+	background-color: #E9E9E9;
+}
+.tagFront{
+	font-size: 26px;
+	color: #F83801;
+}
+.tagName{
+	font-size: 21px;
 }
 </style>
 <script>
@@ -1025,7 +1044,6 @@ $(function(){
 	<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno }">
 </form>
 <!-- 쪽지폼 -->
-
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -1036,7 +1054,11 @@ $(function(){
 				<img class="userImage rounded-circle img-thumbnail" 
 					src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /><br>
 				<div class="cookUserid">${memberVo.username }</div>
-				<div class="cookViewCnt">
+				<div class="cookViewRatingDiv">
+					<span class="cookavgRating">
+						<i class="fas fa-star fa-lg"></i>
+						<span class="cookavgRatingVal">${recipeBoardVo.avgRating }</span>
+					</span>
 					<span class="cookViewCntBack">
 						<i class="fas fa-eye fa-lg"></i>
 						<span class="cookViewCntVal">${recipeBoardVo.r_viewcnt }</span>
@@ -1055,21 +1077,21 @@ $(function(){
 						</div>
 						<div class="col-md-4 iconDiv">
 							<span><i class="fas fa-clock fa-3x cookIcon"></i></span> 
-							<div class="iconExplain">${recipeBoardVo.f_type }</div>
+							<div class="iconExplain">${recipeBoardVo.r_time }</div>
 						</div>
 						<div class="col-md-4 iconDiv">
 							<c:choose>
-								<c:when test="${recipeBoardVo == '어려움'}">
-									<span><i class="fas fa-tired fa-3x cookIcon"></i></span>
-								</c:when>
-								<c:when test="${recipeBoardVo == '보통'}">
-									<span><i class="fas fa-grin-beam-sweat fa-3x cookIcon"></i></span>
-								</c:when>
-								<c:when test="${recipeBoardVo == '쉬움'}">
+								<c:when test="${recipeBoardVo.r_level == '쉬움'}">
 									<span><i class="fas fa-grin-alt fa-3x cookIcon"></i></span>
 								</c:when>
+								<c:when test="${recipeBoardVo.r_level == '보통'}">
+									<span><i class="fas fa-grin-beam-sweat fa-3x cookIcon"></i></span>
+								</c:when>
+								<c:when test="${recipeBoardVo.r_level == '어려움'}">
+									<span><i class="fas fa-tired fa-3x cookIcon"></i></span>
+								</c:when>
 							</c:choose>
-							<div class="iconExplain">${recipeBoardVo.f_type }</div>
+							<div class="iconExplain">${recipeBoardVo.r_level }</div>
 						</div>
 					</div>
 				</div>
@@ -1334,6 +1356,19 @@ $(function(){
 			</form>
 		</div>
 		<hr class="createHr2">
+		
+		<div class="cookP" id="cookCommentAll">
+			<span class="cookTitleP">태그</span>
+			<span class="cookSecondTitleP">Tag</span>
+			<div id="tagDiv">
+				<c:forEach items="${tagList}" var="oneTag">
+					<span class="oneTag">
+						<span class="tagFront">#</span>
+						<span class="tagName">${oneTag}</span>
+					</span>
+				</c:forEach>
+			</div>
+		</div>
 	</div>
 	<div class="col-md-2"></div>
 </div>

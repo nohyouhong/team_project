@@ -13,6 +13,10 @@
 		select seq_recipe_content_cno.nextval from dual
 	</select>
 	
+	<select id="getAvgRating" resultType="float">
+		select avg(r_rating) from tbl_recipe_review
+	</select>
+	
 	<insert id="insertPicture">
 		insert into tbl_recipe_pic(r_pno, r_picture, r_cno)
 		values(seq_recipe_pic_pno.nextval, #{r_picture}, #{r_cno})
@@ -25,10 +29,10 @@
 
 	<insert id="create">
 		insert into tbl_recipe_board
-			(r_bno, r_title, r_titlepic, r_explain, r_cooktip, userid, f_code)
+			(r_bno, r_title, r_titlepic, r_explain, r_cooktip, userid, f_code, r_time, r_level)
 		values
 			(#{r_bno}, #{r_title}, #{r_titlepic}, #{r_explain}, 
-				#{r_cooktip}, #{userid}, #{f_code})
+				#{r_cooktip}, #{userid}, #{f_code}, #{r_time}, #{r_level})
 	</insert>
 	
 	<insert id="ingredCreate">
@@ -53,17 +57,6 @@
 		where b.r_bno = #{r_bno}
 		order by c.r_cno
 	</select>
-	
-<!-- 	지워도될듯 -->
-	<select id="readContents" resultType="string">
-		select r_content from tbl_recipe_content
-		where r_bno = #{r_bno}
-	</select>
-	<select id="readPictures" resultType="string">
-		select r_picture from tbl_recipe_pic
-		where r_bno = #{r_bno}
-	</select>
-<!-- 	지워도될듯 -->
 	
 	<select id="readIngreds" resultType="IngredientVo">
 		select * from 
@@ -90,6 +83,18 @@
 		delete from tbl_recipe_board
 		where r_bno = #{r_bno}
 	</delete>
+	
+	<select id="getTags" resultType="string">
+		select r_tag from tbl_recipe_tag
+		where r_bno = #{r_bno}
+	</select>
+	
+	<insert id="tagCreate">
+		insert into tbl_recipe_tag
+			(r_tno, r_bno, r_tag)
+		values
+			(seq_recipe_tag_tno.nextval, #{r_bno}, #{r_tag})
+	</insert>
 	
 	<select id="list" resultType="RecipeBoardVo">
 		select * from(select rownum rnum, a.* from 

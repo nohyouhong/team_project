@@ -91,13 +91,16 @@ public class RecipeBoardController {
 		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
 		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
 		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
+		List<String> tagList = recipeBoardService.getTags(r_bno);
 		MemberVo memberVo = recipeBoardService.getMemberVoByBno(r_bno);
 		System.out.println(recipeBoardVo);
 		System.out.println(ingredientVoList);
 		System.out.println(recipeStepVoList);
+		System.out.println("tagList" + tagList);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
 		model.addAttribute("ingredientVoList", ingredientVoList);
 		model.addAttribute("recipeStepVoList", recipeStepVoList);
+		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberVo", memberVo);
 		model.addAttribute("pagingDto", pagingDto);
 		return "recipeboard/read";

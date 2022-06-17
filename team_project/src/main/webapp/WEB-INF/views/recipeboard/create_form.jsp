@@ -126,6 +126,17 @@
 	width: 40%;
 	margin-left: 10px;
 }
+.modalLabel{
+	font-size: 16px;
+	margin-left: 10px;
+}
+.modalInput{
+	display: inline-block;
+	width: 70%;
+	margin-left: 10px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
 </style>
 <script>
 $(function() {
@@ -313,32 +324,49 @@ $(function() {
 	}
 
 	//재료등록
-	$("#addIngred").click(function() {
+	$("#insertIngred").click(function() {
 		$("#modal-520057").trigger("click");
-		
+			$("#ingredInsertBtn").click(function() {
+				var i_name = $("#i_name").val();
+				var i_address = $("#i_address").val();
+				if(i_name == "") {
+					alert("재료이름을 입력하세요.");
+				}else if(i_address == ""){
+					alert("재료의 나무위키 주소를 입력하세요.");
+				} else{
+					$("#ingredInsertForm").submit();
+				}
+			});
 	});
 });
 </script>
 <!-- 모달 -->
-<a id="modal-520057" href="#modal-container-520057" role="button"
+<a id="modal-520057" style="display: none;" href="#modal-container-520057" role="button"
 	class="btn" data-toggle="modal">Launch demo modal</a>
 <div class="modal fade" id="modal-container-520057" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="myModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="myModalLabel">재료 등록</h5>
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				
+				<form id="ingredInsertForm" action="/recipeboard/insertIngred" method="post">
+					<label class="modalLabel" for="i_name">재료이름</label>
+					<input type="text" class="modalInput form-control" id="i_name" name="i_name" placeholder="재료의 이름를 입력하세요. 예) 달걀, 참기름"><br>
+					<label class="modalLabel" for="i_unit">재료단위</label>
+					<input type="text" class="modalInput form-control" id="i_unit" name="i_unit" placeholder="재료의 단위를 입력하세요. 예) g, 개"><br>
+					<label class="modalLabel" for="i_address">나무위키</label>
+					<input type="text" class="modalInput form-control" id="i_address" name="i_address" placeholder="나무위키 주소를 입력하세요.">
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">등록하기
+				<button type="button" id="ingredInsertBtn" class="btn btn-outline-primary">등록하기
 				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
 					취소하기</button>
 			</div>
 		</div>

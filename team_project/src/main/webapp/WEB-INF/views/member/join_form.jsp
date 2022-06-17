@@ -187,6 +187,15 @@ $(document).ready(function(){
 						<input type="text" class="form-control" name="username" id="usernameInput"/>
 					</div>
 					<div class="join-form">
+						<label for="cellphone" id="cellphone">폰번호</label> 
+						<div id="cellphonediv">
+							<input type="text" class="form-control" name="cellphone" id="cellphoneInput1" value="010" disabled/>-
+							<input type="text" class="form-control" name="cellphone" id="cellphoneInput2"/>-
+							<input type="text" class="form-control" name="cellphone" id="cellphoneInput3"/>
+						</div>
+						<button type="button" class="btn btn-outline-secondary" id="overlapPhoneCheckBtn">폰번호 중복확인</button>
+					</div>
+					<div class="join-form">
 						<label for="email" id="email">이메일</label> 
 						<div id="emailDiv">
 							<input type="hidden" name="email" id="totalemail">

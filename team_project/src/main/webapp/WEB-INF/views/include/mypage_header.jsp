@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<style>
+#mainHeaderUserImage{
+	width: 150px;
+	height: 150px;
+}
+#mainHeaderForm{
+	text-align: center;
+}
+</style>
 <script>
 $(function() {
 	//메인헤더 이미지바꾸기
@@ -48,7 +56,7 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="margin-top: 50px;">
 
 			<!-- partial -->
 			<div class="container-fluid">
@@ -56,9 +64,9 @@ $(function() {
 					<!-- partial:partials/_sidebar.html -->
 					<nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
 						<div class="user-info">
-						${loginVo }
+<%-- 						${loginVo } --%>
 							<form id="mainHeaderForm">
-								<img id="mainHeaderUserImage" src="/member/displayImage?filename=${loginVo.m_picture}">
+								<img id="mainHeaderUserImage" class="rounded-circle" src="/member/displayImage?filename=${loginVo.m_picture}">
 								<input style="display: none;" type="file" id="mainHeaderUserImageFile" name="file" class="mainHeaderUserImageFile"/>
 								<button type="button" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
 							</form>

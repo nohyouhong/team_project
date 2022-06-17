@@ -4,7 +4,8 @@
 	border-left: 1px solid #DFD9D8;
 }
 #mainHeaderUserImage{
-	
+	width: 150px;
+	height: 150px;
 }
 .menuEx {
 	width: 270px;

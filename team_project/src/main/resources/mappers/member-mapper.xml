@@ -28,9 +28,9 @@
 	
 	<insert id="insertMember" >
 		insert into tbl_member
-			(userid, userpw, username, email, gender, m_picture)
+			(userid, userpw, username, email, gender, m_picture, cellphone)
 		values
-			(#{userid}, #{userpw}, #{username},  #{email}, #{gender}, #{m_picture, jdbcType=VARCHAR})
+			(#{userid}, #{userpw}, #{username},  #{email}, #{gender}, #{m_picture, jdbcType=VARCHAR}, #{cellphone})
 	</insert>
 	
 	<update id="modifyMember">

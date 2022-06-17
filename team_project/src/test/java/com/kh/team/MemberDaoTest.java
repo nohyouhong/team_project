@@ -36,12 +36,12 @@ public class MemberDaoTest {
 		System.out.println("memberVo: " + memberVo);
 	}
 	
-	@Test
-	public void testModifyMember() {
-		MemberVo memberVo = new MemberVo("user10", "1234", "유저10", "user@email.com", "M");
-		boolean result = memberDao.modifyMember(memberVo);
-		System.out.println("result: " + result);
-	}
+//	@Test
+//	public void testModifyMember() {
+//		MemberVo memberVo = new MemberVo("user10", "1234", "유저10", "user@email.com", "M");
+//		boolean result = memberDao.modifyMember(memberVo);
+//		System.out.println("result: " + result);
+//	}
 	
 	@Test
 	public void testDeleteMember() {

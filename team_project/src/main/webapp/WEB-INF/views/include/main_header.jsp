@@ -107,7 +107,7 @@
 										<a href="/member/admin_page?userid=${loginVo.userid}">관리자페이지</a>
 									</c:when>
 									<c:otherwise>
-										<a href="#">출석체크</a>
+<!-- 										<a href="#">출석체크</a> -->
 										<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
 									</c:otherwise>
 								</c:choose>
@@ -126,7 +126,7 @@
 						<div class="col-sm-4 col-md-4" id="uldiv">
 			            <ul>
 								<li><a href="/recipeboard/list">레시피</a></li>
-								<li><a href="#">포인트샵</a></li>
+<!-- 								<li><a href="#">포인트샵</a></li> -->
 								<li><a href="/column/column_list">칼럼</a></li>
 <!-- 								<li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li> -->
 						</ul>

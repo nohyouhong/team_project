@@ -13,21 +13,29 @@ public class MemberVo {
 	private String m_picture;
 	private int m_totalattend;
 	private int m_code;
+	private String cellphone;
 	
 	public MemberVo() {
 		super();
 	}
 	
-	public MemberVo(String userid, String userpw, String username, String email, String gender) {
+	
+	
+
+	public MemberVo(String userid, String userpw, String username, String email, String gender, String cellphone) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
 		this.username = username;
 		this.email = email;
 		this.gender = gender;
+		this.cellphone = cellphone;
 	}
 
-	public MemberVo(String userid, String userpw, String username, String email, String gender, String m_picture) {
+	
+
+	public MemberVo(String userid, String userpw, String username, String email, String gender, String m_picture,
+			String cellphone) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -35,10 +43,15 @@ public class MemberVo {
 		this.email = email;
 		this.gender = gender;
 		this.m_picture = m_picture;
+		this.cellphone = cellphone;
 	}
 
+
+	
+
+
 	public MemberVo(String userid, String userpw, String username, String email, String gender, Date m_regdate,
-			int m_point, String m_picture, int m_totalattend) {
+			int m_point, String m_picture, int m_totalattend, int m_code, String cellphone) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -49,7 +62,12 @@ public class MemberVo {
 		this.m_point = m_point;
 		this.m_picture = m_picture;
 		this.m_totalattend = m_totalattend;
+		this.m_code = m_code;
+		this.cellphone = cellphone;
 	}
+
+
+
 
 	public String getUserid() {
 		return userid;
@@ -130,11 +148,32 @@ public class MemberVo {
 	public void setM_code(int m_code) {
 		this.m_code = m_code;
 	}
+	
+	
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+
+
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
+	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "MemberVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", gender=" + gender + ", m_regdate=" + m_regdate + ", m_point=" + m_point + ", m_picture="
-				+ m_picture + ", m_totalattend=" + m_totalattend + ", m_code=" + m_code + "]";
+				+ m_picture + ", m_totalattend=" + m_totalattend + ", m_code=" + m_code + ", cellphone=" + cellphone
+				+ "]";
 	}
+
+
+
+
 }

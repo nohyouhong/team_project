@@ -36,6 +36,15 @@
 .main_column_small_img {
 	border-radius: 10px;
 }
+/* #main-img{ */
+/* 	width:1000px; */
+/* } */
+.carousel-item{
+	text-align:center;
+}
+#main_1_div{
+	margin-top:20px;
+}
 </style>
 <body>
 
@@ -50,13 +59,9 @@
 					<li data-slide-to="2" data-target="#carousel-392965"></li>
 				</ol>
 				<div class="carousel-inner">
-					<div class="carousel-item active">
+					<div class="carousel-item active" id="main_1_div">
 						<img class="d-block w-100" alt="Carousel Bootstrap First"
-							src="/resources/main_catagory/custom_images/11.jpg" />
-						<div class="carousel-caption">
-							<h4>사이트 안내 사진</h4>
-							<p></p>
-						</div>
+							id="main-img"src="/resources/main_header/images/main_img_1.png" />
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100" alt="Carousel Bootstrap Second"

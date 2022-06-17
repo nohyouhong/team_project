@@ -34,13 +34,20 @@
 	<select id="listAsk" resultType="AskVo">
 		select * from(select rownum rnum, a.* from(
 			select * from tbl_ask_board
-			where writer = #{writer}
-			or re_group = #{re_group}
+			where re_group in (select re_group from tbl_ask_board where writer = #{writer})
 			order by re_group desc, re_seq asc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
+<!-- 	<select id="listAsk" resultType="AskVo"> -->
+<!-- 		select * from(select rownum rnum, a.* from( -->
+<!-- 			select * from tbl_ask_board -->
+<!-- 			where writer = #{writer} -->
+<!-- 			or re_group = #{re_group} -->
+<!-- 			order by re_group desc, re_seq asc) a) -->
+<!-- 		where rnum between #{startRow} and #{endRow} -->
+<!-- 	</select> -->
 	<select id="getReGroup" resultType="int">
-		select re_group from tbl_ask_board
+		select distinct re_group from tbl_ask_board
 		where writer = #{writer}
 	</select>
 	<select id="allListAsk" resultType="AskVo">

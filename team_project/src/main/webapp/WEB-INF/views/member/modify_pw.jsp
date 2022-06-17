@@ -15,29 +15,7 @@
 </style>
 <script>
 $(document).ready(function(){
-	$("#getVerifCode").on("click", function(e){
-		e.preventDefault();
-		var userid = $("#userid").val();
-		var username = $("#username").val();
-		var email = $("#email").val();
-		var url = "/member/chk_find_pw";
-		var sData = {
-				"userid" : userid, 
-				"username" : username, 
-				"email" : email
-		}
-		$.post(url, sData, function(rData) {
-			console.log("rData: ", rData)
-			if (rData != "fail") {
-				$(".verif_code_div").show();
-				$(".compl_find_pw").show();
-				$("#getVerifCode").hide();
-				$(".rdKey").val(rData);
-			} else if (rData == "fail") {
-				alert("입력한 정보와 일치하는 회원 정보가 없습니다.");
-			}
-		}); // $.post
-	}); // getVerifCode
+	
 		
 }); // script
 </script>
@@ -47,7 +25,7 @@ $(document).ready(function(){
 		<div class="col-md-8">
 			<h3>비밀번호 재설정</h3>
 			<hr>
-			<p>아래의 내용을 빠짐없이 입력해주세요</p>
+			<p>변경할 비밀번호를 입력해주세요</p>
 			<form class="findPwFrm" action="find_pw_run" method="post">
 				<input type="hidden" class="rdKey" name="rdKey" value="">
 				<div class="findPwDiv">

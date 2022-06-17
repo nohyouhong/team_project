@@ -198,7 +198,11 @@ public class MemberController {
 		System.out.println("email: " + email);
 		System.out.println("verif_code: " + verif_code);
 		System.out.println("rdKey: " + rdKey);
-		return null;
+		if (verif_code == rdKey) {
+			return "/member/";
+		} else {
+			return null;			
+		}
 	}
 	
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)

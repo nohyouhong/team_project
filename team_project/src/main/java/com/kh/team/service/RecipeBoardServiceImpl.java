@@ -46,7 +46,7 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 		}
 		//레시피재료리스트
 		String[] i_names = ingredientListVo.getI_names();
-		int[] i_amounts = ingredientListVo.getI_amounts();
+		String[] i_amounts = ingredientListVo.getI_amounts();
 		if((i_names != null && i_names.length != 0) &&
 				(i_amounts != null && i_amounts.length != 0)) {
 			for(int i = 0; i < i_names.length; i++) {

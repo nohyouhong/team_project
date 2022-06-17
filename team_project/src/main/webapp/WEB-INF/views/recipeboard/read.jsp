@@ -389,6 +389,7 @@ padding-bottom: 20px;
 .oneTag{
 	margin-right: 10px;
 	background-color: #E9E9E9;
+	cursor: pointer;
 }
 .tagFront{
 	font-size: 26px;
@@ -438,6 +439,9 @@ $(function(){
 		});
 		$.get(url2, function(rData) {
 			console.log(rData);
+			if(rData.length > 3){
+				$("#commentShowButton").show();
+			}
 			$(".oneComment:gt(0)").remove();
 			$.each(rData, function() {
 				var oneCommentDiv = $(".oneComment").eq(0).clone();
@@ -639,6 +643,9 @@ $(function(){
 		});
 		$.get(url3, function(rData) {
 			console.log(rData);
+			if(rData.length > 3){
+				$("#reviewShowButton").show();
+			}
 			$(".oneRecipeReview:gt(0)").remove();
 			$.each(rData, function() {
 				var oneReviewDiv = $(".oneRecipeReview").eq(0).clone();
@@ -1273,7 +1280,7 @@ $(function(){
 				</div>
 			</div>
 			<div class="showHideDiv">
-				<button id="reviewShowButton" class="showButton">더보기</button>
+				<button id="reviewShowButton" class="showButton" style="display: none;">더보기</button>
 				<button id="reviewHideButton" class="hideButton" style="display: none;">줄여보기</button>
 			</div>
 			<form id="cookReviewForm">
@@ -1345,7 +1352,7 @@ $(function(){
 			
 <!-- 				<이동용> -->
 			<div class="showHideDiv">
-				<button id="commentShowButton" class="showButton">더보기</button>
+				<button id="commentShowButton" class="showButton" style="display: none;">더보기</button>
 				<button id="commentHideButton" class="hideButton" style="display: none;">줄여보기</button>
 			</div>
 			<form id="cookCommentForm">

@@ -43,6 +43,10 @@
 			<mapping path="/ask/**/*"/>
 			<mapping path="/column/column_form"/>
 			<mapping path="/customer/ask_form"/>
+			<mapping path="/recipeboard/createForm"/>
+			<mapping path="/comment/insertRecipeComment"/>
+			<mapping path="/comment/replyRecipeComment"/>
+			<mapping path="/comment/insertRecipeReview"/>
 			<exclude-mapping path="/member/login_form"/>
 			<exclude-mapping path="/member/join_form"/>
 			<exclude-mapping path="/member/checkId"/>

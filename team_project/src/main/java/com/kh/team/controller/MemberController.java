@@ -96,6 +96,7 @@ public class MemberController {
 	public String login(String userid, String userpw, String saveId, 
 			HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
 		MemberVo memberVo = memberService.getMemberByIdAndPw(userid, userpw);
+		System.out.println("memberVo" + memberVo);
 		if(memberVo == null) {
 			rttr.addFlashAttribute("login_result", "fail");
 			return "redirect:/";

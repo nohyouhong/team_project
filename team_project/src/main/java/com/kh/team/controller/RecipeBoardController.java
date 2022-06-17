@@ -174,11 +174,21 @@ public class RecipeBoardController {
 		return data;
 	}
 	
-	
 	@RequestMapping(value="/deleteFile", method=RequestMethod.GET)
 	@ResponseBody
 	public String deleteFile(String filename) {
 		boolean result = MyFileUploader.deleteFile(filename);
 		return String.valueOf(result);
 	}
+	
+//	@RequestMapping(value="/insertIngred", method=RequestMethod.GET)
+//	public String insertIngred(IngredientVo ingredientVo, PagingDto pagingDto) {
+//		boolean result = recipeBoardService.delete(bno);
+//		rttr.addFlashAttribute("delete_result", result);
+//		rttr.addAttribute("page", pagingDto.getPage());
+//		rttr.addAttribute("perPage", pagingDto.getPerPage());
+//		rttr.addAttribute("searchType", pagingDto.getSearchType());
+//		rttr.addAttribute("keyword", pagingDto.getKeyword());
+//		return "redirect:/recipeboard/list";
+//	}
 }

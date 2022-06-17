@@ -38,7 +38,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="tabbable" id="tabs-667120">
-			<div class="col-md-6" id="pointdiv">
+			<div class="col-md-6" id="pointdiv" style="display: none;">
 				
 				<h5 class="pointh5">현재 포인트</h5>
 				<div id="betweenh5"></div>

@@ -2,6 +2,48 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script>
+$(function() {
+	//메인헤더 이미지바꾸기
+	$("#mainHeaderUserImage").click(function() {
+		var inputFile = $("#mainHeaderUserImageFile");
+		inputFile.trigger("click");
+	});
+	$("#mainHeaderUserImageFile").on("change", function(){
+    	if (this.files && this.files[0]) {
+       		var reader = new FileReader();
+    			reader.onload = function (e) {
+    			$("#mainHeaderUserImage").attr("src", e.target.result);
+    			}
+            reader.readAsDataURL(this.files[0]);
+    	}
+    	$("#mainHeaderFormBtn").show();
+    });
+	$("#mainHeaderFormBtn").click(function() {
+		var form = $("#mainHeaderForm");
+		var formData = new FormData(form[0]);
+		var url = "/member/uploadFile";
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				console.log(rData);
+				var url2 = "/member/updateUserImage";
+				var sData = {
+						"filename" : rData
+				}
+				$.post(url2, sData, function(rData2){
+						console.log(rData2);
+				});
+			}
+		});
+	});
+});
+</script>
 
 <div class="container-fluid">
 	<div class="row">
@@ -14,7 +56,12 @@
 					<!-- partial:partials/_sidebar.html -->
 					<nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
 						<div class="user-info">
-							<img src="/resources/main_mypage/images/face.jpg" alt="프로필 이미지">
+						${loginVo }
+							<form id="mainHeaderForm">
+								<img id="mainHeaderUserImage" src="/member/displayImage?filename=${loginVo.m_picture}">
+								<input style="display: none;" type="file" id="mainHeaderUserImageFile" name="file" class="mainHeaderUserImageFile"/>
+								<button type="button" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
+							</form>
 							<p class="name">${loginVo.username}</p>
 							<p class="designation">Manager</p>
 

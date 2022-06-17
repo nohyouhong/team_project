@@ -70,4 +70,10 @@
 		where userid = #{userid} and username = #{username} and email = #{email}
 	</select>
 	
+	<update id="modifyPw">
+		update tbl_member set
+			userpw = #{userpw}
+		where userid = #{userid} and username = #{username} and email = #{email}
+	</update>
+	
 </mapper>

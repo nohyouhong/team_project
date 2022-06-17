@@ -37,6 +37,14 @@
 	border-radius: 10px;
 }
 </style>
+<script>
+$(function(){
+	var login_result = "${login_result}"
+	if (login_result == "fail") {
+		alert("로그인에 실패하였습니다.\r\n다시 로그인해주세요.")
+	}
+});
+</script>
 <body>
 
 	<div class="row">

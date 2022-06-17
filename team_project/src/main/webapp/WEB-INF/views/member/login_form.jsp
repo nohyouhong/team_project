@@ -23,6 +23,17 @@
 	justify-content: flex-end;
 }
 </style>
+<script>
+$(function(){
+	var modi_pw_result = "${modi_pw_result}";
+	if (modi_pw_result == "true") {
+		alert("변경된 비밀번호로 로그인해주세요.")
+	} else if (modi_pw_result == "false") {
+		alert("비밀번호 재설정에 실패하였습니다.")
+	}
+	
+}); // function()
+</script>
 	<div class="container-fluid window">
 		<div class="row">
 			<div class="col-md-4"></div>

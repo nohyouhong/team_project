@@ -136,13 +136,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/find_id_run", method=RequestMethod.POST)
 	@ResponseBody
-	public List<String> findIdRun(String username, String email, String cellphone) {
-		System.out.println("username: " + username);
-		System.out.println("email: " + email);
-		System.out.println("cellphone: " + cellphone);
-		int count = memberService.recogExistId(username, email, cellphone);
+	public List<String> findIdRun(MemberVo memberVo) {
+		int count = memberService.recogExistId(memberVo);
 		if (count > 0) {
-			List<String> userids = memberService.findId(username, email, cellphone);
+			List<String> userids = memberService.findId(memberVo);
 			return userids;				
 		} else {
 			return null;
@@ -157,12 +154,8 @@ public class MemberController {
 
 	@RequestMapping(value="/chk_find_pw", method=RequestMethod.POST)
 	@ResponseBody
-	public String checkforFindPw(String userid, String username, String email) {
-//		System.out.println("userid: " + userid);
-//		System.out.println("username: " + username);
-//		System.out.println("email: " + email);
-		int count = memberService.recogId(userid, username, email);
-		System.out.println("count: " + count);
+	public String checkforFindPw(MemberVo memberVo) {
+		int count = memberService.recogId(memberVo);
 		int rdKey = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
 		System.out.println("rdKey: " + rdKey);
 		if (count > 0) {
@@ -179,10 +172,10 @@ public class MemberController {
 				MimeMessage mail = mailSender.createMimeMessage();
 				MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8"); // true는 멀티파트 메세지를 사용하겠다는 의미
 				mailHelper.setFrom(from);
-				mailHelper.setTo(email);
+				mailHelper.setTo(memberVo.getEmail());
 				mailHelper.setSubject(subject);
 				mailHelper.setText(content, true); // true는 html을 사용하겠다는 의미입니다.
-				mailSender.send(mail);
+//				mailSender.send(mail);
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
@@ -193,17 +186,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/find_pw_run", method=RequestMethod.POST)
-	public String findPwRun(String userid, String username, String email, String verif_code, String rdKey) {
-		System.out.println("userid: " + userid);
-		System.out.println("username: " + username);
-		System.out.println("email: " + email);
-		System.out.println("verif_code: " + verif_code);
-		System.out.println("rdKey: " + rdKey);
-		if (verif_code == rdKey) {
-			return "/member/";
-		} else {
-			return null;			
-		}
+	public String findPwRun(MemberVo memberVo, Model model) {
+		model.addAttribute("memberVo", memberVo);
+		return "/member/modify_pw";			
+		
+	}
+
+	@RequestMapping(value="/modi_pw_run", method=RequestMethod.POST)
+	public String modiPwRun(MemberVo memberVo, RedirectAttributes rttr) {
+		System.out.println("memberVo: " + memberVo);
+		boolean result = memberService.modifyPw(memberVo);
+		rttr.addFlashAttribute("modi_pw_result", result);
+		return "redirect:/member/login_form";
+		
 	}
 	
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)

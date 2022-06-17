@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService{
 	public boolean modifyMember(MemberVo memberVo) {
 		return false;
 	}
+	
+	@Override
+	public boolean updateUserImage(String filename, String userid) {
+		return memberDao.updateUserImage(filename, userid);
+	}
 
 	@Override
 	public boolean deleteMember(String userid) {
@@ -70,25 +75,27 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int recogExistId(String username, String email, String cellphone) {
-		int count = memberDao.recogExistId(username, email, cellphone);
+	public int recogExistId(MemberVo memberVo) {
+		int count = memberDao.recogExistId(memberVo);
 		return count;
 	}
 
 	@Override
-	public List<String> findId(String username, String email, String cellphone) {
-		List<String> userids = memberDao.findId(username, email, cellphone);
+	public List<String> findId(MemberVo memberVo) {
+		List<String> userids = memberDao.findId(memberVo);
 		return userids;
 	}
 
 	@Override
-	public int recogId(String userid, String username, String email) {
-		int count = memberDao.recogId(userid, username, email);
+	public int recogId(MemberVo memberVo) {
+		int count = memberDao.recogId(memberVo);
 		return count;
 	}
 
 	@Override
-	public boolean updateUserImage(String filename, String userid) {
-		return memberDao.updateUserImage(filename, userid);
+	public boolean modifyPw(MemberVo memberVo) {
+		boolean result = memberDao.modifyPw(memberVo);
+		return result;
 	}
+
 }

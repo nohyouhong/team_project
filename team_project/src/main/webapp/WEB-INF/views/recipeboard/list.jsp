@@ -67,7 +67,41 @@
 	margin-left: 3px;
 }
 </style>
+<script>
+$(function(){
+	var frmPaging = $("#frmPaging");
+	
+	$(".recipeBoardLink").click(function() {
+		var r_bno = $(this).attr("data-r_bno"); 
+		frmPaging.find("input[name=r_bno]").val(r_bno);
+		frmPaging.attr("action", "/recipeboard/read");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	
+// 	$("#perPage").change(function() {
+// 		var perPage = $(this).val();
+
+// 		frmPaging.find("input[name=perPage]").val(perPage);
+// 		frmPaging.find("input[name=page]").val(1);
+// 		frmPaging.attr("action", "/recipeboard/list");
+// 		frmPaging.attr("method", "get");
+// 		frmPaging.submit();
+// 	});
+	
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/recipeboard/list");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+});
+</script>
 <%-- ${recipeBoardList }	 --%>
+<%@include file="/WEB-INF/views/include/paging.jsp" %>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -81,7 +115,7 @@
 				<c:forEach items="${recipeBoardList }" var="recipeBoardVo">
 					<div class="oneRecipe">
 						<div>
-							<a href="/recipeboard/read?r_bno=${recipeBoardVo.r_bno }">
+							<a class="recipeBoardLink" data-r_bno="${recipeBoardVo.r_bno}" href="/recipeboard/read?r_bno=${recipeBoardVo.r_bno }">
 								<img class="oneRecipeImage" src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic}">
 							</a>
 						</div>
@@ -160,7 +194,7 @@
 							<c:forEach begin="${pagingDto.startPage }" end="${pagingDto.endPage }" var="i">
 								<li
 									<c:choose>
-										<c:when test="${i == param.page }">
+										<c:when test="${i == pagingDto.page }">
 											class="page-item active"
 										</c:when>
 										<c:otherwise>

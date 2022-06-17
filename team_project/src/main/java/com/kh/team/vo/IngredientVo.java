@@ -4,7 +4,7 @@ public class IngredientVo {
 	private int lno;
 	private int r_bno;
 	private String i_name;
-	private int i_amount;
+	private String i_amount;
 	private String i_unit;
 	private String i_address;
 	
@@ -12,14 +12,14 @@ public class IngredientVo {
 		super();
 	}
 
-	public IngredientVo(int r_bno, String i_name, int i_amount) {
+	public IngredientVo(int r_bno, String i_name, String i_amount) {
 		super();
 		this.r_bno = r_bno;
 		this.i_name = i_name;
 		this.i_amount = i_amount;
 	}
 
-	public IngredientVo(int lno, int r_bno, String i_name, int i_amount, String i_unit, String i_address) {
+	public IngredientVo(int lno, int r_bno, String i_name, String i_amount, String i_unit, String i_address) {
 		super();
 		this.lno = lno;
 		this.r_bno = r_bno;
@@ -53,11 +53,11 @@ public class IngredientVo {
 		this.i_name = i_name;
 	}
 
-	public int getI_amount() {
+	public String getI_amount() {
 		return i_amount;
 	}
 
-	public void setI_amount(int i_amount) {
+	public void setI_amount(String i_amount) {
 		this.i_amount = i_amount;
 	}
 

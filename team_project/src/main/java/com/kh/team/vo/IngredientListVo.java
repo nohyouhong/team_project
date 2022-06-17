@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 public class IngredientListVo {
 	private String[] i_names;
-	private int[] i_amounts;
+	private String[] i_amounts;
 	
 	public IngredientListVo() {
 		super();
 	}
 
-	public IngredientListVo(String[] i_names, int[] i_amounts) {
+	public IngredientListVo(String[] i_names, String[] i_amounts) {
 		super();
 		this.i_names = i_names;
 		this.i_amounts = i_amounts;
@@ -24,11 +24,11 @@ public class IngredientListVo {
 		this.i_names = i_names;
 	}
 
-	public int[] getI_amounts() {
+	public String[] getI_amounts() {
 		return i_amounts;
 	}
 
-	public void setI_amounts(int[] i_amounts) {
+	public void setI_amounts(String[] i_amounts) {
 		this.i_amounts = i_amounts;
 	}
 

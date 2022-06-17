@@ -139,6 +139,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-
+root-security-context.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,maven

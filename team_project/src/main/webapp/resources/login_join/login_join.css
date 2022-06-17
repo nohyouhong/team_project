@@ -8,9 +8,13 @@
 #joinBtnSpan{
 	color:yellowgreen;
 }
-#useridlabel, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #filename{
+#useridlabel, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #cellphone, #filename{
 	font-family:'jua';
 	font-size:17px;
+}
+#cellphonediv{
+	display:flex;
+	width:220px;
 }
 #filecomment{
 	font-family:'jua';
@@ -102,7 +106,7 @@
 #join_bottom{
 	margin-bottom:50px;
 }
-#overlapIdCheckBtn{
+#overlapIdCheckBtn, #overlapPhoneCheckBtn{
 	border-radius: 10px;
 	margin-top:5px;
 	padding:5px 15px;

@@ -10,7 +10,7 @@ public interface AskService {
 	public boolean updateAsk(AskVo askVo);
 	public boolean deleteAsk(int a_bno);
 	public AskVo readAsk(int a_bno);
-	public List<AskVo> AskList(String writer, PagingDto pagingDto, int re_group);
+	public List<AskVo> AskList(String writer, PagingDto pagingDto);
 	public List<AskVo> allAskList(PagingDto pagingDto);
 	public int getCount(PagingDto pagingDto);
 	public List<String> getAskImages(int a_bno);

@@ -74,35 +74,32 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int recogExistId(String username, String email, String cellphone) {
-		Map<String, String> map = new HashMap<>();
-		map.put("username", username);
-		map.put("email", email);
-		map.put("cellphone", cellphone);
-		int count = sqlSession.selectOne(NAMESPACE + "recogExistId", map);
+	public int recogExistId(MemberVo memberVo) {
+		int count = sqlSession.selectOne(NAMESPACE + "recogExistId", memberVo);
 		return count;
 	}
 
 	@Override
-	public List<String> findId(String username, String email, String cellphone) {
-		Map<String, String> map = new HashMap<>();
-		map.put("username", username);
-		map.put("email", email);
-		map.put("cellphone", cellphone);
-		List<String> userid = sqlSession.selectList(NAMESPACE + "findId", map);
+	public List<String> findId(MemberVo memberVo) {
+		List<String> userid = sqlSession.selectList(NAMESPACE + "findId", memberVo);
 		return userid;
 	}
 
 	@Override
-	public int recogId(String userid, String username, String email) {
-		Map<String, String> map = new HashMap<>();
-		map.put("userid", userid);
-		map.put("username", username);
-		map.put("email", email);
-		int count = sqlSession.selectOne(NAMESPACE + "recogId", map);
+	public int recogId(MemberVo memberVo) {
+		int count = sqlSession.selectOne(NAMESPACE + "recogId", memberVo);
 		return count;
 	}
 
+	@Override
+	public boolean modifyPw(MemberVo memberVo) {
+		int count = sqlSession.update(NAMESPACE + "modifyPw", memberVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean updateUserImage(String filename, String userid) {
 		Map<String, String> map = new HashMap<>();
@@ -114,5 +111,6 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return false;
 	}
+
 
 }

@@ -38,6 +38,17 @@ $(document).ready(function(){
 			}
 		}); // $.post
 	}); // getVerifCode
+	
+	$(".compl_find_pw").on("click", function(e){
+		e.preventDefault();
+		var rdKey = $(".rdKey").val();
+		var verif_code = $(".verif_code").val();
+		if (rdKey == verif_code) {
+			$("#findPwFrm").submit();
+		} else {
+			alert("인증번호를 확인해주세요.")
+		}
+	});
 		
 }); // script
 </script>
@@ -48,7 +59,7 @@ $(document).ready(function(){
 			<h3>비밀번호 재설정</h3>
 			<hr>
 			<p>아래의 내용을 빠짐없이 입력해주세요</p>
-			<form class="findPwFrm" action="find_pw_run" method="post">
+			<form id="findPwFrm" action="/member/find_pw_run" method="post">
 				<input type="hidden" class="rdKey" name="rdKey" value="">
 				<div class="findPwDiv">
 					<div class="form-group">
@@ -65,11 +76,11 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group verif_code_div" style="display: none;">
 						<label for="verif_code">인증번호</label>
-						<input type="text" class="form-control" name="verif_code" placeholder="이메일을 확인해주세요"/>
+						<input type="text" class="form-control verif_code" name="verif_code" placeholder="이메일을 확인해주세요"/>
 					</div>
 					<div class="form-group">
 						<a href="#" class="btn btn-danger" id="getVerifCode">인증번호 받기</a>
-						<button class="btn btn-success compl_find_pw" type="submit" style="display: none;">비밀번호 재설정 완료</button>
+						<button class="btn btn-success compl_find_pw" type="submit" style="display: none;">인증번호 확인</button>
 					</div>
 				</div>
 			</form>

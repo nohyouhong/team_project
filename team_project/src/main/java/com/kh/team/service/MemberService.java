@@ -14,7 +14,8 @@ public interface MemberService {
 	public boolean deleteMember(String userid);
 	public MemberVo getMemberByIdAndPw(String userid, String userpw);
 	public List<PointVo> getPoint_list(String userid);
-	public int recogExistId(String username, String email, String cellphone);
-	public List<String> findId(String username, String email, String cellphone);
-	public int recogId(String userid, String username, String email);
+	public int recogExistId(MemberVo memberVo);
+	public List<String> findId(MemberVo memberVo);
+	public int recogId(MemberVo memberVo);
+	public boolean modifyPw(MemberVo memberVo);
 }

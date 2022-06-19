@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.declare">
+
+	<select id="recipeCommentDeclareList" resultType="DeclareVo">
+		select * from tbl_recipe_comment_declare
+		order by d_regdate desc
+	</select>
+
+	<select id="recipeCommentDeclareListByCriminal" resultType="DeclareVo">
+		select * from tbl_recipe_comment_declare
+		where criminal = #{criminal}
+		order by d_regdate desc
+	</select>
+
+	<insert id="insertRecipeCommentDeclare">
+		insert into tbl_recipe_comment_declare
+			(r_dno, r_cno, reporter, criminal, d_code, d_explain)
+		values
+			(seq_recipe_comment_declare_dno.nextval, #{r_cno}, #{reporter}, #{criminal}, #{d_code}, #{d_explain, jdbcType=VARCHAR})
+	</insert>
+	
+</mapper>

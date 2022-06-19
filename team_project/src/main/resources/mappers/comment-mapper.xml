@@ -116,4 +116,19 @@
 		where r_rno = #{r_rno}
 	</delete>
 
+	<select id="getBnoByRno" resultType="int">
+		select r_bno from tbl_recipe_review
+		where r_rno = #{r_rno, jdbcType=INTEGER}
+	</select>
+
+	<select id="getAvgRating" resultType="float">
+		select nvl(avg(r_rating), 0) from tbl_recipe_review
+		where r_bno = #{r_bno}
+	</select>
+
+	<update id="avgRatingUpdate">
+		update tbl_recipe_board set
+			avgRating = #{avgRating}
+		where r_bno = #{r_bno}
+	</update>
 </mapper>

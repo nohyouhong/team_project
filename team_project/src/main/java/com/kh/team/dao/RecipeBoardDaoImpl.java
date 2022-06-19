@@ -40,6 +40,16 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean ingredInfoCreate(IngredientVo ingredientVo) {
+		System.out.println(ingredientVo);
+		int count = sqlSession.insert(NAMESPACE + "ingredInfoCreate", ingredientVo);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public RecipeBoardVo read(int r_bno) {
@@ -160,4 +170,42 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		List<String> tags = sqlSession.selectList(NAMESPACE + "getTags", r_bno);
 		return tags;
 	}
+	
+	@Override
+	public boolean checkIngredInfo(String i_name) {
+		int count = sqlSession.selectOne(NAMESPACE + "checkIngredInfo", i_name);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean ingredDelete(int r_bno) {
+		int count = sqlSession.delete(NAMESPACE + "ingredDelete", r_bno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean tagDelete(int r_bno) {
+		int count = sqlSession.delete(NAMESPACE + "tagDelete", r_bno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteContent(int r_bno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteContent", r_bno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+
 }

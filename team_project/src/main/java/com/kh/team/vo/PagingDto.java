@@ -6,6 +6,7 @@ public class PagingDto {
 	private int endRow;
 	private String searchType;
 	private String keyword;
+	private String listType = "avgRating";
 	private int perPage = 10;
 	private int totalPage;
 	private int count;
@@ -52,6 +53,12 @@ public class PagingDto {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public String getListType() {
+		return listType;
+	}
+	public void setListType(String listType) {
+		this.listType = listType;
+	}
 	public int getPerPage() {
 		return perPage;
 	}
@@ -85,13 +92,14 @@ public class PagingDto {
 	public int getPAGE_BLOCK() {
 		return PAGE_BLOCK;
 	}
-	
 	@Override
 	public String toString() {
 		return "PagingDto [page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", searchType="
-				+ searchType + ", keyword=" + keyword + ", perPage=" + perPage + ", totalPage=" + totalPage + ", count="
-				+ count + ", startPage=" + startPage + ", endPage=" + endPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+				+ searchType + ", keyword=" + keyword + ", listType=" + listType + ", perPage=" + perPage
+				+ ", totalPage=" + totalPage + ", count=" + count + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
+	
 	
 	
 

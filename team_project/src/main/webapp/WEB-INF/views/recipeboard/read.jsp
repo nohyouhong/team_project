@@ -398,6 +398,27 @@ padding-bottom: 20px;
 .tagName{
 	font-size: 21px;
 }
+#buttonsDiv{
+	text-align: center;
+}
+.reviewScore{
+	margin-right: 6px;
+}
+.declareLabel{
+	margin: 5px 0px;
+}
+.declareReason{
+	margin: 5px;
+	margin-left: 20px;
+}
+#declareExplain{
+	margin: 5px;
+	margin-left: 25px;
+	width: 85%;
+}
+.modalDeclareBtnDiv{
+	padding-right: 42px;
+}
 </style>
 <script>
 $(function(){
@@ -450,7 +471,10 @@ $(function(){
 				if(this.userid == "${loginVo.userid}") {
 					UserInfoDiv.append('<span class="smallHr">|</span>');
 					UserInfoDiv.append('<a class="commentDelete" href="#">삭제</a>');
-				} 
+				} else {
+					UserInfoDiv.append('<span class="smallHr">|</span>');
+					UserInfoDiv.append('<a class="commentDeclare" href="#">신고</a>');
+				}
 				if(this.r_userpic != null) {
 					var r_userpic = this.r_userpic;
 					var imageFile = "/recipeboard/displayImage?filename=" + r_userpic;
@@ -466,6 +490,7 @@ $(function(){
 				oneCommentDiv.find("div.userCommentVal").text(this.r_comment);
 				oneCommentDiv.find(".commentReply").attr("data-re_group", this.re_group);
 				oneCommentDiv.find(".commentDeclare").attr("data-r_cno", this.r_cno);
+				oneCommentDiv.find(".commentDeclare").attr("data-userid", this.userid);
 				oneCommentDiv.find(".commentDelete").attr("data-r_cno", this.r_cno);
 				$("#cookCommentDiv").append(oneCommentDiv);
 			});
@@ -510,59 +535,67 @@ $(function(){
 	
 	//댓글 완료 버튼
 	$("#commentButton").click(function() {
-		
-		var form = $("#cookCommentForm");
-		var formData = new FormData(form[0]);
-		console.log(formData);
-		var url = "/comment/insertRecipeComment";
-		
-		$.ajax({
-			"enctype" : "multipart/form-data",  
-			"processData" : false,
-			"contentType" : false,
-			"url" : url,
-			"method" : "post",
-			"data" : formData,
-			"success" : function(rData) {
-				if(rData == "true"){
-					console.log(rData);
-					getCommentList();
+		var loginUserid = "${loginVo.userid}";
+		if(loginUserid != "" && loginUserid != null){
+			var form = $("#cookCommentForm");
+			var formData = new FormData(form[0]);
+			console.log(formData);
+			var url = "/comment/insertRecipeComment";
+			
+			$.ajax({
+				"enctype" : "multipart/form-data",  
+				"processData" : false,
+				"contentType" : false,
+				"url" : url,
+				"method" : "post",
+				"data" : formData,
+				"success" : function(rData) {
+					if(rData == "true"){
+						console.log(rData);
+						getCommentList();
+					}
 				}
-			}
-		});
-		//비우기
-		$("#commentImage").attr("src", "/resources/main_mypage/images/userImagePlus.png");
-		$("#file").val("");
-		$("#r_comment").val("");
+			});
+			//비우기
+			$("#commentImage").attr("src", "/resources/main_mypage/images/userImagePlus.png");
+			$("#file").val("");
+			$("#r_comment").val("");
+		}else{
+			alert("로그인 해주세요.");
+		}
 	});
 	
 	//답글 완료 버튼
 	$("#commentButton2").click(function() {
-		
-		var form = $("#cookCommentForm2");
-		var formData = new FormData(form[0]);
-		console.log(formData);
-		var url = "/comment/replyRecipeComment";
-		
-		$.ajax({
-			"enctype" : "multipart/form-data",  
-			"processData" : false,
-			"contentType" : false,
-			"url" : url,
-			"method" : "post",
-			"data" : formData,
-			"success" : function(rData) {
-				if(rData == "true"){
-					console.log(rData);
-					getCommentList();
+		var loginUserid = "${loginVo.userid}";
+		if(loginUserid != "" && loginUserid != null){
+			var form = $("#cookCommentForm2");
+			var formData = new FormData(form[0]);
+			console.log(formData);
+			var url = "/comment/replyRecipeComment";
+			
+			$.ajax({
+				"enctype" : "multipart/form-data",  
+				"processData" : false,
+				"contentType" : false,
+				"url" : url,
+				"method" : "post",
+				"data" : formData,
+				"success" : function(rData) {
+					if(rData == "true"){
+						console.log(rData);
+						getCommentList();
+					}
 				}
-			}
-		});
-		//비우기
-		form.hide();
-		$("#commentImage2").attr("src", "/resources/main_mypage/images/userImagePlus.png");
-		$("#file2").val("");
-		$("#r_comment2").val("");
+			});
+			//비우기
+			form.hide();
+			$("#commentImage2").attr("src", "/resources/main_mypage/images/userImagePlus.png");
+			$("#file2").val("");
+			$("#r_comment2").val("");
+		}else{
+			alert("로그인 해주세요.");
+		}
 	});
 	
 	//댓글답글버튼
@@ -591,7 +624,12 @@ $(function(){
 	
 	//요리후기 완료
 	$("#reviewButton").click(function() {
-		$("#modal-269785").trigger("click");
+		var loginUserid = "${loginVo.userid}";
+		if(loginUserid != "" && loginUserid != null){
+			$("#modal-269785").trigger("click");
+		}else{
+			alert("로그인 해주세요.");
+		}
 		
 	});
 	//평점 완료버튼
@@ -916,6 +954,61 @@ $(function(){
 			alert("로그인 해주세요.");
 		}
 	});
+	$("#btnDelete").click(function(e) {
+		e.preventDefault();
+		var result = confirm("정말로 삭제하시겠습니까?");
+		if(result) {
+			var link = $(this).attr("href");
+			location.href = link;
+		}
+	});
+	
+	//신고 기타사유 text창 나오게하기
+	$("#declare1009").click(function(){
+		$("#declareExplain").show();
+	});
+	//신고 다른사유누르면 text창 다시 하이드
+	$(".declare1009Hide").click(function(){
+		$("#declareExplain").hide();
+	});
+	
+	//댓글신고버튼
+	$("#cookCommentDiv").on("click", ".commentDeclare", function(e) {
+		e.preventDefault();
+		$("#modal-534545").trigger("click");
+			var r_cno = $(this).attr("data-r_cno");
+			var criminal = $(this).attr("data-userid");
+		
+		$("#reciepCommentDeclareBtn").click(function() {
+			var d_code = $('input:radio[name="declare"]:checked').val();
+			var d_explain = $("#declareExplain").val();
+			
+			$("#declareForm").find("input#r_cno").val(r_cno);
+			$("#declareForm").find("input#criminal").val(criminal);
+			$("#declareForm").find("input#d_code").val(d_code);
+			$("#declareForm").find("input#d_explain").val(d_explain);
+			
+			var form = $("#declareForm");
+			var formData = new FormData(form[0]);
+			var url = "/declare/insertRecipeCommentDeclare";
+			
+			$.ajax({
+				"enctype" : "multipart/form-data",  
+				"processData" : false,
+				"contentType" : false,
+				"url" : url,
+				"method" : "post",
+				"data" : formData,
+				"success" : function(rData) {
+					if(rData == "true") {
+						alert("신고가 접수되었습니다.");
+					}
+				}
+			});			
+		});
+	});
+	
+	
 	
 });
 </script>
@@ -951,7 +1044,7 @@ $(function(){
 						</div>
 					</div>
 					<div class="modal-footer modalReview">
-						<button type="button" id="starRatingFinish" class="btn btn-primary">평점등록</button>
+						<button type="button" id="starRatingFinish" class="btn btn-outline-primary">평점등록</button>
 					</div>
 				</div>
 			</div>
@@ -974,7 +1067,7 @@ $(function(){
 						<img id="modalReviewImage" src="#">
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-outline-secondary"
 							data-dismiss="modal">닫기</button>
 					</div>
 				</div>
@@ -1011,7 +1104,7 @@ $(function(){
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-outline-secondary"
 							data-dismiss="modal">닫기</button>
 					</div>
 				</div>
@@ -1036,9 +1129,9 @@ $(function(){
 							placeholder="쪽지내용을 입력해주세요."></textarea>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" id="modalSendBtn" class="btn btn-secondary"
+						<button type="submit" id="modalSendBtn" class="btn btn-outline-primary"
 							>보내기</button>
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-outline-secondary"
 							data-dismiss="modal">취소</button>
 					</div>
 				</div>
@@ -1046,7 +1139,51 @@ $(function(){
 		</div>
 	</div>
 </div>
+<a id="modal-534545" style="display: none;" href="#modal-container-534545" role="button"
+			class="btn" data-toggle="modal">Launch demo modal</a>
 
+		<div class="modal fade" id="modal-container-534545" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">신고사유를 선택해주세요.</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="declareDiv">
+							<input type="radio" class="declareReason declare1009Hide" id="declare1001" name="declare" value="1001">
+							<label class="declareLabel" for="declare1001">광고/홍보</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1002" name="declare" value="1002">
+							<label class="declareLabel" for="declare1002">음란/선정성</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1003" name="declare" value="1003">
+							<label class="declareLabel" for="declare1003">욕설/비방</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1004" name="declare" value="1004">
+							<label class="declareLabel" for="declare1004">안 맞는 글</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1005" name="declare" value="1005">
+							<label class="declareLabel" for="declare1005">도배글</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1006" name="declare" value="1006">
+							<label class="declareLabel" for="declare1006">중복글</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1007" name="declare" value="1007">
+							<label class="declareLabel" for="declare1007">저작권 위배</label><br>
+							<input type="radio" class="declareReason declare1009Hide" id="declare1008" name="declare" value="1008">
+							<label class="declareLabel" for="declare1008">개인정보 노출</label><br>
+							<input type="radio" class="declareReason" id="declare1009" name="declare" value="1009">
+							<label class="declareLabel" for="declare1009">기타</label><br>
+							<input type="text" id="declareExplain" style="display:none;"></input>
+						</div>
+					</div>
+					<div class="modal-footer modalDeclareBtnDiv">
+						<button type="button" id="reciepCommentDeclareBtn" class="btn btn-outline-danger"
+							data-dismiss="modal">신고하기</button>
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal">취소하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 <!-- 모달리스트 -->
 <!-- 쪽지폼 -->
 <form id="messageForm" method="post">
@@ -1056,6 +1193,15 @@ $(function(){
 	<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno }">
 </form>
 <!-- 쪽지폼 -->
+<!-- 신고폼 -->
+<form id="declareForm" method="post">
+	<input type="hidden" id="r_cno" name="r_cno">
+	<input type="hidden" id="reporter" name="reporter" value="${loginVo.userid }">
+	<input type="hidden" id="criminal" name="criminal">
+	<input type="hidden" id="d_code" name="d_code">
+	<input type="hidden" id="d_explain" name="d_explain">
+</form>
+<!-- 신고폼 -->
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -1269,7 +1415,7 @@ $(function(){
 					</div>
 					<div class="reviewUserInfo">
 						<div class="UserInfoDiv">
-							<span class="reviewUser">노유홍</span> 
+							<span class="reviewUser">사람이름</span> 
 							<span class="reviewDate">2022-06-12</span>
 							<span class="reviewScore"></span>
 						</div>
@@ -1388,6 +1534,14 @@ $(function(){
 					</span>
 				</c:forEach>
 			</div>
+		</div>
+		<hr class="createHr2">
+		<div class="cookP" id="buttonsDiv">
+			<a class="btn btn-outline-success linkBtn" href="/recipeboard/list">목록으로</a>
+			<c:if test="${memberVo.userid == loginVo.userid }">
+				<a class="btn btn-outline-info linkBtn" href="/recipeboard/updateForm?r_bno=${recipeBoardVo.r_bno }">수정하기</a>
+				<a class="btn btn-outline-danger linkBtn" href="/recipeboard/delete?r_bno=${recipeBoardVo.r_bno }" id="btnDelete">삭제하기</a>
+			</c:if>
 		</div>
 	</div>
 	<div class="col-md-2"></div>

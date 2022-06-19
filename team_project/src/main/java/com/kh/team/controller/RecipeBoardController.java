@@ -42,15 +42,9 @@ public class RecipeBoardController {
 	public String createRun(RecipeBoardVo recipeBoardVo, IngredientVo ingredientVo, 
 			IngredientListVo ingredientListVo, HttpSession session, RedirectAttributes rttr, MultipartFile file, 
 			@RequestParam("files") List<MultipartFile> files) {
-//		System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
-//		System.out.println("BoardController, createRun, titlepic: " + file);
-//		System.out.println("BoardController, createRun, contentpictures: " + files);
-//		System.out.println("BoardController, createRun, List<ingredientVo>: " + ingredientListVo);
-//		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-//		String userid = memberVo.getUserid();
-		String userid = "user01";
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = memberVo.getUserid();
 		recipeBoardVo.setUserid(userid);
-		
 		try {
 			//타이틀이미지
 			String originalFilename = file.getOriginalFilename();
@@ -106,33 +100,78 @@ public class RecipeBoardController {
 		return "recipeboard/read";
 	}
 	
-	@RequestMapping(value="/update_form", method=RequestMethod.GET)
-	public String updateForm() {
+	@RequestMapping(value="/updateForm", method=RequestMethod.GET)
+	public String updateForm(int r_bno, Model model, PagingDto pagingDto) {
+		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
+		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
+		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
+		List<String> tagList = recipeBoardService.getTags(r_bno);
+		model.addAttribute("recipeBoardVo", recipeBoardVo);
+		model.addAttribute("ingredientVoList", ingredientVoList);
+		model.addAttribute("recipeStepVoList", recipeStepVoList);
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("pagingDto", pagingDto);
 		return "recipeboard/update_form";
 	}
 	
 	@RequestMapping(value="/updateRun", method=RequestMethod.POST)
-	public String updateRun(RecipeBoardVo recipeBoardVo, int bno, RedirectAttributes rttr, PagingDto pagingDto) {
-		System.out.println("BoardController, updateRun, recipeBoardVo: " + recipeBoardVo);
-		System.out.println("BoardController, updateRun, pagingDto: " + pagingDto);
-		boolean result = recipeBoardService.update(recipeBoardVo);
-		rttr.addFlashAttribute("update_result", result);
-		rttr.addAttribute("bno", recipeBoardVo.getR_bno());
-		rttr.addAttribute("page", pagingDto.getPage());
-		rttr.addAttribute("perPage", pagingDto.getPerPage());
-		rttr.addAttribute("searchType", pagingDto.getSearchType());
-		rttr.addAttribute("keyword", pagingDto.getKeyword());
-		return "redirect:/recipeboard/read";
+	public String updateRun(RecipeBoardVo recipeBoardVo, IngredientVo ingredientVo, PagingDto pagingDto, 
+			IngredientListVo ingredientListVo, HttpSession session, RedirectAttributes rttr, MultipartFile file, 
+			@RequestParam("files") List<MultipartFile> files) {
+		System.out.println(recipeBoardVo);
+		System.out.println(ingredientListVo);
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = memberVo.getUserid();
+		recipeBoardVo.setUserid(userid);
+		try {
+			//타이틀이미지
+			String originalFilename = file.getOriginalFilename();
+			if(originalFilename != null && !originalFilename.equals("")) {
+				String r_titlepic = MyFileUploader.uploadFile(
+						"//192.168.0.110/boardattach", originalFilename, file.getBytes());
+				recipeBoardVo.setR_titlepic(r_titlepic);
+			} 
+			//요리스탭이미지들
+			int index = 0;
+			String[] pictures = recipeBoardVo.getPictures();
+			String[] updatePictures = new String[files.size()];
+			for(MultipartFile onefile : files) {
+				String oneOriginalFilename = onefile.getOriginalFilename();
+				System.out.println(index + oneOriginalFilename);
+				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
+					String picture = MyFileUploader.uploadFile(
+							"//192.168.0.110/boardattach", oneOriginalFilename, onefile.getBytes());
+					updatePictures[index] = picture;
+					//썻던파일 필요없는건 폴더에서 지우기
+					MyFileUploader.deleteFile(pictures[index]);
+				} else{
+					updatePictures[index] = pictures[index];
+				}
+				index++;
+			}
+			recipeBoardVo.setPictures(updatePictures);
+			
+			boolean result = recipeBoardService.update(recipeBoardVo, ingredientListVo);
+			rttr.addFlashAttribute("update_result", result);
+			rttr.addAttribute("bno", recipeBoardVo.getR_bno());
+			rttr.addAttribute("page", pagingDto.getPage());
+			rttr.addAttribute("perPage", pagingDto.getPerPage());
+//			rttr.addAttribute("searchType", pagingDto.getSearchType());
+//			rttr.addAttribute("keyword", pagingDto.getKeyword());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/recipeboard/read?r_bno=" + recipeBoardVo.getR_bno();
 	}
-	
+
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
-	public String delete(int bno, RedirectAttributes rttr, PagingDto pagingDto) {
-		boolean result = recipeBoardService.delete(bno);
+	public String delete(int r_bno, RedirectAttributes rttr, PagingDto pagingDto) {
+		boolean result = recipeBoardService.delete(r_bno);
 		rttr.addFlashAttribute("delete_result", result);
 		rttr.addAttribute("page", pagingDto.getPage());
 		rttr.addAttribute("perPage", pagingDto.getPerPage());
-		rttr.addAttribute("searchType", pagingDto.getSearchType());
-		rttr.addAttribute("keyword", pagingDto.getKeyword());
+//		rttr.addAttribute("searchType", pagingDto.getSearchType());
+//		rttr.addAttribute("keyword", pagingDto.getKeyword());
 		return "redirect:/recipeboard/list";
 	}
 	
@@ -181,14 +220,17 @@ public class RecipeBoardController {
 		return String.valueOf(result);
 	}
 	
-//	@RequestMapping(value="/insertIngred", method=RequestMethod.GET)
-//	public String insertIngred(IngredientVo ingredientVo, PagingDto pagingDto) {
-//		boolean result = recipeBoardService.delete(bno);
-//		rttr.addFlashAttribute("delete_result", result);
-//		rttr.addAttribute("page", pagingDto.getPage());
-//		rttr.addAttribute("perPage", pagingDto.getPerPage());
-//		rttr.addAttribute("searchType", pagingDto.getSearchType());
-//		rttr.addAttribute("keyword", pagingDto.getKeyword());
-//		return "redirect:/recipeboard/list";
-//	}
+	@RequestMapping(value="/ingredInfoCreate", method=RequestMethod.POST)
+	@ResponseBody
+	public String ingredInfoCreate(IngredientVo ingredientVo) {
+		boolean result = recipeBoardService.ingredInfoCreate(ingredientVo);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value="/checkIngredInfo", method=RequestMethod.GET)
+	@ResponseBody
+	public String checkIngredInfo(String i_name) {
+		boolean result = recipeBoardService.checkIngredInfo(i_name);
+		return String.valueOf(result);
+	}
 }

@@ -23,6 +23,11 @@
 		where r_bno = #{r_bno}
 	</select>
 	
+	<select id="checkIngredInfo" resultType="int">
+		select count(*) from tbl_ingredient
+		where i_name = #{i_name}
+	</select>
+	
 	<insert id="insertPicture">
 		insert into tbl_recipe_pic(r_pno, r_picture, r_cno)
 		values(seq_recipe_pic_pno.nextval, #{r_picture}, #{r_cno})
@@ -45,6 +50,12 @@
 		insert into tbl_ingredient_list
 			(lno, r_bno, i_name, i_amount)
 		values(seq_ingredient_list_lno.nextval, #{r_bno}, #{i_name}, #{i_amount})
+	</insert>
+	
+	<insert id="ingredInfoCreate">
+		insert into tbl_ingredient
+			(i_name, i_unit, i_address)
+		values(#{i_name}, #{i_unit, jdbcType=VARCHAR}, #{i_address, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="read" resultType="RecipeBoardVo">
@@ -80,13 +91,32 @@
 	<update id="update">
 		update tbl_recipe_board set
 			r_title = #{r_title},
-			r_content = #{r_content, jdbcType=VARCHAR},
-			userid = #{userid}
+			r_titlepic = #{r_titlepic},
+			r_explain = #{r_explain},
+			r_cooktip = #{r_cooktip},
+			f_code = #{f_code},
+			r_time = #{r_time},
+			r_level = #{r_level}
 		where r_bno = #{r_bno}
 	</update>
 	
 	<delete id="delete">
 		delete from tbl_recipe_board
+		where r_bno = #{r_bno}
+	</delete>
+	
+	<delete id="ingredDelete">
+		delete from tbl_ingredient_list
+		where r_bno = #{r_bno}
+	</delete>
+	
+	<delete id="tagDelete">
+		delete from tbl_recipe_tag
+		where r_bno = #{r_bno}
+	</delete>
+	
+	<delete id="deleteContent">
+		delete from tbl_recipe_content
 		where r_bno = #{r_bno}
 	</delete>
 	
@@ -107,7 +137,7 @@
   		  (select * from 
   		  tbl_recipe_board b join tbl_member m
   		  	on b.userid = m.userid
-   			 order by r_regdate desc) a)
+   			 order by ${listType} desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
 <!--   		  <include refid="search"></include> -->

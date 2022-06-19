@@ -4,11 +4,33 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 <style>
-.recipeListNumDiv{
+.recipeListNumDiv, .listTypeDiv{
 	margin-left: 20px;
-	margin-right: 10px;
+	margin-right: 20px;
 	margin-top: 100px;
 	font-size: 18px;
+}
+.listTypeDiv{
+	float: right;
+	text-align: right;
+	font-size: 13px;
+}
+.listNumVal{
+	font-size: 25px;
+	color: rgba(248, 56, 1);
+}
+.listTypeBtn{
+	margin-left: -14px;
+	border: 1px solid #BEB6B6;
+	cursor: pointer;
+	padding: 11px 19px;
+	position: relative;
+	left: 20px;
+	top: 10px;
+}
+.selectTypeBtn{
+	background: #FA7C61;
+	color: white;
 }
 .listNumVal{
 	font-size: 25px;
@@ -66,11 +88,14 @@
 .listStarNum{
 	margin-left: 3px;
 }
+.pagingDiv{
+	margin-top: 30px;
+}
 </style>
 <script>
 $(function(){
 	var frmPaging = $("#frmPaging");
-	
+	//read할때 
 	$(".recipeBoardLink").click(function() {
 		var r_bno = $(this).attr("data-r_bno"); 
 		frmPaging.find("input[name=r_bno]").val(r_bno);
@@ -88,12 +113,24 @@ $(function(){
 // 		frmPaging.attr("method", "get");
 // 		frmPaging.submit();
 // 	});
-	
+
+	// 이전 1, 2 ~ 10 다음   등등..
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
 		
 		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/recipeboard/list");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	
+	// 최신순, 조회순, 평점순   등등..
+	$("a.listType").click(function(e) {
+		e.preventDefault();
+		var listType = $(this).attr("href");
+		
+		frmPaging.find("input[name=listType]").val(listType);
 		frmPaging.attr("action", "/recipeboard/list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
@@ -106,6 +143,17 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+			<div class="listTypeDiv">
+				<a href="r_bno" class="listType"><span class="listTypeBtn 
+				<c:if test="${pagingDto.listType == 'r_bno'}">selectTypeBtn</c:if>
+				">최신순</span></a>
+				<a href="r_viewcnt" class="listType"><span class="listTypeBtn 
+				<c:if test="${pagingDto.listType == 'r_viewcnt'}">selectTypeBtn</c:if>
+				">조회순</span></a>
+				<a href="avgRating" class="listType"><span class="listTypeBtn 
+				<c:if test="${pagingDto.listType == 'avgRating'}">selectTypeBtn</c:if>
+				">평점순</span></a>
+			</div>
 			<div class="recipeListNumDiv">
 				<span>총</span>
 				<span class="listNumVal">${boardCount }</span>
@@ -185,7 +233,7 @@ $(function(){
 			</div>
 			<!-- 	페이징 -->
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12 pagingDiv">
 					<nav>
 						<ul class="pagination justify-content-center">
 							<c:if test="${pagingDto.startPage != 1 }">

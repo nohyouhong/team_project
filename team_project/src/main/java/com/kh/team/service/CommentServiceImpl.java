@@ -70,13 +70,22 @@ public class CommentServiceImpl implements CommentService{
 	}
 	
 	@Override
+	@Transactional
 	public boolean insertRecipeReview(RecipeReviewVo recipeReviewVo) {
-		return commentDao.insertRecipeReview(recipeReviewVo);
+		boolean result = commentDao.insertRecipeReview(recipeReviewVo);
+		float avgRating = commentDao.getAvgRating(recipeReviewVo.getR_bno());	
+		commentDao.avgRatingUpdate(avgRating, recipeReviewVo.getR_bno());
+		return result;
 	}
 	
 	@Override
+	@Transactional
 	public boolean deleteRecipeReview(int r_rno) {
-		return commentDao.deleteRecipeReview(r_rno);
+		int r_bno = commentDao.getBnoByRno(r_rno);
+		boolean result = commentDao.deleteRecipeReview(r_rno);
+		float avgRating = commentDao.getAvgRating(r_bno);	
+		commentDao.avgRatingUpdate(avgRating, r_bno);
+		return result;
 	}
 	
 }

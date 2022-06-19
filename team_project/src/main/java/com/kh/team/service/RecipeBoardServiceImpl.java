@@ -94,8 +94,44 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	}
 	
 	@Override
-	public boolean update(RecipeBoardVo recipeBoardVo) {
+	@Transactional
+	public boolean update(RecipeBoardVo recipeBoardVo, IngredientListVo ingredientListVo) {
+		//레시피보드
 		boolean result = recipeBoardDao.update(recipeBoardVo);
+		int r_bno = recipeBoardVo.getR_bno();
+		recipeBoardDao.ingredDelete(r_bno);
+		recipeBoardDao.deleteContent(r_bno);
+		recipeBoardDao.tagDelete(r_bno);
+		//내용물을 지우고 다시 작성
+		
+		String[] contents = recipeBoardVo.getR_contents();
+		String[] pictures = recipeBoardVo.getPictures();
+		System.out.println("contents: " + contents + "pictures: " + pictures);
+		if((contents != null && contents.length != 0) &&
+				(pictures != null && pictures.length != 0)) {
+			for(int i = 0; i < contents.length; i++) {
+				int r_cno = recipeBoardDao.getNextCno();
+				recipeBoardDao.insertContent(contents[i], r_bno, r_cno);
+				recipeBoardDao.insertPicture(pictures[i], r_cno);
+			}
+		}
+		//레시피재료리스트
+		String[] i_names = ingredientListVo.getI_names();
+		String[] i_amounts = ingredientListVo.getI_amounts();
+		if((i_names != null && i_names.length != 0) &&
+				(i_amounts != null && i_amounts.length != 0)) {
+			for(int i = 0; i < i_names.length; i++) {
+				IngredientVo ingredientVo = new IngredientVo(r_bno, i_names[i], i_amounts[i]);  
+				recipeBoardDao.ingredCreate(ingredientVo);
+			}
+		}
+		String[] r_tags = recipeBoardVo.getR_tags();
+		System.out.println("tags" + r_tags);
+		if(r_tags != null && r_tags.length != 0) {
+			for(int i = 0; i < r_tags.length; i++) {
+				recipeBoardDao.tagCreate(r_tags[i], r_bno);
+			}
+		}
 		return result;
 	}
 
@@ -129,5 +165,15 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 		String userid = recipeBoardDao.getUseridByBno(r_bno);
 		MemberVo memberVo = memberDao.getMemberById(userid);
 		return memberVo;
+	}
+
+	@Override
+	public boolean ingredInfoCreate(IngredientVo ingredintVo) {
+		return recipeBoardDao.ingredInfoCreate(ingredintVo);
+	}
+
+	@Override
+	public boolean checkIngredInfo(String i_name) {
+		return recipeBoardDao.checkIngredInfo(i_name);
 	}
 }

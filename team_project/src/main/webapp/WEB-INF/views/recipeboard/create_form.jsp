@@ -137,6 +137,14 @@
 	margin-right: 20px;
 	margin-bottom: 10px;
 }
+.addIngredDiv{
+	height: 50px;
+}
+.checkIngred{
+	position:relative;
+	bottom: 6px;
+	font-size: 10px;
+}
 </style>
 <script>
 $(function() {
@@ -152,7 +160,7 @@ $(function() {
 
 	//재료 삭제
 	$("#addIngredList").on("click", ".ingredRemove", function() {
-		$(this).parent().remove();
+		$(this).parent().parent().remove();
 	});
 
 	// 	요리스텝추가
@@ -324,6 +332,7 @@ $(function() {
 	}
 
 	//재료등록
+	var ingredInfoCreateState = false;
 	$("#insertIngred").click(function() {
 		$("#modal-520057").trigger("click");
 			$("#ingredInsertBtn").click(function() {
@@ -334,10 +343,69 @@ $(function() {
 				}else if(i_address == ""){
 					alert("재료의 나무위키 주소를 입력하세요.");
 				} else{
-					$("#ingredInsertForm").submit();
+					var form = $("#ingredInsertForm");
+					var formData = new FormData(form[0]);
+					var url = "/recipeboard/ingredInfoCreate";
+					
+					$.ajax({
+						"enctype" : "multipart/form-data",  
+						"processData" : false,
+						"contentType" : false,
+						"url" : url,
+						"method" : "post",
+						"data" : formData,
+						"success" : function(rData) {
+							if(rData == "true"){
+								ingredInfoCreateState = true;
+								alert(i_name + "를 등록했습니다.");
+// 								console.log("아약스 안", ingredInfoCreateState);
+							}
+						}
+					});
+					//아약스 비동기라 셋타임아웃 안쓰면 밑에꺼랑 아약스안 함수랑 거의 동시에 실행
+					setTimeout(function() {
+// 						console.log("아약스 이후", ingredInfoCreateState);
+						if(!ingredInfoCreateState){
+							alert(i_name + "는 이미 등록되있습니다.");
+						}
+						ingredInfoCreateState = false;
+						$("#i_name").val("");
+						$("#i_unit").val("");
+						$("#i_address").val("");
+						var thats = $(".ingredName");
+						$.each(thats, function(){
+							var that = $(this);
+							checkIngred(that);
+						});
+					}, 1000);
 				}
 			});
 	});
+	//재료칸에 이름적을때
+	$("#addIngredList").on("change", ".ingredName", function(){
+		var that = $(this);
+		checkIngred(that);
+	});
+	//재료적은거 등록도잇는건지 확인
+	function checkIngred(that) {
+		var checkDiv = $(that).parent().parent().find("div.checkIngred"); 
+		var ingredName = $(that).val();
+		var url = "/recipeboard/checkIngredInfo";
+		var sData = {
+			"i_name" : ingredName
+		};
+		$.get(url, sData, function(rData) {
+			if(rData == "true"){
+				var checkResult = ingredName + "는 등록된 재료입니다.";
+				checkDiv.text(checkResult);
+				checkDiv.css("color", "#BEB6B6");
+			} else{
+				var checkResult = ingredName + "는 등록되지않은 재료입니다.";
+				checkDiv.text(checkResult);
+				checkDiv.css("color", "#F83801");
+			}
+		});
+	}
 });
 </script>
 <!-- 모달 -->
@@ -354,7 +422,7 @@ $(function() {
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="ingredInsertForm" action="/recipeboard/insertIngred" method="post">
+				<form id="ingredInsertForm" action="/recipeboard/ingredInfoCreate" method="post">
 					<label class="modalLabel" for="i_name">재료이름</label>
 					<input type="text" class="modalInput form-control" id="i_name" name="i_name" placeholder="재료의 이름를 입력하세요. 예) 달걀, 참기름"><br>
 					<label class="modalLabel" for="i_unit">재료단위</label>
@@ -367,7 +435,7 @@ $(function() {
 				<button type="button" id="ingredInsertBtn" class="btn btn-outline-primary">등록하기
 				</button>
 				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
-					취소하기</button>
+					그만두기</button>
 			</div>
 		</div>
 	</div>
@@ -450,20 +518,26 @@ $(function() {
 					<div class="col-md-8">
 						<div id="addIngredList">
 							<!-- 						클론용 -->
-							<div class="input-group mb-2 addIngredDiv" style="display: none;">
-								<input type="text" class="form-control inputVal ingredName"
-									placeholder="예)소고기" name="i_names"> <input type="text"
-									class="form-control inputVal ingredAmount"
-									placeholder="예)1000g" name="i_amounts"> <i
-									class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i>
+							<div class="addIngredDiv" style="display: none;">
+								<div class="input-group mb-2">
+									<input type="text" class="form-control inputVal ingredName"
+										placeholder="예)소고기" name="i_names"> 
+									<input type="text" class="form-control inputVal ingredAmount"
+										placeholder="예)1000g" name="i_amounts"> 
+									<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i>
+								</div>
+								<div class="checkIngred"></div>
 							</div>
 							<!-- 						클론용 -->
-							<div class="input-group mb-2 addIngredDiv">
-								<input type="text" class="form-control inputVal ingredName"
-									placeholder="예)소고기" name="i_names"> <input type="text"
-									class="form-control inputVal ingredAmount"
-									placeholder="예)1000g" name="i_amounts"> <i
-									class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i>
+							<div class="addIngredDiv">
+								<div class="input-group mb-2 ">
+									<input type="text" class="form-control inputVal ingredName"
+										placeholder="예)소고기" name="i_names"> 
+									<input type="text" class="form-control inputVal ingredAmount"
+										placeholder="예)1000g" name="i_amounts"> 
+									<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i><br>
+								</div>
+								<div class="checkIngred"></div>
 							</div>
 						</div>
 						<div style="text-align: center;">

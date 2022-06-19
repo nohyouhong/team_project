@@ -16,6 +16,7 @@ public interface CommentDao {
 	public boolean deleteRecipeComment(int r_cno);
 	
 	public int getNextrno();
+	public int getBnoByRno(int r_rno);
 	public List<RecipeReviewVo> recipeReviewList(int r_bno);
 	public List<RecipeReviewVo> recipeReviewImageList(int r_bno);
 	public int recipeReviewListNum(int r_bno);
@@ -23,4 +24,6 @@ public interface CommentDao {
 	public boolean insertRecipeReview(RecipeReviewVo recipeReviewVo);
 	public boolean reviewUpdateReLevel(int r_rno);
 	public boolean deleteRecipeReview(int r_rno);
+	public float getAvgRating(int r_bno);
+	public boolean avgRatingUpdate(float avgRating, int r_bno);
 }

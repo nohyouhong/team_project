@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,5 +130,31 @@ public class CommentDaoImpl implements CommentDao{
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean avgRatingUpdate(float avgRating, int r_bno) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("avgRating", avgRating);
+		parameter.put("r_bno", r_bno);
+		int count = sqlSession.update(NAMESPACE + "avgRatingUpdate", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public float getAvgRating(int r_bno) {
+		float avgRating = sqlSession.selectOne(NAMESPACE + "getAvgRating", r_bno);
+		return avgRating;
+	}
+
+	@Override
+	public int getBnoByRno(int r_rno) {
+		System.out.println("r_rno" + r_rno);
+		int r_bno = sqlSession.selectOne(NAMESPACE + "getBnoByRno", r_rno);
+		System.out.println("r_rno" + r_rno);
+		return r_bno;
 	}
 }

@@ -12,7 +12,9 @@ $(document).ready(function(){
     $('#idChk').html('<b style=" color: yellowgreen">[아이디를 입력해주세요]');
     $('#pwChk').html('<b style=" color: yellowgreen">[비밀번호를 입력해주세요]</b>');
     $('#pwSameChk').html('<b style=" color: yellowgreen">[비밀번호를 한번 더 입력해주세요]');
+    $('#phoneChk').html('<b style=" color: yellowgreen">[번호를 입력해주세요]');
     var isPushed = "false";
+    var isPushed2 = "false";
     
     $('#userid').keyup(function() {
         if($(this).val() === '' ) {
@@ -66,6 +68,22 @@ $(document).ready(function(){
 	    }
     });
     
+    $('#cellphoneInput2').keyup(function() {
+        if($(this).val() === '' ) {
+           $(this).css('background-color', 'pink');
+           $('#phoneChk').html('<b style=" color: red">[휴대폰 번호는 필수값입니다.]</b>');
+   		}
+    });
+    
+    $('#cellphoneInput3').keyup(function() {
+        if($(this).val() === '' ) {
+           $(this).css('background-color', 'pink');
+           $('#phoneChk').html('<b style=" color: red">[휴대폰 번호는 필수값입니다.]</b>');
+   		}else{
+        	$(this).css('background-color', 'white');
+        	$('#phoneChk').html('<b style=" color: yellowgreen">[휴대폰 번호 중복체크를 해주세요]');
+        }
+    });
     
 	$("#profileImg").on("click", ".joinImage", function() {
 		var inputFile = $(this).parent().find("input");
@@ -83,6 +101,7 @@ $(document).ready(function(){
 			$("#filecomment").hide();
 		}
 	});
+	
 	$("#email3").change(function(){
 		if($(this).val()==9){
 			$("#emailAdInput").removeAttr("disabled");
@@ -105,15 +124,23 @@ $(document).ready(function(){
 	});
 	
 	
+	
 	function email(){
 		const email = $("#emailIdInput").val();
 		const middle = $("#emailB").text();
 		const address = $("#emailAdInput").val();
 		if(email != "" && address != "") {
 			$("#totalemail").val(email+middle+address);
-			console.log($("#totalemail").val());
 		}
 	};
+	
+	$("#cellphoneInput2").keyup(function(){
+		isPushed2 = "false";
+	});
+	
+	$("#cellphoneInput3").keyup(function(){
+		isPushed2 = "false";
+	});
 	
 	$("#cellphoneInput2").blur(function(){
 		phoneNum();
@@ -129,9 +156,30 @@ $(document).ready(function(){
 		const phoneNum3 = $("#cellphoneInput3").val();
 		if(phoneNum2 != "" && phoneNum3 != ""){
 			$("#totalPhoneNum").val(phoneNum1+phoneNum2+phoneNum3);
+			$("#overlapPhoneCheckBtn").click(function(){
+				var cellphone = $("#totalPhoneNum").val();
+				var sData = {
+						"cellphone" : cellphone
+				};
+				var url = "/member/checkPhoneNum";
+				$.post(url, sData, function(rData){
+					console.log("rData: "+rData);
+					if(rData != 2){
+						$(this).css('background-color', 'aliceblue');
+			            $('#phoneChk').html('<b style=" color: #75daff">[사용가능한 번호입니다.]</b>');
+			            isPushed2="true";
+		            } else {
+		            	$(this).css('background-color', 'pink');
+			            $('#phoneChk').html('<b style=" color: red">[사용중인 번호입니다.]</b>');
+		            };
+				});
+			});
 			console.log($("#totalPhoneNum").val());
 		}
 	}
+	
+	
+	
 	$("#joinBtn").click(function(){
 		if($("#userid").val() ==""){
 			alert("ID를 입력해주세요");
@@ -152,6 +200,8 @@ $(document).ready(function(){
 			alert("이메일 주소를 선택하거나 직접입력을 통해 입력해주세요");
 		}else if($('input[name=gender]:checked').val() == ""){
 			alert("성별을 선택해주세요");
+		}else if($("#totalPhoneNum").val() == ""){
+			alert("휴대폰 번호를 입력해주세요")
 		}else if(isPushed == "false"){
 			$("#userid").val("").focus;
 			alert("아이디를 확인하세요");
@@ -212,6 +262,7 @@ $(document).ready(function(){
 							<input type="text" class="form-control" name="cellphone" id="cellphoneInput3"/>
 						</div>
 						<button type="button" class="btn btn-outline-secondary" id="overlapPhoneCheckBtn">폰번호 중복확인</button>
+						<span id="phoneChk"></span>
 					</div>
 					<div class="join-form">
 						<label for="email" id="email">이메일</label> 

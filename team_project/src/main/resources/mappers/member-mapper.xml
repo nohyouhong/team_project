@@ -20,6 +20,11 @@
 		where userid = #{userid}
 	</select>
 	
+	<select id="checkPhoneNum" resultType="int">
+		select count(*) from tbl_member
+		where cellphone = #{cellphone}
+	</select>
+	
 	<select id="getMemberByIdAndPw" resultType="MemberVo">
 		select * from tbl_member
 		where userid = #{userid}

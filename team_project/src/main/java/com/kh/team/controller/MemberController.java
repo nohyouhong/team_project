@@ -52,8 +52,15 @@ public class MemberController {
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	@ResponseBody
 	public int checkId(String userid) {
-//		System.out.println("memberController 작동됨");
 		int cnt = memberService.checkId(userid);
+		return cnt;
+	}
+	
+	@RequestMapping(value="/checkPhoneNum", method=RequestMethod.POST)
+	@ResponseBody
+	public int checkPhoneNum(String cellphone) {
+//		System.out.println("memberController 작동됨");
+		int cnt = memberService.checkPhoneNum(cellphone);
 		return cnt;
 	}
 	

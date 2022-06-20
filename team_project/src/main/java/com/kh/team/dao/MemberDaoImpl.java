@@ -72,6 +72,12 @@ public class MemberDaoImpl implements MemberDao{
 		int cnt = sqlSession.selectOne(NAMESPACE+"checkId", userid);
 		return cnt;
 	}
+	
+	@Override
+	public int checkPhoneNum(String cellphone) {
+		int cnt = sqlSession.selectOne(NAMESPACE+"checkPhoneNum", cellphone);
+		return cnt;
+	}
 
 	@Override
 	public int recogExistId(MemberVo memberVo) {

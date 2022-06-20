@@ -73,6 +73,12 @@ public class MemberServiceImpl implements MemberService{
 		int cnt = memberDao.checkId(userid);
 		return cnt;
 	}
+	
+	@Override
+	public int checkPhoneNum(String cellphone) {
+		int cnt = memberDao.checkPhoneNum(cellphone);
+		return cnt;
+	}
 
 	@Override
 	public int recogExistId(MemberVo memberVo) {
@@ -97,5 +103,7 @@ public class MemberServiceImpl implements MemberService{
 		boolean result = memberDao.modifyPw(memberVo);
 		return result;
 	}
+
+	
 
 }

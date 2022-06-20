@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-#ftrlogo{
-	height:30px;
+#footerimg{
+	width:200px;
 }
 </style>
 
@@ -12,7 +12,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col footer-col colorlib-widget">
-						<img id=footerimg src="/resources/main_header/images/footer_logo.png" id="ftrlogo">
+						<img id=footerimg src="/resources/main_header/images/footer_logo.png">
 						<p>Ulsan KH Information Educational Institute Co.,Ltd.</p>
 						<p>멀티 디바이스 융합 자바(Java) 디지털 컨버전스 과정</p>
 						<p>주소 : 울산광역시 남구 삼산로35번길 19 3층</p>

@@ -75,16 +75,16 @@ $(function() {
 
 						</div>
 						<ul class="nav">
-<!-- 							<li class="nav-item"> -->
-<!-- 								<a class="nav-link menuEx" href="index.html"> -->
-<!-- 									<span class="attendance">  -->
-<!-- 										<span>2</span><br> <span>이번달 출석</span> -->
-<!-- 									</span>  -->
-<!-- 									<span class="attendance">  -->
-<!-- 										<span>102</span><br> <span>총누적 출석</span> -->
-<!-- 									</span> -->
-<!-- 								</a> -->
-<!-- 							</li> -->
+							<li class="nav-item">
+								<a class="nav-link menuEx" href="index.html">
+									<span class="attendance"> 
+										<span>2</span><br> <span>이번달 출석</span>
+									</span> 
+									<span class="attendance"> 
+										<span>102</span><br> <span>총누적 출석</span>
+									</span>
+								</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link menuEx" href="/message/receive_list?page=1"> 
 									<span class="menu-title">쪽지함</span>
@@ -95,11 +95,11 @@ $(function() {
 									<span class="menu-title">포인트 내역</span>
 								</a>
 							</li>
-<!-- 							<li class="nav-item"> -->
-<!-- 								<a class="nav-link menuEx" href="#">  -->
-<!-- 									<span class="menu-title">내 정보 수정</span> -->
-<!-- 								</a> -->
-<!-- 							</li> -->
+							<li class="nav-item">
+								<a class="nav-link menuEx" href="#"> 
+									<span class="menu-title">내 정보 수정</span>
+								</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link menuEx" href="/ask/ask_list"> 
 									<span class="menu-title">1:1문의</span>

@@ -115,6 +115,23 @@ $(document).ready(function(){
 		}
 	};
 	
+	$("#cellphoneInput2").blur(function(){
+		phoneNum();
+	});
+	
+	$("#cellphoneInput3").blur(function(){
+		phoneNum();
+	});
+
+	function phoneNum(){
+		const phoneNum1 = $("#cellphoneInput1").val();
+		const phoneNum2 = $("#cellphoneInput2").val();
+		const phoneNum3 = $("#cellphoneInput3").val();
+		if(phoneNum2 != "" && phoneNum3 != ""){
+			$("#totalPhoneNum").val(phoneNum1+phoneNum2+phoneNum3);
+			console.log($("#totalPhoneNum").val());
+		}
+	}
 	$("#joinBtn").click(function(){
 		if($("#userid").val() ==""){
 			alert("ID를 입력해주세요");
@@ -189,6 +206,7 @@ $(document).ready(function(){
 					<div class="join-form">
 						<label for="cellphone" id="cellphone">폰번호</label> 
 						<div id="cellphonediv">
+							<input type="hidden" name="cellphone" id="totalPhoneNum">
 							<input type="text" class="form-control" name="cellphone" id="cellphoneInput1" value="010" disabled/>-
 							<input type="text" class="form-control" name="cellphone" id="cellphoneInput2"/>-
 							<input type="text" class="form-control" name="cellphone" id="cellphoneInput3"/>

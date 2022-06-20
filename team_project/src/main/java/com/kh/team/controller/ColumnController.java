@@ -118,15 +118,15 @@ public class ColumnController {
 
 	@RequestMapping(value="/column_delete", method=RequestMethod.GET)
 	public String column_delete(int c_bno) {
-		System.out.println("c_bno: " + c_bno);
+//		System.out.println("c_bno: " + c_bno);
 		String file_root = "//192.168.0.110/boardattach/";
 		List<String> deletefiles = columnService.getdeletefiles(c_bno);
 		for (String deletefile : deletefiles) {
-			System.out.println("deletefile: " + deletefile);
+//			System.out.println("deletefile: " + deletefile);
 			String filename = file_root + deletefile;
-			System.out.println("filename: " + filename);			
+//			System.out.println("filename: " + filename);			
 			boolean deleteFile_result = MyFileUploader.deleteFile(filename);
-			System.out.println("deleteFile_result: " + deleteFile_result);
+//			System.out.println("deleteFile_result: " + deleteFile_result);
 		}
 		columnService.deleteColumn(c_bno);
 		return "redirect: /column/column_list";
@@ -136,7 +136,7 @@ public class ColumnController {
 	public String readColumn(int c_bno, PagingDto pagingDto, Model model) {
 		ColumnVo columnVo = columnService.readColumn(c_bno);
 		List<ColumnVo> columnList = columnService.getRowColumnList();
-		System.out.println("ColumnController, readColumn, columnList: " + columnList);
+//		System.out.println("ColumnController, readColumn, columnList: " + columnList);
 		int c_rnum = columnService.getColumnC_rnum(c_bno);
 		int c_count = columnService.getColumnCount();
 		model.addAttribute("columnVo", columnVo);
@@ -150,10 +150,10 @@ public class ColumnController {
 	@RequestMapping(value="/column_like", method=RequestMethod.POST)
 	@ResponseBody
 	public String likeColumn(int c_bno, String userid, HttpSession session) {
-		System.out.println("c_bno: " + c_bno);
-		System.out.println("userid: " + userid);
+//		System.out.println("c_bno: " + c_bno);
+//		System.out.println("userid: " + userid);
 		boolean isLikeResult = columnService.isColumnLike(c_bno, userid);
-		System.out.println("isLikeResult: " + isLikeResult);
+//		System.out.println("isLikeResult: " + isLikeResult);
 		if (isLikeResult) {
 			columnService.deleteColumnLike(c_bno, userid);
 			columnService.updateColumnLikeCount(c_bno, ColumnDao.COLUMNDISLIKE);

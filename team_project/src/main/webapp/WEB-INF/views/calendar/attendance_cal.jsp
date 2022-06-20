@@ -4,12 +4,7 @@
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 
-<script>
-	
-</script>
 <style TYPE="text/css">
-
-
 td {
 	font-family: jua;
 	font-size: 9pt;
@@ -142,6 +137,25 @@ th {
 	margin: 10px;
 }
 </style>
+<script>
+$(function(){
+	$("#submit_attend").on("click", function(e){
+		e.preventDefault();
+		var userid = "${loginVo.userid}";
+		var url = "/cal/insertAttendance";
+		var sData = {
+				"userid" : userid
+		}
+		$.get(url, sData, function(rData){
+			if (rData == "fail") {
+				alert("이미 오늘의 출석을 완료하셨습니다.")
+			} else if (rData == "success") {
+				alert("50포인트가 지급되었습니다.")
+			}
+		});
+	});
+});
+</script>
 </head>
 <form name="calendarFrm" id="calendarFrm" action="" method="GET">
 
@@ -154,8 +168,8 @@ th {
 				href="/cal/chkAttendance?year=${today_info.before_year}&month=${today_info.before_month}">
 				&lt;
 			</a>
-			<span class="this_month"> &nbsp;${today_info.search_year}. <c:if
-					test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
+			<span class="this_month"> &nbsp;${today_info.search_year}.
+				<c:if test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
 			</span>
 			<!-- 다음달 --> 
 			<a class="before_after_month" 
@@ -164,9 +178,6 @@ th {
 			</a> 
 		</div>
 
-		<!-- <div class="today_button_div"> -->
-		<!-- <input type="button" class="today_button" onclick="javascript:location.href='/calendar.do'" value="go today"/> -->
-		<!-- </div> -->
 		<table class="calendar_body">
 
 			<thead>
@@ -204,17 +215,20 @@ th {
 						<div class="sun">${dateList.date}</div>
 						<div></div>
 					</td>
-					</c:when>
-					<c:otherwise>
+							</c:when>
+							<c:otherwise>
 						<td class="normal_day">
 							<div class="date">${dateList.date}</div>
 							<div></div>
 						</td>
-					</c:otherwise>
-					</c:choose>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 			</tbody>
 		</table>
+		<div>
+			<button class="btn btn-success" id="submit_attend">출석 체크</button>
+		</div>
 	</div>
 </form>
 	<%@ include file="/WEB-INF/views/include/mypage_footer.jsp"%>

@@ -22,4 +22,7 @@ public interface MemberDao {
 	public List<String> findId(MemberVo memberVo);
 	public int recogId(MemberVo memberVo);
 	public boolean modifyPw(MemberVo memberVo);
+	
+	public int getM_totalAttend(String userid);
+	public boolean initializeM_totalAttend(String userid);
 }

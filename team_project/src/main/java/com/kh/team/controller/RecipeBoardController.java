@@ -57,7 +57,7 @@ public class RecipeBoardController {
 			String[] pictures = new String[files.size()];
 			for(MultipartFile onefile : files) {
 				String oneOriginalFilename = onefile.getOriginalFilename();
-				System.out.println(index + oneOriginalFilename);
+//				System.out.println(index + oneOriginalFilename);
 				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
 					String picture = MyFileUploader.uploadFile(
 							"//192.168.0.110/boardattach", oneOriginalFilename, onefile.getBytes());
@@ -70,7 +70,7 @@ public class RecipeBoardController {
 //			System.out.println("BoardController, createRun, recipeBoardVo: " + recipeBoardVo);
 			
 			boolean result = recipeBoardService.create(recipeBoardVo, ingredientListVo);
-			System.out.println("BoardController, createRun, result: " + result);
+//			System.out.println("BoardController, createRun, result: " + result);
 			rttr.addFlashAttribute("create_result", result);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class RecipeBoardController {
 	@RequestMapping(value="/read", method=RequestMethod.GET)
 	public String read(int r_bno, Model model, PagingDto pagingDto) {
 //		System.out.println("BoardController, read, r_bno: " + r_bno);
-		System.out.println("BoardController, read, pagingDto: " + pagingDto);
+//		System.out.println("BoardController, read, pagingDto: " + pagingDto);
 		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
 		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
 		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
@@ -118,8 +118,8 @@ public class RecipeBoardController {
 	public String updateRun(RecipeBoardVo recipeBoardVo, IngredientVo ingredientVo, PagingDto pagingDto, 
 			IngredientListVo ingredientListVo, HttpSession session, RedirectAttributes rttr, MultipartFile file, 
 			@RequestParam("files") List<MultipartFile> files) {
-		System.out.println(recipeBoardVo);
-		System.out.println(ingredientListVo);
+//		System.out.println(recipeBoardVo);
+//		System.out.println(ingredientListVo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = memberVo.getUserid();
 		recipeBoardVo.setUserid(userid);
@@ -137,7 +137,7 @@ public class RecipeBoardController {
 			String[] updatePictures = new String[files.size()];
 			for(MultipartFile onefile : files) {
 				String oneOriginalFilename = onefile.getOriginalFilename();
-				System.out.println(index + oneOriginalFilename);
+//				System.out.println(index + oneOriginalFilename);
 				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
 					String picture = MyFileUploader.uploadFile(
 							"//192.168.0.110/boardattach", oneOriginalFilename, onefile.getBytes());
@@ -181,9 +181,9 @@ public class RecipeBoardController {
 		pagingDto.setCount(boardCount);
 		pagingDto.setPerPage(16);
 		pagingDto.setPage(pagingDto.getPage());
-		System.out.println("pagingDto" + pagingDto);
+//		System.out.println("pagingDto" + pagingDto);
 		List<RecipeBoardVo> recipeBoardList = recipeBoardService.list(pagingDto);
-		System.out.println(recipeBoardList);
+//		System.out.println(recipeBoardList);
 		model.addAttribute("recipeBoardList", recipeBoardList);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("boardCount", boardCount);
@@ -194,11 +194,11 @@ public class RecipeBoardController {
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
 	@ResponseBody
 	public String uploadFile(MultipartFile file) throws Exception{
-		System.out.println("file: " + file);
+//		System.out.println("file: " + file);
 		String originalFilename = file.getOriginalFilename();
 		byte[] fileData = file.getBytes();
 		String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach", originalFilename, fileData);
-		System.out.println("saveFilename: " + saveFilename);
+//		System.out.println("saveFilename: " + saveFilename);
 		
 		return saveFilename;
 	}
@@ -206,7 +206,7 @@ public class RecipeBoardController {
 	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception{
-		System.out.println("filename" + filename);
+//		System.out.println("filename" + filename);
 		FileInputStream fis = new FileInputStream(filename);
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();

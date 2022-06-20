@@ -96,7 +96,7 @@ public class MemberController {
 	public String login(String userid, String userpw, String saveId, 
 			HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
 		MemberVo memberVo = memberService.getMemberByIdAndPw(userid, userpw);
-		System.out.println("memberVo" + memberVo);
+//		System.out.println("memberVo" + memberVo);
 		if(memberVo == null) {
 			rttr.addFlashAttribute("login_result", "fail");
 			return "redirect:/";
@@ -157,7 +157,7 @@ public class MemberController {
 	public String checkforFindPw(MemberVo memberVo) {
 		int count = memberService.recogId(memberVo);
 		int rdKey = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
-		System.out.println("rdKey: " + rdKey);
+//		System.out.println("rdKey: " + rdKey);
 		if (count > 0) {
 			String subject = "비밀번호 재설정 안내 메일입니다."; // 메일 제목
 			String content = "<html>"
@@ -166,7 +166,7 @@ public class MemberController {
 					+ "<span>" + rdKey + "</span>"
 					+ "<div>인증 번호를 입력하시면 비밀번호를 변경 가능합니다.</div>"
 					+ "</html>"; // 메일 내용
-			String from = "authorxzsad@gmail.com"; // 보내는사람 아이디@주소
+			String from = "teampro1234@naver.com"; // 보내는사람 아이디@주소
 			String to = ""; // 받는사람 아이디@주소
 			try {
 				MimeMessage mail = mailSender.createMimeMessage();
@@ -175,7 +175,7 @@ public class MemberController {
 				mailHelper.setTo(memberVo.getEmail());
 				mailHelper.setSubject(subject);
 				mailHelper.setText(content, true); // true는 html을 사용하겠다는 의미입니다.
-//				mailSender.send(mail);
+				mailSender.send(mail);
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
@@ -194,7 +194,7 @@ public class MemberController {
 
 	@RequestMapping(value="/modi_pw_run", method=RequestMethod.POST)
 	public String modiPwRun(MemberVo memberVo, RedirectAttributes rttr) {
-		System.out.println("memberVo: " + memberVo);
+//		System.out.println("memberVo: " + memberVo);
 		boolean result = memberService.modifyPw(memberVo);
 		rttr.addFlashAttribute("modi_pw_result", result);
 		return "redirect:/member/login_form";
@@ -222,11 +222,11 @@ public class MemberController {
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
 	@ResponseBody
 	public String uploadFile(MultipartFile file) throws Exception{
-		System.out.println("file: " + file);
+//		System.out.println("file: " + file);
 		String originalFilename = file.getOriginalFilename();
 		byte[] fileData = file.getBytes();
 		String saveFilename = MyFileUploader.uploadFile("//192.168.0.110/boardattach", originalFilename, fileData);
-		System.out.println("saveFilename: " + saveFilename);
+//		System.out.println("saveFilename: " + saveFilename);
 		
 		return saveFilename;
 	}

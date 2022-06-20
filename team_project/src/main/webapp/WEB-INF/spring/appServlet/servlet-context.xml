@@ -61,6 +61,8 @@
 			<exclude-mapping path="/member/chk_find_pw"/>
 			<exclude-mapping path="/member/find_pw_run"/>
 			<exclude-mapping path="/member/modi_pw_run"/>
+			<exclude-mapping path="/member/modi_pw_run"/>
+			<exclude-mapping path="/member/displayImage"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

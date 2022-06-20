@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
+<%@include file="/WEB-INF/views/include/admin_header.jsp" %>
 <link rel="stylesheet" href="/resources/login_join/login_join.css" type="text/css">
 <script>
 $(document).ready(function(){
@@ -198,8 +199,6 @@ $(document).ready(function(){
 			$("#emailIdInput").focus();
 		}else if($("#emailAdInput").val() == ""){
 			alert("이메일 주소를 선택하거나 직접입력을 통해 입력해주세요");
-		}else if($('input[name=gender]:checked').val() == ""){
-			alert("성별을 선택해주세요");
 		}else if($("#totalPhoneNum").val() == ""){
 			alert("휴대폰 번호를 입력해주세요")
 		}else if(isPushed == "false"){
@@ -223,13 +222,8 @@ $(document).ready(function(){
 						<img class="joinImage" id="writeImg" src="/resources/login_join/images/jointitle.png">
 					</form>
 				</div>
-				<form id="join_form" role="form" action="/member/join_run" method="post">
-					<div class="form-group" id="profileImg">
-						<img class="joinImage" id="joinImg" src="/resources/login_join/images/join.png">
-						<input class="joinImageFile" type="file" id="file" name="file"
-							style="display: none;">
-					</div>
-					<p class="help-block" id="filecomment">프로필 사진을 등록해주세요.</p>
+				<form id="join_form" role="form" action="/member/admin_join_run" method="post">
+					<input type="hidden" name="m_code" value="101">
 					<div class="join-form">
 						<label for="userid" id="useridlabel">아이디</label> 
 						<input type="text" class="form-control" name="userid" id="userid" placeholder="숫자와 영어로 4~10글자"/>
@@ -283,14 +277,6 @@ $(document).ready(function(){
 							</select>
 						</div>
 					</div>
-
-					<div class="join-form">
-						<label for="gender" id="gender">성별</label>
-						<div id="genderRadio">
-						<input type="radio" class="gender" name="gender" value="M" /><p id="genderMan">남</p> 
-						<input type="radio" class="gender" name="gender" value="F" /><p id="genderWoman">여</p>
-						</div> 
-					</div>
 						<button type="button" class="btn btn-outline-danger" id="joinBtn">가입하기</button>
 						<span id="joinBtnSpan"></span>
 				</form>
@@ -298,4 +284,5 @@ $(document).ready(function(){
 			<div id="join_bottom"></div>
 	</div>
 </div>
+<%@include file="/WEB-INF/views/include/admin_footer.jsp" %>
 <%@include file="/WEB-INF/views/include/main_footer.jsp" %>

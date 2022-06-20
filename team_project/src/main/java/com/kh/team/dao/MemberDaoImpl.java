@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -27,8 +28,8 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public List<MemberVo> getMemberList() {
-		List<MemberVo> memberList = sqlSession.selectList(NAMESPACE + "getMemberList");
+	public List<MemberVo> getMemberList(PagingDto pagingDto) {
+		List<MemberVo> memberList = sqlSession.selectList(NAMESPACE + "getMemberList", pagingDto);
 		return memberList;
 	}
 
@@ -113,6 +114,15 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("userid", userid);
 		int count = sqlSession.update(NAMESPACE + "updateUserImage", map);
 		if( count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean insertAdmin(MemberVo memberVo) {
+		int count = sqlSession.insert(NAMESPACE+"insertAdmin", memberVo);
+		if(count>0) {
 			return true;
 		}
 		return false;

@@ -27,8 +27,13 @@
 								</a>
 							</li>
 							<li class="admin-item">
-								<a class="nav-link menuEx" href="#"> 
+								<a class="nav-link menuEx" href="/member/member_list"> 
 									<span class="admin-title">회원정보관리</span>
+								</a>
+							</li>
+							<li class="admin-item">
+								<a class="nav-link menuEx" href="/member/admin_join_form"> 
+									<span class="admin-title">관리자 추가</span>
 								</a>
 							</li>
 						</ul>

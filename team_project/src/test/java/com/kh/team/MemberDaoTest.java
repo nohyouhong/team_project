@@ -26,8 +26,8 @@ public class MemberDaoTest {
 	
 	@Test
 	public void testGetMemberList() {
-		List<MemberVo> memberList = memberDao.getMemberList();
-		System.out.println("memberList: " + memberList);
+//		List<MemberVo> memberList = memberDao.getMemberList();
+//		System.out.println("memberList: " + memberList);
 	}
 	
 	@Test

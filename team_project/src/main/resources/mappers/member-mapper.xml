@@ -7,6 +7,7 @@
 
 	<select id="getMemberList" resultType="MemberVo" >
 		select * from tbl_member
+		 <include refid="search"></include>
 		order by userid
 	</select>
 	
@@ -36,6 +37,13 @@
 			(userid, userpw, username, email, gender, m_picture, cellphone)
 		values
 			(#{userid}, #{userpw}, #{username},  #{email}, #{gender}, #{m_picture, jdbcType=VARCHAR}, #{cellphone})
+	</insert>
+	
+	<insert id="insertAdmin" >
+		insert into tbl_member
+			(userid, userpw, username, email, m_code, cellphone)
+		values
+			(#{userid}, #{userpw}, #{username}, #{email}, #{m_code}, #{cellphone})
 	</insert>
 	
 	<update id="modifyMember">
@@ -81,4 +89,20 @@
 		where userid = #{userid} and username = #{username} and email = #{email}
 	</update>
 	
+	<!-- 검색조건 -->
+	<sql id="search">
+		<if test="searchType != null and keyword != null">
+             <choose>
+              	<when test='searchType == "id"'>
+              		where userid like '%' || #{keyword} || '%'
+              	</when>
+              	<when test='searchType == "email"'>
+              		where email like '%' || #{keyword} || '%'
+              	</when>
+              	<when test='searchType == "cellphone"'>
+              		where cellphone like '%' || #{keyword} || '%'
+              	</when>
+             </choose>
+         </if> 
+	</sql>
 </mapper>

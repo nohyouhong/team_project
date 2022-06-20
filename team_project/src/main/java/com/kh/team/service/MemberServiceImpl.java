@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.dao.MemberDao;
 import com.kh.team.dao.PointDao;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointVo;
 
 @Service
@@ -31,8 +32,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVo> getMemberList() {
-		return null;
+	public List<MemberVo> getMemberList(PagingDto pagingDto) {
+		List<MemberVo> member_list = memberDao.getMemberList(pagingDto);
+		return member_list;
 	}
 
 	@Override
@@ -53,6 +55,10 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public boolean deleteMember(String userid) {
+		boolean result = memberDao.deleteMember(userid);
+		if(result) {
+			return true;
+		}
 		return false;
 	}
 
@@ -101,6 +107,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean modifyPw(MemberVo memberVo) {
 		boolean result = memberDao.modifyPw(memberVo);
+		return result;
+	}
+
+	@Override
+	public boolean insertAdmin(MemberVo memberVo) {
+		boolean result = memberDao.insertAdmin(memberVo);
 		return result;
 	}
 

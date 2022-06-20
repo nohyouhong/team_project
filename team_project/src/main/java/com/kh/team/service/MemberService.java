@@ -2,11 +2,13 @@
 
 import java.util.List;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointVo;
 
 public interface MemberService {
 	public boolean insertMember(MemberVo memberVo);
-	public List<MemberVo> getMemberList();
+	public boolean insertAdmin(MemberVo memberVo);
+	public List<MemberVo> getMemberList(PagingDto pagingDto);
 	public MemberVo getMemberById(String userid);
 	public int checkId(String userid);
 	public int checkPhoneNum(String cellphone);

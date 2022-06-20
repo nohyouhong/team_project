@@ -4,10 +4,12 @@ package com.kh.team.dao;
 import java.util.List;
 
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 
 public interface MemberDao { 
-	public boolean insertMember(MemberVo memberVo); 
-	public List<MemberVo> getMemberList();
+	public boolean insertMember(MemberVo memberVo);
+	public boolean insertAdmin(MemberVo memberVo);
+	public List<MemberVo> getMemberList(PagingDto pagingDto);
 	public MemberVo getMemberById(String userid);
 	public int checkId(String userid);
 	public int checkPhoneNum(String cellphone);

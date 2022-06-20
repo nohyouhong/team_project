@@ -8,7 +8,7 @@
 #joinBtnSpan{
 	color:yellowgreen;
 }
-#useridlabel, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #cellphone, #filename{
+#useridlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #cellphone, #filename{
 	font-family:'jua';
 	font-size:17px;
 }

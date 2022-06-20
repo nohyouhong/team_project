@@ -25,6 +25,7 @@ import com.kh.team.service.MemberService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.MessageVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointVo;
 
 @Controller
@@ -48,6 +49,21 @@ public class MemberController {
 		model.addAttribute("memberVo", memberVo);
 		return "member/info";
 	}
+	
+	@RequestMapping(value="/member_list", method=RequestMethod.GET)
+	public String memberList(Model model, PagingDto pagingDto) {
+		List<MemberVo> memberList = memberService.getMemberList(pagingDto);
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("pagingDto", pagingDto);
+		return "member/member_list";
+	}
+	
+	@RequestMapping(value="/member_delete", method=RequestMethod.GET)
+	public String deleteMember(String userid) {
+		memberService.deleteMember(userid);
+		return "redirect:/member/member_list";
+	}
+	
 	
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	@ResponseBody
@@ -74,6 +90,11 @@ public class MemberController {
 		return "member/login_form";
 	}
 	
+	@RequestMapping(value="/admin_join_form", method=RequestMethod.GET)
+	public String adminForm() {
+		return "member/admin_join_form";
+	}
+	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
 	public String info(String userid, Model model) {
 		MemberVo memberVo = memberService.getMemberById(userid);
@@ -96,6 +117,12 @@ public class MemberController {
 	@RequestMapping(value="/join_run", method=RequestMethod.POST)
 	public String joinRun(MemberVo memberVo) {
 		memberService.insertMember(memberVo);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/admin_join_run", method=RequestMethod.POST)
+	public String adminJoinRun(MemberVo memberVo) {
+		memberService.insertAdmin(memberVo);
 		return "redirect:/";
 	}
 	

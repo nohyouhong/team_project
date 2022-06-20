@@ -107,7 +107,7 @@
 										<a href="/member/admin_page?userid=${loginVo.userid}">관리자페이지</a>
 									</c:when>
 									<c:otherwise>
-										<a href="#">출석체크</a>
+										<a href="/cal/chkAttendance">출석체크</a>
 										<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
 									</c:otherwise>
 								</c:choose>

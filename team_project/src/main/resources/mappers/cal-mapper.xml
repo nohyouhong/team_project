@@ -11,6 +11,12 @@
 		where userid = #{userid} and to_char(attend_date, 'yymmdd') = to_char(#{sysdate}, 'yymmdd')
 	</select>
 	
+	<update id="updateAttendCount">
+		update tbl_member set
+		m_attend_count = m_attend_count + 1
+		where userid = #{userid}
+	</update>
+	
 	<update id="updateMemberTattend">
 		update tbl_member set
 		m_totalattend = m_totalattend + 1

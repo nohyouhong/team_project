@@ -31,25 +31,30 @@ public class CalServiceImpl implements CalService {
 
 	@Override
 	public boolean updateMemberTattend(String userid) {
-		boolean result = calDao.updateMemberTattend(userid);
-		return result;
+		
+		return false;
 	}
 
 	@Override
 	@Transactional
 	public boolean insertAttend(String userid) {
-		int m_totalattend = memberDao.getM_totalAttend(userid);
-		if (m_totalattend >= 20) {
+		int m_point_count = memberDao.getM_attend_count(userid);
+		if (m_point_count >= 19) {
 			PointVo pointVo = new PointVo(userid, PointDao.TOTAL_ATTEND_POINT, PointDao.TOTAL_ATTEND_CODE);
 			pointDao.insertPoint(pointVo);
 			pointDao.updatePoint(pointVo);
-			memberDao.initializeM_totalAttend(userid);
+			calDao.updateMemberTattend(userid);
+			memberDao.initializeM_attend_count(userid);
+			boolean result = calDao.insertAttend(userid);
+			return result;
 		} else {
 			PointVo pointVo = new PointVo(userid, PointDao.ATTENDANCE_POINT, PointDao.ATTENDANCE_CODE);			
 			pointDao.insertPoint(pointVo);
 			pointDao.updatePoint(pointVo);
+			calDao.insertAttend(userid);
+			calDao.updateMemberTattend(userid);
+			boolean result = calDao.updateAttendCount(userid);
+			return result;
 		}
-		boolean result = calDao.insertAttend(userid);
-		return result;
 	}
 }

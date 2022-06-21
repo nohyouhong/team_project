@@ -42,6 +42,15 @@ public class CalDaoImpl implements CalDao {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean updateAttendCount(String userid) {
+		int count = sqlSession.update(NAMESPACE + "updateAttendCount", userid);
+		if (count  > 0) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 }

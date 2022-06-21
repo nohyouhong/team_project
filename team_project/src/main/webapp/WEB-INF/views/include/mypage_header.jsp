@@ -105,6 +105,11 @@ $(function() {
 									<span class="menu-title">1:1문의</span>
 								</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link menuEx" href="/cal/chkAttendance?userid=${loginVo.userid}"> 
+									<span class="menu-title">출석 달력</span>
+								</a>
+							</li>
 						</ul>
 					</nav>
 					<!-- partial -->

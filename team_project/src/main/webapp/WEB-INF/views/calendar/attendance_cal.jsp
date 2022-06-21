@@ -139,21 +139,7 @@ th {
 </style>
 <script>
 $(function(){
-	$("#submit_attend").on("click", function(e){
-		e.preventDefault();
-		var userid = "${loginVo.userid}";
-		var url = "/cal/insertAttendance";
-		var sData = {
-				"userid" : userid
-		}
-		$.get(url, sData, function(rData){
-			if (rData == "fail") {
-				alert("이미 오늘의 출석을 완료하셨습니다.")
-			} else if (rData == "success") {
-				alert("50포인트가 지급되었습니다.")
-			}
-		});
-	});
+	
 });
 </script>
 </head>
@@ -226,9 +212,6 @@ $(function(){
 					</c:forEach>
 			</tbody>
 		</table>
-		<div>
-			<button class="btn btn-success" id="submit_attend">출석 체크</button>
-		</div>
 	</div>
 </form>
 	<%@ include file="/WEB-INF/views/include/mypage_footer.jsp"%>

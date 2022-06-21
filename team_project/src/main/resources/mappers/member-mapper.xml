@@ -89,14 +89,14 @@
 		where userid = #{userid} and username = #{username} and email = #{email}
 	</update>
 	
-	<select id="getM_totalAttend" resultType="int">
-		select m_totalattend from tbl_member
+	<select id="getM_attend_count" resultType="int">
+		select m_attend_count from tbl_member
 		where userid = #{userid}
 	</select>
 	
-	<update id="initializeM_totalattend">
+	<update id="initializeM_attend_count">
 		update tbl_member set
-			m_totalattend = 0
+			m_attend_count = 0
 		where userid = #{userid}
 	</update>
 	

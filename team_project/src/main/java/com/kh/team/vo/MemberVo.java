@@ -14,6 +14,7 @@ public class MemberVo {
 	private int m_totalattend;
 	private int m_code;
 	private String cellphone;
+	private int m_attend_count;
 	
 	public MemberVo() {
 		super();
@@ -149,31 +150,27 @@ public class MemberVo {
 		this.m_code = m_code;
 	}
 	
-	
-
 	public String getCellphone() {
 		return cellphone;
 	}
-
-
-
 
 	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
 
+	public int getM_attend_count() {
+		return m_attend_count;
+	}
 
-
+	public void setM_attend_count(int m_attend_count) {
+		this.m_attend_count = m_attend_count;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", gender=" + gender + ", m_regdate=" + m_regdate + ", m_point=" + m_point + ", m_picture="
 				+ m_picture + ", m_totalattend=" + m_totalattend + ", m_code=" + m_code + ", cellphone=" + cellphone
-				+ "]";
+				+ ", m_attend_count=" + m_attend_count + "]";
 	}
-
-
-
-
 }

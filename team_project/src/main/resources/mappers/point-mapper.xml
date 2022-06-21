@@ -7,7 +7,7 @@
 
 	<insert id="insertPoint">
 		insert into tbl_point(pno, userid, point, p_code) 
-		values(seq_pointshop_pno.nextval, #{userid}, #{point}, #{p_code})
+		values(seq_point_pno.nextval, #{userid}, #{point}, #{p_code})
 	</insert>
 	
 	<select id="getPoint_list" resultType="PointVo">

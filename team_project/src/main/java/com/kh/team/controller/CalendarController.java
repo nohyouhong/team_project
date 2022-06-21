@@ -65,12 +65,12 @@ public class CalendarController {
 		int index = 7-dateList.size()%7;
 		
 		if(dateList.size()%7!=0){
-			
 			for (int i = 0; i < index; i++) {
 				calendarData= new DateData(null, null, null, null);
 				dateList.add(calendarData);
 			}
 		}
+		
 		System.out.println(dateList);
 		
 		//배열에 담음

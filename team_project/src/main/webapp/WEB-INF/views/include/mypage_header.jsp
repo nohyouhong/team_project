@@ -66,7 +66,14 @@ $(function() {
 						<div class="user-info">
 <%-- 						${loginVo } --%>
 							<form id="mainHeaderForm">
-								<img id="mainHeaderUserImage" class="rounded-circle" src="/member/displayImage?filename=${loginVo.m_picture}">
+								<c:choose>
+									<c:when test="${not empty loginVo}">
+										<img id="mainHeaderUserImage" class="rounded-circle" src="/member/displayImage?filename=${loginVo.m_picture}">
+									</c:when>
+									<c:otherwise>
+										<img id="mainHeaderUserImage" class="rounded-circle" src="/resources/main_mypage/images/userImageM.png">
+									</c:otherwise>
+								</c:choose>
 								<input style="display: none;" type="file" id="mainHeaderUserImageFile" name="file" class="mainHeaderUserImageFile"/>
 								<button type="button" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
 							</form>

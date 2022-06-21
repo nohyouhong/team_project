@@ -3,6 +3,7 @@ package com.kh.team.controller;
 
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,9 +31,8 @@ public class CalendarController {
 	private CalService calService;
 	
 	@RequestMapping(value = "/chkAttendance", method = RequestMethod.GET)
-	public String calendar(Model model, HttpServletRequest request, DateData dateData){
+	public String calendar(Model model, HttpServletRequest request, DateData dateData, String userid){
 		
-		System.out.println("calendar, dateData" + dateData);
 		Calendar cal = Calendar.getInstance();
 		DateData calendarData;
 		//검색 날짜
@@ -53,11 +53,36 @@ public class CalendarController {
 		
 		//날짜 삽입
 		for (int i = today_info.get("startDay"); i <= today_info.get("endDay"); i++) {
+			String attend_date = "";
+			if (Integer.parseInt(dateData.getMonth()) < 10) {
+				attend_date = dateData.getYear() + "0" + String.valueOf(Integer.parseInt(dateData.getMonth()) + 1);
+			} else {
+				attend_date = dateData.getYear() + String.valueOf(Integer.parseInt(dateData.getMonth()) + 1);
+			}
+			if (i < 10) {
+				attend_date += "0" + i;
+			} else {
+				attend_date += i;
+			}
+//			System.out.println("attend_date: " + attend_date);
+			DateData attendData = calService.getAttendDate(userid, attend_date);
+//			System.out.println("attendData: " + attendData);			
 			if(i==today_info.get("today")){
 				calendarData= new DateData(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "today");
+				if (attendData != null) {
+					calendarData.setAno(attendData.getAno());
+					calendarData.setUserid(attendData.getUserid());
+					calendarData.setAttend_date(attendData.getAttend_date());
+				}
 			}else{
 				calendarData= new DateData(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "normal_date");
+				if (attendData != null) {
+					calendarData.setAno(attendData.getAno());
+					calendarData.setUserid(attendData.getUserid());
+					calendarData.setAttend_date(attendData.getAttend_date());
+				}
 			}
+			System.out.println("calendarData: " + calendarData);
 			dateList.add(calendarData);
 		}
 
@@ -71,7 +96,6 @@ public class CalendarController {
 			}
 		}
 		
-		System.out.println(dateList);
 		
 		//배열에 담음
 		model.addAttribute("dateList", dateList);		//날짜 데이터 배열

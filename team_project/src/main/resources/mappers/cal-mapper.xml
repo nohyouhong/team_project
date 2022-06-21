@@ -28,4 +28,9 @@
 		values(seq_attendance_ano.nextval, #{userid}, sysdate)
 	</insert>
 	
+	<select id="getAttendDate" resultType="DateData">
+		select * from tbl_attendance
+		where userid = #{userid} and to_char(attend_date, 'YYYYMMDD') = #{attend_date}
+	</select>
+	
 </mapper>

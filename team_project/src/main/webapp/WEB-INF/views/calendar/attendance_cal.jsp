@@ -151,7 +151,7 @@ $(function(){
 		<div class="navigation">
 			<!-- 이전달 -->
 			<a class="before_after_month"
-				href="/cal/chkAttendance?year=${today_info.before_year}&month=${today_info.before_month}">
+				href="/cal/chkAttendance?year=${today_info.before_year}&month=${today_info.before_month}&userid=${loginVo.userid}">
 				&lt;
 			</a>
 			<span class="this_month"> &nbsp;${today_info.search_year}.
@@ -159,7 +159,7 @@ $(function(){
 			</span>
 			<!-- 다음달 --> 
 			<a class="before_after_month" 
-			href="/cal/chkAttendance?year=${today_info.after_year}&month=${today_info.after_month}">
+			href="/cal/chkAttendance?year=${today_info.after_year}&month=${today_info.after_month}&userid=${loginVo.userid}">
 			&gt;
 			</a> 
 		</div>
@@ -185,13 +185,21 @@ $(function(){
 							<c:when test="${dateList.value=='today'}">
 								<td class="today">
 									<div class="date">${dateList.date}</div>
-									<div></div>
+									<div>
+										<c:if test="${not empty dateList.attend_date}">
+											출석 완료
+										</c:if>
+									</div>
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==6}">
 								<td class="sat_day">
 									<div class="sat">${dateList.date}</div>
-									<div></div>
+									<div>
+										<c:if test="${not empty dateList.attend_date}">
+											출석 완료
+										</c:if>
+									</div>
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==0}">
@@ -205,7 +213,11 @@ $(function(){
 							<c:otherwise>
 						<td class="normal_day">
 							<div class="date">${dateList.date}</div>
-							<div></div>
+							<div>
+								<c:if test="${not empty dateList.attend_date}">
+									출석 완료
+								</c:if>
+							</div>
 						</td>
 							</c:otherwise>
 						</c:choose>

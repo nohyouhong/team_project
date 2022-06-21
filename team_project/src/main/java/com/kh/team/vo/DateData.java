@@ -15,7 +15,7 @@ public class DateData {
 	private String value = "";
 	private int ano;
 	private String userid;
-	private Date attend_date;
+	private String attend_date;
 
 	public String getYear() {
 		return year;
@@ -65,11 +65,11 @@ public class DateData {
 		this.userid = userid;
 	}
 
-	public Date getAttend_date() {
+	public String getAttend_date() {
 		return attend_date;
 	}
 
-	public void setAttend_date(Date attend_date) {
+	public void setAttend_date(String attend_date) {
 		this.attend_date = attend_date;
 	}
 
@@ -154,6 +154,17 @@ public class DateData {
 			this.date = date;
 			this.value = value;
 		}
+	}
+
+	public DateData(String year, String month, String date, String value, int ano, String userid, String attend_date) {
+		super();
+		this.year = year;
+		this.month = month;
+		this.date = date;
+		this.value = value;
+		this.ano = ano;
+		this.userid = userid;
+		this.attend_date = attend_date;
 	}
 
 	public DateData() {

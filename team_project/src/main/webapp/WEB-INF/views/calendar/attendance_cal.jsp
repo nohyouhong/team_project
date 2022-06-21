@@ -136,6 +136,14 @@ th {
 .this_month {
 	margin: 10px;
 }
+.attend_img_div {
+	text-align: center;
+	padding-top: 10px;
+}
+.attend_img {
+	width: 65px;
+	height: auto;
+}
 </style>
 <script>
 $(function(){
@@ -193,9 +201,9 @@ $(function(){
 							<c:when test="${dateList.value=='today'}">
 								<td class="today">
 									<div class="date">${dateList.date}</div>
-									<div>
+									<div class="attend_img_div">
 										<c:if test="${not empty dateList.attend_date}">
-											출석 완료
+											<img class="attend_img" src="/resources/attendance_calendar/img_attendance.png">
 										</c:if>
 									</div>
 								</td>
@@ -203,9 +211,9 @@ $(function(){
 							<c:when test="${date_status.index%7==6}">
 								<td class="sat_day">
 									<div class="sat">${dateList.date}</div>
-									<div>
+									<div class="attend_img_div">
 										<c:if test="${not empty dateList.attend_date}">
-											출석 완료
+											<img class="attend_img" src="/resources/attendance_calendar/img_attendance.png">
 										</c:if>
 									</div>
 								</td>
@@ -221,9 +229,9 @@ $(function(){
 							<c:otherwise>
 						<td class="normal_day">
 							<div class="date">${dateList.date}</div>
-							<div>
+							<div class="attend_img_div">
 								<c:if test="${not empty dateList.attend_date}">
-									출석 완료
+									<img class="attend_img" src="/resources/attendance_calendar/img_attendance.png">
 								</c:if>
 							</div>
 						</td>

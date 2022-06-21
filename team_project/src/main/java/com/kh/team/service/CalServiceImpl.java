@@ -1,6 +1,7 @@
 package com.kh.team.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.dao.CalDao;
 import com.kh.team.dao.MemberDao;
 import com.kh.team.dao.PointDao;
+import com.kh.team.vo.DateData;
 import com.kh.team.vo.PointVo;
 
 @Service
@@ -56,5 +58,11 @@ public class CalServiceImpl implements CalService {
 			boolean result = calDao.updateAttendCount(userid);
 			return result;
 		}
+	}
+
+	@Override
+	public DateData getAttendDate(String userid, String attend_date) {
+		DateData dateData = calDao.getAttendDate(userid, attend_date);
+		return dateData;
 	}
 }

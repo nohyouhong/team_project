@@ -88,21 +88,7 @@
 	</head>
 <script>
 $(function(){
-	$(".attendance").on("click", function(e){
-		e.preventDefault();
-		var userid = "${loginVo.userid}";
-		var url = "/cal/insertAttendance";
-		var sData = {
-				"userid" : userid
-		}
-		$.get(url, sData, function(rData){
-			if (rData == "fail") {
-				alert("이미 오늘의 출석을 완료하셨습니다.")
-			} else if (rData == "success") {
-				alert("포인트가 지급되었습니다.")
-			}
-		});
-	}); // 출석 체크
+	
 }); // function
 </script>
 	<body>
@@ -126,7 +112,7 @@ $(function(){
 										<a href="/member/admin_page?userid=${loginVo.userid}">관리자페이지</a>
 									</c:when>
 									<c:otherwise>
-										<a href="#" class="attendance">출석체크</a>
+										<a href="/cal/insertAttendance?userid=${loginVo.userid}">출석체크</a>
 										<a href="/member/point_list?userid=${loginVo.userid}">마이페이지</a>
 									</c:otherwise>
 								</c:choose>

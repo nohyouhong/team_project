@@ -34,22 +34,16 @@ $(document).ready(function(){
 	};
 	
 	var not = document.getElementsByClassName("n_title");
-	var title = document.getElementsByClassName("notice_content");
 	var i;
 	
 	for (i = 0; i < not.length; i++) {
 		not[i].addEventListener("click", function () {
 	        this.classList.toggle("active");
 	        var p = this.nextElementSibling;
-// 	        var n_content = p.nextElementSibling;
-// 	        console.log(p);
 	        if (p.style.display == "block") {
 	        	p.style.display = "none";
 	        } else {
 	        	p.style.display = "block";
-// 	        	$(".notice_modify").click(function(){
-	        		
-// 	        	});
 	        }
 	    });
 	};
@@ -110,9 +104,9 @@ $(document).ready(function(){
 								<div>
 									<input type="text" value="${noticeVo.n_title}" name="n_title"
 												class="form-control n_title_input" style="display:none;">
-										<p><span class="span_username">${noticeVo.username}</span>  ${noticeVo.n_regdate}
-										</p>
-										<h3 class="n_title" >${noticeVo.n_title}</h3>
+									<p><span class="span_username">${noticeVo.username}</span>  ${noticeVo.n_regdate}
+									</p>
+									<h3 class="n_title" >${noticeVo.n_title}</h3>
 									<div class="notice_content">
 										<textarea class="form-control" name="n_content" class="n_content" readonly>${noticeVo.n_content}</textarea>
 										<button type="button" class="btn btn-outline-primary notice_modify">

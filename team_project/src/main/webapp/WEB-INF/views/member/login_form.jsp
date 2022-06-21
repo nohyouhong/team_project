@@ -46,7 +46,7 @@ $(function(){
 					</div>
 					<div class="form-group">
 						<label for="userpw" id="pwlabel">비밀번호</label> 
-						<input type="password" class="form-control" id="userpw" name="userpw"/>
+						<input type="password" class="form-control" name="userpw"/>
 					</div>
 					
 					<div class="checkbox">

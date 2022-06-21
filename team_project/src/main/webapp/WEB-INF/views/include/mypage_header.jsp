@@ -79,12 +79,12 @@ $(function() {
 						</div>
 						<ul class="nav">
 							<li class="mypage-item">
-								<a class="nav-link menuEx" href="index.html" id="attendspan">
+								<a class="nav-link menuEx" href="" id="attendspan">
 									<span class="attendance"> 
 										<span class="jua">${loginVo.m_point}</span><br> <span class="jua">포인트</span>
 									</span> 
 									<span class="attendance" id="lineleft"> 
-										<span class="jua">102</span><br> <span class="jua">총누적 출석</span>
+										<span class="jua">${loginVo.m_totalattend}</span><br> <span class="jua">총누적 출석</span>
 									</span>
 								</a>
 							</li>

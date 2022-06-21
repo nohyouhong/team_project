@@ -70,9 +70,9 @@ th {
 }
 
 .calendar_body .today {
-	border: 1px solid white;
+	border: 3px solid rgb(248, 56, 1);
 	height: 120px;
-	background-color: #c9c9c9;
+	background-color: rgb(245, 245, 245);
 	text-align: left;
 	vertical-align: top;
 }
@@ -119,7 +119,7 @@ th {
 .calendar_body .normal_day {
 	border: 1px solid white;
 	height: 120px;
-	background-color: #EFEFEF;
+	background-color: rgb(245, 245, 245);
 	vertical-align: top;
 	text-align: left;
 }
@@ -175,7 +175,7 @@ $(function(){
 		<table class="calendar_body">
 
 			<thead>
-				<tr bgcolor="#CECECE">
+				<tr style="background-color: rgb(255, 227, 219)">
 					<td class="day sun">일</td>
 					<td class="day">월</td>
 					<td class="day">화</td>

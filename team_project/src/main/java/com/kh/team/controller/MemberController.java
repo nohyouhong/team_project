@@ -72,6 +72,13 @@ public class MemberController {
 		return cnt;
 	}
 	
+	@RequestMapping(value="/checkNick", method=RequestMethod.POST)
+	@ResponseBody
+	public int checkNick(String nickname) {
+		int cnt = memberService.checkNick(nickname);
+		return cnt;
+	}
+	
 	@RequestMapping(value="/checkPhoneNum", method=RequestMethod.POST)
 	@ResponseBody
 	public int checkPhoneNum(String cellphone) {
@@ -95,11 +102,11 @@ public class MemberController {
 		return "member/admin_join_form";
 	}
 	
-	@RequestMapping(value="/info", method=RequestMethod.GET)
+	@RequestMapping(value="/user_info", method=RequestMethod.GET)
 	public String info(String userid, Model model) {
 		MemberVo memberVo = memberService.getMemberById(userid);
 		model.addAttribute("memberVo", memberVo);
-		return "member/info";
+		return "member/user_info";
 	}
 	
 	@RequestMapping(value="/point_list", method = RequestMethod.GET)

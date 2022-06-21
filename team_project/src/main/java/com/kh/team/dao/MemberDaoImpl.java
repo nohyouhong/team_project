@@ -143,5 +143,11 @@ public class MemberDaoImpl implements MemberDao{
 		return false;
 	}
 
+	@Override
+	public int checkNick(String nickname) {
+		int cnt = sqlSession.selectOne(NAMESPACE+"checkNick", nickname);
+		return cnt;
+	}
+
 
 }

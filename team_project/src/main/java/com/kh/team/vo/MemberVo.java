@@ -15,15 +15,14 @@ public class MemberVo {
 	private int m_code;
 	private String cellphone;
 	private int m_attend_count;
+	private String nickname;
 	
 	public MemberVo() {
 		super();
 	}
 	
-	
-	
-
-	public MemberVo(String userid, String userpw, String username, String email, String gender, String cellphone) {
+	public MemberVo(String userid, String userpw, String username, String email, String gender, String cellphone,
+			String nickname) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -31,12 +30,11 @@ public class MemberVo {
 		this.email = email;
 		this.gender = gender;
 		this.cellphone = cellphone;
+		this.nickname = nickname;
 	}
 
-	
-
 	public MemberVo(String userid, String userpw, String username, String email, String gender, String m_picture,
-			String cellphone) {
+			String cellphone, String nickname) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -45,14 +43,17 @@ public class MemberVo {
 		this.gender = gender;
 		this.m_picture = m_picture;
 		this.cellphone = cellphone;
+		this.nickname = nickname;
 	}
-
 
 	
 
 
+
+
 	public MemberVo(String userid, String userpw, String username, String email, String gender, Date m_regdate,
-			int m_point, String m_picture, int m_totalattend, int m_code, String cellphone) {
+			int m_point, String m_picture, int m_totalattend, int m_code, String cellphone, int m_attend_count,
+			String nickname) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -65,10 +66,9 @@ public class MemberVo {
 		this.m_totalattend = m_totalattend;
 		this.m_code = m_code;
 		this.cellphone = cellphone;
+		this.m_attend_count = m_attend_count;
+		this.nickname = nickname;
 	}
-
-
-
 
 	public String getUserid() {
 		return userid;
@@ -165,12 +165,22 @@ public class MemberVo {
 	public void setM_attend_count(int m_attend_count) {
 		this.m_attend_count = m_attend_count;
 	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", gender=" + gender + ", m_regdate=" + m_regdate + ", m_point=" + m_point + ", m_picture="
 				+ m_picture + ", m_totalattend=" + m_totalattend + ", m_code=" + m_code + ", cellphone=" + cellphone
-				+ ", m_attend_count=" + m_attend_count + "]";
+				+ ", m_attend_count=" + m_attend_count + ", nickname=" + nickname + "]";
 	}
+
+	
 }

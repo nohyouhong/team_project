@@ -21,6 +21,11 @@
 		where userid = #{userid}
 	</select>
 	
+	<select id="checkNick" resultType="int">
+		select count(*) from tbl_member
+		where nickname = #{nickname}
+	</select>
+	
 	<select id="checkPhoneNum" resultType="int">
 		select count(*) from tbl_member
 		where cellphone = #{cellphone}
@@ -34,9 +39,9 @@
 	
 	<insert id="insertMember" >
 		insert into tbl_member
-			(userid, userpw, username, email, gender, m_picture, cellphone)
+			(userid, userpw, username, email, gender, m_picture, cellphone, nickname)
 		values
-			(#{userid}, #{userpw}, #{username},  #{email}, #{gender}, #{m_picture, jdbcType=VARCHAR}, #{cellphone})
+			(#{userid}, #{userpw}, #{username},  #{email}, #{gender}, #{m_picture, jdbcType=VARCHAR}, #{cellphone}, #{nickname})
 	</insert>
 	
 	<insert id="insertAdmin" >

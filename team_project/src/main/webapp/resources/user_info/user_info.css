@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#info-form{
+	border:medium ridge rgb(255,227,219);
+	border-radius:5px;
+	box-shadow: 10px 5px 5px rgb(255,227,219);
+	padding:10px 5px 20px 5px;
+	width:650px;
+	margin:0 auto;
+}
+
+#useridlabel, #pwlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #cellphone, #filename{
+	font-family:'jua';
+	font-size:17px;
+}
+
+#genderRadio{
+	display: flex
+}
+
+.gender{
+	margin: 6px 10px;
+}
+
+#emailDiv, #usernameInput{
+	margin-bottom:5px;
+}
+#usernameInput{
+	width:200px;
+}
+#emailIdInput{
+	width:100px;
+}
+#emailAdInput{
+	width:200px;
+}
+#emailB{
+	margin-top:5px;
+}
+
+#checkdiv, #emailDiv{
+	display:flex;
+}

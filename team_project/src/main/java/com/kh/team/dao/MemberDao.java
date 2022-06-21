@@ -12,6 +12,7 @@ public interface MemberDao {
 	public List<MemberVo> getMemberList(PagingDto pagingDto);
 	public MemberVo getMemberById(String userid);
 	public int checkId(String userid);
+	public int checkNick(String nickname);
 	public int checkPhoneNum(String cellphone);
 	public boolean modifyMember(MemberVo memberVo);
 	public boolean updateUserImage(String filename, String userid);

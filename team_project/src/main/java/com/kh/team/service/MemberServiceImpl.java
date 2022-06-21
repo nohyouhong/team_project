@@ -81,6 +81,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public int checkNick(String nickname) {
+		int cnt = memberDao.checkNick(nickname);
+		return cnt;
+	}
+	
+	@Override
 	public int checkPhoneNum(String cellphone) {
 		int cnt = memberDao.checkPhoneNum(cellphone);
 		return cnt;
@@ -115,6 +121,8 @@ public class MemberServiceImpl implements MemberService{
 		boolean result = memberDao.insertAdmin(memberVo);
 		return result;
 	}
+
+	
 
 	
 

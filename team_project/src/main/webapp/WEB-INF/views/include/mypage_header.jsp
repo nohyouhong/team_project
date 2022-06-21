@@ -99,7 +99,7 @@ $(function() {
 								</a>
 							</li>
 							<li class="mypage-item">
-								<a class="nav-link menuEx" href="/member/user_info"> 
+								<a class="nav-link menuEx" href="/member/user_info?userid=${loginVo.userid}"> 
 									<span class="menu-title jua">내 정보 수정</span>
 								</a>
 							</li>

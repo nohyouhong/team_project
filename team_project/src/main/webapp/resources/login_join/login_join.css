@@ -8,7 +8,7 @@
 #joinBtnSpan{
 	color:yellowgreen;
 }
-#useridlabel, #pwlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #cellphone, #filename{
+#useridlabel, #nicklabel, #pwlabel, #userpw, #userpw2, #username, #email, #gender, #genderMan, #genderWoman, #cellphone, #filename{
 	font-family:'jua';
 	font-size:17px;
 }
@@ -38,14 +38,24 @@
 #emailDiv, #usernameInput{
 	margin-bottom:5px;
 }
-#usernameInput{
-	width:200px;
+#usernameInput, #nickname{
+	width:150px;
+}
+#username{
+	margin-right:20px;
+}
+#nicklabel{
+	margin-left:20px;
+	margin-right:20px;
 }
 #emailIdInput{
 	width:100px;
 }
 #emailAdInput{
 	width:200px;
+}
+#name_nick{
+	display:flex;
 }
 #emailB{
 	margin-top:5px;
@@ -106,10 +116,17 @@
 #join_bottom{
 	margin-bottom:50px;
 }
-#overlapIdCheckBtn, #overlapPhoneCheckBtn{
+#overlapIdCheckBtn, #overlapPhoneCheckBtn, #overlapNickCheckBtn{
 	border-radius: 10px;
 	margin-top:5px;
 	padding:5px 15px;
+}
+#overlapNickCheckBtn{
+	margin-left:5px;
+	margin-top:1px;
+}
+#name_nick{
+	margin:10px auto;
 }
 #genderRadio{
 	display: flex

@@ -15,6 +15,7 @@ $(document).ready(function(){
     $('#phoneChk').html('<b style=" color: yellowgreen">[번호를 입력해주세요]');
     var isPushed = "false";
     var isPushed2 = "false";
+    var isPushed3 = "false";
     
     $('#userid').keyup(function() {
         if($(this).val() === '' ) {
@@ -45,6 +46,34 @@ $(document).ready(function(){
 			});
         }
     });
+    
+    $('#nickname').keyup(function() {
+        if($(this).val() === '' ) {
+           $(this).css('background-color', 'pink');
+           $('#nickChk').html('<b style=" color: red">[닉네임은 필수값입니다.]</b>');
+   		}else{
+        	$(this).css('background-color', 'white');
+        	$('#nickChk').html('<b style=" color: yellowgreen">[닉네임 중복체크 해주세요]');
+			$("#overlapNickCheckBtn").click(function(){
+				var nickname = $("#nickname").val();
+				var sData = {
+						"nickname" : nickname
+				};
+				var url = "/member/checkNick";
+				$.post(url, sData, function(rData){
+					if(rData != 1){
+						$(this).css('background-color', 'aliceblue');
+			            $('#nickChk').html('<b style=" color: #75daff">[사용가능한 닉네임입니다.]</b>');
+			            isPushed3="true";
+		            } else {
+		            	$(this).css('background-color', 'pink');
+			            $('#nickChk').html('<b style=" color: red">[사용중인 닉네임입니다.]</b>');
+		            };
+				});
+			});
+        }
+    });
+    
     $('#userpwInput').keyup(function(){
     	if($(this).val() === '' ) {
             $(this).css('background-color', 'pink');
@@ -114,6 +143,11 @@ $(document).ready(function(){
 	$("#userid").keyup(function(){
 		console.log("아이디 변경중");
 		isPushed = "false";
+	});
+	
+	$("nickname").keyup(function(){
+		console.log("닉네임 변경중");
+		isPushed3 = "false";
 	});
 	
 	$("#emailIdInput").blur(function(){
@@ -207,6 +241,8 @@ $(document).ready(function(){
 			alert("아이디를 확인하세요");
 		}else if(isPushed2 == "false"){
 			alert("폰번호를 확인하세요")
+		}else if(isPushed3 == "false"){
+			alert("닉네임를 확인하세요")
 		}else{
 			$("#join_form").submit();
 // 			console.log($("#totalemail").val());
@@ -252,8 +288,17 @@ $(document).ready(function(){
 					</div>
 
 					<div class="join-form">
-						<label for="username" id="username">이름</label> 
-						<input type="text" class="form-control" name="username" id="usernameInput"/>
+						<div id="name_nick">
+							<label for="username" id="username">이름</label> <br>
+							<input type="text" class="form-control" name="username" id="usernameInput"/>
+						
+							<label for="nick" id="nicklabel">닉네임</label> <br>
+							<input type="text" class="form-control" name="nickname" id="nickname" /><br>
+							<div id="checknic">
+								<button type="button" class="btn btn-outline-secondary" id="overlapNickCheckBtn">닉네임 중복확인</button><br>
+								<span id="nickChk"></span>
+							</div>
+						</div>
 					</div>
 					<div class="join-form">
 						<label for="cellphone" id="cellphone">폰번호</label> 

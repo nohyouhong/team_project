@@ -5,5 +5,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kh.team.mappers.cal">
-
+	
+	<select id="isAttend" resultType="int">
+		select count(*) from tbl_attendance
+		where userid = #{userid} and to_char(attend_date, 'yymmdd') = to_char(#{sysdate}, 'yymmdd')
+	</select>
+	
+	<update id="updateAttendCount">
+		update tbl_member set
+		m_attend_count = m_attend_count + 1
+		where userid = #{userid}
+	</update>
+	
+	<update id="updateMemberTattend">
+		update tbl_member set
+		m_totalattend = m_totalattend + 1
+		where userid = #{userid}
+	</update>
+	
+	<insert id="insertAttend">
+		insert into tbl_attendance(ano, userid, attend_date)
+		values(seq_attendance_ano.nextval, #{userid}, sysdate)
+	</insert>
+	
 </mapper>

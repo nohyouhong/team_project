@@ -66,7 +66,14 @@ $(function() {
 						<div class="user-info">
 <%-- 						${loginVo } --%>
 							<form id="mainHeaderForm">
-								<img id="mainHeaderUserImage" class="rounded-circle" src="/member/displayImage?filename=${loginVo.m_picture}">
+								<c:choose>
+									<c:when test="${not empty loginVo}">
+										<img id="mainHeaderUserImage" class="rounded-circle" src="/member/displayImage?filename=${loginVo.m_picture}">
+									</c:when>
+									<c:otherwise>
+										<img id="mainHeaderUserImage" class="rounded-circle" src="/resources/main_mypage/images/userImageM.png">
+									</c:otherwise>
+								</c:choose>
 								<input style="display: none;" type="file" id="mainHeaderUserImageFile" name="file" class="mainHeaderUserImageFile"/>
 								<button type="button" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
 							</form>
@@ -103,6 +110,11 @@ $(function() {
 							<li class="nav-item">
 								<a class="nav-link menuEx" href="/ask/ask_list"> 
 									<span class="menu-title">1:1문의</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link menuEx" href="/cal/chkAttendance?userid=${loginVo.userid}"> 
+									<span class="menu-title">출석 달력</span>
 								</a>
 							</li>
 						</ul>

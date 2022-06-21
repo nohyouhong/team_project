@@ -1,5 +1,6 @@
 package com.kh.team.vo;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,10 +9,13 @@ import java.util.Map;
 
 public class DateData {
 
-	String year = "";
-	String month = "";
-	String date = "";
-	String value = "";
+	private String year = "";
+	private String month = "";
+	private String date = "";
+	private String value = "";
+	private int ano;
+	private String userid;
+	private Date attend_date;
 
 	public String getYear() {
 		return year;
@@ -43,6 +47,30 @@ public class DateData {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public Date getAttend_date() {
+		return attend_date;
+	}
+
+	public void setAttend_date(Date attend_date) {
+		this.attend_date = attend_date;
 	}
 
 	// 날짜에 관련된 달력정보를 가지는 메서드
@@ -129,11 +157,13 @@ public class DateData {
 	}
 
 	public DateData() {
+		
 	}
 
 	@Override
 	public String toString() {
-		return "DateData [year=" + year + ", month=" + month + ", date=" + date + ", value=" + value + "]";
+		return "DateData [year=" + year + ", month=" + month + ", date=" + date + ", value=" + value + ", ano=" + ano
+				+ ", userid=" + userid + ", attend_date=" + attend_date + "]";
 	}
-
+	
 }

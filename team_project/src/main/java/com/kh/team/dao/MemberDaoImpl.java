@@ -128,5 +128,20 @@ public class MemberDaoImpl implements MemberDao{
 		return false;
 	}
 
+	@Override
+	public int getM_attend_count(String userid) {
+		int m_point_count = sqlSession.selectOne(NAMESPACE + "getM_attend_count", userid);
+		return m_point_count;
+	}
+
+	@Override
+	public boolean initializeM_attend_count(String userid) {
+		int count = sqlSession.update(NAMESPACE + "initializeM_attend_count", userid);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

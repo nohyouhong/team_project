@@ -2,6 +2,8 @@ package com.kh.team.controller;
 
 
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.CalService;
 import com.kh.team.vo.DateData;
@@ -29,10 +32,11 @@ public class CalendarController {
 	@RequestMapping(value = "/chkAttendance", method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, DateData dateData){
 		
+		System.out.println("calendar, dateData" + dateData);
 		Calendar cal = Calendar.getInstance();
 		DateData calendarData;
 		//검색 날짜
-		if(dateData.getDate().equals("")&&dateData.getMonth().equals("")){
+		if(dateData.getDate().equals("") && dateData.getMonth().equals("")){
 			dateData = new DateData(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
 		}
 		//검색 날짜 end
@@ -61,18 +65,33 @@ public class CalendarController {
 		int index = 7-dateList.size()%7;
 		
 		if(dateList.size()%7!=0){
-			
 			for (int i = 0; i < index; i++) {
 				calendarData= new DateData(null, null, null, null);
 				dateList.add(calendarData);
 			}
 		}
+		
 		System.out.println(dateList);
 		
 		//배열에 담음
 		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today_info", today_info);
 		return "/calendar/attendance_cal";
+	}
+	
+	@RequestMapping(value="/insertAttendance", method=RequestMethod.GET)
+	@ResponseBody
+	public String insertAttendance(String userid) {
+		System.out.println("userid: " + userid);
+		Date sysdate = Date.valueOf(LocalDate.now());
+		int count = calService.isAttend(userid, sysdate);
+		if (count > 0) {
+			return "fail";
+		} else {
+			calService.insertAttend(userid);
+			calService.updateMemberTattend(userid);
+			return "success";
+		}
 	}
 	
 }

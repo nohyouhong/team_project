@@ -34,31 +34,36 @@ $(document).ready(function(){
 	};
 	
 	var not = document.getElementsByClassName("n_title");
+	var title = document.getElementsByClassName("notice_content");
 	var i;
 	
 	for (i = 0; i < not.length; i++) {
 		not[i].addEventListener("click", function () {
 	        this.classList.toggle("active");
 	        var p = this.nextElementSibling;
-	        var n_content = p.nextElementSibling;
-	        if (n_content.style.display == "block") {
-	        	n_content.style.display = "none";
+// 	        var n_content = p.nextElementSibling;
+// 	        console.log(p);
+	        if (p.style.display == "block") {
+	        	p.style.display = "none";
 	        } else {
-	        	n_content.style.display = "block";
+	        	p.style.display = "block";
+// 	        	$(".notice_modify").click(function(){
+	        		
+// 	        	});
 	        }
 	    });
 	};
-	
 	
 	$(".notice_modify").click(function(){
 		var notice_content = $(this).parent();
 		var textarea = notice_content.find("textarea");
 		var modify_run = notice_content.find(".notice_modify_run");
-		var input = notice_content.find(".n_title_input");
+		var n_title = notice_content.parent();
+		
+		n_title.find(".n_title").eq(0).hide();
+		n_title.find(".n_title_input").eq(0).show();
 		textarea.attr("readonly", false);
 		modify_run.fadeIn();
-		$(".n_title_input").show();
-		$(".n_title").hide();
 		$(this).fadeOut();
 	});
 	
@@ -102,12 +107,12 @@ $(document).ready(function(){
 							<form role="form" method="post" action="/customer/notice_modify_run">
 							<input type="hidden" value="${noticeVo.n_bno}" name="n_bno">
 							<section>
-									<input type="text" value="${noticeVo.n_title}" name="n_title"
-										class="form-control n_title_input" style="display:none;">
 								<div>
-									<h3 class="n_title" >${noticeVo.n_title}</h3>
-									<p><span class="span_username">${noticeVo.username}</span>  ${noticeVo.n_regdate}
-									</p>
+									<input type="text" value="${noticeVo.n_title}" name="n_title"
+												class="form-control n_title_input" style="display:none;">
+										<p><span class="span_username">${noticeVo.username}</span>  ${noticeVo.n_regdate}
+										</p>
+										<h3 class="n_title" >${noticeVo.n_title}</h3>
 									<div class="notice_content">
 										<textarea class="form-control" name="n_content" class="n_content" readonly>${noticeVo.n_content}</textarea>
 										<button type="button" class="btn btn-outline-primary notice_modify">

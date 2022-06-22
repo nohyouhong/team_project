@@ -81,9 +81,11 @@
 	<script src="/resources/summernote/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	
-	
-<!-- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
+	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/8393ee0e69.js" crossorigin="anonymous"></script>
+		
+	<!-- daum address api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 	</head>
 <script>
@@ -100,6 +102,7 @@ $(function(){
 				<div class="container">
 					<div class="row toploginmenu">
 						<div class="col-md-12" id="col12" >
+							<a href="/pay/paymentScreen">결제창 접속(임시)</a>
 						<c:choose>
 							<c:when test="${empty loginVo}">
 								<a href="/member/login_form">로그인</a>

@@ -70,9 +70,9 @@ th {
 }
 
 .calendar_body .today {
-	border: 1px solid white;
+	border: 3px solid rgb(248, 56, 1);
 	height: 120px;
-	background-color: #c9c9c9;
+	background-color: rgb(245, 245, 245);
 	text-align: left;
 	vertical-align: top;
 }
@@ -119,7 +119,7 @@ th {
 .calendar_body .normal_day {
 	border: 1px solid white;
 	height: 120px;
-	background-color: #EFEFEF;
+	background-color: rgb(245, 245, 245);
 	vertical-align: top;
 	text-align: left;
 }
@@ -136,10 +136,26 @@ th {
 .this_month {
 	margin: 10px;
 }
+.attend_img_div {
+	text-align: center;
+	padding-top: 10px;
+}
+.attend_img {
+	width: 100px;
+	height: auto;
+}
 </style>
 <script>
 $(function(){
-	
+	var attend_success = '${attend_success}'
+	var attend_fail = '${attend_fail}'
+	console.log(attend_success);
+	console.log(attend_fail);
+	if (attend_fail == 'false') {
+		alert("이미 출석체크를 하였습니다.")
+	} else if (attend_success == 'true') {
+		alert("포인트가 지급되었습니다.")
+	}
 });
 </script>
 </head>
@@ -151,7 +167,7 @@ $(function(){
 		<div class="navigation">
 			<!-- 이전달 -->
 			<a class="before_after_month"
-				href="/cal/chkAttendance?year=${today_info.before_year}&month=${today_info.before_month}">
+				href="/cal/chkAttendance?year=${today_info.before_year}&month=${today_info.before_month}&userid=${loginVo.userid}">
 				&lt;
 			</a>
 			<span class="this_month"> &nbsp;${today_info.search_year}.
@@ -159,7 +175,7 @@ $(function(){
 			</span>
 			<!-- 다음달 --> 
 			<a class="before_after_month" 
-			href="/cal/chkAttendance?year=${today_info.after_year}&month=${today_info.after_month}">
+			href="/cal/chkAttendance?year=${today_info.after_year}&month=${today_info.after_month}&userid=${loginVo.userid}">
 			&gt;
 			</a> 
 		</div>
@@ -167,7 +183,7 @@ $(function(){
 		<table class="calendar_body">
 
 			<thead>
-				<tr bgcolor="#CECECE">
+				<tr style="background-color: rgb(255, 227, 219)">
 					<td class="day sun">일</td>
 					<td class="day">월</td>
 					<td class="day">화</td>
@@ -185,13 +201,21 @@ $(function(){
 							<c:when test="${dateList.value=='today'}">
 								<td class="today">
 									<div class="date">${dateList.date}</div>
-									<div></div>
+									<div class="attend_img_div">
+										<c:if test="${not empty dateList.attend_date}">
+											<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
+										</c:if>
+									</div>
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==6}">
 								<td class="sat_day">
 									<div class="sat">${dateList.date}</div>
-									<div></div>
+									<div class="attend_img_div">
+										<c:if test="${not empty dateList.attend_date}">
+											<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
+										</c:if>
+									</div>
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==0}">
@@ -205,7 +229,11 @@ $(function(){
 							<c:otherwise>
 						<td class="normal_day">
 							<div class="date">${dateList.date}</div>
-							<div></div>
+							<div class="attend_img_div">
+								<c:if test="${not empty dateList.attend_date}">
+									<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
+								</c:if>
+							</div>
 						</td>
 							</c:otherwise>
 						</c:choose>

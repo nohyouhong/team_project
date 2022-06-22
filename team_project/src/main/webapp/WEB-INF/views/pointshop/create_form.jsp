@@ -247,7 +247,7 @@ $(function() {
 			for (var i = 1; i < tags.length; i++) {
 				var tag = $(".tagName").eq(i).text();
 				console.log(tag);
-				var tagHtml = "<input type='hidden' name='r_tags' value=" + tag + ">";
+				var tagHtml = "<input type='hidden' name='p_tags' value=" + tag + ">";
 				$("#pointShopForm").prepend(tagHtml);
 			}
 			//클론input삭제
@@ -324,6 +324,7 @@ $(function() {
 			<hr class="createHr">
 			<form role="form" id="pointShopForm" action="/pointshop/createRun"
 				method="post" enctype="multipart/form-data">
+			<input type="hidden" name="userid" value="${loginVo.userid }">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
@@ -418,16 +419,16 @@ $(function() {
 								<div class="oneProductInfo">
 									<label for="p_option" class="productInfoLabel">물품명</label>
 									<input type="text" class="form-control productInfoVal productInfoInput1 inputVa p_optionl"
-										placeholder="예) 시원한 열무 무김치 2kg" name="p_option">
+										placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
 									<label for="p_price" class="productInfoLabel">가격</label>
 									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
-										placeholder="예) 15000" name="p_price">
+										placeholder="예) 15000" name="p_prices">
 									<label for="p_discount" class="productInfoLabel">할인율</label>
 									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
-										placeholder="예) 70 (% 생략)" name="p_discount">
+										placeholder="예) 70 (% 생략)" name="p_discounts">
 									<label for="p_stock" class="productInfoLabel">재고</label>
 									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
-										placeholder="예) 1000 (개 생략)" name="p_stock">
+										placeholder="예) 1000 (개 생략)" name="p_stocks">
 								</div>
 								<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 							</div>
@@ -437,16 +438,16 @@ $(function() {
 								<div class="oneProductInfo">
 									<label for="p_option" class="productInfoLabel">물품명</label>
 									<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
-										placeholder="예) 시원한 열무 무김치 2kg" name="p_option">
+										placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
 									<label for="p_price" class="productInfoLabel">가격</label>
 									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
-										placeholder="예) 15000" name="p_price">
+										placeholder="예) 15000" name="p_prices">
 									<label for="p_discount" class="productInfoLabel">할인율</label>
 									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
-										placeholder="예) 70 (% 생략)" name="p_discount">
+										placeholder="예) 70 (% 생략)" name="p_discounts">
 									<label for="p_stock" class="productInfoLabel">재고</label>
 									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
-										placeholder="예) 1000 (개 생략)" name="p_stock">
+										placeholder="예) 1000 (개 생략)" name="p_stocks">
 								</div>
 								<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 							</div>

@@ -42,7 +42,7 @@
 .carousel-item{
 	text-align:center;
 }
-#main_1_div{
+#carousel-392965{
 	margin-top:20px;
 }
 </style>
@@ -71,21 +71,13 @@ $(function(){
 						<img class="d-block w-100" alt="Carousel Bootstrap First"
 							id="main-img"src="/resources/main_header/images/main_img_1.png" />
 					</div>
-					<div class="carousel-item">
+					<div class="carousel-item" id="mainImg_2_div">
 						<img class="d-block w-100" alt="Carousel Bootstrap Second"
-							src="/resources/main_catagory/custom_images/10.jpg" />
-						<div class="carousel-caption">
-							<h4>오늘의 추천 레시피</h4>
-							<p>일단 잡솨봐</p>
-						</div>
+							src="/resources/main_header/images/main_img_2.png" />
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100" alt="Carousel Bootstrap Third"
 							src="/resources/main_catagory/custom_images/9.jpg" />
-						<div class="carousel-caption">
-							<h4>포인트샵</h4>
-							<p>일단 사자</p>
-						</div>
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carousel-392965"

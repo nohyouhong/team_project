@@ -20,7 +20,7 @@ public interface PointShopDao {
 	
 	public int getNextPno();
 	public int getPnoByBno(int p_bno);
-	public boolean productCreate(ProductVo productVo, int p_bno);
+	public boolean productCreate(int pno, int p_bno, String p_name);
 	public boolean productInfoCreate(ProductVo productVo);
 	public boolean productPicCreate(String p_picture, int pno);
 	public List<ProductVo> productRead(int pno);

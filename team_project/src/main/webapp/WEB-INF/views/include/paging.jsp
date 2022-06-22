@@ -5,6 +5,7 @@
 	<input type="hidden" name="n_bno" value="">
 	<input type="hidden" name="a_bno" value="">
 	<input type="hidden" name="r_bno" value="">
+	<input type="hidden" name="i_bno" value="">
 	<input type="hidden" name="userid" value="">
 	<input type="hidden" name="listType" value="${pagingDto.listType}">
 	<input type="hidden" name="page" value="${pagingDto.page}">

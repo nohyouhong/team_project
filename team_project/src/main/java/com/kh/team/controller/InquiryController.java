@@ -38,11 +38,9 @@ public class InquiryController {
 	
 	@RequestMapping(value="/inquiry_list", method=RequestMethod.GET)
 	public String askList(HttpSession session, InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
-		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = loginVo.getUserid();
 		pagingDto.setCount(inquiryService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
-		List<InquiryVo> inquiryList = inquiryService.inquiryList(userid, pagingDto);
+		List<InquiryVo> inquiryList = inquiryService.inquiryList(pagingDto);
 		model.addAttribute("inquiryList", inquiryList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "inquiry/inquiry_list";

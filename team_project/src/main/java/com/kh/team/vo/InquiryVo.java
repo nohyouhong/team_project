@@ -11,6 +11,7 @@ public class InquiryVo {
 	private int re_group;
 	private int re_level;
 	private int re_seq;
+	private int i_state;
 	
 	public InquiryVo() {
 		super();
@@ -26,8 +27,10 @@ public class InquiryVo {
 		this.i_regdate = i_regdate;
 	}
 	
+	
+	
 	public InquiryVo(int i_bno, String i_title, String i_content, String userid, Date i_regdate, int re_group,
-			int re_level, int re_seq) {
+			int re_level, int re_seq, int i_state) {
 		super();
 		this.i_bno = i_bno;
 		this.i_title = i_title;
@@ -37,8 +40,9 @@ public class InquiryVo {
 		this.re_group = re_group;
 		this.re_level = re_level;
 		this.re_seq = re_seq;
+		this.i_state = i_state;
 	}
-	
+
 	public int getI_bno() {
 		return i_bno;
 	}
@@ -103,13 +107,19 @@ public class InquiryVo {
 		this.re_seq = re_seq;
 	}
 	
+	public int getI_state() {
+		return i_state;
+	}
+
+	public void setI_state(int i_state) {
+		this.i_state = i_state;
+	}
+
 	@Override
 	public String toString() {
 		return "InquiryVo [i_bno=" + i_bno + ", i_title=" + i_title + ", i_content=" + i_content + ", userid=" + userid
 				+ ", i_regdate=" + i_regdate + ", re_group=" + re_group + ", re_level=" + re_level + ", re_seq="
-				+ re_seq + "]";
+				+ re_seq + ", i_state=" + i_state + "]";
 	}
-	
-	
-	
+
 }

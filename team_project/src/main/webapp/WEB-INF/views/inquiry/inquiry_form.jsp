@@ -28,10 +28,10 @@
 						
 						<hr>
 							<div class="form-group inq">
-								<b>문의 제목</b><input type="text" class="form-control" name="a_title" />
+								<b>문의 제목</b><input type="text" class="form-control" name="i_title" />
 							</div>
 							<div class="form-group inq">
-								<b>문의 내용</b><textarea class="form-control" name="a_content" rows="20"></textarea>
+								<b>문의 내용</b><textarea class="form-control" name="i_content" rows="20"></textarea>
 							</div>
 							<div id="ask_submit">
 								<button type="submit" class="btn btn-outline-warning">문의등록</button>

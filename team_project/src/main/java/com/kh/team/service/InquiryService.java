@@ -10,7 +10,7 @@ public interface InquiryService {
 	public boolean updateInquiry(InquiryVo inquiryVo);
 	public boolean deleteInquiry(int i_bno);
 	public InquiryVo readInquiry(int i_bno);
-	public List<InquiryVo> inquiryList(String userid, PagingDto pagingDto);
+	public List<InquiryVo> inquiryList(PagingDto pagingDto);
 	public int getCount(PagingDto pagingDto);
 	public int getNexti_bno();
 	public boolean insertInquiryReply(InquiryVo inquiryVo);//답글쓰기

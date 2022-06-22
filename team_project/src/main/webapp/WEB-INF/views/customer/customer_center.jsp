@@ -46,12 +46,6 @@ $(document).ready(function(){
 								<li><a href="/customer/notice">공지사항</a></li>
 								<li><a href="/inquiry/inquiry_list">문의게시판</a></li>
 							</ul>
-							<c:if test="${not empty loginVo}">
-								<div style="text-align:right;">
-									<a href="/inquiry/inquiry_form" class="btn btn-outline-secondary askbtn">문의하기</a>
-									<a href="/ask/ask_form" class="btn btn-outline-danger askbtn">1:1문의하기</a>
-								</div>
-							</c:if>
 							<div>
 								<section class="faq-container">
 									<div class="faq-one">

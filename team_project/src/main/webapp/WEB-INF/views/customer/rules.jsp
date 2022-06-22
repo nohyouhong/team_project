@@ -46,6 +46,7 @@ $(document).ready(function(){
 								<li><a href="/customer/agreement">이용약관</a></li>
 								<li class="on"><a href="#">개인정보취급방침</a></li>
 								<li><a href="/customer/notice">공지사항</a></li>
+								<li><a href="/inquiry/inquiry_list">문의게시판</a></li>
 							</ul>
 						</div>
 						<div id="cus_info">

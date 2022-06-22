@@ -60,15 +60,15 @@ public class PointShopController {
 			RedirectAttributes rttr, @RequestParam("files") List<MultipartFile> files) {
 		try {
 			//상품이미지들
+			int index = 0;
 			String[] productPictures = new String[4];
 			for(int i = 0; i < 4; i++) {
 				String oneOriginalFilename = files.get(i).getOriginalFilename();
 				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
 					String p_picture = MyFileUploader.uploadFile(
 							"//192.168.0.110/boardattach", oneOriginalFilename, files.get(i).getBytes());
-					productPictures[i] = p_picture;
+					productPictures[index++] = p_picture;
 				} 
-				System.out.println("oneOriginalFilename" + oneOriginalFilename);
 			}
 			String[] checkedPictures = picturesCheckNull(productPictures);
 			productVo.setP_pictures(checkedPictures);
@@ -103,16 +103,13 @@ public class PointShopController {
 				index++;
 			}
 		}
-
 		int index1 = 0;
 		String[] checkedPictures = new String[index];
 		for(int i = 0; i < index; i++) {
 			if(pictures[i] != null && !pictures[i].equals("")){
 				checkedPictures[index1++] = pictures[i];
-				System.out.println("pictures[i]" + pictures[i]);
 			}
 		} 
-		
 		return checkedPictures;
 	}
 	

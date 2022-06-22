@@ -14,8 +14,8 @@
 #mainProductImage {
 	margin-top: 40px;
 	border: 1px solid #DFD9D8;
-	width: 250px;
-	height: 250px;
+	width: 300px;
+	height: 260px;
 	cursor: pointer;
 }
 .productImages{
@@ -43,7 +43,8 @@
 	margin-bottom: 30px
 }
 .explainDiv {
-	margin-bottom: 20px;
+	margin-top:5px;
+	margin-bottom: 15px;
 }
 .explain {
 	color: #AFACAC;
@@ -61,12 +62,12 @@
 }
 .productInfoInput1{
 	display: inline-block;
-	width: 300px;
+	width: 250px;
 	margin-left: 5px;
 }
 .productInfoInput2{
 	display: inline-block;
-	width: 150px;
+	width: 110px;
 	margin-left: 10px;
 }
 .oneProductInfo{
@@ -85,6 +86,19 @@
 }
 #productExDivList{
 	margin-bottom: 20px;
+	text-align: center;
+}
+.oneProductExDiv{
+	width: 1050px;
+	margin-left: 90px;
+	margin-bottom: 15px;
+	border: 2px solid #DFD9D8;
+    border-radius: 10px;
+    padding: 0px 10px;
+    padding-bottom: 10px;
+}
+.productExDivSet{
+	margin-top: 30px;
 }
 .productStepTitle{
 	display: inline-block;
@@ -94,21 +108,21 @@
 	font-style: italic;
 	margin-left: 5px;
 }
+.pageTitle{
+	margin-left: -860px;
+    font-size: 50px;
+    position: relative;
+}
+.pageExplain{
+	font-size: 17px;
+	margin: 7px 0px;
+}
 .stepProductImage{
-	width: 230px;
-	height: 350px;
+	width: 500px;
+	height: 500px;
 }
-.oneProductExDiv{
-	display: inline-block;
-	margin-left: 10px;
-	margin-right: 10px;
-	border: 2px solid #DFD9D8;
-    border-radius: 10px;
-    padding: 0px 10px;
-    padding-bottom: 10px;
-}
-.productExDivSet{
-	margin-top: 30px;
+#addStep{
+	margin-left: 140px;
 }
 .inputImage{
 	margin: 10px;
@@ -120,8 +134,10 @@
     cursor: pointer;
 }
 .stepRemove{
-	position: relative;
-    top: 170px;
+    float: right;
+    position: relative;
+    left: 70px;
+    bottom: 45px;
     cursor: pointer;
 }
 #tagDiv {
@@ -168,16 +184,13 @@ $(function() {
 	});
 
 	// 	물품설명스텝셋트로추가
-	var stepIndex = 5;
+	var stepIndex = 2;
 	$("#addStep").click(function() {
-		var cloneProductExDivSetDiv = $(".productExDivSet").eq(0).clone();
-		cloneProductExDivSetDiv.show();
-		var productStepTitleDivs = cloneProductExDivSetDiv.find("div.productStepTitle");
-		for(var i = 0; i < productStepTitleDivs.length; i++){
-			var stepText = "step" + stepIndex++;
-			$(productStepTitleDivs).eq(i).text(stepText);
-		}
-		$("#productExDivList").append(cloneProductExDivSetDiv);
+		var cloneOneProductExDivDiv = $(".oneProductExDiv").eq(0).clone();
+		cloneOneProductExDivDiv.show();
+		var stepText = "page" + stepIndex++;
+		cloneOneProductExDivDiv.find("div.productStepTitle").text(stepText);
+		$("#productExDivList").append(cloneOneProductExDivDiv);
 	});
 
 	//  요리스텝삭제
@@ -185,8 +198,8 @@ $(function() {
 		stepIndex = 1;
 		$(this).parent().remove();
 		var stepTitles = $("#productExDivList").find(".productStepTitle");
-		for(var i = 4; i < stepTitles.length; i++) {
-			var stepText = "step" + stepIndex++;
+		for(var i = 1; i < stepTitles.length; i++) {
+			var stepText = "page" + stepIndex++;
 			$(stepTitles).eq(i).text(stepText);
 		}
 	});
@@ -224,6 +237,34 @@ $(function() {
 			reader.readAsDataURL(this.files[0]);
 		}
 	});
+	
+	//원가/할인율 자동계산
+	$(".p_discount").change(function() {
+		var infoDiv = $(this).parent();
+		var p_price = $(infoDiv).find(".p_price").val();
+		var p_discount = 100 - $(this).val();
+		
+		var priceSum = $(infoDiv).find(".priceSum");
+		if((p_price != null && p_price != "" )&&
+				(p_discount != null && p_discount != "" )){
+			var sum = Math.floor(p_price * (p_discount / 100));
+			priceSum.val(sum + "원");
+		}
+	});
+	//원가/할인율 자동계산
+	$(".p_price").change(function() {
+		var infoDiv = $(this).parent();
+		var p_price = $(this).val();
+		var p_discount = $(infoDiv).find(".p_discount").val();
+		
+		var priceSum = $(infoDiv).find(".priceSum");
+		if((p_price != null && p_price != "" )&&
+				(p_discount != null && p_discount != "" )){
+			var sum = Math.floor(p_price * (p_discount / 100));
+			priceSum.val(sum + "원");
+		}
+	});
+	
 	//태그 넣기
 	$("#tagBtn").click(function() {
 		var tag = $("#tagInput").val();
@@ -388,17 +429,17 @@ $(function() {
 						<div>
 							<span>
 								<img class="inputVal productImages"
-									src="/resources/main_mypage/images/goods.png" /> 
+									src="/resources/main_mypage/images/plusImage1.png" /> 
 								<input type="file" style="display: none;" name="files" class="productFile" />
 							</span>
 							<span>
 								<img class="inputVal productImages"
-									src="/resources/main_mypage/images/goods.png" /> 
+									src="/resources/main_mypage/images/plusImage1.png" /> 
 								<input type="file" style="display: none;" name="files" class="productFile" />
 							</span>
 							<span>
 								<img class="inputVal productImages"
-									src="/resources/main_mypage/images/goods.png" /> 
+									src="/resources/main_mypage/images/plusImage1.png" /> 
 								<input type="file" style="display: none;" name="files" class="productFile" />
 							</span>
 						</div>
@@ -408,56 +449,64 @@ $(function() {
 				
 				<span class="createTitle">물품 등록</span><br>
 				<div class="explainDiv">
-					<span class="explain">옵션 별로 물품의 상세정보를 등록해주세요.</span><br>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div id="productOpList">
-<!-- 							클론용 -->
-							<div class="oneProductOp" style="display: none;">
-								<div class="productStepTitle">1</div>
-								<div class="oneProductInfo">
-									<label for="p_option" class="productInfoLabel">물품명</label>
-									<input type="text" class="form-control productInfoVal productInfoInput1 inputVa p_optionl"
-										placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
-									<label for="p_price" class="productInfoLabel">가격</label>
-									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
-										placeholder="예) 15000" name="p_prices">
-									<label for="p_discount" class="productInfoLabel">할인율</label>
-									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
-										placeholder="예) 70 (% 생략)" name="p_discounts">
-									<label for="p_stock" class="productInfoLabel">재고</label>
-									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
-										placeholder="예) 1000 (개 생략)" name="p_stocks">
+					<div class="explainDiv">
+						<span class="explain">옵션 별로 물품의 상세정보를 등록해주세요.</span><br>
+						<span class="explain">등록하실때 단위는 생략하시고 각각 글자와 숫자만 적어주세요.</span><br>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="productOpList">
+	<!-- 							클론용 -->
+								<div class="oneProductOp" style="display: none;">
+									<div class="productStepTitle">1</div>
+									<div class="oneProductInfo">
+										<label for="p_option" class="productInfoLabel">물품명</label>
+										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_optionl"
+											placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
+										<label for="p_price" class="productInfoLabel">원가</label>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
+											placeholder="예) 15000" name="p_prices">
+										<label for="p_discount" class="productInfoLabel">할인율</label>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
+											placeholder="예) 70" name="p_discounts">
+										<label for="priceSum" class="productInfoLabel">가격</label>
+										<input type="text" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
+											placeholder="자동계산" readonly>
+										<label for="p_stock" class="productInfoLabel">재고</label>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
+											placeholder="예) 100" name="p_stocks">
+									</div>
+									<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 								</div>
-								<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
-							</div>
-<!-- 							클론용 -->
-							<div class="oneProductOp">
-								<div class="productStepTitle">1</div>
-								<div class="oneProductInfo">
-									<label for="p_option" class="productInfoLabel">물품명</label>
-									<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
-										placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
-									<label for="p_price" class="productInfoLabel">가격</label>
-									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
-										placeholder="예) 15000" name="p_prices">
-									<label for="p_discount" class="productInfoLabel">할인율</label>
-									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
-										placeholder="예) 70 (% 생략)" name="p_discounts">
-									<label for="p_stock" class="productInfoLabel">재고</label>
-									<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
-										placeholder="예) 1000 (개 생략)" name="p_stocks">
+	<!-- 							클론용 -->
+								<div class="oneProductOp">
+									<div class="productStepTitle">1</div>
+									<div class="oneProductInfo">
+										<label for="p_option" class="productInfoLabel">물품명</label>
+										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
+											placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
+										<label for="p_price" class="productInfoLabel">원가</label>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
+											placeholder="예) 15000" name="p_prices">
+										<label for="p_discount" class="productInfoLabel">할인율</label>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
+											placeholder="예) 70" name="p_discounts">
+										<label for="priceSum" class="productInfoLabel">가격</label>
+										<input type="text" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
+											placeholder="자동계산" readonly>
+										<label for="p_stock" class="productInfoLabel">재고</label>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
+											placeholder="예) 100" name="p_stocks">
+									</div>
+									<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 								</div>
-								<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 							</div>
-						</div>
-						<div style="text-align: center;">
-							<span class="addButton btn btn-outline-info" id="addProduct">물품추가</span> 
+							<div style="text-align: center;">
+								<span class="addButton btn btn-outline-info" id="addProduct">물품추가</span> 
+							</div>
 						</div>
 					</div>
 				</div>
-				
 				<hr class="createHr">
 				<div class="form-group">
 					<span class="createTitle">물품 정보 사진</span><br>
@@ -466,81 +515,32 @@ $(function() {
 					</div>
 					<div id="productExDivList">
 <!-- 						클론용 -->
-						<div class="productExDivSet" style="display: none;">
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step1</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage" 
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" style="display: none;" name="files" />
-								</div>
+						<div class="oneProductExDiv" style="display: none;">
+							<div class="productStepTitle pageTitle">page1</div>
+							<div class="stepImageDiv">
+								<img class="inputImage stepProductImage" 
+									src="/resources/main_mypage/images/plusImage3.jpg" /> 
+								<input style="display: none;" type="file" class="productFile productStepFile" style="display: none;" name="files" />
 							</div>
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step2</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage" 
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" name="files" /> 
-								</div>
-							</div>
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step3</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage"
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" name="files" /> 
-								</div>
-							</div>
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step4</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage" 
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" name="files" /> 
-								</div>
-							</div>
-							<i class="fas fa-times-circle fa-2x stepIconX stepRemove"></i>
+							<div class="pageExplain">물품 설명 사진을 등록해주세요.</div>
+							<i class="fas fa-times-circle fa-3x stepIconX stepRemove"></i>
 						</div>
 <!-- 						클론용 -->
-						<div class="productExDivSet">
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step1</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage" 
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" style="display: none;" name="files" />
-								</div>
+						<div class="oneProductExDiv">
+							<div class="productStepTitle pageTitle">page1</div>
+							<div class="stepImageDiv">
+								<img class="inputImage stepProductImage" 
+									src="/resources/main_mypage/images/plusImage3.jpg" /> 
+								<input style="display: none;" type="file" class="productFile productStepFile" style="display: none;" name="files" />
 							</div>
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step2</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage" 
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" name="files" /> 
-								</div>
-							</div>
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step3</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage"
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" name="files" /> 
-								</div>
-							</div>
-							<div class="oneProductExDiv">
-								<div class="productStepTitle">step4</div>
-								<div class="stepImageDiv">
-									<img class="inputImage stepProductImage" 
-										src="/resources/main_mypage/images/plus.png" /> 
-									<input style="display: none;" type="file" class="productFile productStepFile" name="files" /> 
-								</div>
-							</div>
-							<i class="fas fa-times-circle fa-2x stepIconX stepRemove"></i>
+							<div class="pageExplain">물품 설명 사진을 등록해주세요.</div>
+							<i class="fas fa-times-circle fa-3x stepIconX stepRemove"></i>
 						</div>
 					</div>
 					<!-- 					여기 -->
+					<div></div>
 					<div style="text-align: center;">
-						<span class="addButton btn btn-outline-info" id="addStep">스탭 추가</span>
+						<div class="addButton btn btn-outline-info" id="addStep">상품페이지 추가</div>
 					</div>
 				</div>
 				<hr class="createHr">

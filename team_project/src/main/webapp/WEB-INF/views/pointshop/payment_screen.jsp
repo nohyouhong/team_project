@@ -50,16 +50,31 @@
 	margin-top: 3px;
 }
 
-.pay_address_tbl th {
-	width: 180px;
-}
-
 .order_list_div {
 	margin-top: 30px;
 }
 
-.new_saved_address_td {
+/* 배송 정보 css */
+
+.pay_address_tbl {
+	border-bottom-style: solid;
+	border-top-style: solid;
+	vertical-align: middle;
+}
+
+.pay_address_tbl th {
+	width: 180px;
+	height: 60px;
+	font-family: jua;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.pay_address_tbl td {
 	float: left;
+	height: 60px;
+	font-family: jua;
+	font-size: 20px;
 }
 
 .new_saved_address_rdo {
@@ -69,8 +84,16 @@
 
 .new_address_btn {
 	margin-left: 10px;
-	width: 110px;
-	height: 20px;
+	width: 120px;
+	height: 40px;
+	border-radius: 10px;
+	border:none;
+	background-color: rgb(255, 227, 219);
+}
+
+.pay_receiver {
+	border-radius: 10px;
+	border-color: rgb(255, 227, 219);
 }
 </style>
 
@@ -125,17 +148,17 @@
 				<tbody>
 					<tr>
 						<th>배송지 확인</th>
-						<td class="new_saved_address_td">
+						<td>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">기본 배송지</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">최근 배송지</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">직접 입력</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">주문자 정보와 동일</label>
-							<button type="button" class="btn btn-light new_address_btn">배송지 관리</button>
+							<button type="button" class="new_address_btn">배송지 관리</button>
 						</td>
 					</tr>
 					<tr>
 						<th>받으실분</th>
-						<td>1</td>
+						<td><input type="text" class="pay_receiver"></td>
 					</tr>
 					<tr>
 						<th>받으실 곳</th>

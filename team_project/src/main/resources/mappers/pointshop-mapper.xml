@@ -4,5 +4,163 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.pointshop">
+
+	<select id="getNextBno" resultType="int">
+		select seq_pointshop_board_bno.nextval from dual
+	</select>
+	
+	<insert id="create">
+		insert into tbl_pointshop_board
+			(p_bno, p_title, p_explain, sellstate, purchaseplace, deliverycharge, userid)
+		values
+			(#{p_bno}, #{p_title}, #{p_explain}, #{sellstate}, 
+				#{purchaseplace}, #{deliverycharge}, #{userid})
+	</insert>
+	
+	<insert id="productExPicCreate">
+		insert into tbl_pointshop_board_pic
+			(p_picture, p_bno)
+		values
+			(#{p_picture}, #{p_bno})
+	</insert>
+	
+	<select id="read" resultType="PointShopBoardVo">
+		select * from 
+		tbl_pointshop_board
+		where p_bno = #{p_bno}
+	</select>
+	
+	<select id="list" resultType="PointShopBoardVo">
+		select * from(select rownum rnum, a.* from 
+  		  (select * from 
+  		  tbl_pointshop_board b join tbl_member m
+  		  	on b.userid = m.userid
+   			 order by p_regdate desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+<!--   		  <include refid="search"></include> -->
+
+	<select id="productExPicList" resultType="string">
+		select p_picture from tbl_pointshop_board_pic
+		where p_bno = #{p_bno}
+	</select>
+	
+	<update id="update">
+		update tbl_pointshop_board set
+			p_title = #{p_title},
+			p_explain = #{p_explain},
+			sellstate = #{sellstate},
+			purchaseplace = #{purchaseplace},
+			deliverycharge = #{deliverycharge}
+		where p_bno = #{p_bno}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_pointshop_board
+		where p_bno = #{p_bno}
+	</delete>
+	
+	<select id="getNextPno" resultType="int">
+		select seq_pointshop_product_pno.nextval from dual
+	</select>
+	
+	<select id="getPnoByBno" resultType="int">
+		select pno from tbl_product
+		where p_bno = #{p_bno}
+	</select>
+	
+	<insert id="productCreate">
+		insert into tbl_product
+			(pno, p_bno, p_name)
+		values
+			(#{pno}, #{p_bno}, #{p_name})
+	</insert>
+	
+	<insert id="productInfoCreate">
+		insert into tbl_product_info
+			(p_ino, pno, p_option, p_price, p_discount, p_stock, p_seq)
+		values
+			(seq_product_info_ino.nextval, #{pno}, #{p_option}, #{p_price}, #{p_discount}, #{p_stock}, #{p_seq})
+	</insert>
+	
+	<insert id="productPicCreate">
+		insert into tbl_product_pic
+			(p_picture, pno)
+		values
+			(#{p_picture}, #{pno})
+	</insert>
+	
+	<select id="productRead" resultType="ProductVo">
+		select * from tbl_product_info
+		where pno = #{pno}
+	</select>
+	
+	<select id="productPicList" resultType="string">
+		select p_picture from tbl_product_pic
+		where pno = #{pno}
+	</select>
+	
+	<update id="productUpdate">
+		update tbl_product set
+			p_name = #{p_name},
+		where pno = #{pno}
+	</update>
+	
+	<delete id="productDelete">
+		delete from tbl_product
+		where pno = #{pno}
+	</delete>
+	
+	<insert id="tagCreate">
+		insert into tbl_pointshop_tag
+			(p_tno, p_bno, p_tag)
+		values
+			(seq_pointshop_tag_tno.nextval, #{p_bno}, #{p_tag})
+	</insert>
+	
+	<select id="tagRead" resultType="string">
+		select p_tag from tbl_pointshop_tag
+		where p_bno = #{p_bno}
+	</select>
+	
+	<delete id="tagDelete">
+		delete from tbl_pointshop_tag
+		where p_bno = #{p_bno}
+	</delete>
+	
+	
+	
+	
+	
+	
+<!-- 	<select id="getRatingNum" resultType="int"> -->
+<!-- 		select count(*) from tbl_pointshop_review -->
+<!-- 		where r_bno = #{r_bno} -->
+<!-- 	</select> -->
+	
+<!-- 	<sql id="search"> -->
+<!-- 		<if test="searchType != null and keyword != null"> -->
+<!-- 			<choose> -->
+<!-- 				<when test='searchType == "t"'> -->
+<!-- 					where title like '%' || #{keyword} || '%' -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "c"'> -->
+<!-- 					where content like '%' || #{keyword} || '%' -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "w"'> -->
+<!-- 					where writer like '%' || #{keyword} || '%' -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "tc"'> -->
+<!-- 					where title like '%' || #{keyword} || '%' -->
+<!-- 					or content like '%' || #{keyword} || '%' -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "tcw"'> -->
+<!-- 					where title like '%' || #{keyword} || '%' -->
+<!-- 					or content like '%' || #{keyword} || '%' -->
+<!-- 					or writer like '%' || #{keyword} || '%' -->
+<!-- 				</when> -->
+<!-- 			</choose> -->
+<!--   		  </if> -->
+<!-- 	</sql> -->
 	
 </mapper>

@@ -1,9 +1,21 @@
 package com.kh.team.service;
 
+import java.util.List;
+
+import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
+import com.kh.team.vo.PointShopBoardVo;
+import com.kh.team.vo.ProductVo;
+
 public interface PointShopService {
-//	public boolean create(RecipeBoardVo recipeBoardVo);
-//	public RecipeBoardVo read(int r_bno);
-//	public List<RecipeBoardVo> list(PagingDto pagingDto);
-//	public boolean update(RecipeBoardVo recipeBoardVo);
-//	public boolean delete(int r_bno);
+	
+	public boolean create(ProductVo productVo,PointShopBoardVo pointShopBoardVo);
+	public PointShopBoardVo read(int p_bno);
+	public List<PointShopBoardVo> list(PagingDto pagingDto);
+	public List<ProductVo> productRead(int p_bno);
+	public List<String> productExPicList(int p_bno);
+	public List<String> productPicList(int p_bno);
+	public List<String> tagRead(int p_bno);
+	public boolean update(PointShopBoardVo pointShopBoardVo);
+	public boolean delete(int p_bno);
 }

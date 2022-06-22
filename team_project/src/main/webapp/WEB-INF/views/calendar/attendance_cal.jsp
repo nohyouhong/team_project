@@ -141,7 +141,7 @@ th {
 	padding-top: 10px;
 }
 .attend_img {
-	width: 65px;
+	width: 100px;
 	height: auto;
 }
 </style>
@@ -203,7 +203,7 @@ $(function(){
 									<div class="date">${dateList.date}</div>
 									<div class="attend_img_div">
 										<c:if test="${not empty dateList.attend_date}">
-											<img class="attend_img" src="/resources/attendance_calendar/img_attendance.png">
+											<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
 										</c:if>
 									</div>
 								</td>
@@ -213,7 +213,7 @@ $(function(){
 									<div class="sat">${dateList.date}</div>
 									<div class="attend_img_div">
 										<c:if test="${not empty dateList.attend_date}">
-											<img class="attend_img" src="/resources/attendance_calendar/img_attendance.png">
+											<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
 										</c:if>
 									</div>
 								</td>
@@ -231,7 +231,7 @@ $(function(){
 							<div class="date">${dateList.date}</div>
 							<div class="attend_img_div">
 								<c:if test="${not empty dateList.attend_date}">
-									<img class="attend_img" src="/resources/attendance_calendar/img_attendance.png">
+									<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
 								</c:if>
 							</div>
 						</td>

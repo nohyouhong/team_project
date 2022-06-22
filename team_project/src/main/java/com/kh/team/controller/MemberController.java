@@ -64,6 +64,14 @@ public class MemberController {
 		return "redirect:/member/member_list";
 	}
 	
+	@RequestMapping(value="/member_modify", method=RequestMethod.POST)
+	public String modifyMember(MemberVo memberVo) {
+		System.out.println("실행됨");
+		System.out.println("입력된 memberVo: " + memberVo);
+		memberService.modifyMember(memberVo);
+		return "redirect:/member/user_info?userid="+memberVo.getUserid();
+	}
+	
 	
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	@ResponseBody

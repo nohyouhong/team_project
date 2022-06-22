@@ -57,8 +57,9 @@
 			username = #{username},
 			email = #{email},
 			gender = #{gender},
-			m_picture = #{m_picture, jdbcType=VARCHAR}
-			where userid = #{userid}
+			cellphone = #{cellphone},
+			nickname = #{nickname}
+		where userid = #{userid}
 	</update>
 	
 	<update id="updateUserImage">

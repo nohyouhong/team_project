@@ -55,6 +55,8 @@
 			<exclude-mapping path="/member/login_run"/>
 			<exclude-mapping path="/member/join_run"/>
 			<exclude-mapping path="/member/member_delete"/>
+			<exclude-mapping path="/member/member_modify"/>
+			<exclude-mapping path="/member/user_info?userid=memberVo.getUserid();"/>
 			<exclude-mapping path="/member/find_id_form"/>
 			<exclude-mapping path="/member/find_id_run"/>
 			<exclude-mapping path="/member/find_pw_form"/>

@@ -45,6 +45,10 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public boolean modifyMember(MemberVo memberVo) {
+		boolean result = memberDao.modifyMember(memberVo);
+		if(result) {
+			return true;
+		}
 		return false;
 	}
 	

@@ -37,7 +37,7 @@ public class InquiryController {
 	}
 	
 	@RequestMapping(value="/inquiry_list", method=RequestMethod.GET)
-	public String inquiryList(InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
+	public String inquiryList(Model model, PagingDto pagingDto) {
 		pagingDto.setCount(inquiryService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<InquiryVo> inquiryList = inquiryService.inquiryList(pagingDto);
@@ -47,7 +47,7 @@ public class InquiryController {
 	}
 	
 	@RequestMapping(value="/inquiry_admin_list", method=RequestMethod.GET)
-	public String inquiryAdminList(InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
+	public String inquiryAdminList(Model model, PagingDto pagingDto) {
 		pagingDto.setCount(inquiryService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<InquiryVo> inquiryList = inquiryService.inquiryList(pagingDto);

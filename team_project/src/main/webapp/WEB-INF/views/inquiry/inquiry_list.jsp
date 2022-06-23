@@ -21,6 +21,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
+// 		frmPaging.find("input[name=i_bno]").remove();
 		frmPaging.attr("action", "/inquiry/inquiry_list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();

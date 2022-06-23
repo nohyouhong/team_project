@@ -13,6 +13,8 @@ $(document).ready(function(){
 	var isPushed2 = "true";
 	var isPushed3 = "true";
 	var isPushed4 = "true";
+// 	var isPushed5 = "true";
+// 	var isPushed6 = "true";
 	
     $('#userpwInput').keyup(function(){
     	if($(this).val() === '' ) {
@@ -27,6 +29,21 @@ $(document).ready(function(){
         }
     });
     
+    $("#userpwInput").blur(function(){
+    	if($("#userpwInputCheck").val() == ""){
+    		$('#pwSameChk').html('<b style=" color: yellowgreen">[비밀번호 확인칸을 입력해주세요]');
+	    	isPushed="false";
+    	}else if($(this).val() != $('#userpwInputCheck').val()){
+    		$(this).css('background-color', 'pink');
+	    	$('#pwSameChk').html('<b style=" color: red">[비밀번호가 일치하지 않습니다]');
+	    	isPushed="false";
+	    }else{
+	    	$(this).css('background-color', 'white');
+	    	$('#pwSameChk').html('<b style=" color: green">[비밀번호가 일치합니다]');
+	    	isPushed="true";
+	    }
+    });
+    
     $('#userpwInputCheck').keyup(function(){
 	    if($(this).val() == $('#userpwInput').val()){
 	    	$(this).css('background-color', 'white');
@@ -38,6 +55,38 @@ $(document).ready(function(){
 	    	isPushed="false";
 	    }
     });
+    
+	$("#userpwNow").blur(function(){
+		var userpw = ${memberVo.userpw};
+		if($("#userpwNow").val() != userpw){
+			$('#NowPwChk').html('<b style="color: red">[현재 비밀번호와 일치하지 않습니다.]</b>');
+		}else{
+			$('#NowPwChk').html('<b style="color: yellowgreen">[현재 비밀번호와 일치합니다.]</b>');
+		}
+	});
+	
+	
+	
+	$("#pwChg").click(function(){
+		$(".pwChgInput").show();
+		$("#userpwNow").val("");
+		$("#userpwNow").attr("name","");
+		$("#hiddenpwd").attr("name","");
+		$("#userpwInput").attr("name","userpw");
+		$("#userpwNow").attr("disabled", false);
+		$(this).hide();
+	});
+	
+// 	$("#userpwNow").keyup(function(){
+// 		if($("#userpwInput").val() == ""){
+// 			isPushed5 = "false";
+// 		}else if($("#userpwInputCheck").val() == ""){
+// 			isPushed6 = "false";
+// 			isPushed5 = "true";
+// 		}else{
+// 			isPushed6="true";
+// 		}
+// 	});
 	
 	if(${memberVo.gender == 'M'}){
 		$("#M").attr("checked", "checked");
@@ -160,28 +209,19 @@ $(document).ready(function(){
 		}
 	};
 	
-	$("#pwChg").click(function(){
-		$(".pwChgInput").show();
-		$("#userpwNow").val("");
-		$("#userpwNow").attr("name","");
-		$("#hiddenpwd").attr("name","");
-		$("#userpwInput").attr("name","userpw");
-		$("#userpwNow").attr("disabled", false);
-		$(this).hide();
-	});
 	
-	$("#userpwNow").blur(function(){
-		var userpw = ${memberVo.userpw};
-		if($("#userpwNow").val() != userpw){
-			$('#NowPwChk').html('<b style="color: red">[현재 비밀번호와 일치하지 않습니다.]</b>');
-		}else{
-			$('#NowPwChk').html('<b style="color: yellowgreen">[현재 비밀번호와 일치합니다.]</b>');
-		}
-	});
+	
+
 	
 	$("#modify_userRun").click(function(){
 		var userpw = ${memberVo.userpw};
-		if(isPushed == "false"){
+		if($("#userpwInput").val() == ""){
+			isPushed = "false";
+			$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호를 입력해주세요.]</b>');
+		}else if($("#userpwInputCheck").val() == ""){
+			isPushed = "false";
+			$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호확인을 입력해주세요.]</b>');
+		}else if(isPushed == "false"){
 			$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호를 입력해주세요.]</b>');
 		}else if(isPushed2 == "false"){
 			$('#joinBtnSpan').html('<b style="color: red">[폰번호를 확인해주세요.]</b>');
@@ -194,13 +234,14 @@ $(document).ready(function(){
 		}else{
 			$("#info-form").submit();
 		}
-
-		console.log("userid: " + $("#userid").val());
-		console.log("userpw: " + $("#userpwNow").val());
-		console.log("username: " + $("#usernameInput").val());
-		console.log("nickname: " + $("#nicknameInput").val());
-		console.log("cellphone: " + $("#totalPhoneNum").val());
-		console.log("email: " + $("#totalemail").val());
+// 		console.log(isPushed);
+// 		console.log("userid: " + $("#userid").val());
+// 		console.log("userpw: " + $("#userpwNow").val());
+// 		console.log("newpw: " + $("#userpwInput").val());
+// 		console.log("username: " + $("#usernameInput").val());
+// 		console.log("nickname: " + $("#nicknameInput").val());
+// 		console.log("cellphone: " + $("#totalPhoneNum").val());
+// 		console.log("email: " + $("#totalemail").val());
 	});
 	
 });

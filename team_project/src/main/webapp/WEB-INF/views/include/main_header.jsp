@@ -112,7 +112,7 @@ $(function(){
 								<a href="/member/logout">로그아웃</a>
 								<c:choose>
 									<c:when test="${loginVo.m_code == 101}">
-										<a href="/member/admin_page?userid=${loginVo.userid}">관리자페이지</a>
+										<a href="/inquiry/inquiry_admin_list">관리자페이지</a>
 									</c:when>
 									<c:otherwise>
 										<a href="/cal/insertAttendance?userid=${loginVo.userid}">출석체크</a>

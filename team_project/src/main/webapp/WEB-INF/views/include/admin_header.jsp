@@ -17,7 +17,7 @@
 							<p class="admin-name">${loginVo.username}</p>
 						<ul class="nav">
 							<li class="admin-item">
-								<a class="nav-link menuEx" href="/message/receive_list?page=1"> 
+								<a class="nav-link menuEx" href="/inquiry/inquiry_admin_list"> 
 									<span class="admin-title">전체문의내역</span>
 								</a>
 							</li>

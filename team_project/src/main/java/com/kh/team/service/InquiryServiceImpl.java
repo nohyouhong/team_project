@@ -71,6 +71,10 @@ public class InquiryServiceImpl implements InquiryService{
 
 	@Override
 	public boolean insertInquiryReply(InquiryVo inquiryVo) {
+		inquiryDao.updateIstate(inquiryVo.getI_bno());
+		int i_bno = inquiryDao.getNexti_bno();
+		inquiryVo.setI_bno(i_bno);
+		inquiryDao.updateInquiryReSeq(inquiryVo);
 		boolean result = inquiryDao.insertInquiryReply(inquiryVo);
 		if(result) {
 			return true;

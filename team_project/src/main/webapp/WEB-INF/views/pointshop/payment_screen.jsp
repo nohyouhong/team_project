@@ -56,15 +56,13 @@
 }
 
 .order_list_tbl {
-	width: 1300px;
+	width: 100%;
 	height: auto;
 	border-bottom: 2px solid rgb(204, 204, 204);
 	border-top: 2px solid rgb(204, 204, 204);
 }
 
 .order_list_tbl th {
-	width: 150px;
-	height: 40px;
 	font-size: 15px;
 	vertical-align: middle;
 }
@@ -72,10 +70,38 @@
 .order_list_tbl td {
 	width: 1100px;
 	height: 60px;
-	border: 1px solid gray;
+	border: 1px solid #eee;
 	font-size: 15px;
 	vertical-align: middle;
 	text-align: center;
+}
+
+.pay_order_product_div {
+	display: flex;
+	justify-content:center;
+	float: left;
+	align-items: center;
+}
+
+.pay_product_img {
+	width: 248px;
+	height: 248px;
+}
+
+.pay_order_product_title {
+    vertical-align: middle;
+	margin-left: 10px;
+	text-align: left;
+}
+
+.pay_order_product_a {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.pay_order_product_span  {
+	font-size: 12px;
+	color: #808080;
 }
 
 /* 배송 정보 css */
@@ -203,6 +229,7 @@
 
 </style>
 
+
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -232,19 +259,32 @@
 			<table class="table order_list_tbl">
 				<thead>
 					<tr>
-						<th>상품 정보</th>
-						<th>수량</th>
-						<th>상품 금액</th>
-						<th>할인</th>
-						<th>합계 금액</th>
-						<th>배송비</th>
+						<th width="50%">상품 정보</th>
+						<th width="10%">수량</th>
+						<th width="10%">상품 금액</th>
+						<th width="10%">할인</th>
+						<th width="10%">합계 금액</th>
+						<th width="10%">배송비</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>
-							<img src="/resources/pointshop/dakbal.jpg">
-							<a href="#">엄청 매운 닭발</a>
+							<div class="pay_order_product_div">
+								<div>
+									<img class="pay_product_img" src="/resources/pointshop/dakbal.jpg">
+								</div>
+								<div class="pay_order_product_title">
+									<div>
+										<a class="pay_order_product_a" href="#">
+											<span>제목: 엄청 매운 닭발 엄청 매운 닭발엄청 매운 닭발 엄청 매운 닭발엄청 매운 닭발 엄청 매운 닭발</span>
+										</a>
+									</div>
+									<div>
+										<span class="pay_order_product_span">옵션: 한국에서 제일 매운맛 한국에서 제일 매운맛</span>
+									</div>
+								</div>
+							</div>
 						</td>
 						<td>1</td>
 						<td>10,000</td>
@@ -266,7 +306,6 @@
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">기본 배송지</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">최근 배송지</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">직접 입력</label>
-							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">주문자 정보와 동일</label>
 							<button type="button" class="new_address_btn">배송지 관리</button>
 						</td>
 					</tr>

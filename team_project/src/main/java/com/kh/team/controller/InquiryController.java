@@ -28,7 +28,7 @@ public class InquiryController {
 	}
 	
 	@RequestMapping(value="/inquiry_run", method=RequestMethod.POST)
-	public String askRun(HttpSession session, InquiryVo inquiryVo) {
+	public String inquiryRun(HttpSession session, InquiryVo inquiryVo) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
 		inquiryVo.setUserid(userid);
@@ -37,7 +37,7 @@ public class InquiryController {
 	}
 	
 	@RequestMapping(value="/inquiry_list", method=RequestMethod.GET)
-	public String askList(HttpSession session, InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
+	public String inquiryList(InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
 		pagingDto.setCount(inquiryService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<InquiryVo> inquiryList = inquiryService.inquiryList(pagingDto);
@@ -46,11 +46,28 @@ public class InquiryController {
 		return "inquiry/inquiry_list";
 	}
 	
+	@RequestMapping(value="/inquiry_admin_list", method=RequestMethod.GET)
+	public String inquiryAdminList(InquiryVo inquiryVo, Model model, PagingDto pagingDto) {
+		pagingDto.setCount(inquiryService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<InquiryVo> inquiryList = inquiryService.inquiryList(pagingDto);
+		model.addAttribute("inquiryList", inquiryList);
+		model.addAttribute("pagingDto", pagingDto);
+		return "inquiry/inquiry_admin_list";
+	}
+	
 	@RequestMapping(value="/inquiry_read", method=RequestMethod.GET)
 	public String inquiryRead(int i_bno, Model model) {
 		InquiryVo inquiryVo = inquiryService.readInquiry(i_bno);
 		model.addAttribute("inquiryVo", inquiryVo);
 		return "inquiry/inquiry_read";
+	}
+	
+	@RequestMapping(value="/inquiry_admin_read", method=RequestMethod.GET)
+	public String inquiryAdminRead(int i_bno, Model model) {
+		InquiryVo inquiryVo = inquiryService.readInquiry(i_bno);
+		model.addAttribute("inquiryVo", inquiryVo);
+		return "inquiry/inquiry_admin_read";
 	}
 	
 	@RequestMapping(value="/inquiry_delete", method=RequestMethod.GET)
@@ -66,9 +83,21 @@ public class InquiryController {
 		return "/inquiry/inquiryReply_form";
 	}
 	
+	@RequestMapping(value="/inquiryAdminReplyForm", method=RequestMethod.GET)
+	public String inquiryAdminReplyForm(int i_bno, Model model) {
+		InquiryVo inquiryVo = inquiryService.readInquiry(i_bno);
+		model.addAttribute("inquiryVo", inquiryVo);
+		return "/inquiry/inquiry_admin_reply_form";
+	}
+	
 	@RequestMapping(value="/inquiryReplyRun", method=RequestMethod.POST)
 	public String inquiryReplyRun(InquiryVo inquiryVo) {
 		inquiryService.insertInquiryReply(inquiryVo);
 		return "redirect:/inquiry/inquiry_list";
+	}
+	@RequestMapping(value="/inquiryAdminReplyRun", method=RequestMethod.POST)
+	public String inquiryAdminReplyRun(InquiryVo inquiryVo) {
+		inquiryService.insertInquiryReply(inquiryVo);
+		return "redirect:/inquiry/inquiry_admin_list";
 	}
 }

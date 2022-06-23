@@ -23,10 +23,8 @@ $(document).ready(function(){
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab1">
 					<div>
-					<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
-					<h2 id="iquiryh2">1:1문의 내역</h2>
-						<div id="asksend">
-						</div>
+						<img id="cus_img" src="/resources/customer_center/images/QnA.png" alt="고객센터이미지">
+						<h2 id="iquiryh2">1:1문의 내역</h2>
 					</div>
 					<table class="table ask_table">
 						<thead>

@@ -248,7 +248,7 @@ $(function() {
 		if((p_price != null && p_price != "" )&&
 				(p_discount != null && p_discount != "" )){
 			var sum = Math.floor(p_price * (p_discount / 100));
-			priceSum.val(sum + "원");
+			priceSum.val(sum);
 		}
 	});
 	//원가/할인율 자동계산
@@ -261,7 +261,7 @@ $(function() {
 		if((p_price != null && p_price != "" )&&
 				(p_discount != null && p_discount != "" )){
 			var sum = Math.floor(p_price * (p_discount / 100));
-			priceSum.val(sum + "원");
+			priceSum.val(sum);
 		}
 	});
 	
@@ -492,8 +492,8 @@ $(function() {
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
 											placeholder="예) 70" name="p_discounts">
 										<label for="priceSum" class="productInfoLabel">가격</label>
-										<input type="text" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
-											placeholder="자동계산" readonly>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
+											placeholder="자동계산" name="p_sum" readonly>
 										<label for="p_stock" class="productInfoLabel">재고</label>
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
 											placeholder="예) 100" name="p_stocks">

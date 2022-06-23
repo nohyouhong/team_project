@@ -15,7 +15,7 @@ public class ProductVo {
 	private int[] p_discounts;
 	private int p_stock; //다오에서 받을때
 	private int[] p_stocks; //다오로 줄때
-	private int p_seq;
+	private int p_sum;
 	private String p_picture;
 	private String[] p_pictures;
 	
@@ -43,7 +43,7 @@ public class ProductVo {
 	}
 
 	public ProductVo(int pno, int p_bno, String p_name, int p_ino, String p_option, String[] p_options, int p_price,
-			int[] p_prices, int p_discount, int[] p_discounts, int p_stock, int[] p_stocks, int p_seq, String p_picture,
+			int[] p_prices, int p_discount, int[] p_discounts, int p_stock, int[] p_stocks, int p_sum, String p_picture,
 			String[] p_pictures) {
 		super();
 		this.pno = pno;
@@ -58,7 +58,7 @@ public class ProductVo {
 		this.p_discounts = p_discounts;
 		this.p_stock = p_stock;
 		this.p_stocks = p_stocks;
-		this.p_seq = p_seq;
+		this.p_sum = p_sum;
 		this.p_picture = p_picture;
 		this.p_pictures = p_pictures;
 	}
@@ -159,14 +159,6 @@ public class ProductVo {
 		this.p_stocks = p_stocks;
 	}
 
-	public int getP_seq() {
-		return p_seq;
-	}
-
-	public void setP_seq(int p_seq) {
-		this.p_seq = p_seq;
-	}
-
 	public String getP_picture() {
 		return p_picture;
 	}
@@ -182,6 +174,14 @@ public class ProductVo {
 	public void setP_pictures(String[] p_pictures) {
 		this.p_pictures = p_pictures;
 	}
+	
+	public int getP_sum() {
+		return p_sum;
+	}
+
+	public void setP_sum(int p_sum) {
+		this.p_sum = p_sum;
+	}
 
 	@Override
 	public String toString() {
@@ -189,6 +189,6 @@ public class ProductVo {
 				+ p_option + ", p_options=" + Arrays.toString(p_options) + ", p_price=" + p_price + ", p_prices="
 				+ Arrays.toString(p_prices) + ", p_discount=" + p_discount + ", p_discounts="
 				+ Arrays.toString(p_discounts) + ", p_stock=" + p_stock + ", p_stocks=" + Arrays.toString(p_stocks)
-				+ ", p_seq=" + p_seq + ", p_picture=" + p_picture + ", p_pictures=" + Arrays.toString(p_pictures) + "]";
+				+ ", p_sum=" + p_sum + ", p_picture=" + p_picture + ", p_pictures=" + Arrays.toString(p_pictures) + "]";
 	}
 }

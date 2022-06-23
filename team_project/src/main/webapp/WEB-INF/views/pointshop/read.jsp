@@ -15,6 +15,9 @@
 .creHr{
 	margin: 20px 5px;
 }
+.creHr2{
+	margin: 70px 5px;
+}
 .mainProPic{
 	width: 580px;
 	height: 510px;
@@ -104,6 +107,7 @@
 .proOpSelect{
 	margin: 10px 5px;
     border: 1px solid #B0B0B0;
+	border-radius: 5px;
     width: 445px;
     height: 35px;
     padding: 5px 10px;
@@ -134,16 +138,16 @@
 }
 .proExDiv{
 	text-align: center;
+	padding: 0px 60px;
+}
+.proTitleDivs{
+	text-align: left;
+	margin-bottom: 60px;
 }
 .titleDiv{
-	text-align: left;
-	font-size: 30px;
+	font-size: 26px;
 }
 .productTitleDiv{
-	font-size: 26px;
-	
-}
-.productSecondTitleDiv{
 	margin-left: 5px;
 	font-size: 15px;
 	font-style:italic;
@@ -166,6 +170,78 @@
 }
 .proExImageDiv{
 	text-align: center;
+}
+.ratingValSpan{
+	background: #EAE909;
+	color: white;
+	font-size: 45px;
+	font-weight: bold;
+	padding: 8px 20px;
+	border-radius: 10px;
+	margin-right: 25px;
+}
+.addBasketDiv{
+    border-bottom: 2px solid;
+}
+.oneBasketInfo{
+	background: #F4F4F4;
+	margin-bottom: 10px;
+	padding: 10px 20px;
+}
+.onProInfoAll{
+    margin-bottom: 10px;
+}
+.oneProInfo{
+	font-size: 16px;
+	font-weight: 700;
+}
+.oneProInfoX{
+	float: right;
+	font-size: 25px;
+	cursor: pointer;
+}
+.oneProInfoSignP{
+	margin-left: 25px;
+	cursor: pointer;
+}
+.oneProInfoSignM{
+	margin-right: 25px;
+	cursor: pointer;
+}
+.oneProNumInput{
+	font-size: 20px;
+}
+.proInfoSign{
+	display: inline-block;
+    width: 120px;
+    height: 35px;
+    background: white;
+    border: 1px solid #D5D5D5;
+    border-radius: 6px;
+    text-align: center;
+}
+.sumVal{
+	margin-left: 10px;
+	font-size: 20px;
+}
+.sumAllValDiv{
+	margin-top: 10px;
+	text-align: right;
+}
+.sumAllTitle{
+	font-size: 22px;
+	font-weight: 600;
+}
+.sumAllVal{
+	font-size: 35px;
+	font-weight: 600;
+	color: #7ACE00;
+	margin-left: 10px;	
+}
+.sumAllValUnit{
+	font-size: 26px;
+	color: #7ACE00;
+	margin-right: 5px;
 }
 </style>
 <script>
@@ -193,14 +269,49 @@ $(function() {
 		$("#showBtn").show();
 	});
 	
+	//select 바꿀때마다 쇼우 
+	$(".proOpSelect").change(function(){
+		var index = $(this).val();
+// 		console.log(index);
+		$(".addBasketDiv").show();
+		$(".sumAllValDiv").show();
+		var oneBasketInfo = $(".oneBasketInfo").eq(index).show();
+		var info_price2 = "${productList[" + index + "].p_price}";
+		console.log(info_price2);
+		var now_price = $(".sumAllVal").text();
+		console.log(now_price);
+		$(".sumAllVal").text(info_price + now_price);;
+	});
+	
+	//x버튼 누를시 닫기
+	$(".oneProInfoX").click(function() {
+		$(this).parent().parent().hide();
+		var priceState = false;
+		var basketInfos = $(".oneBasketInfo");
+		var index = basketInfos.length;
+		for(var i = 0; i < index; i++){
+			if($(basketInfos).eq(i).css("display") == "none"){
+				priceState = false;
+			} else {
+				priceState = true;
+				break;
+			}
+		}
+		if(!priceState) {
+			$(".addBasketDiv").hide();
+			$(".sumAllValDiv").hide();
+		}
+		
+
+	});
 	
 });
 </script>
-${pointShopBoardVo }<br><br>
-상품리스트${productList }<br><br>
-${productPicList[0] }<br><br>
-${productExPicList }<br><br>
-${tagList }<br><br>
+<%-- ${pointShopBoardVo }<br><br> --%>
+<%-- 상품리스트${productList }z<br><br> --%>
+<%-- ${productPicList[0] }<br><br> --%>
+<%-- ${productExPicList }<br><br> --%>
+<%-- ${tagList }<br><br> --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -234,7 +345,7 @@ ${tagList }<br><br>
 						<div class="proTitleEx" >${pointShopBoardVo.p_explain }</div>
 						<div class="proPriceDiv">
 							<span class="proDiscount">${productList[0].p_discount }%</span>
-							<span class="proPrice2"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${productList[0].p_price * (100 - productList[0].p_discount) / 100 }" /></span>
+							<span class="proPrice2"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${productList[0].p_sum}" /></span>
 							<span class="proPrice2Unit">원</span>
 							<div class="proPrice1">${productList[0].p_price }원</div>
 						</div>
@@ -274,9 +385,9 @@ ${tagList }<br><br>
 						<hr class="creHr">
 						<div class="proOptionDiv">
 							<select class="proOpSelect">
-								<option class="proOption" selected>= 옵션 : 가격 : 재고 =</option>
+								<option class="proOption" value="basic" selected>= 옵션 : 가격 : 재고 =</option>
 								<c:forEach items="${productList}" var="productVo" varStatus="count">
-									<option class="proOption">
+									<option class="proOption" value="${count.index }">
 										<span>
 											<c:if test="${count.index < 10}">0</c:if>${count.index }.
 										</span>
@@ -287,6 +398,30 @@ ${tagList }<br><br>
 								</c:forEach>
 							</select>
 						</div>
+						<div class="addBasketDiv" style="display: none;">
+							<c:forEach items="${productList}" var="productVo" varStatus="count">
+								<div class="oneBasketInfo" style="display: none;">
+									<div class="onProInfoAll">
+										<span class="oneProInfo">${count.index + 1 }.</span>
+										<span class="oneProInfo">${productVo.p_option }</span>
+										<span class="oneProInfoX">&times;</span>
+									</div>
+									<div>
+										<span class="proInfoSign">
+											<i class="fas fa-angle-left fa-lg oneProInfoSignM"></i>
+											<span class="oneProNumInput">1</span>
+											<i class="fas fa-angle-right fa-lg oneProInfoSignP"></i>
+										</span>
+										<span class="sumVal"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${productVo.p_sum }" />원</span>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+						<div class="sumAllValDiv" style="display: none;">
+							<span class="sumAllTitle">주문금액</span>
+							<span class="sumAllVal"><fmt:formatNumber type="number" maxFractionDigits="0"  value="0" /></span>
+							<span class="sumAllValUnit">원</span>
+						</div>
 						<div class="proPurchaseBtnDiv">
 							<button type="button" class="basketBtn">장바구니</button>
 							<button type="button" class="purchaseBtn">바로구매</button>
@@ -294,10 +429,12 @@ ${tagList }<br><br>
 					</div>
 				</div>
 			</div>
-			<hr class="creHr">
+			<hr class="creHr2">
 			<div class="proExDiv">
-				
-				<div class="titleDiv">상세정보</div>
+				<div class="proTitleDivs">
+					<span class="titleDiv">상세정보</span>
+					<span class="productTitleDiv">Product Info</span>
+				</div>
 				<div class="proExImageDiv">
 					<c:forEach items="${productExPicList}" var="productExPic" varStatus="count">
 						<img class="proExImage" 
@@ -308,8 +445,26 @@ ${tagList }<br><br>
 				<button type="button" id="showBtn" class="showHideBtn">상세 보기</button>
 				<button type="button" id="hideBtn" class="showHideBtn" style="display: none;">숨기기</button>
 			</div>
-			<hr class="creHr">
-			
+			<hr class="creHr2">
+			<div class="proExDiv">
+				<div class="starRatingDiv">
+					<span class="ratingValSpan">${pointShopBoardVo.p_avgrating }</span>
+					<i class="fas fa-star fa-3x yellowStar"></i>
+					<i class="fas fa-star fa-3x yellowStar"></i>
+					<i class="fas fa-star fa-3x yellowStar"></i>
+					<i class="fas fa-star fa-3x yellowStar"></i>
+					<i class="fas fa-star fa-3x yellowStar"></i>				
+				</div>
+			</div>
+			<hr class="creHr2">
+			<div class="proExDiv">
+				<div class="proTitleDivs">
+					<span class="titleDiv">후기</span>
+					<span class="productTitleDiv">Review</span>
+				</div>
+				
+				
+			</div>
 		</div>
 		<div class="col-md-2">
 		</div>

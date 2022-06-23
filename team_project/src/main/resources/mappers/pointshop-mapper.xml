@@ -78,9 +78,9 @@
 	
 	<insert id="productInfoCreate">
 		insert into tbl_product_info
-			(p_ino, pno, p_option, p_price, p_discount, p_stock, p_seq)
+			(p_ino, pno, p_option, p_price, p_discount, p_stock, p_sum)
 		values
-			(seq_product_info_ino.nextval, #{pno}, #{p_option}, #{p_price}, #{p_discount}, #{p_stock}, #{p_seq})
+			(seq_product_info_ino.nextval, #{pno}, #{p_option}, #{p_price}, #{p_discount}, #{p_stock}, #{p_sum})
 	</insert>
 	
 	<insert id="productPicCreate">

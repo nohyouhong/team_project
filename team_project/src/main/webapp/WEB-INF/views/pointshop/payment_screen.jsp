@@ -227,8 +227,229 @@
 	margin: 5px;
 }
 
-</style>
+/* 모달창1 */
+.modal_list_foot {
+	display:flex;
+	justify-content: flex-end;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
 
+#modal_new_address_btn {
+	width: 120px; 
+ 	height: 30px; 
+	border-radius: 5px;
+	border:none;
+	background-color: rgb(255, 227, 219);
+}
+
+.modal_list_tbl {
+	border-top: 1px solid rgb(204, 204, 204);
+}
+
+.modal_list_tbl td{
+	border-top: 1px solid rgb(204, 204, 204);
+	border-bottom: 1px solid rgb(204, 204, 204);
+	vertical-align: middle;
+}
+
+.modal_list_tbl button{
+	width: 70px; 
+ 	height: 30px; 
+	border-radius: 5px;
+	border:1px solid rgb(204, 204, 204);
+	background-color: white;
+}
+
+/* 모달창2 */
+
+.new_address_tbl {
+	width: 1300px;
+	height: auto;
+	border-bottom: 2px solid rgb(204, 204, 204);
+	border-top: 2px solid rgb(204, 204, 204);
+	vertical-align: middle;
+}
+
+.new_address_tbl th {
+	width: 180px;
+	height: 60px;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+.new_address_tbl td {
+	width: 1100px;
+	height: 60px;
+	font-size: 15px;
+	vertical-align: middle;
+	text-align: left;
+}
+.new_address_tbl td input {
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	margin: 5px;
+}
+.modal_new_search_address {
+	padding-left: 10px;
+	padding-right: 10px;
+ 	width: 120px; 
+ 	height: 30px; 
+	border-radius: 5px;
+	border:none;
+	background-color: rgb(255, 227, 219);
+}
+
+.modal_btn_cancel {
+	width: 150px; 
+ 	height: 50px; 
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	background-color: white;
+}
+
+.modal_btn_regist {
+	width: 150px; 
+ 	height: 50px; 
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	background-color: rgb(255, 227, 219);
+}
+
+</style>
+<script>
+$(function(){
+	$("#address_list_btn").click(function(e){
+		e.preventDefault();
+		$("#address_list_modal").modal("show");
+	});
+	
+	$("#modal_new_address_btn").click(function(e){
+		e.preventDefault();
+		$("#modal_new_address").modal("show");
+		
+	})
+});
+
+function pay_search_address() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('pay_search_postcode').value = data.zonecode;
+            document.getElementById("pay_search_addr").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("pay_search_detail").focus();
+        }
+    }).open();
+}
+</script>
+
+<!-- 모달창1 -->
+<div class="modal fade" id="address_list_modal" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">나의 배송지 관리</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table modal_list_tbl">
+					<thead>
+						<tr>
+							<th width="3%">선택</th>
+							<th width="15%">배송지 이름</th>
+							<th width="15%">받으실 분</th>
+							<th width="40%">주소</th>
+							<th width="17%">연락처</th>
+							<th width="10%">수정/삭제</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><button type="button">선택</button></td>
+							<td>우리집</td>
+							<td>박덕호</td>
+							<td>울산광역시 동구 명덕로30 109동 1207호</td>
+							<td>01093746972</td>
+							<td>
+								<div class="modal_modi_del_div">
+									<button>수정</button><br>
+									<button>삭제</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal_list_foot">
+				<button type="button" id="modal_new_address_btn" data-dismiss="modal">+ 새 배송지 추가</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 모달창2 -->
+
+<div class="modal fade" id="modal_new_address" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">새 배송지 등록</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table new_address_tbl">
+				<tbody>
+					<tr>
+						<th>배송지 이름</th>
+						<td><input type="text" class="modal_new_nickname"></td>
+					</tr>
+					<tr>
+						<th>받으실분</th>
+						<td><input type="text" class="modal_new_receiver"></td>
+					</tr>
+					<tr>
+						<th>받으실 곳</th>
+						<td>
+							<input type="text" name="">
+							<button type="button" class="modal_new_search_address">우편번호 검색</button><br>
+							<input type="text" name="" class=""><input type="text" name="" class="">
+						</td>
+					</tr>
+					<tr>
+						<th>휴대폰 번호</th>
+						<td><input type="text" class="modal_new_cellphone"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="modal_btn_cancel"  data-dismiss="modal">취소</button>
+				<button type="button" class="modal_btn_regist">저장</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="col-md-2"></div>
@@ -306,7 +527,7 @@
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">기본 배송지</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">최근 배송지</label>
 							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">직접 입력</label>
-							<button type="button" class="new_address_btn">배송지 관리</button>
+							<button type="button" id="address_list_btn" class="new_address_btn">배송지 관리</button>
 						</td>
 					</tr>
 					<tr>
@@ -316,9 +537,10 @@
 					<tr>
 						<th>받으실 곳</th>
 						<td>
-							<input type="text" name="">
-							<button type="button" class="pay_search_address">우편번호 검색</button><br>
-							<input type="text" name="" class="pay_search_input"><input type="text" name="" class="pay_search_input">
+							<input type="text" id="pay_search_postcode" name="add_postcode">
+							<button type="button" onclick="pay_search_address()" class="pay_search_address">우편번호 검색</button><br>
+							<input type="text" id="pay_search_addr"name="add_" class="pay_search_input">
+							<input type="text" id="pay_search_detail" name="" class="pay_search_input">
 						</td>
 					</tr>
 					<tr>

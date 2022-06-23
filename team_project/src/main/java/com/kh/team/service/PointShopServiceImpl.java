@@ -24,6 +24,7 @@ public class PointShopServiceImpl implements PointShopService{
 	@Override
 	@Transactional
 	public boolean create(ProductVo productVo,PointShopBoardVo pointShopBoardVo) {
+		System.out.println(productVo);
 		//포인트샵보드
 		int p_bno = pointShopDao.getNextBno();
 		pointShopBoardVo.setP_bno(p_bno);
@@ -37,7 +38,7 @@ public class PointShopServiceImpl implements PointShopService{
 		//물품등록
 		int pno = pointShopDao.getNextPno();
 		productVo.setPno(pno);
-		pointShopDao.productCreate(productVo, p_bno);
+		pointShopDao.productCreate(pno, p_bno, productVo.getP_name());
 		String[] p_options = productVo.getP_options();
 		int[] p_prices = productVo.getP_prices();
 		int[] p_discounts = productVo.getP_discounts();
@@ -69,8 +70,7 @@ public class PointShopServiceImpl implements PointShopService{
 
 	@Override
 	public PointShopBoardVo read(int p_bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return pointShopDao.read(p_bno);
 	}
 
 	@Override

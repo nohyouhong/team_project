@@ -102,16 +102,16 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 	
 	@Override
 	public int getPnoByBno(int p_bno) {
-		int pno = sqlSession.selectOne(NAMESPACE + "getBnoByPno", p_bno);
+		int pno = sqlSession.selectOne(NAMESPACE + "getPnoByBno", p_bno);
 		return pno;
 	}
 	
 	@Override
-	public boolean productCreate(ProductVo productVo, int p_bno) {
+	public boolean productCreate(int pno, int p_bno, String p_name) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
-		System.out.println("productVo" + productVo + "p_bno" + p_bno);
-		parameter.put("productVo", productVo);
+		parameter.put("pno", pno);
 		parameter.put("p_bno", p_bno);
+		parameter.put("p_name", p_name);
 		int count = sqlSession.insert(NAMESPACE + "productCreate", parameter);
 		if(count > 0) {
 			return true;

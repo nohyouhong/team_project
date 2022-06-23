@@ -17,6 +17,7 @@ public class PointShopBoardVo {
 	private String p_picture;
 	private String[] p_pictures;
 	private String[] p_tags;
+	private int p_purchasecnt;
 	
 	public PointShopBoardVo() {
 		super();
@@ -35,7 +36,7 @@ public class PointShopBoardVo {
 
 	public PointShopBoardVo(int p_bno, String p_title, String p_explain, int deliverycharge, String userid,
 			Date p_regdate, int p_viewcnt, float p_avgrating, String sellstate, String purchaseplace, String p_picture,
-			String[] p_pictures, String[] p_tags) {
+			String[] p_pictures, String[] p_tags, int p_purchasecnt) {
 		super();
 		this.p_bno = p_bno;
 		this.p_title = p_title;
@@ -50,6 +51,7 @@ public class PointShopBoardVo {
 		this.p_picture = p_picture;
 		this.p_pictures = p_pictures;
 		this.p_tags = p_tags;
+		this.p_purchasecnt = p_purchasecnt;
 	}
 
 	public int getP_bno() {
@@ -156,12 +158,22 @@ public class PointShopBoardVo {
 		this.p_tags = p_tags;
 	}
 
+	public int getP_purchasecnt() {
+		return p_purchasecnt;
+	}
+
+	public void setP_purchasecnt(int p_purchasecnt) {
+		this.p_purchasecnt = p_purchasecnt;
+	}
+
 	@Override
 	public String toString() {
 		return "PointShopBoardVo [p_bno=" + p_bno + ", p_title=" + p_title + ", p_explain=" + p_explain
 				+ ", deliverycharge=" + deliverycharge + ", userid=" + userid + ", p_regdate=" + p_regdate
 				+ ", p_viewcnt=" + p_viewcnt + ", p_avgrating=" + p_avgrating + ", sellstate=" + sellstate
 				+ ", purchaseplace=" + purchaseplace + ", p_picture=" + p_picture + ", p_pictures="
-				+ Arrays.toString(p_pictures) + ", p_tags=" + Arrays.toString(p_tags) + "]";
+				+ Arrays.toString(p_pictures) + ", p_tags=" + Arrays.toString(p_tags) + ", p_purchasecnt="
+				+ p_purchasecnt + "]";
 	}
+	
 }

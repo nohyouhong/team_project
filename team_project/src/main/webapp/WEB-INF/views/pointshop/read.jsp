@@ -224,6 +224,9 @@
 	margin-left: 10px;
 	font-size: 20px;
 }
+.sumValUnit{
+	font-size: 20px;
+}
 .sumAllValDiv{
 	margin-top: 10px;
 	text-align: right;
@@ -272,20 +275,76 @@ $(function() {
 	//select 바꿀때마다 쇼우 
 	$(".proOpSelect").change(function(){
 		var index = $(this).val();
-// 		console.log(index);
 		$(".addBasketDiv").show();
 		$(".sumAllValDiv").show();
 		var oneBasketInfo = $(".oneBasketInfo").eq(index).show();
-		var info_price2 = "${productList[" + index + "].p_price}";
-		console.log(info_price2);
+		var info_price = parseInt($(".oneVal").eq(index).text().replace(",", ""));
 		var now_price = $(".sumAllVal").text();
-		console.log(now_price);
-		$(".sumAllVal").text(info_price + now_price);;
+		var now_priceVal = parseInt(now_price.replace(",", ""));
+		var sum = info_price + now_priceVal;
+		var sumVal = sum.toLocaleString('ko-kr');
+		$(".sumAllVal").text(sumVal);
+	});
+	
+	//증가버튼
+	$(".addBasketDiv").on("click", ".oneProInfoSignP", function() {
+		//숫자변환
+		var proInfoSignSpan = $(this).parent();
+		var nowIndex = parseInt($(proInfoSignSpan).find("span.oneProNumInput").text());
+		var newIndex = nowIndex + 1;
+		$(proInfoSignSpan).find("span.oneProNumInput").text(newIndex);
+		
+		//가격변환(옵션가격)
+		var addPrice = parseInt($(this).parent().parent().find("span.oneVal").text().replace(",", ""));
+		var nowPrice1 = parseInt($(this).parent().parent().find("span.sumVal").text().replace(",", ""));
+		var optionPrice = nowPrice1 + addPrice;
+		var optionPriceVal = optionPrice.toLocaleString('ko-kr');
+		$(this).parent().parent().find("span.sumVal").text(optionPriceVal);
+		
+		//가격변환(전체가격)
+		var nowPrice = parseInt($(".sumAllVal").text().replace(",", ""));
+		var sum = nowPrice + addPrice;
+		var sumVal = sum.toLocaleString('ko-kr');
+		$(".sumAllVal").text(sumVal);
+	});
+	//감소버튼
+	$(".addBasketDiv").on("click", ".oneProInfoSignM", function() {
+		var proInfoSignSpan =  $(this).parent();
+		var nowIndex = parseInt($(proInfoSignSpan).find("span.oneProNumInput").text());
+		if(nowIndex > 1) {
+			var newIndex = nowIndex - 1;
+			$(proInfoSignSpan).find("span.oneProNumInput").text(newIndex);
+			//가격변환(옵션가격)
+			var subPrice = parseInt($(this).parent().parent().find("span.oneVal").text().replace(",", ""));
+			var nowPrice1 = parseInt($(this).parent().parent().find("span.sumVal").text().replace(",", ""));
+			var optionPrice = nowPrice1 - subPrice;
+			var optionPriceVal = optionPrice.toLocaleString('ko-kr');
+			$(this).parent().parent().find("span.sumVal").text(optionPriceVal);
+			
+			//가격변환(전체가격)
+			var nowPrice2 = parseInt($(".sumAllVal").text().replace(",", ""));
+			var sum = nowPrice2 - subPrice;
+			var sumVal = sum.toLocaleString('ko-kr');
+			$(".sumAllVal").text(sumVal);
+		}
 	});
 	
 	//x버튼 누를시 닫기
-	$(".oneProInfoX").click(function() {
-		$(this).parent().parent().hide();
+	$(".addBasketDiv").on("click", ".oneProInfoX", function() {
+		var oneBasketInfo = $(this).parent().parent();
+		$(oneBasketInfo).hide();
+		//값없애기
+		var onePrice = $(oneBasketInfo).find("span.oneVal").text();
+		var allSubPrice = parseInt($(oneBasketInfo).find("span.sumVal").text().replace(",", ""));
+		var nowPrice = parseInt($(".sumAllVal").text().replace(",", ""));
+		var sumPrice = nowPrice - allSubPrice;
+		var sumPriceVal = sumPrice.toLocaleString('ko-kr');
+		$(".sumAllVal").text(sumPriceVal);
+		$(oneBasketInfo).find("span.sumVal").text(onePrice);
+		$(oneBasketInfo).find("span.oneProNumInput").text("1");
+		
+		
+		//옵션 모두 하이드시 다 하이드
 		var priceState = false;
 		var basketInfos = $(".oneBasketInfo");
 		var index = basketInfos.length;
@@ -389,7 +448,7 @@ $(function() {
 								<c:forEach items="${productList}" var="productVo" varStatus="count">
 									<option class="proOption" value="${count.index }">
 										<span>
-											<c:if test="${count.index < 10}">0</c:if>${count.index }.
+											<c:if test="${count.index < 11}">0</c:if>${count.index + 1 }.
 										</span>
 										<span>${productVo.p_option}</span> :
 										<span>${productVo.p_price}</span> :
@@ -409,17 +468,21 @@ $(function() {
 									<div>
 										<span class="proInfoSign">
 											<i class="fas fa-angle-left fa-lg oneProInfoSignM"></i>
-											<span class="oneProNumInput">1</span>
+											<span class="oneProNumInput">
+<!-- 												<input type=> -->
+											</span>
 											<i class="fas fa-angle-right fa-lg oneProInfoSignP"></i>
 										</span>
-										<span class="sumVal"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${productVo.p_sum }" />원</span>
+										<span class="oneVal" style="display:none;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_sum }" /></span>
+										<span class="sumVal"><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_sum }" /></span>
+										<span class="sumValUnit">원</span>
 									</div>
 								</div>
 							</c:forEach>
 						</div>
 						<div class="sumAllValDiv" style="display: none;">
 							<span class="sumAllTitle">주문금액</span>
-							<span class="sumAllVal"><fmt:formatNumber type="number" maxFractionDigits="0"  value="0" /></span>
+							<span class="sumAllVal">0</span>
 							<span class="sumAllValUnit">원</span>
 						</div>
 						<div class="proPurchaseBtnDiv">

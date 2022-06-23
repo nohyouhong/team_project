@@ -774,11 +774,6 @@ $(function(){
 	//요리후기 더보기 줄여보기
 	//(false가 줄여보기 상태)
 	var reviewState = false;
-// 	$("#reviewShowButton").click(function() {
-// 		//전환버튼
-// 		reviewState = !reviewState;
-// 		runByReviewState();
-// 	});
 	$("#reviewShowButton").click(function() {
 		//전환버튼
 		reviewState = !reviewState;
@@ -801,13 +796,10 @@ $(function(){
 		//show시키기
 			for(var i = 1; i < recipeReviews.length; i++){
 				$(recipeReviews[i]).show();
-// 				console.log(i, "쇼우");
 			}
 		} else if(!reviewState){
 		//hide시키기
 			for(var i = 4; i < recipeReviews.length; i++){
-// 				console.log(i, "하이드");
-// 				console.log(recipeReviews[i], "recipeReviews[i]");
 				$(recipeReviews[i]).hide();
 			}
 		}
@@ -844,7 +836,6 @@ $(function(){
 	$("#cookRecipeReDiv").on("click", ".reviewUserImageBtn", function(){
 		$("#modal-531767").trigger("click");
 		var filename = $(this).attr("data-filename");
-// 		console.log(filename);
 		var imageVal = "/recipeboard/displayImage?filename=" + filename;
 		$("#modalReviewImage").attr("src", imageVal);
 		
@@ -894,14 +885,12 @@ $(function(){
 
 			//왼쪽버튼
 			$("#modalLeftBtn").click(function() {
-// 				console.log("왼쪽버튼 클림됨");
 				if(i != 0) {
 					modalImageRun(--i, rData);
 				}
 			});
 			//오른쪽버튼
 			$("#modalRightBtn").click(function() {
-// 				console.log("오른쪽버튼 클림됨");
 				if(i != (rData.length - 1)) {
 					modalImageRun(++i, rData);
 				}

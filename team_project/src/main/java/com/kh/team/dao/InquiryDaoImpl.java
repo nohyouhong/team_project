@@ -89,4 +89,9 @@ public class InquiryDaoImpl implements InquiryDao{
 		
 	}
 
+	@Override
+	public void updateIstate(int i_bno) {
+		sqlSession.update(NAMESPACE+"updateIstate", i_bno);
+	}
+
 }

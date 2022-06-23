@@ -38,14 +38,6 @@
 			order by re_group desc, re_seq asc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
-<!-- 	<select id="listAsk" resultType="AskVo"> -->
-<!-- 		select * from(select rownum rnum, a.* from( -->
-<!-- 			select * from tbl_ask_board -->
-<!-- 			where writer = #{writer} -->
-<!-- 			or re_group = #{re_group} -->
-<!-- 			order by re_group desc, re_seq asc) a) -->
-<!-- 		where rnum between #{startRow} and #{endRow} -->
-<!-- 	</select> -->
 	<select id="getReGroup" resultType="int">
 		select distinct re_group from tbl_ask_board
 		where writer = #{writer}

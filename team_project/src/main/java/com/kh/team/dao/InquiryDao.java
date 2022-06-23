@@ -16,4 +16,5 @@ public interface InquiryDao {
 	public int getNexti_bno();
 	public boolean insertInquiryReply(InquiryVo inquiryVo);//답글쓰기
 	public void updateInquiryReSeq(InquiryVo inquiryVo);//답글 순서조정
+	public void updateIstate(int i_bno);
 }

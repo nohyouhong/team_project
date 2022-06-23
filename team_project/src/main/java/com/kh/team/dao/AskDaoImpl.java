@@ -116,10 +116,4 @@ public class AskDaoImpl implements AskDao{
 		sqlSession.update(NAMESPACE+"updateAstate", a_bno);
 	}
 
-//	@Override
-//	public List<Integer> getReGroup(String writer) {
-//		List<Integer> reGroupList = sqlSession.selectList(NAMESPACE+"getReGroup", writer);
-//		return reGroupList;
-//	}
-
 }

@@ -32,10 +32,10 @@
 	
 	<select id="listInquiry" resultType="InquiryVo">
 		select * from(select rownum rnum, a.* from(
-			select * from tbl_inquiry_board) a)
+			select * from tbl_inquiry_board
+			order by re_group desc, re_seq asc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
-	
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_inquiry_board
 	</select>
@@ -50,5 +50,10 @@
 			re_seq = re_seq + 1
 		where re_group = #{re_group}
 		and re_seq &gt; #{re_seq}
+	</update>
+		<update id="updateIstate">
+		update tbl_inquiry_board set
+			i_state = i_state + 1
+		where i_bno = #{i_bno}
 	</update>
 </mapper>

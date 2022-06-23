@@ -4,6 +4,15 @@
 	height:150px;
 }
 #inquirysend{
-	float:right;
+	text-align:right;
 	margin-bottom:20px;
+}
+#inquiryh2div{
+	text-align:left;
+}
+#userid{
+	font-size:15px;
+}
+#colmd1{
+	margin-left:50px;
 }

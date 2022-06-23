@@ -58,7 +58,7 @@
 							</div>
 							<hr>
 							<div id="read-title-writer">
-								<div class="form-group message_read text-left" id="read-title">
+								<div class="form-group message_read text-left" id="read-title2">
 									답글 제목
 									<input type="text" class="form-control" name="i_title" value="[re:]"/>
 								</div>

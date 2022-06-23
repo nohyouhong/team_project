@@ -7,6 +7,9 @@
 	text-align:right;
 	margin-bottom:20px;
 }
+#inquirysend2{
+	text-align:right;
+}
 #inquiryh2div{
 	text-align:left;
 }
@@ -15,4 +18,20 @@
 }
 #colmd1{
 	margin-left:50px;
+}
+#cus_img3{
+	height: 50px;
+	width: 50px;
+}
+#read-title-writer{
+	display:flex;
+}
+#read-title{
+	width:80%;
+}
+#read-writer{
+	width:20%;
+}
+#read-title2{
+	width:100%;
 }

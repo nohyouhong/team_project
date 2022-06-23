@@ -52,7 +52,8 @@ $(document).ready(function(){
 						<div id="asksend">
 							<c:choose>
 								<c:when test="${loginVo.m_code == 101}">
-									<a href="/ask/ask_admin_list" class="btn btn-outline-warning">목록으로</a>
+									<a href="/ask/ask_admin_list?page=${param.page}&perPage=${param.perPage}"
+										class="btn btn-outline-warning">목록으로</a>
 									<a href="/ask/askReplyForm?a_bno=${askVo.a_bno}" class="btn btn-outline-primary">답글달기</a>
 								</c:when>
 								<c:otherwise>

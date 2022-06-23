@@ -1,0 +1,416 @@
+@charset "UTF-8";
+.cookP{
+	padding: 35px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+.cookCenterDiv{
+	text-align: center;
+}
+.mainImage{
+	position:relative;
+	top: 48px;
+	width: 680px;
+	height: 400px;
+	border: 1px solid #BEB6B6;
+	border-radius: 10px;
+}
+.userImageDiv{
+	position:relative;
+	bottom: 40px;
+}
+.userImage{
+	width: 150px;
+	height: 150px;
+}
+.cookUserid{
+	position: relative;
+	top: 10px;
+	font-size: 18px;
+}
+.cookTitle{
+	font-size: 30px;
+	font-weight: bold;
+}
+.cookTitleP{
+	font-size: 26px;
+}
+.cookSecondTitleP{
+	margin-left: 5px;
+	font-size: 15px;
+	font-style:italic;
+	color: #BEB6B6;
+}
+.cookExplain{
+	margin-top: 25px; 
+	font-size: 19px;
+	color: #BEB6B6;
+}
+.cookViewRatingDiv{
+	position: relative;
+	bottom: 130px;
+	padding-right: 250px;
+	float: right;
+}
+.cookViewCntBack, .cookavgRating{
+	padding:7px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: black;
+	color: white;
+	border-radius: 40px;
+}
+.cookavgRating{
+	margin-right: 10px;
+}
+.cookViewCntVal, .cookavgRatingVal{
+	color: white;
+}
+.createHr2{
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+.iconDivs{
+	margin-top: 60px;
+}
+.iconDiv{
+	width: 30%;	
+}
+.cookIcon, .grayCol{
+	color: #BEB6B6;
+}
+.iconExplain{
+	margin-top: 5px;
+	margin-bottom: 20px;
+	font-size: 19px;
+	color: #BEB6B6;
+}
+.cookReadUl{
+	list-style: none;
+	width: 100%;
+	margin-top: 30px;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+.cookReadLl{
+	width: 23%;
+	display: inline-block;
+	margin: 22px;
+	margin-right:50px;	
+	border-bottom: 1px solid #C9C3C3;
+}
+.cookLiSpan{
+	font-size: 18px;
+}
+.cookLiSpanAfter{
+	float:right;
+	font-size: 18px;
+}
+.info, .infoSpan{
+	cursor: pointer;
+}
+.stepDiv{
+	margin-top: 30px;
+}
+.cookTipTitle{
+	color: rgba(248, 56, 1);
+	font-size: 28px;
+}
+.cookTipEx{
+	font-size: 22px;
+	margin: 35px;
+	margin-left: 70px;
+	margin-right: 70px;
+}
+.stepContent{
+	font-size: 23px;
+	margin-top: 90px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 30px;
+}
+.r_contentP{
+	padding-top: 5px;
+}
+.stepPicDiv, .userImageInfo, .showHideDiv{
+	text-align: center;
+}
+.stepCount{
+	float: right;
+	color: rgba(248, 56, 1);
+	font-size: 28px;
+	font-weight: bold;
+}
+.cookStepStyleSpan{
+	float:right;
+	margin-top: 10px;
+	margin-right: 90px;
+}
+.cookStepStyleIcon{
+	border: 2px solid #BEB6B6;
+	padding: 10px;
+	color: #BEB6B6;
+	cursor: pointer;
+}
+#stepStyle1{
+ 	background: #8C8C8C; 
+}
+.stepPicture{
+	width: 900px;
+	height: 450px;
+}
+.stepPicture3{
+	width: 300px;
+	height: 150px;
+}
+.userImage2{
+	width: 120px;
+	height: 120px;
+}
+.userInfomation{
+	margin: 30px;
+	margin-top: 50px;
+	font-size: 20px;
+}
+.userInfos{
+	margin-top: 15px;
+}
+.userEmail{
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 19px;
+}
+.cookTitleExNum{
+	font-size: 26px;
+	font-style: italic;
+	color: rgba(248, 56, 1);
+	margin-left: 5px;
+}
+#cookRecipeReImageDiv{
+	margin-top: 60px;
+	margin-bottom: 30px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+.cookRecipeReImage{
+	width: 150px;
+	height: 150px;
+	margin-right: 5px;
+}
+.imageListButton{
+	width: 150px;
+	height: 150px;
+	margin-right: 20px;
+}
+.imageListButtonDiv{
+	float: right;
+	margin-right: 94px;
+}
+.imageListButton{
+	position:relative;
+	bottom:180px;
+	background: rgba(0, 0, 0, 0.5);
+}
+.imageListbuttonChar{
+	font-size: 18px;
+	color: white;
+}
+#cookCommentDiv, #cookRecipeReDiv{
+margin-top: 70px;
+}
+.oneComment, .oneRecipeReview{
+margin-left: 80px;
+margin-right: 80px;
+border-bottom: 1px solid #C9C3C3;
+margin-top: 20px;
+padding-bottom: 20px;
+}
+.commentUserImageDiv, .reviewUserImageDiv, .reviewUserCookImageDiv{
+	display: inline-block;
+}
+.reviewUserCookImageDiv{
+	width: 20%;
+	text-align: right;
+	padding-top:5px;
+	padding-right: 20px;
+}
+.commentUserImage{
+	width: 60px;
+	height: 60px;
+	margin-top: -50px;
+	margin-left: 20px;
+}
+.reviewUserImage{
+	width: 60px;
+	height: 60px;
+}
+.commentUserInfo, .reviewUserInfo{
+	display: inline-block;
+	width: 70%;
+	margin-left: 15px;
+}
+.commentUser, .reviewUser, #modalReviewUser{
+	font-size: 20px;
+	color: rgba(248, 56, 1);
+	margin-right: 12px;
+}
+.commentDate, .smallHr, .commentReply, .commentDeclare, .commentDelete,
+	 .reviewDate, .reviewReply, .reviewDelete, #modalReviewDate{
+	font-size: 16px;
+	color: #BEB6B6;
+	margin-right: 10px;
+}
+.userCommentVal, .userReviewVal, #modalReviewComment{
+	margin-top: 12px;
+	font-size: 16px;
+}
+.cookCommentInputDiv, .cookReviewInputDiv{
+	margin-left: 80px;
+	margin-right: 130px;
+	margin-top: 30px;
+}
+.cookCommentInputDiv2, .cookReviewInputDiv2{
+	margin-left: 120px;
+	margin-right: 130px;
+	margin-top: 15px;
+	margin-bottom: 40px;
+}
+.commentImage, .reviewImage{
+	height: 100px;
+	width: 100px;
+	border: 2px solid #BEB6B6;
+	cursor: pointer;
+	background: #D4D4D4;
+}
+.commentButton, .reviewButton{
+	height: 101px;
+	width: 100px;
+	border: 2px solid #BEB6B6;
+	margin-left: -1px;
+	background-color: white;
+}
+.commentTextarea, .reviewTextarea{
+	height: 100px;
+	width:100%;
+	margin-left:30px;
+	border: 2px solid #BEB6B6;
+}
+.showButton, .hideButton{
+	height: 40px;
+	width: 400px;
+	border: 1px solid #BEB6B6;
+	background-color: white;
+	margin: 20px;
+}
+.yellowStar{
+	color: #EAE909;
+}
+.grayStar{
+	color: #BEB6B6
+}
+.starReviewEx{
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+}
+.starsDiv{
+	position: relative;
+	left: 150px;
+}
+.starRating {
+	display:flex;
+	flex-direction: row-reverse;
+	font-size:50px;
+	justify-content:space-around;
+	width:180px;
+	text-align:center;
+}
+.starRating input {
+	display:none;
+}
+.starRating label {
+	color:#BEB6B6;
+	cursor:pointer;
+}
+.starRating :checked ~ label {
+	color:#EAE909;
+}
+.starRating label:hover,
+.starRating label:hover ~ label {
+	color:#EAE909;
+}
+.reviewUserImageBtn{
+	cursor: pointer;
+}
+#modalReviewImage{
+	width: 470px;
+	height: 320px;
+}
+#modalReviewImageList{
+	width: 570px;
+	height: 400px;
+}
+.cookRecipeReImage{
+	cursor: pointer;
+}
+.mymodalBody{
+	width: 800px;
+	heght: 800px;
+}
+.modalImageDiv{
+	padding-left: 37px;
+}
+#modalReviewPic{
+	width: 50px;
+	height: 50px;
+}
+.modalReviewInfo{
+	margin-left: 80px;
+	margin-right: 80px;
+	margin-top: 20px;
+}
+#modalMessageText{
+	width: 470px;
+	height: 260px;
+}
+#modalReviewComment{
+	margin-left: 5px;
+}
+#tagDiv{
+	margin: 30px;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+.oneTag{
+	margin-right: 10px;
+	background-color: #E9E9E9;
+	cursor: pointer;
+}
+.tagFront{
+	font-size: 26px;
+	color: #F83801;
+}
+.tagName{
+	font-size: 21px;
+}
+#buttonsDiv{
+	text-align: center;
+}
+.reviewScore{
+	margin-right: 6px;
+}
+.declareLabel{
+	margin: 5px 0px;
+}
+.declareReason{
+	margin: 5px;
+	margin-left: 20px;
+}
+#declareExplain{
+	margin: 5px;
+	margin-left: 25px;
+	width: 85%;
+}
+.modalDeclareBtnDiv{
+	padding-right: 42px;
+}

@@ -3,95 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
-<style>
-.recipeListNumDiv, .listTypeDiv{
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 100px;
-	font-size: 18px;
-}
-.listTypeDiv{
-	float: right;
-	text-align: right;
-	font-size: 13px;
-}
-.listNumVal{
-	font-size: 25px;
-	color: rgba(248, 56, 1);
-}
-.listTypeBtn{
-	margin-left: -14px;
-	border: 1px solid #BEB6B6;
-	cursor: pointer;
-	padding: 11px 19px;
-	position: relative;
-	left: 20px;
-	top: 10px;
-}
-.selectTypeBtn{
-	background: #FA7C61;
-	color: white;
-}
-.listNumVal{
-	font-size: 25px;
-	color: rgba(248, 56, 1);
-}
-.recipeListDiv{
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
-.oneRecipe{
-	display: inline-block;
-	margin: 10px;
-	margin-top: 20px;
-	margin-bottom: 35px;
-	width: 280px;
-}
-.oneRecipeImage{
-	width: 280px;
-	height: 280px;
-	border-radius: 10px;
-	cursor: pointer;
-}
-.listUserImage{
-	width: 25px;
-	height: 25px;
-}
-.listUserName{
-	margin-left: 5px;
-}
-.oneRecipeTitle{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	font-size: 16px;
-	font-weight: bold;
-	height: 50px;
-}
-.oneRecipeInfo{
-	margin-top: 10px;
-}
-.listStarNum, .listViewName, .listViewCnt{
-	color: #BEB6B6;
-}
-.listViewName{
-	margin-left: 5px;
-}
-.listYellowStar{
-	color: #EAE909;
-	margin-right: -3px;
-}
-.listGrayStar{
-	color: #BEB6B6;
-	margin-right: -3px;
-}
-.listStarNum{
-	margin-left: 3px;
-}
-.pagingDiv{
-	margin-top: 30px;
-}
-</style>
+<%@include file="/WEB-INF/views/include/paging.jsp" %>
+<link rel="stylesheet" href="/resources/recipe/recipe_list.css" type="text/css">
 <script>
 $(function(){
 	var frmPaging = $("#frmPaging");
@@ -99,28 +12,18 @@ $(function(){
 	$(".recipeBoardLink").click(function() {
 		var r_bno = $(this).attr("data-r_bno"); 
 		frmPaging.find("input[name=r_bno]").val(r_bno);
-		frmPaging.attr("action", "/recipeboard/read");
+		frmPaging.attr("action", "/recipeboard/recipe_read");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
 	
-// 	$("#perPage").change(function() {
-// 		var perPage = $(this).val();
-
-// 		frmPaging.find("input[name=perPage]").val(perPage);
-// 		frmPaging.find("input[name=page]").val(1);
-// 		frmPaging.attr("action", "/recipeboard/list");
-// 		frmPaging.attr("method", "get");
-// 		frmPaging.submit();
-// 	});
-
 	// 이전 1, 2 ~ 10 다음   등등..
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
 		
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/recipeboard/list");
+		frmPaging.attr("action", "/recipeboard/recipe_list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -131,14 +34,14 @@ $(function(){
 		var listType = $(this).attr("href");
 		
 		frmPaging.find("input[name=listType]").val(listType);
-		frmPaging.attr("action", "/recipeboard/list");
+		frmPaging.attr("action", "/recipeboard/recipe_list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
 });
 </script>
 <%-- ${recipeBoardList }	 --%>
-<%@include file="/WEB-INF/views/include/paging.jsp" %>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -163,7 +66,7 @@ $(function(){
 				<c:forEach items="${recipeBoardList }" var="recipeBoardVo">
 					<div class="oneRecipe">
 						<div>
-							<a class="recipeBoardLink" data-r_bno="${recipeBoardVo.r_bno}" href="/recipeboard/read?r_bno=${recipeBoardVo.r_bno }">
+							<a class="recipeBoardLink" data-r_bno="${recipeBoardVo.r_bno}" href="/recipeboard/recipe_read?r_bno=${recipeBoardVo.r_bno }">
 								<img class="oneRecipeImage" src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic}">
 							</a>
 						</div>

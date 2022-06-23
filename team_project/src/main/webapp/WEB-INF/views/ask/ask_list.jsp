@@ -16,6 +16,15 @@ $(document).ready(function(){
 		frmpaging.attr("method", "get");
 		frmpaging.submit();
 	});
+	//페이지처리
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/ask/ask_list");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 <div class="row">

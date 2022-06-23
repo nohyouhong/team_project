@@ -49,7 +49,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/message/send_msg_list");
+		frmPaging.attr("action", "/message/receive_msg_list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});

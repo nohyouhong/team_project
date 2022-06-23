@@ -3,17 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
-<link rel="stylesheet" href="/resources/customer_center/customer_center.css" type="text/css">
+<link rel="stylesheet" href="/resources/customer_center/inquiryList.css" type="text/css">
 
 <script>
 $(document).ready(function(){
-	var frmpaging = $("#frmPaging");
+	//게시글 보기
+	var frmPaging = $("#frmPaging");
 	$(".td_list").click(function(){
 		var i_bno = $(this).attr("data-i_bno");
-		frmpaging.find("input[name=i_bno]").val(i_bno);
-		frmpaging.attr("action", "/inquiry/inquiry_read");
-		frmpaging.attr("method", "get");
-		frmpaging.submit();
+		frmPaging.find("input[name=i_bno]").val(i_bno);
+		frmPaging.attr("action", "/inquiry/inquiry_read");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	//페이지 처리
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/inquiry/inquiry_list");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
 	});
 });
 </script>
@@ -82,26 +92,35 @@ $(document).ready(function(){
 							</table>
 						</div>
 						<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
-							<nav>
-								<ul class="pagination justify-content-center">
-									<c:if test="${pagingDto.startPage != 1}">
-										<li class="page-item"><a class="page-link in_page_link"
-											href="${pagingDto.startPage -1}">이전</a></li>
-									</c:if>
-									<c:forEach var="v" begin="${pagingDto.startPage}"
-										end="${pagingDto.endPage}">
-										<li class="page-item"><a class="page-link in_page_link"
-											href="${v}">${v}</a></li>
-									</c:forEach>
-									<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
-										<li class="page-item"><a class="page-link in_page_link"
-											href="${pagingDto.endPage +1}">다음</a></li>
-									</c:if>
-								</ul>
-							</nav>
-						</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-8">
+								<nav>
+									<ul class="pagination justify-content-center">
+										<c:if test="${pagingDto.startPage != 1 }">
+											<li class="page-item"><a class="page-link"
+												href="${pagingDto.startPage - 1}">이전</a></li>
+										</c:if>
+										<c:forEach begin="${pagingDto.startPage }" end="${pagingDto.endPage }" var="i">
+											<li
+												<c:choose>
+													<c:when test="${i == pagingDto.page }">
+														class="page-item active"
+													</c:when>
+													<c:otherwise>
+														class="page-item"
+													</c:otherwise>							
+												</c:choose>
+												class="page-item">
+												<a class="page-link" href="${i}">${i}</a>
+											</li>
+										</c:forEach>
+										<c:if test="${pagingDto.endPage != pagingDto.totalPage }">
+											<li class="page-item"><a class="page-link"
+												href="${pagingDto.endPage + 1}">다음</a></li>
+										</c:if>
+									</ul>
+								</nav>
+							</div>
 						<div class="col-md-2"></div>
 						</div>
 					</div>

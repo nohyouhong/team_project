@@ -33,9 +33,9 @@ public class RecipeBoardController {
 	@Autowired
 	private RecipeBoardService recipeBoardService;
 	
-	@RequestMapping(value="/createForm", method=RequestMethod.GET)
-	public String createForm() {
-		return "recipeboard/create_form";
+	@RequestMapping(value="/recipeCreateForm", method=RequestMethod.GET)
+	public String recipeCreateForm() {
+		return "recipeboard/recipe_create_form";
 	}
 	
 	@RequestMapping(value="/createRun", method=RequestMethod.POST)
@@ -75,33 +75,27 @@ public class RecipeBoardController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/recipeboard/list";
+		return "redirect:/recipeboard/recipe_list";
 	}
 
-	@RequestMapping(value="/read", method=RequestMethod.GET)
-	public String read(int r_bno, Model model, PagingDto pagingDto) {
-//		System.out.println("BoardController, read, r_bno: " + r_bno);
-//		System.out.println("BoardController, read, pagingDto: " + pagingDto);
+	@RequestMapping(value="/recipe_read", method=RequestMethod.GET)
+	public String recipeRead(int r_bno, Model model, PagingDto pagingDto) {
 		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
 		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
 		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
 		List<String> tagList = recipeBoardService.getTags(r_bno);
 		MemberVo memberVo = recipeBoardService.getMemberVoByBno(r_bno);
-//		System.out.println(recipeBoardVo);
-//		System.out.println(ingredientVoList);
-//		System.out.println(recipeStepVoList);
-//		System.out.println("tagList" + tagList);
 		model.addAttribute("recipeBoardVo", recipeBoardVo);
 		model.addAttribute("ingredientVoList", ingredientVoList);
 		model.addAttribute("recipeStepVoList", recipeStepVoList);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberVo", memberVo);
 		model.addAttribute("pagingDto", pagingDto);
-		return "recipeboard/read";
+		return "recipeboard/recipe_read";
 	}
 	
-	@RequestMapping(value="/updateForm", method=RequestMethod.GET)
-	public String updateForm(int r_bno, Model model, PagingDto pagingDto) {
+	@RequestMapping(value="/recipeUpdateForm", method=RequestMethod.GET)
+	public String recipeUpdateForm(int r_bno, Model model, PagingDto pagingDto) {
 		RecipeBoardVo recipeBoardVo = recipeBoardService.read(r_bno);
 		List<IngredientVo> ingredientVoList = recipeBoardService.readIngreds(r_bno);
 		List<RecipeStepVo> recipeStepVoList = recipeBoardService.readStepVos(r_bno);
@@ -111,15 +105,13 @@ public class RecipeBoardController {
 		model.addAttribute("recipeStepVoList", recipeStepVoList);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("pagingDto", pagingDto);
-		return "recipeboard/update_form";
+		return "recipeboard/recipe_update_form";
 	}
 	
 	@RequestMapping(value="/updateRun", method=RequestMethod.POST)
 	public String updateRun(RecipeBoardVo recipeBoardVo, IngredientVo ingredientVo, PagingDto pagingDto, 
 			IngredientListVo ingredientListVo, HttpSession session, RedirectAttributes rttr, MultipartFile file, 
 			@RequestParam("files") List<MultipartFile> files) {
-//		System.out.println(recipeBoardVo);
-//		System.out.println(ingredientListVo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = memberVo.getUserid();
 		recipeBoardVo.setUserid(userid);
@@ -156,12 +148,10 @@ public class RecipeBoardController {
 			rttr.addAttribute("bno", recipeBoardVo.getR_bno());
 			rttr.addAttribute("page", pagingDto.getPage());
 			rttr.addAttribute("perPage", pagingDto.getPerPage());
-//			rttr.addAttribute("searchType", pagingDto.getSearchType());
-//			rttr.addAttribute("keyword", pagingDto.getKeyword());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/recipeboard/read?r_bno=" + recipeBoardVo.getR_bno();
+		return "redirect:/recipeboard/recipe_read?r_bno=" + recipeBoardVo.getR_bno();
 	}
 
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
@@ -170,25 +160,21 @@ public class RecipeBoardController {
 		rttr.addFlashAttribute("delete_result", result);
 		rttr.addAttribute("page", pagingDto.getPage());
 		rttr.addAttribute("perPage", pagingDto.getPerPage());
-//		rttr.addAttribute("searchType", pagingDto.getSearchType());
-//		rttr.addAttribute("keyword", pagingDto.getKeyword());
-		return "redirect:/recipeboard/list";
+		return "redirect:/recipeboard/recipe_list";
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list(Model model, PagingDto pagingDto) {
+	@RequestMapping(value="/recipe_list", method=RequestMethod.GET)
+	public String recipeList(Model model, PagingDto pagingDto) {
 		int boardCount = recipeBoardService.getCount(pagingDto);
 		pagingDto.setCount(boardCount);
 		pagingDto.setPerPage(16);
 		pagingDto.setPage(pagingDto.getPage());
-//		System.out.println("pagingDto" + pagingDto);
 		List<RecipeBoardVo> recipeBoardList = recipeBoardService.list(pagingDto);
-//		System.out.println(recipeBoardList);
 		model.addAttribute("recipeBoardList", recipeBoardList);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("boardCount", boardCount);
 		
-		return "recipeboard/list";
+		return "recipeboard/recipe_list";
 	}
 	
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)

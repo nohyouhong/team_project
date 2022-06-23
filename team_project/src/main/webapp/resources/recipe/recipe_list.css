@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.recipeListNumDiv, .listTypeDiv{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 100px;
+	font-size: 18px;
+}
+.listTypeDiv{
+	float: right;
+	text-align: right;
+	font-size: 13px;
+}
+.listNumVal{
+	font-size: 25px;
+	color: rgba(248, 56, 1);
+}
+.listTypeBtn{
+	margin-left: -14px;
+	border: 1px solid #BEB6B6;
+	cursor: pointer;
+	padding: 11px 19px;
+	position: relative;
+	left: 20px;
+	top: 10px;
+}
+.selectTypeBtn{
+	background: #FA7C61;
+	color: white;
+}
+.listNumVal{
+	font-size: 25px;
+	color: rgba(248, 56, 1);
+}
+.recipeListDiv{
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+.oneRecipe{
+	display: inline-block;
+	margin: 10px;
+	margin-top: 20px;
+	margin-bottom: 35px;
+	width: 280px;
+}
+.oneRecipeImage{
+	width: 280px;
+	height: 280px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.listUserImage{
+	width: 25px;
+	height: 25px;
+}
+.listUserName{
+	margin-left: 5px;
+}
+.oneRecipeTitle{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	height: 50px;
+}
+.oneRecipeInfo{
+	margin-top: 10px;
+}
+.listStarNum, .listViewName, .listViewCnt{
+	color: #BEB6B6;
+}
+.listViewName{
+	margin-left: 5px;
+}
+.listYellowStar{
+	color: #EAE909;
+	margin-right: -3px;
+}
+.listGrayStar{
+	color: #BEB6B6;
+	margin-right: -3px;
+}
+.listStarNum{
+	margin-left: 3px;
+}
+.pagingDiv{
+	margin-top: 30px;
+}

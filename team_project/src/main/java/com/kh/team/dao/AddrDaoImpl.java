@@ -23,6 +23,15 @@ public class AddrDaoImpl implements AddrDao {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean updateAdd_code(String userid) {
+		int count = sqlSession.update(NAMESPACE + "updateAdd_code", userid);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public List<AddrVo> addrList(String userid) {

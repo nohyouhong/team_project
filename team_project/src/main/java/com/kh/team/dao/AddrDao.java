@@ -10,6 +10,7 @@ public interface AddrDao {
 	public static final int RECENTADDRESS = 1003;
 	
 	public boolean insertAddr(AddrVo addrVo);
+	public boolean updateAdd_code(String userid);
 	public List<AddrVo> addrList(String userid);
 	public AddrVo readAddr(int add_no);
 	public boolean updateAddr(AddrVo addrVo);

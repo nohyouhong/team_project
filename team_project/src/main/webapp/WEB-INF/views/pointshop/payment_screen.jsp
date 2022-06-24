@@ -106,7 +106,7 @@
 
 /* 배송 정보 css */
 
-.pay_address_tbl {
+#pay_address_tbl {
 	width: 1300px;
 	height: auto;
 	border-bottom: 2px solid rgb(204, 204, 204);
@@ -114,14 +114,14 @@
 	vertical-align: middle;
 }
 
-.pay_address_tbl th {
+#pay_address_tbl th {
 	width: 150px;
 	height: 60px;
 	font-size: 15px;
 	vertical-align: middle;
 }
 
-.pay_address_tbl td {
+#pay_address_tbl td {
 	width: 1100px;
 	height: 60px;
 	font-size: 15px;
@@ -143,7 +143,7 @@
 	background-color: rgb(255, 227, 219);
 }
 
-.pay_address_tbl td input {
+#pay_address_tbl td input {
 	border-radius: 5px;
 	border: 2px solid rgb(204, 204, 204);
 	margin: 5px;
@@ -468,6 +468,20 @@ $(function(){
 	
 	$("#modal_list_tbl").on("click", ".modal_choose_btn", function(e){
 		e.preventDefault();
+		var add_no = $(this).attr("data-addNo");
+		console.log("add_no: ", add_no);
+		var url = "/pay/readAddr";
+		var sData = {
+				"add_no" : add_no
+		};
+		$.get(url, sData, function(rData){
+			console.log("rData: ", rData);
+			$("#pay_address_tbl > tbody > tr > td input").eq(3).val(rData.add_receiver);
+			$("#pay_address_tbl > tbody > tr > td input").eq(4).val(rData.add_postcode);
+			$("#pay_address_tbl > tbody > tr > td input").eq(5).val(rData.add_address);
+			$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);
+			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.add_cellphone);
+		});
 		
 	});
 });
@@ -478,7 +492,7 @@ function getAddrList() {
 		$("#modal_list_tbl > tbody > tr").remove();
 		var addrListTable = "<tr>";
 		$.each(rData, function(v, addrVo) {
-			addrListTable += "<td><button type='button' class='modal_choose_btn' data-dismiss='modal'>선택</button></td>";
+			addrListTable += "<td><button type='button' class='modal_choose_btn' data-dismiss='modal' data-addNo=" + addrVo.add_no + ">선택</button></td>";
 			addrListTable += "<td>" + addrVo.add_nickname + "</td>";
 			addrListTable += "<td>" + addrVo.add_receiver + "</td>";
 			addrListTable += "<td>" + addrVo.add_address + "<br>" + addrVo.add_addrdetail + "</td>";
@@ -494,7 +508,7 @@ function getAddrList() {
 		
 		$("#modal_list_tbl>tbody").append(addrListTable);
 	});
-}
+} // getAddrList()
 
 function pay_search_address() {
     new daum.Postcode({
@@ -546,7 +560,7 @@ function modal_search_address() {
             document.getElementById("modal_new_detail").focus();
         }
     }).open();
-}  
+} // 배송지 등록 모달 주소api
 function modal_modi_address() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -571,7 +585,7 @@ function modal_modi_address() {
             document.getElementById("modal_modi_detail").focus();
         }
     }).open();
-}
+} // 배송지 수정 모달 주소 api
 </script>
 <!-- 리스트 모달창 -->
 <div class="modal fade" id="address_list_modal" role="dialog"
@@ -780,7 +794,7 @@ function modal_modi_address() {
 		
 		<div class="pay_address_div">
 			<h4>배송 정보</h4>
-			<table class="table pay_address_tbl">
+			<table class="table" id="pay_address_tbl">
 				<tbody>
 					<tr>
 						<th>배송지 확인</th>

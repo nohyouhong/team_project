@@ -105,7 +105,7 @@
 			m_attend_count = 0
 		where userid = #{userid}
 	</update>
-	
+		
 	<!-- 검색조건 -->
 	<sql id="search">
 		<if test="searchType != null and keyword != null">

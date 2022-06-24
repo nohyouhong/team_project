@@ -12,6 +12,12 @@
 		#{add_address}, #{add_addrdetail}, #{add_cellphone}, #{add_code}, #{userid})
 	</insert>
 	
+	<update id="updateAdd_code">
+		update tbl_address set
+    		add_code = 1001
+		where userid = #{userid} and add_code = 1002
+	</update>
+	
 	<select id="addrList" resultType="AddrVo">
 		select * from tbl_address
 		where userid = #{userid}

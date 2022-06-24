@@ -26,4 +26,5 @@ public interface MemberDao {
 	
 	public int getM_attend_count(String userid);
 	public boolean initializeM_attend_count(String userid);
+	
 }

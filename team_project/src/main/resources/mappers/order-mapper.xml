@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.order">
+	
+	<update id="updateBasket">
+		update tbl_member set
+			basket = #{l_lno}
+		where userid = #{userid}
+	</update>
+	
+	<select id="getLnoByUserId" resultType="int">
+		select l_lno from tbl_order_list 
+		where userid = #{userid}
+		and rownum = 1
+	</select>
+
+	<insert id="create">
+		insert into tbl_order_list
+			(l_lno, userid)
+		values
+			(seq_order_list_lno.nextval, #{userid})
+	</insert>
+	
+	<select id="read" resultType="OrderProductVo">
+		select * from tbl_order_list 
+		where l_lno = #{l_lno}
+	</select>
+	
+	<update id="update">
+		update tbl_order_list set
+			l_deliverycharge = #{l_deliverycharge},
+			l_sum = #{l_sum}
+		where l_lno = #{l_lno}
+	</update>
+	
+	<select id="getNextPno" resultType="int">
+		select seq_order_product_pno.nextval from dual
+	</select>
+	
+	<select id="getBasketProduct" resultType="OrderProductVo">
+		select * from 
+		tbl_order_product p join tbl_product_info i
+			on p.p_ino = i.p_ino
+		where l_lno = #{l_lno}
+		order by o_pno
+	</select>
+
+	<insert id="basketProductCreate">
+		insert into tbl_order_product
+			(o_pno, l_lno, p_ino, p_bno, o_amount, o_sum, o_titlepic, o_price, o_deliverycharge)
+		values
+			(#{o_pno}, #{l_lno}, #{p_ino}, #{p_bno}, #{o_amount}, #{o_sum}, #{o_titlepic}, #{o_price}, #{o_deliverycharge})
+	</insert>
+
+	<update id="basketProductUpdate">
+		update tbl_order_product set
+			o_amount = #{o_amount},
+			o_price = #{o_price},
+			o_sum = #{o_sum}
+		where o_pno = #{o_pno}
+	</update>
+	
+	<delete id="basketProductDelete">
+		delete from tbl_order_product
+		where o_pno = #{o_pno}
+	</delete>
+	
+</mapper>

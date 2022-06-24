@@ -409,8 +409,8 @@ $(function() {
 		var basketInfos = $(".oneBasketInfo");
 		for(var i = 0; i < basketInfos.length; i++){
 			if($(basketInfos).eq(i).css("display") != "none"){
-				var pno = $(basketInfos).eq(i).find("span.oneProPno").text();
-				var html = '<input type="hidden" name="pnos" value="' + pno + '">';	
+				var p_ino = $(basketInfos).eq(i).find("span.oneProIno").text();
+				var html = '<input type="hidden" name="p_inos" value="' + p_ino + '">';	
 				var o_price = $(basketInfos).eq(i).find("span.oneVal").text().replace(",", "");
 				html += '<input type="hidden" name="o_prices" value="' + o_price + '">';	
 				var o_amount = $(basketInfos).eq(i).find("input.oneProNumInput").val();
@@ -451,6 +451,8 @@ $(function() {
 <%-- ${tagList }<br><br> --%>
 <form id="basketRunForm">
 	<input type="hidden" name="o_titlepic" value="${productPicList[0]}">
+	<input type="hidden" name="p_bno" value="${pointShopBoardVo.p_bno}">
+	<input type="hidden" name="o_deliverycharge" value="${pointShopBoardVo.deliverycharge}">
 </form>
 <div class="container-fluid">
 	<div class="row">
@@ -542,7 +544,7 @@ $(function() {
 							<c:forEach items="${productList}" var="productVo" varStatus="count">
 								<div class="oneBasketInfo" style="display: none;">
 									<div class="onProInfoAll">
-										<span class="oneProPno" style="display: none;">${productVo.p_ino }</span>
+										<span class="oneProIno" style="display: none;">${productVo.p_ino }</span>
 										<span class="oneProInfo">${count.index + 1 }</span>.
 										<span class="oneProInfo opInfo">${productVo.p_option }</span>
 										<span class="oneProInfoX">&times;</span>

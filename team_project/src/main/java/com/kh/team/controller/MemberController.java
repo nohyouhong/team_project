@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.MemberService;
+import com.kh.team.service.OrderService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.MessageVo;
@@ -34,6 +35,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	OrderService orderService;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -150,6 +154,12 @@ public class MemberController {
 			rttr.addFlashAttribute("login_result", "fail");
 			return "redirect:/";
 		} else {
+			//장바구니 없는사람 갱신해주기
+			int myBasket = memberVo.getBasket();
+			if(myBasket == 0) {
+				orderService.create(userid);
+			} 
+			
 			session.setAttribute("loginVo", memberVo);
 			if(saveId != null && !saveId.equals("")) {
 				Cookie cookie = new Cookie("saveId", userid);

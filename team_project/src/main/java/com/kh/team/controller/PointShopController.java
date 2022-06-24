@@ -22,6 +22,7 @@ import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.IngredientListVo;
 import com.kh.team.vo.IngredientVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.OrderProductVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointShopBoardVo;
 import com.kh.team.vo.ProductVo;
@@ -53,6 +54,14 @@ public class PointShopController {
 	@RequestMapping(value="/shopping_basket", method=RequestMethod.GET)
 	public String shoppingBasket() {
 		return "pointshop/shopping_basket";
+	}
+	
+	@RequestMapping(value="/addBasket", method=RequestMethod.POST)
+	@ResponseBody
+	public String addBasket(OrderProductVo orderProductVo, HttpSession session) {
+		System.out.println(orderProductVo);
+		boolean result = true;
+		return String.valueOf(result);
 	}
 	
 	@RequestMapping(value="/createRun", method=RequestMethod.POST)

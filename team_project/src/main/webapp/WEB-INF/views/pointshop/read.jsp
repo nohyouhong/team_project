@@ -23,6 +23,9 @@
 	height: 510px;
 	border-radius: 10px;
 }
+.proPicDiv{
+	margin-top: 5px;
+}
 .proPic{
 	width: 130px;
 	height: 130px;
@@ -201,15 +204,10 @@
 	cursor: pointer;
 }
 .oneProInfoSignP{
-	margin-left: 25px;
 	cursor: pointer;
 }
 .oneProInfoSignM{
-	margin-right: 25px;
 	cursor: pointer;
-}
-.oneProNumInput{
-	font-size: 20px;
 }
 .proInfoSign{
 	display: inline-block;
@@ -246,6 +244,25 @@
 	color: #7ACE00;
 	margin-right: 5px;
 }
+.oneProNumInput{
+	font-size: 20px;
+	border: 0px solid black;
+	width: 70px;
+    text-align: center;
+    position: relative;
+    left: 1px;
+}
+.oneProNumInput:focus{
+    outline: none;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 </style>
 <script>
 $(function() {
@@ -275,34 +292,41 @@ $(function() {
 	//select 바꿀때마다 쇼우 
 	$(".proOpSelect").change(function(){
 		var index = $(this).val();
-		$(".addBasketDiv").show();
-		$(".sumAllValDiv").show();
-		var oneBasketInfo = $(".oneBasketInfo").eq(index).show();
-		var info_price = parseInt($(".oneVal").eq(index).text().replace(",", ""));
-		var now_price = $(".sumAllVal").text();
-		var now_priceVal = parseInt(now_price.replace(",", ""));
-		var sum = info_price + now_priceVal;
-		var sumVal = sum.toLocaleString('ko-kr');
-		$(".sumAllVal").text(sumVal);
+		//기본 옵션은 처리안되게
+		if( index != "1001"){
+			var basketInfos = $(".oneBasketInfo");
+			//옵션창 켜진거 안켜진거 구별해서 안켜진것만 실행
+			if($(basketInfos).eq(index).css("display") == "none"){
+				$(".addBasketDiv").show();
+				$(".sumAllValDiv").show();
+				var oneBasketInfo = $(".oneBasketInfo").eq(index).show();
+				var info_price = parseInt($(".oneVal").eq(index).text().replaceAll(",", ""));
+				var now_price = $(".sumAllVal").text();
+				var now_priceVal = parseInt(now_price.replaceAll(",", ""));
+				var sum = info_price + now_priceVal;
+				var sumVal = sum.toLocaleString('ko-kr');
+				$(".sumAllVal").text(sumVal);
+			} 
+		}
 	});
 	
 	//증가버튼
 	$(".addBasketDiv").on("click", ".oneProInfoSignP", function() {
 		//숫자변환
 		var proInfoSignSpan = $(this).parent();
-		var nowIndex = parseInt($(proInfoSignSpan).find("span.oneProNumInput").text());
+		var nowIndex = parseInt($(proInfoSignSpan).find("input.oneProNumInput").val());
 		var newIndex = nowIndex + 1;
-		$(proInfoSignSpan).find("span.oneProNumInput").text(newIndex);
+		$(proInfoSignSpan).find("input.oneProNumInput").val(newIndex);
 		
 		//가격변환(옵션가격)
-		var addPrice = parseInt($(this).parent().parent().find("span.oneVal").text().replace(",", ""));
-		var nowPrice1 = parseInt($(this).parent().parent().find("span.sumVal").text().replace(",", ""));
+		var addPrice = parseInt($(this).parent().parent().find("span.oneVal").text().replaceAll(",", ""));
+		var nowPrice1 = parseInt($(this).parent().parent().find("span.sumVal").text().replaceAll(",", ""));
 		var optionPrice = nowPrice1 + addPrice;
 		var optionPriceVal = optionPrice.toLocaleString('ko-kr');
 		$(this).parent().parent().find("span.sumVal").text(optionPriceVal);
 		
 		//가격변환(전체가격)
-		var nowPrice = parseInt($(".sumAllVal").text().replace(",", ""));
+		var nowPrice = parseInt($(".sumAllVal").text().replaceAll(",", ""));
 		var sum = nowPrice + addPrice;
 		var sumVal = sum.toLocaleString('ko-kr');
 		$(".sumAllVal").text(sumVal);
@@ -310,19 +334,19 @@ $(function() {
 	//감소버튼
 	$(".addBasketDiv").on("click", ".oneProInfoSignM", function() {
 		var proInfoSignSpan =  $(this).parent();
-		var nowIndex = parseInt($(proInfoSignSpan).find("span.oneProNumInput").text());
+		var nowIndex = parseInt($(proInfoSignSpan).find("input.oneProNumInput").val());
 		if(nowIndex > 1) {
 			var newIndex = nowIndex - 1;
-			$(proInfoSignSpan).find("span.oneProNumInput").text(newIndex);
+			$(proInfoSignSpan).find("input.oneProNumInput").val(newIndex);
 			//가격변환(옵션가격)
-			var subPrice = parseInt($(this).parent().parent().find("span.oneVal").text().replace(",", ""));
-			var nowPrice1 = parseInt($(this).parent().parent().find("span.sumVal").text().replace(",", ""));
+			var subPrice = parseInt($(this).parent().parent().find("span.oneVal").text().replaceAll(",", ""));
+			var nowPrice1 = parseInt($(this).parent().parent().find("span.sumVal").text().replaceAll(",", ""));
 			var optionPrice = nowPrice1 - subPrice;
 			var optionPriceVal = optionPrice.toLocaleString('ko-kr');
 			$(this).parent().parent().find("span.sumVal").text(optionPriceVal);
 			
 			//가격변환(전체가격)
-			var nowPrice2 = parseInt($(".sumAllVal").text().replace(",", ""));
+			var nowPrice2 = parseInt($(".sumAllVal").text().replaceAll(",", ""));
 			var sum = nowPrice2 - subPrice;
 			var sumVal = sum.toLocaleString('ko-kr');
 			$(".sumAllVal").text(sumVal);
@@ -334,15 +358,13 @@ $(function() {
 		var oneBasketInfo = $(this).parent().parent();
 		$(oneBasketInfo).hide();
 		//값없애기
-		var onePrice = $(oneBasketInfo).find("span.oneVal").text();
-		var allSubPrice = parseInt($(oneBasketInfo).find("span.sumVal").text().replace(",", ""));
-		var nowPrice = parseInt($(".sumAllVal").text().replace(",", ""));
+		var onePrice = $(oneBasketInfo).find("span.oneVal").text().replaceAll(",", "");
+		var allSubPrice = parseInt($(oneBasketInfo).find("span.sumVal").text().replaceAll(",", ""));
+		var nowPrice = parseInt($(".sumAllVal").text().replaceAll(",", ""));
 		var sumPrice = nowPrice - allSubPrice;
 		var sumPriceVal = sumPrice.toLocaleString('ko-kr');
 		$(".sumAllVal").text(sumPriceVal);
-		$(oneBasketInfo).find("span.sumVal").text(onePrice);
-		$(oneBasketInfo).find("span.oneProNumInput").text("1");
-		
+		$(oneBasketInfo).find("input.oneProNumInput").val("1");
 		
 		//옵션 모두 하이드시 다 하이드
 		var priceState = false;
@@ -360,10 +382,66 @@ $(function() {
 			$(".addBasketDiv").hide();
 			$(".sumAllValDiv").hide();
 		}
-		
-
 	});
 	
+	//옵션갯수를 직접입력할때 바꾸기
+	$(".oneProNumInput").change(function() {
+		console.log("체인지");
+		//그전값빼기
+		var nowNum = parseInt($(this).val());
+		var subPrice = parseInt($(this).parent().parent().find("span.sumVal").text().replaceAll(",", ""));
+		var nowPrice = parseInt($(".sumAllVal").text().replaceAll(",", ""));
+		var sumPrice = nowPrice - subPrice;
+		
+		//새로운값 더하기
+		var oneVal = parseInt($(this).parent().parent().find("span.oneVal").text().replaceAll(",", ""));
+		var nowVal = oneVal * nowNum;
+		var sumOptionVal = nowVal.toLocaleString('ko-kr');
+		$(this).parent().parent().find("span.sumVal").text(sumOptionVal);
+		
+		sumPrice += nowVal;
+		var sumPriceVal = sumPrice.toLocaleString('ko-kr');
+		$(".sumAllVal").text(sumPriceVal);
+	});
+	
+	//장바구니 담기
+	$(".basketBtn").click(function() {
+		var basketInfos = $(".oneBasketInfo");
+		for(var i = 0; i < basketInfos.length; i++){
+			if($(basketInfos).eq(i).css("display") != "none"){
+				var pno = $(basketInfos).eq(i).find("span.oneProPno").text();
+				var html = '<input type="hidden" name="pnos" value="' + pno + '">';	
+				var o_price = $(basketInfos).eq(i).find("span.oneVal").text().replace(",", "");
+				html += '<input type="hidden" name="o_prices" value="' + o_price + '">';	
+				var o_amount = $(basketInfos).eq(i).find("input.oneProNumInput").val();
+				html += '<input type="hidden" name="o_amounts" value="' + o_amount + '">';	
+				var o_sum = $(basketInfos).eq(i).find("span.sumVal").text().replaceAll(",", "");
+				html += '<input type="hidden" name="o_sums" value="' + o_sum + '">';	
+				$("#basketRunForm").append(html);
+			}
+		}
+		
+		var form = $("#basketRunForm");
+		var formData = new FormData(form[0]);
+		console.log(formData);
+		var url = "/pointshop/addBasket";
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				if(rData == "true"){
+					console.log(rData);
+					//장바구니아이콘 숫자 올리기 비동기를 여기다가
+					alert("장바구니에 추가 되었습니다.");
+				}
+			}
+		});
+	});
 });
 </script>
 <%-- ${pointShopBoardVo }<br><br> --%>
@@ -371,6 +449,9 @@ $(function() {
 <%-- ${productPicList[0] }<br><br> --%>
 <%-- ${productExPicList }<br><br> --%>
 <%-- ${tagList }<br><br> --%>
+<form id="basketRunForm">
+	<input type="hidden" name="o_titlepic" value="${productPicList[0]}">
+</form>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -444,7 +525,7 @@ $(function() {
 						<hr class="creHr">
 						<div class="proOptionDiv">
 							<select class="proOpSelect">
-								<option class="proOption" value="basic" selected>= 옵션 : 가격 : 재고 =</option>
+								<option class="proOption" value="1001" selected>= 옵션 : 가격 : 재고 =</option>
 								<c:forEach items="${productList}" var="productVo" varStatus="count">
 									<option class="proOption" value="${count.index }">
 										<span>
@@ -461,16 +542,15 @@ $(function() {
 							<c:forEach items="${productList}" var="productVo" varStatus="count">
 								<div class="oneBasketInfo" style="display: none;">
 									<div class="onProInfoAll">
-										<span class="oneProInfo">${count.index + 1 }.</span>
-										<span class="oneProInfo">${productVo.p_option }</span>
+										<span class="oneProPno" style="display: none;">${productVo.p_ino }</span>
+										<span class="oneProInfo">${count.index + 1 }</span>.
+										<span class="oneProInfo opInfo">${productVo.p_option }</span>
 										<span class="oneProInfoX">&times;</span>
 									</div>
 									<div>
 										<span class="proInfoSign">
 											<i class="fas fa-angle-left fa-lg oneProInfoSignM"></i>
-											<span class="oneProNumInput">
-<!-- 												<input type=> -->
-											</span>
+											<input class="oneProNumInput" type="number" value="1">
 											<i class="fas fa-angle-right fa-lg oneProInfoSignP"></i>
 										</span>
 										<span class="oneVal" style="display:none;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_sum }" /></span>

@@ -16,6 +16,8 @@ public class MemberVo {
 	private String cellphone;
 	private int m_attend_count;
 	private String nickname;
+	private int add_code;
+	private int basket;
 	
 	public MemberVo() {
 		super();
@@ -46,14 +48,9 @@ public class MemberVo {
 		this.nickname = nickname;
 	}
 
-	
-
-
-
-
 	public MemberVo(String userid, String userpw, String username, String email, String gender, Date m_regdate,
 			int m_point, String m_picture, int m_totalattend, int m_code, String cellphone, int m_attend_count,
-			String nickname) {
+			String nickname, int add_code, int basket) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -68,6 +65,24 @@ public class MemberVo {
 		this.cellphone = cellphone;
 		this.m_attend_count = m_attend_count;
 		this.nickname = nickname;
+		this.add_code = add_code;
+		this.basket = basket;
+	}
+
+	public int getAdd_code() {
+		return add_code;
+	}
+
+	public void setAdd_code(int add_code) {
+		this.add_code = add_code;
+	}
+
+	public int getBasket() {
+		return basket;
+	}
+
+	public void setBasket(int basket) {
+		this.basket = basket;
 	}
 
 	public String getUserid() {
@@ -179,8 +194,7 @@ public class MemberVo {
 		return "MemberVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", gender=" + gender + ", m_regdate=" + m_regdate + ", m_point=" + m_point + ", m_picture="
 				+ m_picture + ", m_totalattend=" + m_totalattend + ", m_code=" + m_code + ", cellphone=" + cellphone
-				+ ", m_attend_count=" + m_attend_count + ", nickname=" + nickname + "]";
+				+ ", m_attend_count=" + m_attend_count + ", nickname=" + nickname + ", add_code=" + add_code
+				+ ", basket=" + basket + "]";
 	}
-
-	
 }

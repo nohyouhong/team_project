@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.team.mappers.addr">
+
+	<insert id="insertAddr">
+		insert into tbl_address(add_no, add_nickname, add_receiver, add_postcode, 
+		add_address, add_addrdetail, add_cellphone, add_code, userid)
+		values(seq_address_add_no.nextval, #{add_nickname}, #{add_receiver}, #{add_postcode}, 
+		#{add_address}, #{add_addrdetail}, #{add_cellphone}, #{add_code}, #{userid})
+	</insert>
+	
+	<select id="addrList" resultType="AddrVo">
+		select * from tbl_address
+		where userid = #{userid}
+		order by add_no
+	</select>
+	
+	<select id="readAddr" resultType="AddrVo">
+		select * from tbl_address
+		where add_no = #{add_no}
+	</select>
+	
+	<update id="updateAddr">
+		update tbl_address set
+			add_nickname = #{add_nickname}, 
+			add_receiver = #{add_receiver}, 
+			add_postcode = #{add_postcode}, 
+			add_address = #{add_address}, 
+			add_addrdetail = #{add_addrdetail}, 
+			add_cellphone = #{add_cellphone}, 
+			where add_no = #{add_no} and userid = #{userid}
+	</update>
+	
+	<delete id="deleteAddr">
+		delete from tbl_address
+		where add_no = #{add_no}
+	</delete>
+
+</mapper>

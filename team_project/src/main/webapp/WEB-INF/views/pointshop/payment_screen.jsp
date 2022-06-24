@@ -243,17 +243,17 @@
 	background-color: rgb(255, 227, 219);
 }
 
-.modal_list_tbl {
+#modal_list_tbl {
 	border-top: 1px solid rgb(204, 204, 204);
 }
 
-.modal_list_tbl td{
+#modal_list_tbl td{
 	border-top: 1px solid rgb(204, 204, 204);
 	border-bottom: 1px solid rgb(204, 204, 204);
 	vertical-align: middle;
 }
 
-.modal_list_tbl button{
+#modal_list_tbl button{
 	width: 70px; 
  	height: 30px; 
 	border-radius: 5px;
@@ -316,20 +316,189 @@
 	background-color: rgb(255, 227, 219);
 }
 
+.modal_btn_modify {
+	width: 150px; 
+ 	height: 50px; 
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	background-color: rgb(255, 227, 219);
+}
+
+.modal_new_code {
+	margin-left: 5px;
+}
+
+/* 모달창3 */
+
+#modi_address_tbl {
+	width: 1300px;
+	height: auto;
+	border-bottom: 2px solid rgb(204, 204, 204);
+	border-top: 2px solid rgb(204, 204, 204);
+	vertical-align: middle;
+}
+
+#modi_address_tbl th {
+	width: 180px;
+	height: 60px;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+#modi_address_tbl td {
+	width: 1100px;
+	height: 60px;
+	font-size: 15px;
+	vertical-align: middle;
+	text-align: left;
+}
+#modi_address_tbl td input {
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	margin: 5px;
+}
+.modal_modi_search_address {
+	padding-left: 10px;
+	padding-right: 10px;
+ 	width: 120px; 
+ 	height: 30px; 
+	border-radius: 5px;
+	border:none;
+	background-color: rgb(255, 227, 219);
+}
+
 </style>
 <script>
 $(function(){
 	$("#address_list_btn").click(function(e){
 		e.preventDefault();
+		getAddrList();
 		$("#address_list_modal").modal("show");
 	});
 	
 	$("#modal_new_address_btn").click(function(e){
 		e.preventDefault();
 		$("#modal_new_address").modal("show");
+	});
+	
+	$(".modal_btn_regist").click(function(e){
+		e.preventDefault();
+		if ($("#chk_code").is(":checked")) {
+			$("#add_code").val("1002");
+		} else {
+			$("#add_code").val("1001");
+		};
 		
-	})
+		
+		var form = $("#modal_frm");
+		var formData = new FormData(form[0]);
+		console.log("form: ", form);
+		console.log("formData: ", formData);
+		console.log("form[0]: ", form[0]);		
+		var url = "/pay/insertAddr";
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				console.log(rData);
+				if (rData == "true") {
+					console.log(rData);
+				}
+			}
+		});
+		$(".new_address_tbl td input").val("");
+		getAddrList();
+		$("#address_list_modal").modal("show");
+	});
+	
+	$("#modal_list_tbl").on("click", ".modal_modi_btn", function(e){
+		e.preventDefault();
+		var url = "/pay/readAddr";
+		var addNo = $(this).attr("data-addNo");
+		var sData = {
+				"add_no" : addNo
+		}
+		console.log("sData: ", sData);
+		$.get(url, sData, function(rData){
+			console.log("rData: ", rData);
+			$("#modi_address_tbl > tbody > tr > td input").eq(0).val(rData.add_nickname)
+			$("#modi_address_tbl > tbody > tr > td input").eq(1).val(rData.add_receiver)
+			$("#modi_address_tbl > tbody > tr > td input").eq(2).val(rData.add_postcode)
+			$("#modi_address_tbl > tbody > tr > td input").eq(3).val(rData.add_address)
+			$("#modi_address_tbl > tbody > tr > td input").eq(4).val(rData.add_addrdetail)
+			$("#modi_address_tbl > tbody > tr > td input").eq(5).val(rData.add_cellphone)
+		});
+		$("#modal_modi_address").modal("show");
+	});
+	
+	$(".modal_btn_modify").click(function(e){
+		e.preventDefault();
+		var url = "/pay/modifyAddr";
+		var form = $("#modal_modi_frm");
+		var formData = new FormData(form[0]);
+		console.log("form: " + form);
+		console.log("form[0]: " + form[0]);
+		console.log("formData: " + formData);
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+				console.log(rData);
+			}
+		});
+		getAddrList();
+		$("#address_list_modal").modal("show");
+	});
+	
+	$("#modal_list_tbl").on("click", ".modal_del_btn", function(e){
+		e.preventDefault();
+		var url = "/pay/deleteAddr";
+		var addNo = $(this).attr("data-addNo");
+		var sData = {
+				"add_no" : addNo
+		}
+		console.log("sData: ", sData);
+		$.get(url, sData, function(rData){
+			console.log("rData: ", rData);
+			getAddrList();
+		});
+	});
 });
+
+function getAddrList() {
+	var url = "/pay/addrList";
+	$.get(url, function(rData) {
+		console.log("rData: ", rData);
+		$("#modal_list_tbl > tbody > tr").remove();
+		var addrListTable = "<tr>";
+		$.each(rData, function(v, addrVo) {
+			addrListTable += "<td><button type='button'>선택</button></td>";
+			addrListTable += "<td>" + addrVo.add_nickname + "</td>";
+			addrListTable += "<td>" + addrVo.add_receiver + "</td>";
+			addrListTable += "<td>" + addrVo.add_address + "<br>" + addrVo.add_addrdetail + "</td>";
+			addrListTable += "<td>" + addrVo.add_cellphone + "</td>";
+			addrListTable += "<td>";
+			addrListTable += "<div class='modal_modi_del_div'>";
+			addrListTable += "<button class='modal_modi_btn' data-dismiss='modal' data-addNo=" + addrVo.add_no + ">수정</button><br>";
+			addrListTable += "<button class='modal_del_btn' data-addNo=" + addrVo.add_no + ">삭제</button>";
+			addrListTable += "</div>";
+			addrListTable += "</td>";
+			addrListTable += "</tr>";
+		});// 리스트 append $.each()
+		
+		$("#modal_list_tbl>tbody").append(addrListTable);
+	});
+}
 
 function pay_search_address() {
     new daum.Postcode({
@@ -356,9 +525,59 @@ function pay_search_address() {
         }
     }).open();
 }
-</script>
 
-<!-- 모달창1 -->
+function modal_search_address() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('modal_new_postcode').value = data.zonecode;
+            document.getElementById("modal_new_addr").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("modal_new_detail").focus();
+        }
+    }).open();
+}  
+function modal_modi_address() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('modal_modi_postcode').value = data.zonecode;
+            document.getElementById("modal_modi_addr").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("modal_modi_detail").focus();
+        }
+    }).open();
+}
+</script>
+<!-- 리스트 모달창 -->
 <div class="modal fade" id="address_list_modal" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
@@ -370,7 +589,7 @@ function pay_search_address() {
 				</button>
 			</div>
 			<div class="modal-body">
-				<table class="table modal_list_tbl">
+				<table class="table" id="modal_list_tbl">
 					<thead>
 						<tr>
 							<th width="3%">선택</th>
@@ -382,19 +601,6 @@ function pay_search_address() {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><button type="button">선택</button></td>
-							<td>우리집</td>
-							<td>박덕호</td>
-							<td>울산광역시 동구 명덕로30 109동 1207호</td>
-							<td>01093746972</td>
-							<td>
-								<div class="modal_modi_del_div">
-									<button>수정</button><br>
-									<button>삭제</button>
-								</div>
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -405,7 +611,7 @@ function pay_search_address() {
 	</div>
 </div>
 
-<!-- 모달창2 -->
+<!-- 입력 모달창 -->
 
 <div class="modal fade" id="modal_new_address" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -418,34 +624,92 @@ function pay_search_address() {
 				</button>
 			</div>
 			<div class="modal-body">
-				<table class="table new_address_tbl">
-				<tbody>
-					<tr>
-						<th>배송지 이름</th>
-						<td><input type="text" class="modal_new_nickname"></td>
-					</tr>
-					<tr>
-						<th>받으실분</th>
-						<td><input type="text" class="modal_new_receiver"></td>
-					</tr>
-					<tr>
-						<th>받으실 곳</th>
-						<td>
-							<input type="text" name="">
-							<button type="button" class="modal_new_search_address">우편번호 검색</button><br>
-							<input type="text" name="" class=""><input type="text" name="" class="">
-						</td>
-					</tr>
-					<tr>
-						<th>휴대폰 번호</th>
-						<td><input type="text" class="modal_new_cellphone"></td>
-					</tr>
-				</tbody>
-			</table>
+				<form id="modal_frm" action="/pay/insertAddr" method="get">
+				<input type="hidden" id="add_code" name="add_code" value="">
+				<input type="hidden" name="userid" value="${loginVo.userid}">
+					<table class="table new_address_tbl">
+						<tbody>
+							<tr>
+								<th>배송지 이름</th>
+								<td><input type="text" name="add_nickname" class="modal_new_nickname" value=""></td>
+							</tr>
+							<tr>
+								<th>받으실분</th>
+								<td><input type="text" name="add_receiver" class="modal_new_receiver" value=""></td>
+							</tr>
+							<tr>
+								<th>받으실 곳</th>
+								<td>
+									<input type="text" id="modal_new_postcode" name="add_postcode">
+									<button type="button" onclick="modal_search_address()" class="modal_new_search_address">우편번호 검색</button><br>
+									<input type="text" id="modal_new_addr" name="add_address"><input type="text" id="modal_new_detail" name="add_addrdetail">
+								</td>
+							</tr>
+							<tr>
+								<th>휴대폰 번호</th>
+								<td><input type="text" name="add_cellphone" class="modal_new_cellphone"></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="modal_new_code">
+						<input type="checkbox" id="chk_code" checked>
+						<span>기본 배송지로 설정합니다</span>
+					</div>
+				</form>			
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="modal_btn_cancel"  data-dismiss="modal">취소</button>
-				<button type="button" class="modal_btn_regist">저장</button>
+				<button type="button" class="modal_btn_cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="modal_btn_regist" data-dismiss="modal">저장</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 수정 모달창 -->
+<div class="modal fade" id="modal_modi_address" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">배송지 수정</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="modal_modi_frm" action="">
+					<input type="hidden" name="userid" value="${loginVo.userid}">
+					<input type="hidden" name="add_no">
+					<table class="table" id="modi_address_tbl">
+						<tbody>
+							<tr>
+								<th>배송지 이름</th>
+								<td><input type="text" name="add_nickname" class="modal_modi_nickname"></td>
+							</tr>
+							<tr>
+								<th>받으실분</th>
+								<td><input type="text" name="add_receiver" class="modal_modi_receiver"></td>
+							</tr>
+							<tr>
+								<th>받으실 곳</th>
+								<td>
+									<input type="text" id="modal_modi_postcode" name="add_postcode">
+									<button type="button" onclick="modal_modi_address()" class="modal_modi_search_address">우편번호 검색</button><br>
+									<input type="text" id="modal_modi_addr" name="add_address" value="">
+									<input type="text" id="modal_modi_detail" name="add_addrdetail">
+								</td>
+							</tr>
+							<tr>
+								<th>휴대폰 번호</th>
+								<td><input type="text" name="add_cellphone" class="modal_modi_cellphone"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="modal_btn_cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="modal_btn_modify" data-dismiss="modal">수정</button>
 			</div>
 		</div>
 	</div>

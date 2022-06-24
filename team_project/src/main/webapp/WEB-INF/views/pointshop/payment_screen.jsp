@@ -392,9 +392,6 @@ $(function(){
 		
 		var form = $("#modal_frm");
 		var formData = new FormData(form[0]);
-		console.log("form: ", form);
-		console.log("formData: ", formData);
-		console.log("form[0]: ", form[0]);		
 		var url = "/pay/insertAddr";
 		
 		$.ajax({
@@ -405,9 +402,8 @@ $(function(){
 			"method" : "post",
 			"data" : formData,
 			"success" : function(rData) {
-				console.log(rData);
 				if (rData == "true") {
-					console.log(rData);
+					
 				}
 			}
 		});
@@ -423,28 +419,27 @@ $(function(){
 		var sData = {
 				"add_no" : addNo
 		}
-		console.log("sData: ", sData);
 		$.get(url, sData, function(rData){
-			console.log("rData: ", rData);
-			$("#modi_address_tbl > tbody > tr > td input").eq(0).val(rData.add_nickname)
-			$("#modi_address_tbl > tbody > tr > td input").eq(1).val(rData.add_receiver)
-			$("#modi_address_tbl > tbody > tr > td input").eq(2).val(rData.add_postcode)
-			$("#modi_address_tbl > tbody > tr > td input").eq(3).val(rData.add_address)
-			$("#modi_address_tbl > tbody > tr > td input").eq(4).val(rData.add_addrdetail)
-			$("#modi_address_tbl > tbody > tr > td input").eq(5).val(rData.add_cellphone)
+			$("#modi_address_tbl > tbody > tr > td input").eq(0).val(rData.add_nickname);
+			$("#modi_address_tbl > tbody > tr > td input").eq(1).val(rData.add_receiver);
+			$("#modi_address_tbl > tbody > tr > td input").eq(2).val(rData.add_postcode);
+			$("#modi_address_tbl > tbody > tr > td input").eq(3).val(rData.add_address);
+			$("#modi_address_tbl > tbody > tr > td input").eq(4).val(rData.add_addrdetail);
+			$("#modi_address_tbl > tbody > tr > td input").eq(5).val(rData.add_cellphone);
+			$("#modal_modi_add_no").val(rData.add_no);
+			$("#modal_modi_add_code").val(rData.add_code);
 		});
 		$("#modal_modi_address").modal("show");
 	});
 	
+	
 	$(".modal_btn_modify").click(function(e){
 		e.preventDefault();
-		var url = "/pay/modifyAddr";
+		
 		var form = $("#modal_modi_frm");
 		var formData = new FormData(form[0]);
-		console.log("form: " + form);
-		console.log("form[0]: " + form[0]);
-		console.log("formData: " + formData);
 		
+		var url = "/pay/modifyAddr";
 		$.ajax({
 			"enctype" : "multipart/form-data",  
 			"processData" : false,
@@ -453,10 +448,9 @@ $(function(){
 			"method" : "post",
 			"data" : formData,
 			"success" : function(rData) {
-				console.log(rData);
+				getAddrList();
 			}
 		});
-		getAddrList();
 		$("#address_list_modal").modal("show");
 	});
 	
@@ -467,22 +461,24 @@ $(function(){
 		var sData = {
 				"add_no" : addNo
 		}
-		console.log("sData: ", sData);
 		$.get(url, sData, function(rData){
-			console.log("rData: ", rData);
 			getAddrList();
 		});
+	});
+	
+	$("#modal_list_tbl").on("click", ".modal_choose_btn", function(e){
+		e.preventDefault();
+		
 	});
 });
 
 function getAddrList() {
 	var url = "/pay/addrList";
 	$.get(url, function(rData) {
-		console.log("rData: ", rData);
 		$("#modal_list_tbl > tbody > tr").remove();
 		var addrListTable = "<tr>";
 		$.each(rData, function(v, addrVo) {
-			addrListTable += "<td><button type='button'>선택</button></td>";
+			addrListTable += "<td><button type='button' class='modal_choose_btn' data-dismiss='modal'>선택</button></td>";
 			addrListTable += "<td>" + addrVo.add_nickname + "</td>";
 			addrListTable += "<td>" + addrVo.add_receiver + "</td>";
 			addrListTable += "<td>" + addrVo.add_address + "<br>" + addrVo.add_addrdetail + "</td>";
@@ -679,29 +675,30 @@ function modal_modi_address() {
 			<div class="modal-body">
 				<form id="modal_modi_frm" action="">
 					<input type="hidden" name="userid" value="${loginVo.userid}">
-					<input type="hidden" name="add_no">
+					<input type="hidden" name="add_no" id="modal_modi_add_no" value="">
+					<input type="hidden" name="add_code" id="modal_modi_add_code" value="">
 					<table class="table" id="modi_address_tbl">
 						<tbody>
 							<tr>
 								<th>배송지 이름</th>
-								<td><input type="text" name="add_nickname" class="modal_modi_nickname"></td>
+								<td><input type="text" name="add_nickname" class="modal_modi_nickname" value=""></td>
 							</tr>
 							<tr>
 								<th>받으실분</th>
-								<td><input type="text" name="add_receiver" class="modal_modi_receiver"></td>
+								<td><input type="text" name="add_receiver" class="modal_modi_receiver" value=""></td>
 							</tr>
 							<tr>
 								<th>받으실 곳</th>
 								<td>
-									<input type="text" id="modal_modi_postcode" name="add_postcode">
-									<button type="button" onclick="modal_modi_address()" class="modal_modi_search_address">우편번호 검색</button><br>
+									<input type="text" id="modal_modi_postcode" name="add_postcode"  value="">
+									<button type="button" onclick="modal_modi_address()" class="modal_modi_search_address" value="">우편번호 검색</button><br>
 									<input type="text" id="modal_modi_addr" name="add_address" value="">
-									<input type="text" id="modal_modi_detail" name="add_addrdetail">
+									<input type="text" id="modal_modi_detail" name="add_addrdetail" value="">
 								</td>
 							</tr>
 							<tr>
 								<th>휴대폰 번호</th>
-								<td><input type="text" name="add_cellphone" class="modal_modi_cellphone"></td>
+								<td><input type="text" name="add_cellphone" class="modal_modi_cellphone" value=""></td>
 							</tr>
 						</tbody>
 					</table>
@@ -814,10 +811,6 @@ function modal_modi_address() {
 					<tr>
 						<th>남기실 말씀</th>
 						<td><input type="text" class="pay_comment"></td>
-					</tr>
-					<tr>
-						<th>배송정보 반영</th>
-						<td>1</td>
 					</tr>
 				</tbody>
 			</table>

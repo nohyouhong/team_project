@@ -30,8 +30,8 @@
 			add_postcode = #{add_postcode}, 
 			add_address = #{add_address}, 
 			add_addrdetail = #{add_addrdetail}, 
-			add_cellphone = #{add_cellphone}, 
-			where add_no = #{add_no} and userid = #{userid}
+			add_cellphone = #{add_cellphone}
+		where add_no = #{add_no} and userid = #{userid}
 	</update>
 	
 	<delete id="deleteAddr">

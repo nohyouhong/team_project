@@ -125,7 +125,7 @@ public class CalendarController {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		MemberVo loginVo = memberService.getMemberByIdAndPw(memberVo.getUserid(), memberVo.getUserpw());
 		session.setAttribute("loginVo", loginVo);
-		return "redirect:/cal/chkAttendance?userid=" + userid;
+		return "redirect:/";
 	}
 	
 }

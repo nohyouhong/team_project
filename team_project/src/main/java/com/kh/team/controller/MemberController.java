@@ -152,7 +152,7 @@ public class MemberController {
 //		System.out.println("memberVo" + memberVo);
 		if(memberVo == null) {
 			rttr.addFlashAttribute("login_result", "fail");
-			return "redirect:/";
+			return "redirect:/member/login_form";
 		} else {
 			//장바구니 없는사람 갱신해주기
 			int myBasket = memberVo.getBasket();
@@ -173,6 +173,7 @@ public class MemberController {
 				response.addCookie(cookie);
 			}
 			String targetLocation = (String)session.getAttribute("targetLocation");
+			System.out.println("targetLoc: " + targetLocation);
 			if(targetLocation == null || targetLocation.equals("")) {
 				return "redirect:/";
 			}else {

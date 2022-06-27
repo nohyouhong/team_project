@@ -20,10 +20,10 @@ $(document).ready(function(){
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
-		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/ask/ask_list");
-		frmPaging.attr("method", "get");
-		frmPaging.submit();
+		frmpaging.find("input[name=page]").val(page);
+		frmpaging.attr("action", "/ask/ask_list");
+		frmpaging.attr("method", "get");
+		frmpaging.submit();
 	});
 });
 </script>
@@ -89,12 +89,22 @@ $(document).ready(function(){
 					<a class="page-link in_page_link" href="${pagingDto.startPage -1}">이전</a>
 				</li>
 			</c:if>
-			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
-				<li class="page-item">
-					<a class="page-link in_page_link" href="${v}">${v}</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+				<c:forEach begin="${pagingDto.startPage }"
+					end="${pagingDto.endPage }" var="i">
+					<li
+						<c:choose>
+							<c:when test="${i == pagingDto.page }">
+								class="page-item active"
+							</c:when>
+							<c:otherwise>
+								class="page-item"
+							</c:otherwise>							
+						</c:choose>
+						class="page-item">
+						<a class="page-link" href="${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
 				<li class="page-item">
 					<a class="page-link in_page_link" href="${pagingDto.endPage +1}">다음</a>
 				</li>

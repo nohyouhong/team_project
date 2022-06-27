@@ -45,8 +45,8 @@ private final String NAMESPACE = "com.kh.team.mappers.order.";
 	}
 
 	@Override
-	public OrderProductVo read(int o_lno) {
-		OrderProductVo orderVo = sqlSession.selectOne(NAMESPACE + "read", o_lno);
+	public OrderProductVo read(int l_lno) {
+		OrderProductVo orderVo = sqlSession.selectOne(NAMESPACE + "read", l_lno);
 		return orderVo;
 	}
 
@@ -66,11 +66,35 @@ private final String NAMESPACE = "com.kh.team.mappers.order.";
 	}
 
 	@Override
-	public List<OrderProductVo> getBasketProduct(int o_lno) {
-		List<OrderProductVo> basketProductList = sqlSession.selectList(NAMESPACE + "getBasketProduct", o_lno);
+	public boolean getInoByLno(int l_lno, int p_ino) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("l_lno", l_lno);
+		parameter.put("p_ino", p_ino);
+		int count = sqlSession.selectOne(NAMESPACE + "getInoByLno", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public OrderProductVo getBasketProductVoByIno(int p_ino) {
+		OrderProductVo basketProductVo = sqlSession.selectOne(NAMESPACE + "getBasketProductVoByIno", p_ino);
+		return basketProductVo;
+	}
+	
+	@Override
+	public List<OrderProductVo> getBasketProduct(int l_lno) {
+		List<OrderProductVo> basketProductList = sqlSession.selectList(NAMESPACE + "getBasketProduct", l_lno);
 		return basketProductList;
 	}
 
+	@Override
+	public List<OrderProductVo> getBasketProductOptions(int p_bno) {
+		List<OrderProductVo> basketProductOptionList = sqlSession.selectList(NAMESPACE + "getBasketProductOptions", p_bno);
+		return basketProductOptionList;
+	}
+	
 	@Override
 	public boolean basketProductCreate(OrderProductVo orderProductVo) {
 		int count = sqlSession.insert(NAMESPACE + "basketProductCreate", orderProductVo);
@@ -91,12 +115,11 @@ private final String NAMESPACE = "com.kh.team.mappers.order.";
 
 	@Override
 	public boolean basketProductDelete(int o_pno) {
-		int count = sqlSession.delete(NAMESPACE + "basketProductDelete", o_pno);
+		int count = sqlSession.update(NAMESPACE + "basketProductDelete", o_pno);
 		if(count > 0) {
 			return true;
 		}
 		return false;
 	}
-
 
 }

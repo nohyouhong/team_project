@@ -33,5 +33,6 @@ public interface RecipeBoardDao {
 	public boolean deleteContent(int r_bno);
 	public String getUseridByBno(int r_bno);
 	public boolean checkIngredInfo(String i_name);
+	public String getIngredUnitByName(String i_name);
 
 }

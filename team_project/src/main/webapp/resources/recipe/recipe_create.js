@@ -188,11 +188,10 @@ $(function() {
 		$("#modal-520057").trigger("click");
 			$("#ingredInsertBtn").click(function() {
 				var i_name = $("#i_name").val();
-				var i_address = $("#i_address").val();
+				var i_addressVal = "https://namu.wiki/w/" + i_name;
+					$("#i_address").val(i_addressVal);
 				if(i_name == "") {
 					alert("재료이름을 입력하세요.");
-				}else if(i_address == ""){
-					alert("재료의 나무위키 주소를 입력하세요.");
 				} else{
 					var form = $("#ingredInsertForm");
 					var formData = new FormData(form[0]);
@@ -228,7 +227,7 @@ $(function() {
 							var that = $(this);
 							checkIngred(that);
 						});
-					}, 1000);
+					}, 2000);
 				}
 			});
 	});
@@ -241,20 +240,30 @@ $(function() {
 	function checkIngred(that) {
 		var checkDiv = $(that).parent().parent().find("div.checkIngred"); 
 		var ingredName = $(that).val();
-		var url = "/recipeboard/checkIngredInfo";
-		var sData = {
-			"i_name" : ingredName
-		};
-		$.get(url, sData, function(rData) {
-			if(rData == "true"){
-				var checkResult = ingredName + "는 등록된 재료입니다.";
-				checkDiv.text(checkResult);
-				checkDiv.css("color", "#BEB6B6");
-			} else{
-				var checkResult = ingredName + "는 등록되지않은 재료입니다.";
-				checkDiv.text(checkResult);
-				checkDiv.css("color", "#F83801");
-			}
-		});
+		if(ingredName != "") {
+			var url = "/recipeboard/checkIngredInfo";
+			var sData = {
+					"i_name" : ingredName
+			};
+			$.get(url, sData, function(rData) {
+				if(rData == "true"){
+					var checkResult = ingredName + "는 등록된 재료입니다.";
+					checkDiv.text(checkResult);
+					checkDiv.css("color", "#BEB6B6");
+					//재료단위 넘겨주기
+					console.log("단위넘겨받기전");
+					var url2 = "/recipeboard/getIngredUnitByName";
+					$.get(url2, sData, function(rData2) {
+						console.log(rData2);
+						var unit = rData2;
+						$(that).parent().find("input.ingredUnit").val(unit); 
+					});
+				} else{
+					var checkResult = ingredName + "는 등록되지않은 재료입니다.";
+					checkDiv.text(checkResult);
+					checkDiv.css("color", "#F83801");
+				}
+			});
+		}
 	}
 });

@@ -219,4 +219,12 @@ public class RecipeBoardController {
 		boolean result = recipeBoardService.checkIngredInfo(i_name);
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value="/getIngredUnitByName", method=RequestMethod.GET, produces="application/text; charset=utf8")
+	@ResponseBody
+	public String getIngredUnitByName(String i_name) {
+		String ingredUnit = recipeBoardService.getIngredUnitByName(i_name);
+		System.out.println(ingredUnit);
+		return ingredUnit;
+	}
 }

@@ -1,6 +1,7 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -56,14 +57,41 @@ public class PointShopController {
 	}
 	
 	@RequestMapping(value="/shopping_basket", method=RequestMethod.GET)
-	public String shoppingBasket() {
+	public String shoppingBasket(HttpSession session, Model model) {
+//		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+//		int l_lno = memberVo.getBasket();
+//		OrderProductVo orderProductVo = orderService.read(l_lno);
+//		List<OrderProductVo> orderProductList = orderService.getBasketProduct(l_lno);
+//		model.addAttribute("orderProductVo", orderProductVo);
+//		model.addAttribute("orderProductList", orderProductList);
 		return "pointshop/shopping_basket";
+	}
+	
+	@RequestMapping(value="/orderProductList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<OrderProductVo> orderProductList(HttpSession session) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		int l_lno = memberVo.getBasket();
+		List<OrderProductVo> orderProductList = orderService.getBasketProduct(l_lno);
+		return orderProductList;
+	}
+	
+	@RequestMapping(value="/orderProductOptionList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<OrderProductVo> orderProductOptionList(int p_bno) {
+		List<OrderProductVo> orderProductOptionList = orderService.getBasketProductOptions(p_bno);
+		return orderProductOptionList;
+	}
+	
+	@RequestMapping(value="/deleteBasket", method=RequestMethod.GET)
+	public String deleteBasket(int[] o_pno) {
+		boolean result = orderService.basketProductDelete(o_pno);
+		return "redirect:/pointshop/shopping_basket";
 	}
 	
 	@RequestMapping(value="/addBasket", method=RequestMethod.POST)
 	@ResponseBody
 	public String addBasket(OrderProductVo orderProductVo, HttpSession session) {
-		System.out.println(orderProductVo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		orderProductVo.setL_lno(memberVo.getBasket());
 		boolean result = orderService.basketProductCreate(orderProductVo);

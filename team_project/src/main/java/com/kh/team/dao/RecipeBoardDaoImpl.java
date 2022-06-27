@@ -207,5 +207,11 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 		return false;
 	}
 
+	@Override
+	public String getIngredUnitByName(String i_name) {
+		String ingredUnit = sqlSession.selectOne(NAMESPACE + "getIngredUnitByName", i_name);
+		return ingredUnit;
+	}
+
 
 }

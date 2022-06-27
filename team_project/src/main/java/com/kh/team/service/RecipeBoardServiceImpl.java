@@ -176,4 +176,9 @@ public class RecipeBoardServiceImpl implements RecipeBoardService{
 	public boolean checkIngredInfo(String i_name) {
 		return recipeBoardDao.checkIngredInfo(i_name);
 	}
+
+	@Override
+	public String getIngredUnitByName(String i_name) {
+		return recipeBoardDao.getIngredUnitByName(i_name);
+	}
 }

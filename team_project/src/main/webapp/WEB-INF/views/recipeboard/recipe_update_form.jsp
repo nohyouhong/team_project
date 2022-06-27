@@ -24,8 +24,7 @@
 					<input type="text" class="modalInput form-control" id="i_name" name="i_name" placeholder="재료의 이름를 입력하세요. 예) 달걀, 참기름"><br>
 					<label class="modalLabel" for="i_unit">재료단위</label>
 					<input type="text" class="modalInput form-control" id="i_unit" name="i_unit" placeholder="재료의 단위를 입력하세요. 예) g, 개"><br>
-					<label class="modalLabel" for="i_address">나무위키</label>
-					<input type="text" class="modalInput form-control" id="i_address" name="i_address" placeholder="나무위키 주소를 입력하세요.">
+					<input style="display: none;" type="text" class="modalInput form-control" id="i_address" name="i_address">
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -139,23 +138,35 @@
 						<div id="addIngredList">
 							<!-- 						클론용 -->
 							<div class="addIngredDiv" style="display: none;">
-								<div class="input-group mb-2">
-									<input type="text" class="form-control inputVal ingredName"
-										placeholder="예)소고기" name="i_names"> 
-									<input type="text" class="form-control inputVal ingredAmount"
-										placeholder="예)1000g" name="i_amounts"> 
-									<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i>
+								<div class="oneIngred">
+									<i class="fa-solid fa-pen-to-square fa-lg"></i>
+									<label for="i_names" class="ingredLabel">이름</label>
+									<input type="text" id="i_names" class="form-control inputVal ingredName"
+										placeholder="예) 소고기" name="i_names"> 
+									<label for="i_amounts" class="ingredLabel">갯수</label>
+									<input type="text" id="i_amounts" class="form-control inputVal ingredAmount"
+										placeholder="예) 1/4, 1(단위는 제외)" name="i_amounts"> 
+									<label for="i_units" class="ingredLabel">단위</label>
+									<input type="text" id="i_units" class="form-control inputVal ingredUnit"
+										placeholder="재료단위(자동입력)" readonly>
+									<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i><br>
 								</div>
 								<div class="checkIngred"></div>
 							</div>
 							<!-- 						클론용 -->
 							<c:forEach items="${ingredientVoList}" var="ingredientVo">
 								<div class="addIngredDiv">
-									<div class="input-group mb-2 ">
-										<input type="text" class="form-control inputVal ingredName"
-											placeholder="예)소고기" name="i_names" value="${ingredientVo.i_name }"> 
-										<input type="text" class="form-control inputVal ingredAmount"
-											placeholder="예)1000g" name="i_amounts" value="${ingredientVo.i_amount }"> 
+									<div class="oneIngred">
+										<i class="fa-solid fa-pen-to-square fa-lg"></i>
+										<label for="i_names" class="ingredLabel">이름</label>
+										<input type="text" id="i_names" class="form-control inputVal ingredName"
+											placeholder="예) 소고기" name="i_names" value=${ingredientVo.i_name }> 
+										<label for="i_amounts" class="ingredLabel">갯수</label>
+										<input type="text" id="i_amounts" class="form-control inputVal ingredAmount"
+											placeholder="예) 1/4, 1(단위는 제외)" name="i_amounts" value=${ingredientVo.i_amount }> 
+										<label for="i_units" class="ingredLabel">단위</label>
+										<input type="text" id="i_units" class="form-control inputVal ingredUnit"
+											placeholder="재료단위(자동입력)"  value=${ingredientVo.i_unit } readonly>
 										<i class="fas fa-times-circle fa-lg ingredIconX ingredRemove"></i><br>
 									</div>
 									<div class="checkIngred">${ingredientVo.i_name }는 등록된 재료입니다</div>

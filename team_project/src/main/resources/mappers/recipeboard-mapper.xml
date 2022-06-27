@@ -83,6 +83,11 @@
 		order by l.lno asc
 	</select>
 	
+	<select id="getIngredUnitByName" resultType="string">
+		select i_unit from tbl_ingredient
+		where i_name = #{i_name}
+	</select>
+	
 	<select id="getUseridByBno" resultType="string">
 		select userid from tbl_recipe_board
 		where r_bno = #{r_bno}

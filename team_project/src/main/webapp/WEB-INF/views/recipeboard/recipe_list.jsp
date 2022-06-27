@@ -5,6 +5,7 @@
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@include file="/WEB-INF/views/include/paging.jsp" %>
 <link rel="stylesheet" href="/resources/recipe/recipe_list.css" type="text/css">
+
 <script>
 $(function(){
 	var frmPaging = $("#frmPaging");
@@ -38,6 +39,14 @@ $(function(){
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+	$("#createRecipeBtn").click(function(e) {
+		e.preventDefault();
+		
+		frmPaging.attr("action", "/recipeboard/recipeCreateForm");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 <%-- ${recipeBoardList }	 --%>
@@ -47,6 +56,10 @@ $(function(){
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="listTypeDiv">
+				<button id="createRecipeBtn" class="btn btn-outline-danger">
+					<i class="fa-solid fa-pen-to-square fa-lg"></i>
+					레시피 작성하기
+				</button>
 				<a href="r_bno" class="listType"><span class="listTypeBtn 
 				<c:if test="${pagingDto.listType == 'r_bno'}">selectTypeBtn</c:if>
 				">최신순</span></a>

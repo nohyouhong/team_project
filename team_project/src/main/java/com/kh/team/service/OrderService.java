@@ -7,13 +7,14 @@ import com.kh.team.vo.OrderProductVo;
 public interface OrderService {
 //	장바구니
 	public boolean create(String userid);
-	public OrderProductVo read(int o_lno);
+	public OrderProductVo read(int l_lno);
 	public boolean update(OrderProductVo orderProductVo);
 	
 //	장바구니물건
 	public int getNextPno();
-	public List<OrderProductVo> getBasketProduct(int o_lno);
+	public List<OrderProductVo> getBasketProduct(int l_lno);
+	public List<OrderProductVo> getBasketProductOptions(int p_bno);
 	public boolean basketProductCreate(OrderProductVo orderProductVo);
 	public boolean basketProductUpdate(OrderProductVo orderProductVo);
-	public boolean basketProductDelete(int o_pno);
+	public boolean basketProductDelete(int[] o_pnos);
 }

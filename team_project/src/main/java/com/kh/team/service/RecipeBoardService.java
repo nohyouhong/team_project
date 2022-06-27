@@ -22,4 +22,5 @@ public interface RecipeBoardService {
 	public int getCount(PagingDto pagingDto);
 	public MemberVo getMemberVoByBno(int r_bno);
 	public boolean checkIngredInfo(String i_name); 
+	public String getIngredUnitByName(String i_name);
 }

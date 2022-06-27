@@ -40,11 +40,36 @@
 		select seq_order_product_pno.nextval from dual
 	</select>
 	
+	<select id="getInoByLno" resultType="int">
+		select count(*) from tbl_order_product
+		where p_ino = #{p_ino}
+		and l_lno = #{l_lno}
+	</select>
+	
+	<select id="getBasketProductVoByIno" resultType="OrderProductVo">
+		select * from tbl_order_product
+		where p_ino = #{p_ino}
+	</select>
+	
 	<select id="getBasketProduct" resultType="OrderProductVo">
+		select distinct o.p_bno, p.p_name from 
+		tbl_order_list l join tbl_order_product o
+		    on l.l_lno = o.l_lno
+		join tbl_product_info i
+		    on o.p_ino = i.p_ino
+		join tbl_product p
+		    on i.pno = p.pno
+		where l.l_lno = #{l_lno}
+	</select>
+	
+	<select id="getBasketProductOptions" resultType="OrderProductVo">
 		select * from 
 		tbl_order_product p join tbl_product_info i
 			on p.p_ino = i.p_ino
-		where l_lno = #{l_lno}
+		join tbl_pointshop_board b
+            on p.p_bno = b.p_bno
+		where p.p_bno = #{p_bno}
+		and deletestate = 1
 		order by o_pno
 	</select>
 
@@ -58,14 +83,14 @@
 	<update id="basketProductUpdate">
 		update tbl_order_product set
 			o_amount = #{o_amount},
-			o_price = #{o_price},
 			o_sum = #{o_sum}
 		where o_pno = #{o_pno}
 	</update>
 	
-	<delete id="basketProductDelete">
-		delete from tbl_order_product
+	<update id="basketProductDelete">
+		update tbl_order_product set
+			deletestate = 0
 		where o_pno = #{o_pno}
-	</delete>
+	</update>
 	
 </mapper>

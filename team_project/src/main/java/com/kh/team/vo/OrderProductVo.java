@@ -14,10 +14,14 @@ public class OrderProductVo {
 	private int o_amount;
 	private int[] o_amounts;
 	private int o_sum;
+	private int l_sum;
 	private int[] o_sums;
 	private String p_option;
 	private String p_discount;
+	private String p_name;
+	private String p_title;
 	private int o_deliverycharge;
+	private int l_deliverycharge;
 	private int p_deliverycharge;
 	
 	public OrderProductVo() {
@@ -25,8 +29,9 @@ public class OrderProductVo {
 	}
 
 	public OrderProductVo(int o_pno, int l_lno, int p_ino, int[] p_inos, int p_bno, String o_titlepic, int o_price,
-			int[] o_prices, int o_amount, int[] o_amounts, int o_sum, int[] o_sums, String p_option, String p_discount,
-			int o_deliverycharge, int p_deliverycharge) {
+			int[] o_prices, int o_amount, int[] o_amounts, int o_sum, int l_sum, int[] o_sums, String p_option,
+			String p_discount, String p_name, String p_title, int o_deliverycharge, int l_deliverycharge,
+			int p_deliverycharge) {
 		super();
 		this.o_pno = o_pno;
 		this.l_lno = l_lno;
@@ -39,10 +44,14 @@ public class OrderProductVo {
 		this.o_amount = o_amount;
 		this.o_amounts = o_amounts;
 		this.o_sum = o_sum;
+		this.l_sum = l_sum;
 		this.o_sums = o_sums;
 		this.p_option = p_option;
 		this.p_discount = p_discount;
+		this.p_name = p_name;
+		this.p_title = p_title;
 		this.o_deliverycharge = o_deliverycharge;
+		this.l_deliverycharge = l_deliverycharge;
 		this.p_deliverycharge = p_deliverycharge;
 	}
 
@@ -174,14 +183,47 @@ public class OrderProductVo {
 		this.p_inos = p_inos;
 	}
 
+	public int getL_sum() {
+		return l_sum;
+	}
+
+	public void setL_sum(int l_sum) {
+		this.l_sum = l_sum;
+	}
+
+	public int getL_deliverycharge() {
+		return l_deliverycharge;
+	}
+
+	public void setL_deliverycharge(int l_deliverycharge) {
+		this.l_deliverycharge = l_deliverycharge;
+	}
+	
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public String getP_title() {
+		return p_title;
+	}
+
+	public void setP_title(String p_title) {
+		this.p_title = p_title;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderProductVo [o_pno=" + o_pno + ", l_lno=" + l_lno + ", p_ino=" + p_ino + ", p_inos="
 				+ Arrays.toString(p_inos) + ", p_bno=" + p_bno + ", o_titlepic=" + o_titlepic + ", o_price=" + o_price
 				+ ", o_prices=" + Arrays.toString(o_prices) + ", o_amount=" + o_amount + ", o_amounts="
-				+ Arrays.toString(o_amounts) + ", o_sum=" + o_sum + ", o_sums=" + Arrays.toString(o_sums)
-				+ ", p_option=" + p_option + ", p_discount=" + p_discount + ", o_deliverycharge=" + o_deliverycharge
-				+ ", p_deliverycharge=" + p_deliverycharge + "]";
+				+ Arrays.toString(o_amounts) + ", o_sum=" + o_sum + ", l_sum=" + l_sum + ", o_sums="
+				+ Arrays.toString(o_sums) + ", p_option=" + p_option + ", p_discount=" + p_discount + ", p_name="
+				+ p_name + ", p_title=" + p_title + ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge="
+				+ l_deliverycharge + ", p_deliverycharge=" + p_deliverycharge + "]";
 	}
-	
+
 }

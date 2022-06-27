@@ -266,6 +266,7 @@ input::-webkit-inner-spin-button {
 </style>
 <script>
 $(function() {
+	
 	//누르면 메인사진으로 보이기
 	$(".proPic").click(function() {
 		var src = $(this).attr("src");

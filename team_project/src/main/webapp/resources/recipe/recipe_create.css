@@ -138,6 +138,24 @@
 }
 .checkIngred{
 	position:relative;
-	bottom: 6px;
+	bottom: 19px;
+    left: 72px;
 	font-size: 10px;
+}
+.ingredName{
+	display: inline-block;
+	width: 32%;
+}
+.ingredAmount, .ingredUnit{
+	display: inline-block;
+	width: 21%;
+}
+.ingredLabel{
+	margin-right: 5px;
+    margin-left: 10px;
+    font-size: 15px;
+}
+.addIngredDiv{
+    position: relative;
+    bottom: 9px;
 }

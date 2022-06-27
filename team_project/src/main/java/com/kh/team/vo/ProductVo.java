@@ -16,6 +16,7 @@ public class ProductVo {
 	private int p_stock; //다오에서 받을때
 	private int[] p_stocks; //다오로 줄때
 	private int p_sum;
+	private int[] p_sums;
 	private String p_picture;
 	private String[] p_pictures;
 	
@@ -23,13 +24,14 @@ public class ProductVo {
 		super();
 	}
 	
-	public ProductVo(int pno, String p_option, int p_price, int p_discount, int p_stock) {
+	public ProductVo(int pno, String p_option, int p_price, int p_discount, int p_stock, int p_sum) {
 		super();
 		this.pno = pno;
 		this.p_option = p_option;
 		this.p_price = p_price;
 		this.p_discount = p_discount;
 		this.p_stock = p_stock;
+		this.p_sum = p_sum;
 	}
 
 	public ProductVo(String p_name, int p_ino, String p_option, int p_price, int p_discount, int p_stock) {
@@ -43,8 +45,8 @@ public class ProductVo {
 	}
 
 	public ProductVo(int pno, int p_bno, String p_name, int p_ino, String p_option, String[] p_options, int p_price,
-			int[] p_prices, int p_discount, int[] p_discounts, int p_stock, int[] p_stocks, int p_sum, String p_picture,
-			String[] p_pictures) {
+			int[] p_prices, int p_discount, int[] p_discounts, int p_stock, int[] p_stocks, int p_sum, int[] p_sums,
+			String p_picture, String[] p_pictures) {
 		super();
 		this.pno = pno;
 		this.p_bno = p_bno;
@@ -59,6 +61,7 @@ public class ProductVo {
 		this.p_stock = p_stock;
 		this.p_stocks = p_stocks;
 		this.p_sum = p_sum;
+		this.p_sums = p_sums;
 		this.p_picture = p_picture;
 		this.p_pictures = p_pictures;
 	}
@@ -182,6 +185,14 @@ public class ProductVo {
 	public void setP_sum(int p_sum) {
 		this.p_sum = p_sum;
 	}
+	
+	public int[] getP_sums() {
+		return p_sums;
+	}
+
+	public void setP_sums(int[] p_sums) {
+		this.p_sums = p_sums;
+	}
 
 	@Override
 	public String toString() {
@@ -189,6 +200,8 @@ public class ProductVo {
 				+ p_option + ", p_options=" + Arrays.toString(p_options) + ", p_price=" + p_price + ", p_prices="
 				+ Arrays.toString(p_prices) + ", p_discount=" + p_discount + ", p_discounts="
 				+ Arrays.toString(p_discounts) + ", p_stock=" + p_stock + ", p_stocks=" + Arrays.toString(p_stocks)
-				+ ", p_sum=" + p_sum + ", p_picture=" + p_picture + ", p_pictures=" + Arrays.toString(p_pictures) + "]";
+				+ ", p_sum=" + p_sum + ", p_sums=" + Arrays.toString(p_sums) + ", p_picture=" + p_picture
+				+ ", p_pictures=" + Arrays.toString(p_pictures) + "]";
 	}
+
 }

@@ -45,7 +45,7 @@
 			<mapping path="/inquiry/**/*"/>
 			<mapping path="/column/column_form"/>
 			<mapping path="/customer/ask_form"/>
-			<mapping path="/recipeboard/createForm"/>
+			<mapping path="/recipeboard/recipeCreateForm"/>
 			<mapping path="/comment/insertRecipeComment"/>
 			<mapping path="/comment/replyRecipeComment"/>
 			<mapping path="/comment/insertRecipeReview"/>

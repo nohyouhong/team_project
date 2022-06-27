@@ -13,12 +13,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
 		throws Exception{
+		System.out.println("프리핸더 실행됨");
 		HttpSession session = request.getSession();
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		if(memberVo == null) {
 			String uri = request.getRequestURI();
 			String queryString = request.getQueryString();
 			String targetLocation = uri + "?" + queryString;
+			System.out.println("프리핸더 실행됨");
 			session.setAttribute("targetLocation", targetLocation);
 			response.sendRedirect("/member/login_form");
 			return false;

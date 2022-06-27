@@ -471,7 +471,7 @@ $(function() {
 											placeholder="예) 70" name="p_discounts">
 										<label for="priceSum" class="productInfoLabel">가격</label>
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
-											placeholder="자동계산" name="p_sum" readonly>
+											placeholder="자동계산" name="p_sums" readonly>
 										<label for="p_stock" class="productInfoLabel">재고</label>
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
 											placeholder="예) 100" name="p_stocks">

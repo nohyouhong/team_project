@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ ㅍㅊ<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -522,7 +522,7 @@ $(function() {
 						<div class="purchaseCntDiv">
 							<i class="fas fa-cash-register fa-lg"></i>
 							<span class="proInfoTitle2">구매</span>
-							<span class="proInfo">${pointShopBoardVo.deliverycharge }</span>
+							<span class="proInfo">${pointShopBoardVo.p_purchasecnt }</span>
 							<span class="proUnit">구매</span>
 						</div>
 						<hr class="creHr">

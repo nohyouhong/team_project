@@ -43,12 +43,14 @@ public class PointShopServiceImpl implements PointShopService{
 		int[] p_prices = productVo.getP_prices();
 		int[] p_discounts = productVo.getP_discounts();
 		int[] p_stocks = productVo.getP_stocks();
+		int[] p_sums = productVo.getP_sums();
 		if((p_options != null && p_options.length != 0) &&
 				(p_prices != null && p_prices.length != 0) &&
 				(p_discounts != null && p_discounts.length != 0) &&
-				(p_stocks != null && p_stocks.length != 0)) {
+				(p_stocks != null && p_stocks.length != 0) &&
+				(p_sums != null && p_sums.length != 0)) {
 			for(int i = 0; i < p_options.length; i++) {
-				ProductVo productInfoVo = new ProductVo(pno, p_options[i], p_prices[i], p_discounts[i], p_stocks[i]);  
+				ProductVo productInfoVo = new ProductVo(pno, p_options[i], p_prices[i], p_discounts[i], p_stocks[i], p_sums[i]);  
 				pointShopDao.productInfoCreate(productInfoVo);
 			}
 		}

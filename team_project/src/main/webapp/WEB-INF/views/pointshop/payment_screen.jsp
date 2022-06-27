@@ -167,34 +167,31 @@
 	border-radius: 5px;
 	border: 2px solid rgb(204, 204, 204);
 	width: 610px;
+	margin: 5px;
+	appearance: none;
+}
+
+#direct_comment {
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	width: 610px;
+	display: none;
 }
 
 /* 결제 정보 css */
-.pay_final_tbl {
-	width: 1300px;
-	height: auto;
-	border-bottom: 2px solid rgb(204, 204, 204);
-	border-top: 2px solid rgb(204, 204, 204);
-	vertical-align: middle;
+.pay_final {
+	height: 150px;
+	border-radius: 5px;
+	border: 2px solid rgb(204, 204, 204);
+	padding: 10px;
 }
 
-.pay_final_tbl th {
-	width: 150px;
-	height: 60px;
-	font-size: 15px;
-	vertical-align: middle;
-}
-
-.pay_final_tbl td {
-	width: 1100px;
-	height: 60px;
-	font-size: 15px;
-	vertical-align: middle;
-	text-align: left;
-}
-
-.pay_final_tbl td span {
-	margin: 5px;
+.pay_final_div { 
+	display: flex;
+	justify-content: center;
+	margin: 30px;
+	font-size: 30px;
+	text-align: center;
 }
 
 /* 모달창1 */
@@ -337,6 +334,22 @@
 	background-color: rgb(255, 227, 219);
 }
 
+/* 주문완료 버튼 */
+#order_complete_btn {
+	margin: 10px;
+	width: 300px;
+	height: 70px;
+	border-radius: 5px;
+	border:none;
+	background-color: rgb(255, 227, 219);
+	font-size: 20px;
+	font-weight: bold;
+}
+.order_complete_div {
+	display: flex;
+	justify-content: center;
+}
+
 </style>
 <script>
 getBasicAddress();
@@ -469,12 +482,45 @@ $(function(){
 			$("#pay_address_tbl > tbody > tr > td input").eq(6).val("");
 			$("#pay_address_tbl > tbody > tr > td input").eq(7).val("");
 		}
-		
 	}); // 배송정보 radio button
 	
-	var comment_select = $("#comment_select option:selected").val();
-	console.log(comment_select);
+	$("#comment_select").change(function(){
+		var comment_select = $("#comment_select option:selected").val();
+		console.log(comment_select);
+		if (comment_select == "direct") {
+			$("#direct_comment").show();
+		} else {
+			$("#direct_comment").hide();			
+		}
+	}); // 배송 메모
+	
+	$("#email3").change(function(){
+		if($(this).val()==9){
+			$("#emailAdInput").removeAttr("disabled");
+		}else{
+			$("#emailAdInput").val($("#email3").val());
+			$("#emailAdInput").attr("disabled", true);
+		}
+    }); // email
+	
+	$("#emailIdInput").blur(function(){
+		email();
+	});
+	
+	$("#email3").change(function(){
+		email();
+	});
+	
 });
+
+function email(){
+	const email = $("#emailIdInput").val();
+	const middle = $("#emailB").text();
+	const address = $("#emailAdInput").val();
+	if(email != "" && address != "") {
+		$("#totalemail").val(email+middle+address);
+	}
+}; // 배송정보 이메일 값 hidden 입력 함수
 
 function getAddrList() {
 	var url = "/pay/addrList";
@@ -810,61 +856,94 @@ function modal_modi_address() {
 					</tr>
 					<tr>
 						<th>받으실분</th>
-						<td><input type="text" class="pay_receiver"></td>
+						<td><input type="text" name="ob_receiver" class="pay_receiver"></td>
 					</tr>
 					<tr>
 						<th>받으실 곳</th>
 						<td>
-							<input type="text" id="pay_search_postcode" name="add_postcode">
+							<input type="text" name="ob_postcode" id="pay_search_postcode" readonly>
 							<button type="button" onclick="pay_search_address()" class="pay_search_address">우편번호 검색</button><br>
-							<input type="text" id="pay_search_addr"name="add_" class="pay_search_input">
-							<input type="text" id="pay_search_detail" name="" class="pay_search_input">
+							<input type="text" name="ob_address" id="pay_search_addr" class="pay_search_input" readonly>
+							<input type="text" name="ob_address_detail" id="pay_search_detail" class="pay_search_input">
 						</td>
 					</tr>
 					<tr>
 						<th>휴대폰 번호</th>
-						<td><input type="text" class="pay_cellphone"></td>
+						<td><input type="text" name="ob_cellphone" class="pay_cellphone"></td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><input type="text" class="pay_orderer_email"></td>
+						<td>
+							<input type="hidden" name="ob_email" id="totalemail">
+							<input type="text" name="email1" id="emailIdInput" /><span id="emailB">@</span>
+							<input type="text" name="email2" id="emailAdInput" disabled/>
+							<select name="email3" id="email3">
+								<option value=''>메일 선택</option>
+								<option value='9'>직접 입력하기</option>
+								<option value="naver.com">naver.com</option>
+								<option value="daum.net">daum.net</option>
+								<option value="gmail.com">gmail.com</option>
+								<option value="kakao.com">kakao.com</option>
+								<option value="nate.com">nate.com</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>배송 메모</th>
 						<td>
-							<select id="comment_select">
-								<option value="">배송 전에 미리 연락 부탁드려요.</option>
-								<option value="">부재시 경비실에 맡겨주세요.</option>
-								<option value="">부재시 문자나 전화 주세요.</option>
-								<option value="">직접 입력</option>
-							</select>
+							<select id="comment_select" name="ob_deliver_comment">
+								<option value=""></option>
+								<option value="배송 전에 미리 연락 부탁드려요.">배송 전에 미리 연락 부탁드려요.</option>
+								<option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
+								<option value="부재시 문자나 전화 주세요.">부재시 문자나 전화 주세요.</option>
+								<option value="direct">직접 입력</option>
+							</select><br>
+							<input type="text" name="direct_comment" id="direct_comment">
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-		<div class="pay_final_div">
+		<div class="pay_final">
 			<h4>결제 정보</h4>
-			<table class="table pay_final_tbl">
-				<tbody>
-					<tr>
-						<th>상품 합계 포인트</th>
-						<td><span class="pay_prod_sum">1,000</span>
-					</tr>
-					<tr>
-						<th>배송비</th>
-						<td><span class="pay_deliver_fee">20,000</span>
-					</tr>
-					<tr>
-						<th>최종 결제 포인트</th>
-						<td><span class="pay_final_point">21,000</span>
-					</tr>
-				</tbody>
+			<table>
+				<tr>
+					<td>
+						<div class="pay_final_div">
+							<span>상품 합계 포인트</span>
+							<span>1,000</span>				
+						</div>
+					</td>
+					<td>
+						<div class="pay_final_div">
+							<span><i class="fa-solid fa-plus"></i></span>				
+						</div>
+					</td>
+					<td>
+						<div class="pay_final_div">
+							<span>총 배송비</span>
+							<span>20,000</span>				
+						</div>
+					</td>
+					<td>
+						<div class="pay_final_div">
+							<span><i class="fa-solid fa-equals"></i></span>				
+						</div>
+					</td>
+					<td>
+						<div class="pay_final_div">
+							<span>최종 결제 포인트</span>
+							<span>21,000</span>				
+						</div>
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div>
-			<button type="button" onclick="">주문 완료</button>
+			<div class="order_complete_div">
+				<button type="button" id="order_complete_btn" onclick="">주문 완료</button>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-2"></div>

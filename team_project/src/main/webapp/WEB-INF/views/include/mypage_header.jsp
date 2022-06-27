@@ -81,7 +81,7 @@ $(function() {
 							<li class="mypage-item">
 								<a class="nav-link menuEx" href="" id="attendspan">
 									<span class="attendance"> 
-										<span class="jua">${loginVo.m_point}</span><br> <span class="jua">포인트</span>
+										<span class="jua">${nowPoint}</span><br> <span class="jua">현재 포인트</span>
 									</span> 
 									<span class="attendance" id="lineleft"> 
 										<span class="jua">${loginVo.m_totalattend}</span><br> <span class="jua">총누적 출석</span>

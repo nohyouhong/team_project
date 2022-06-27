@@ -31,7 +31,7 @@
 				<button type="button" id="ingredInsertBtn" class="btn btn-outline-primary">등록하기
 				</button>
 				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
-					그만두기</button>
+					닫기</button>
 			</div>
 		</div>
 	</div>
@@ -48,7 +48,7 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
-							<label for="r_title" class="createTitle">레시피 제목</label> <input
+							<label for="r_title" class="createTitle">요리 제목</label> <input
 								type="text" class="form-control inputVal" id="r_title"
 								name="r_title" placeholder="예)김치찌개 끓이기" />
 						</div>
@@ -109,7 +109,7 @@
 				<div class="row">
 					<div class="col-md-3">
 						<input type="text" class="form-control" value="재료"
-							style="background: #FFFECC" />
+							style="background: #FFFECC" readonly/>
 					</div>
 					<div class="col-md-8">
 						<div id="addIngredList">

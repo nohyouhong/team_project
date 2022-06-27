@@ -239,7 +239,7 @@ $(function() {
 	});
 	
 	//원가/할인율 자동계산
-	$(".p_discount").change(function() {
+	$("#productOpList").on("change", ".p_discount", function() {
 		var infoDiv = $(this).parent();
 		var p_price = $(infoDiv).find(".p_price").val();
 		var p_discount = 100 - $(this).val();
@@ -252,7 +252,7 @@ $(function() {
 		}
 	});
 	//원가/할인율 자동계산
-	$(".p_price").change(function() {
+	$("#productOpList").on("change", ".p_price", function() {
 		var infoDiv = $(this).parent();
 		var p_price = $(this).val();
 		var p_discount = $(infoDiv).find(".p_discount").val();
@@ -461,7 +461,7 @@ $(function() {
 									<div class="productStepTitle">1</div>
 									<div class="oneProductInfo">
 										<label for="p_option" class="productInfoLabel">물품명</label>
-										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_optionl"
+										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
 											placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
 										<label for="p_price" class="productInfoLabel">원가</label>
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
@@ -470,8 +470,8 @@ $(function() {
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
 											placeholder="예) 70" name="p_discounts">
 										<label for="priceSum" class="productInfoLabel">가격</label>
-										<input type="text" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
-											placeholder="자동계산" readonly>
+										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
+											placeholder="자동계산" name="p_sum" readonly>
 										<label for="p_stock" class="productInfoLabel">재고</label>
 										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
 											placeholder="예) 100" name="p_stocks">

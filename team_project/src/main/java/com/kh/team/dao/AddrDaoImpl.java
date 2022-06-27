@@ -62,5 +62,11 @@ public class AddrDaoImpl implements AddrDao {
 		}
 		return false;
 	}
+
+	@Override
+	public AddrVo getBasicAddr(String userid) {
+		AddrVo addrVo = sqlSession.selectOne(NAMESPACE + "getBasicAddr", userid);
+		return addrVo;
+	}
 	
 }

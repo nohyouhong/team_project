@@ -11,4 +11,5 @@ public interface AddrService {
 	public AddrVo readAddr(int add_no);
 	public boolean updateAddr(AddrVo addrVo);
 	public boolean deleteAddr(int add_no);
+	public AddrVo getBasicAddr(String userid);
 }

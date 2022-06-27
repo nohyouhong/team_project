@@ -44,5 +44,10 @@
 		delete from tbl_address
 		where add_no = #{add_no}
 	</delete>
+	
+	<select id="getBasicAddr" resultType="AddrVo">
+		select * from tbl_address
+		where userid = #{userid} and add_code = 1002
+	</select>
 
 </mapper>

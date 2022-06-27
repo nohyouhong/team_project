@@ -369,6 +369,7 @@
 
 </style>
 <script>
+getBasicAddress();
 $(function(){
 	$("#address_list_btn").click(function(e){
 		e.preventDefault();
@@ -403,12 +404,11 @@ $(function(){
 			"data" : formData,
 			"success" : function(rData) {
 				if (rData == "true") {
-					
+					getAddrList();		
 				}
 			}
 		});
 		$(".new_address_tbl td input").val("");
-		getAddrList();
 		$("#address_list_modal").modal("show");
 	});
 	
@@ -509,6 +509,26 @@ function getAddrList() {
 		$("#modal_list_tbl>tbody").append(addrListTable);
 	});
 } // getAddrList()
+
+function getBasicAddress(){
+	var url = "/pay/getBasicAddr";
+	$.get(url, function(rData) {
+		console.log("rData: ", rData);
+		if (rData != "") {
+			$("#basic_addr_rdo").prop("checked", true);
+			$("#pay_address_tbl > tbody > tr > td input").eq(3).val(rData.add_receiver);
+			$("#pay_address_tbl > tbody > tr > td input").eq(4).val(rData.add_postcode);
+			$("#pay_address_tbl > tbody > tr > td input").eq(5).val(rData.add_address);
+			$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);
+			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.add_cellphone);
+			if (("#edit_addr_rdo").is(':check')) {
+				
+			}
+		} else if (rData == "") {
+			$("#edit_addr_rdo").prop("checked", true);
+		}
+	});
+}
 
 function pay_search_address() {
     new daum.Postcode({
@@ -799,9 +819,9 @@ function modal_modi_address() {
 					<tr>
 						<th>배송지 확인</th>
 						<td>
-							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">기본 배송지</label>
-							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">최근 배송지</label>
-							<input type="radio" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">직접 입력</label>
+							<input type="radio" id="basic_addr_rdo" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">기본 배송지</label>
+							<input type="radio" id="recent_addr_rdo" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">최근 배송지</label>
+							<input type="radio" id="edit_addr_rdo" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">직접 입력</label>
 							<button type="button" id="address_list_btn" class="new_address_btn">배송지 관리</button>
 						</td>
 					</tr>

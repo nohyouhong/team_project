@@ -36,6 +36,7 @@ public class PayController {
 	public String insertAddr(AddrVo addrVo) {
 		System.out.println("PayController, insertAddr, addrVo: " + addrVo);
 		boolean result = addrService.insertAddr(addrVo);
+		System.out.println("PayController, insertAddr, result: " + result);		
 		return String.valueOf(result);
 	}
 	
@@ -70,4 +71,12 @@ public class PayController {
 		return String.valueOf(result);
 	}
 	
+	@RequestMapping(value="/getBasicAddr", method=RequestMethod.GET)
+	@ResponseBody
+	public AddrVo getBasicAddr(HttpSession session) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		AddrVo addrVo = addrService.getBasicAddr(userid);
+		return addrVo;
+	}
 }

@@ -90,8 +90,16 @@
 	</head>
 <script>
 $(function(){
-	
-}); // function
+	var attend_success = '${attend_success}'
+	var attend_fail = '${attend_fail}'
+	console.log(attend_success);
+	console.log(attend_fail);
+	if (attend_fail == 'false') {
+		alert("이미 출석체크를 하였습니다.")
+	} else if (attend_success == 'true') {
+		alert("출석완료!포인트가 지급되었습니다.")
+	}
+});
 </script>
 	<body>
 	<div class="colorlib-loader"></div>

@@ -32,6 +32,11 @@ $(function(){
 		alert("비밀번호 재설정에 실패하였습니다.")
 	}
 	
+	var login_result = "${login_result}"
+	if (login_result == "fail") {
+		alert("로그인에 실패하였습니다.\r\n다시 로그인해주세요.")
+	}
+
 }); // function()
 </script>
 	<div class="container-fluid window">

@@ -9,6 +9,7 @@ public class OrderProductVo {
 	private int[] p_inos;
 	private int p_bno;
 	private String o_titlepic;
+	private int p_price;
 	private int o_price;
 	private int[] o_prices;
 	private int o_amount;
@@ -28,10 +29,10 @@ public class OrderProductVo {
 		super();
 	}
 
-	public OrderProductVo(int o_pno, int l_lno, int p_ino, int[] p_inos, int p_bno, String o_titlepic, int o_price,
-			int[] o_prices, int o_amount, int[] o_amounts, int o_sum, int l_sum, int[] o_sums, String p_option,
-			String p_discount, String p_name, String p_title, int o_deliverycharge, int l_deliverycharge,
-			int p_deliverycharge) {
+	public OrderProductVo(int o_pno, int l_lno, int p_ino, int[] p_inos, int p_bno, String o_titlepic, int p_price,
+			int o_price, int[] o_prices, int o_amount, int[] o_amounts, int o_sum, int l_sum, int[] o_sums,
+			String p_option, String p_discount, String p_name, String p_title, int o_deliverycharge,
+			int l_deliverycharge, int p_deliverycharge) {
 		super();
 		this.o_pno = o_pno;
 		this.l_lno = l_lno;
@@ -39,6 +40,7 @@ public class OrderProductVo {
 		this.p_inos = p_inos;
 		this.p_bno = p_bno;
 		this.o_titlepic = o_titlepic;
+		this.p_price = p_price;
 		this.o_price = o_price;
 		this.o_prices = o_prices;
 		this.o_amount = o_amount;
@@ -214,16 +216,24 @@ public class OrderProductVo {
 	public void setP_title(String p_title) {
 		this.p_title = p_title;
 	}
+	
+	public int getP_price() {
+		return p_price;
+	}
+
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
+	}
 
 	@Override
 	public String toString() {
 		return "OrderProductVo [o_pno=" + o_pno + ", l_lno=" + l_lno + ", p_ino=" + p_ino + ", p_inos="
-				+ Arrays.toString(p_inos) + ", p_bno=" + p_bno + ", o_titlepic=" + o_titlepic + ", o_price=" + o_price
-				+ ", o_prices=" + Arrays.toString(o_prices) + ", o_amount=" + o_amount + ", o_amounts="
-				+ Arrays.toString(o_amounts) + ", o_sum=" + o_sum + ", l_sum=" + l_sum + ", o_sums="
+				+ Arrays.toString(p_inos) + ", p_bno=" + p_bno + ", o_titlepic=" + o_titlepic + ", p_price=" + p_price
+				+ ", o_price=" + o_price + ", o_prices=" + Arrays.toString(o_prices) + ", o_amount=" + o_amount
+				+ ", o_amounts=" + Arrays.toString(o_amounts) + ", o_sum=" + o_sum + ", l_sum=" + l_sum + ", o_sums="
 				+ Arrays.toString(o_sums) + ", p_option=" + p_option + ", p_discount=" + p_discount + ", p_name="
 				+ p_name + ", p_title=" + p_title + ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge="
 				+ l_deliverycharge + ", p_deliverycharge=" + p_deliverycharge + "]";
 	}
-
+	
 }

@@ -60,6 +60,7 @@
 		join tbl_product p
 		    on i.pno = p.pno
 		where l.l_lno = #{l_lno}
+		and deletestate = 1
 	</select>
 	
 	<select id="getBasketProductOptions" resultType="OrderProductVo">

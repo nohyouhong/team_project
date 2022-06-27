@@ -535,8 +535,8 @@ $(function() {
 											<c:if test="${count.index < 11}">0</c:if>${count.index + 1 }.
 										</span>
 										<span>${productVo.p_option}</span> :
-										<span>${productVo.p_price}</span> :
-										<span>${productVo.p_stock}</span> 
+										<span><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_price }" />포인트</span> : 
+										<span><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_stock }" />개</span> 
 									</option>
 								</c:forEach>
 							</select>

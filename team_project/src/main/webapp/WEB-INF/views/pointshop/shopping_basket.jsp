@@ -239,6 +239,9 @@ $(function() {
 	//제품종류별 커다란 테이블 생성 
 	orderProductTableSetting();
 	function orderProductTableSetting(){
+		var allDeliveryCharge = 0;
+		var allSum = 0;
+		var allIndex = 0;
 		$(".oneProductListDiv:gt(0)").remove();
 		url = "/pointshop/orderProductList";
 		$.get(url, function(rData) {
@@ -254,6 +257,7 @@ $(function() {
 				$(".inputProductListDiv").append(oneProductList);
 				//각각의 제품의 테이블안에 옵션별 각 정보 넣기
 				var index = 0; //배달비 하나로 묵으려는 인덱스
+				var priceSum = 0;	
 				$(oneProductList).find("tr.oneProInfoInputDiv:gt(0)").remove();
 				var url = "/pointshop/orderProductOptionList";
 				var sData = {
@@ -268,35 +272,56 @@ $(function() {
 						var p_title = $(this)[0].p_title;						
 						var p_option = $(this)[0].p_option;						
 						var o_amount = $(this)[0].o_amount.toLocaleString('ko-kr');						
-						var o_price = $(this)[0].o_price.toLocaleString('ko-kr');						
+						var p_price = ($(this)[0].p_price * $(this)[0].o_amount).toLocaleString('ko-kr');						
 						var p_discount = $(this)[0].p_discount;						
-						var o_sum = $(this)[0].o_sum.toLocaleString('ko-kr');						
+						var o_sum = $(this)[0].o_sum.toLocaleString('ko-kr');	
+						priceSum += parseInt($(this)[0].o_sum);
+						allSum += parseInt($(this)[0].o_sum);
+						console.log("allSum", allSum);
 						var o_deliverycharge = $(this)[0].o_deliverycharge.toLocaleString('ko-kr');						
 						$(oneTr).find(".orderProductCheck").val(o_pno);
 						$(oneTr).find(".proImage").attr("src", o_titlepic);
 						$(oneTr).find("span.proTitle").text(p_title);
 						$(oneTr).find("div.proOption").text(p_option);
 						$(oneTr).find(".proAmount").text(o_amount);
-						$(oneTr).find(".proPrice").text(o_price);
+						$(oneTr).find(".proPrice").text(p_price);
 						$(oneTr).find(".proDiscount").text(p_discount);
 						$(oneTr).find(".proSum").text(o_sum);
 						if(index == 0){
 							if(parseInt(o_deliverycharge) == 0){
 								$(oneTr).find("span.proDelivery").text("무료배송");
 								$(oneTr).find(".proDeliveryUnit").remove();
+								
 							}else {
-								$(oneTr).find("span.proDelivery").text(o_deliverycharge);
+								$(oneTr).find("span.proDelivery").text(o_deliverycharge.toLocaleString('ko-kr'));
 							}
+							$(oneProductList).find("span.infoEx").eq(1).text(o_deliverycharge.toLocaleString('ko-kr'));
+							allDeliveryCharge += parseInt($(this)[0].o_deliverycharge);
 						}else {
 							$(oneTr).find("td.proDelivery").remove();
 							$(oneProductList).find("td.proDelivery").eq(1).attr("rowspan", index + 1);
 						}
+						//배송상품합계내기
+						$(oneProductList).find("span.infoTitle").eq(1).text(index + 1);
+						$(oneProductList).find("span.infoEx").eq(0).text(priceSum.toLocaleString('ko-kr'));
+						var allPriceSum = priceSum + parseInt($(this)[0].o_deliverycharge);
+						$(oneProductList).find("span.infoEx").eq(2).text(allPriceSum.toLocaleString('ko-kr'));
+						
 						$(oneProductList).find(".proInfoInputDiv").append(oneTr);
 						index++;
+						allIndex++;
 					});
 				});
 			});
 		});
+		setTimeout(function() {
+			console.log("allSum", allSum);
+			console.log("allDeliveryCharge", allDeliveryCharge);
+			$(".allInfoTitle").eq(1).text(allIndex);
+			$(".allInfoEx").eq(0).text(allSum.toLocaleString('ko-kr'));
+			$(".allInfoEx").eq(1).text(allDeliveryCharge.toLocaleString('ko-kr'));
+			$(".allInfoEx").eq(2).text((allSum + allDeliveryCharge).toLocaleString('ko-kr'));
+		}, 1000);
 	}
 	
 	//체크박스 설정(한방한방) - attr로 배웟지만 무조건 prop쓰자!! attr 안먹히는상황잇음! 걍 prop써
@@ -357,16 +382,17 @@ $(function() {
 	});
 	//선택 상품 주문
 	$("#selectedPurchaseBtn").click(function() {
-		
+		orderForm.attr("action", "/pointshop/");
+		orderForm.attr("method", "get");
+		orderForm.submit();
 	});
 	//모든 상품 주문
 	$("#allPurchaseBtn").click(function() {
-		
+		orderForm.attr("action", "/pointshop/");
+		orderForm.attr("method", "get");
+		orderForm.submit();
 	});
-	//선택 상품 삭제
-	$("#selectedDeleteBtn").click(function() {
-		
-	});
+	
 });
 </script>
 <div class="container-fluid">
@@ -467,20 +493,20 @@ $(function() {
 										<span class="proSumInfoDiv">
 											<span class="infoTitle">총 </span>
 											<span class="infoTitle">2</span>
-											<span class="infoTitle">개의 배송금액</span><br>
-											<span class="infoEx"><fmt:formatNumber type="number" maxFractionDigits="3" value="16000" /></span>
+											<span class="infoTitle">개의 주문금액</span><br>
+											<span class="infoEx"></span>
 											<span class="infoEx2">원</span>
 										</span>
 										<i class="fa-solid fa-circle-plus fa-lg infoIcon"></i>
 										<span class="proSumInfoDiv">
 											<span class="infoTitle">배송비</span><br>
-											<span class="infoEx"><fmt:formatNumber type="number" maxFractionDigits="3" value="6000" /></span>
+											<span class="infoEx"></span>
 											<span class="infoEx2">원</span>
 										</span>
 										<i class="fa-solid fa-circle-pause fa-lg fa-rotate-90 infoEx infoIcon"></i>
 										<span class="proSumInfoDiv2">
 											<span class="infoTitle">합계</span><br>
-											<span class="infoEx"><fmt:formatNumber type="number" maxFractionDigits="3" value="16000" /></span>
+											<span class="infoEx"></span>
 											<span class="infoEx2">원</span>
 										</span>
 									</div>
@@ -497,21 +523,21 @@ $(function() {
 						<div class="allProSumDiv">
 							<span class="allProSumInfoDiv">
 								<span class="allInfoTitle">총 </span>
-								<span class="allInfoTitle">2</span>
+								<span class="allInfoTitle"></span>
 								<span class="allInfoTitle">개의 배송금액</span><br>
-								<span class="allInfoEx"><fmt:formatNumber type="number" maxFractionDigits="3" value="16000" /></span>
+								<span class="allInfoEx"></span>
 								<span class="allInfoEx2">원</span>
 							</span>
 							<i class="fa-solid fa-circle-plus fa-lg infoIcon"></i>
 							<span class="allProSumInfoDiv">
 								<span class="allInfoTitle">배송비</span><br>
-								<span class="allInfoEx"><fmt:formatNumber type="number" maxFractionDigits="3" value="6000" /></span>
+								<span class="allInfoEx"></span>
 								<span class="allInfoEx2">원</span>
 							</span>
 							<i class="fa-solid fa-circle-pause fa-lg fa-rotate-90 infoEx infoIcon"></i>
 							<span class="allProSumInfoDiv2">
 								<span class="allInfoTitle">합계</span><br>
-								<span class="allInfoEx"><fmt:formatNumber type="number" maxFractionDigits="3" value="16000" /></span>
+								<span class="allInfoEx"></span>
 								<span class="allInfoEx2">원</span>
 							</span>
 						</div>

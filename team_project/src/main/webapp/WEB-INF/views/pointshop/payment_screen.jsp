@@ -163,40 +163,10 @@
 	width: 300px;
 }
 
-.pay_comment {
+#comment_select {
 	border-radius: 5px;
 	border: 2px solid rgb(204, 204, 204);
 	width: 610px;
-}
-
-/* 주문자 정보 css */
-.pay_orderer_tbl {
-	width: 1300px;
-	height: auto;
-	border-bottom: 2px solid rgb(204, 204, 204);
-	border-top: 2px solid rgb(204, 204, 204);
-	vertical-align: middle;
-}
-
-.pay_orderer_tbl th {
-	width: 150px;
-	height: 60px;
-	font-size: 15px;
-	vertical-align: middle;
-}
-
-.pay_orderer_tbl td {
-	width: 1100px;
-	height: 60px;
-	font-size: 15px;
-	vertical-align: middle;
-	text-align: left;
-}
-
-.pay_orderer_tbl td input {
-	border-radius: 5px;
-	border: 2px solid rgb(204, 204, 204);
-	margin: 5px;
 }
 
 /* 결제 정보 css */
@@ -371,16 +341,17 @@
 <script>
 getBasicAddress();
 $(function(){
+	
 	$("#address_list_btn").click(function(e){
 		e.preventDefault();
 		getAddrList();
 		$("#address_list_modal").modal("show");
-	});
+	}); // modal list 출력 버튼
 	
 	$("#modal_new_address_btn").click(function(e){
 		e.preventDefault();
 		$("#modal_new_address").modal("show");
-	});
+	}); // modal insert창 출력 버튼
 	
 	$(".modal_btn_regist").click(function(e){
 		e.preventDefault();
@@ -410,7 +381,7 @@ $(function(){
 		});
 		$(".new_address_tbl td input").val("");
 		$("#address_list_modal").modal("show");
-	});
+	}); // modal insert창 저장 버튼
 	
 	$("#modal_list_tbl").on("click", ".modal_modi_btn", function(e){
 		e.preventDefault();
@@ -430,7 +401,7 @@ $(function(){
 			$("#modal_modi_add_code").val(rData.add_code);
 		});
 		$("#modal_modi_address").modal("show");
-	});
+	}); // modal list 수정 버튼
 	
 	
 	$(".modal_btn_modify").click(function(e){
@@ -452,7 +423,7 @@ $(function(){
 			}
 		});
 		$("#address_list_modal").modal("show");
-	});
+	}); // modal 수정창 수정완료 버튼
 	
 	$("#modal_list_tbl").on("click", ".modal_del_btn", function(e){
 		e.preventDefault();
@@ -464,7 +435,7 @@ $(function(){
 		$.get(url, sData, function(rData){
 			getAddrList();
 		});
-	});
+	}); // modal list delete 버튼
 	
 	$("#modal_list_tbl").on("click", ".modal_choose_btn", function(e){
 		e.preventDefault();
@@ -482,8 +453,27 @@ $(function(){
 			$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);
 			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.add_cellphone);
 		});
+	}); // modal list 선택 버튼
+	
+	$(".new_saved_address_rdo").on("click", function(){
+		var chked_rdo = $(".new_saved_address_rdo:checked").val();
 		
-	});
+		if (chked_rdo == "basic") {
+			getBasicAddress();
+		} else if (chked_rdo == "recent") {
+			
+		} else if (chked_rdo == "edit") {
+			$("#pay_address_tbl > tbody > tr > td input").eq(3).val("");
+			$("#pay_address_tbl > tbody > tr > td input").eq(4).val("");
+			$("#pay_address_tbl > tbody > tr > td input").eq(5).val("");
+			$("#pay_address_tbl > tbody > tr > td input").eq(6).val("");
+			$("#pay_address_tbl > tbody > tr > td input").eq(7).val("");
+		}
+		
+	}); // 배송정보 radio button
+	
+	var comment_select = $("#comment_select option:selected").val();
+	console.log(comment_select);
 });
 
 function getAddrList() {
@@ -508,7 +498,7 @@ function getAddrList() {
 		
 		$("#modal_list_tbl>tbody").append(addrListTable);
 	});
-} // getAddrList()
+} // getAddrList() modal address list 출력 함수
 
 function getBasicAddress(){
 	var url = "/pay/getBasicAddr";
@@ -521,14 +511,15 @@ function getBasicAddress(){
 			$("#pay_address_tbl > tbody > tr > td input").eq(5).val(rData.add_address);
 			$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);
 			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.add_cellphone);
-			if (("#edit_addr_rdo").is(':check')) {
-				
-			}
 		} else if (rData == "") {
 			$("#edit_addr_rdo").prop("checked", true);
 		}
 	});
-}
+} // radio button 기본 배송지 함수
+
+function getRecentAddress(){
+	
+}; // radio button 최근 배송지 함수
 
 function pay_search_address() {
     new daum.Postcode({
@@ -554,58 +545,50 @@ function pay_search_address() {
             document.getElementById("pay_search_detail").focus();
         }
     }).open();
-}
+} // radio button 직접 입력의 주소 api
 
 function modal_search_address() {
     new daum.Postcode({
         oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+          
+        	var addr = ''; 
+            var extraAddr = ''; 
 
-            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var addr = ''; // 주소 변수
-            var extraAddr = ''; // 참고항목 변수
-
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+            if (data.userSelectedType === 'R') { 
                 addr = data.roadAddress;
-            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+            } else { 
                 addr = data.jibunAddress;
             }
 
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+           
             document.getElementById('modal_new_postcode').value = data.zonecode;
             document.getElementById("modal_new_addr").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
+            
             document.getElementById("modal_new_detail").focus();
         }
     }).open();
-} // 배송지 등록 모달 주소api
+} // modal 배송지 등록 주소api
 function modal_modi_address() {
     new daum.Postcode({
         oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var addr = ''; // 주소 변수
-            var extraAddr = ''; // 참고항목 변수
+        	var addr = ''; 
+            var extraAddr = ''; 
 
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+            
+            if (data.userSelectedType === 'R') { 
                 addr = data.roadAddress;
-            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+            } else { 
                 addr = data.jibunAddress;
             }
 
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('modal_modi_postcode').value = data.zonecode;
             document.getElementById("modal_modi_addr").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
+            
             document.getElementById("modal_modi_detail").focus();
         }
     }).open();
-} // 배송지 수정 모달 주소 api
+} // modal 배송지 수정 주소 api
 </script>
 <!-- 리스트 모달창 -->
 <div class="modal fade" id="address_list_modal" role="dialog"
@@ -819,9 +802,9 @@ function modal_modi_address() {
 					<tr>
 						<th>배송지 확인</th>
 						<td>
-							<input type="radio" id="basic_addr_rdo" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">기본 배송지</label>
-							<input type="radio" id="recent_addr_rdo" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">최근 배송지</label>
-							<input type="radio" id="edit_addr_rdo" class="new_saved_address_rdo" name="new_saved_address"><label for="new_saved_address">직접 입력</label>
+							<input type="radio" id="basic_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="basic"><label for="new_saved_address">기본 배송지</label>
+							<input type="radio" id="recent_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="recent"><label for="new_saved_address">최근 배송지</label>
+							<input type="radio" id="edit_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="edit"><label for="new_saved_address">직접 입력</label>
 							<button type="button" id="address_list_btn" class="new_address_btn">배송지 관리</button>
 						</td>
 					</tr>
@@ -843,28 +826,19 @@ function modal_modi_address() {
 						<td><input type="text" class="pay_cellphone"></td>
 					</tr>
 					<tr>
-						<th>남기실 말씀</th>
-						<td><input type="text" class="pay_comment"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		
-		<div class="pay_orderer_div">
-			<h4>주문자 정보</h4>
-			<table class="table pay_orderer_tbl">
-				<tbody>
-					<tr>
-						<th>주문하시는분</th>
-						<td><input type="text" class="pay_orderer"></td>
-					</tr>
-					<tr>
-						<th>휴대폰 번호</th>
-						<td><input type="text" class="pay_orderer_cellphone"></td>
-					</tr>
-					<tr>
 						<th>이메일</th>
 						<td><input type="text" class="pay_orderer_email"></td>
+					</tr>
+					<tr>
+						<th>배송 메모</th>
+						<td>
+							<select id="comment_select">
+								<option value="">배송 전에 미리 연락 부탁드려요.</option>
+								<option value="">부재시 경비실에 맡겨주세요.</option>
+								<option value="">부재시 문자나 전화 주세요.</option>
+								<option value="">직접 입력</option>
+							</select>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -888,6 +862,9 @@ function modal_modi_address() {
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div>
+			<button type="button" onclick="">주문 완료</button>
 		</div>
 	</div>
 	<div class="col-md-2"></div>

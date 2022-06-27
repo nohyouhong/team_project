@@ -1,11 +1,13 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +27,6 @@ import com.kh.team.service.MemberService;
 import com.kh.team.service.OrderService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
-import com.kh.team.vo.MessageVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointVo;
 
@@ -105,7 +106,13 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/login_form", method=RequestMethod.GET)
-	public String loginForm() {
+	public String loginForm(HttpSession session, HttpServletRequest request) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		if(memberVo == null) {
+			String url = request.getHeader("referer");
+			String targetLocation = url;
+			session.setAttribute("targetLocation", targetLocation);
+		}
 		return "member/login_form";
 	}
 	
@@ -147,7 +154,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/login_run", method=RequestMethod.POST)
 	public String login(String userid, String userpw, String saveId, 
-			HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
+			HttpSession session, RedirectAttributes rttr, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		MemberVo memberVo = memberService.getMemberByIdAndPw(userid, userpw);
 //		System.out.println("memberVo" + memberVo);
 		if(memberVo == null) {
@@ -172,6 +179,7 @@ public class MemberController {
 				cookie.setMaxAge(0); 
 				response.addCookie(cookie);
 			}
+			
 			String targetLocation = (String)session.getAttribute("targetLocation");
 			System.out.println("targetLoc: " + targetLocation);
 			if(targetLocation == null || targetLocation.equals("")) {

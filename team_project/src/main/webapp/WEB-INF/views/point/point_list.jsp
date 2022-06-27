@@ -24,25 +24,43 @@
 	#pointdiv{
 		margin:auto;
 		display:flex;
+		border: medium ridge aliceblue;
+		border-radius:5px;
 	}
 	.pointh5{
-		margin:60px auto 50px auto;
+		margin:20px auto 20px auto;
 	}
 	#betweenh5{
 		border-right:1px solid #DFD9D8;
 		height:150px;
 		margin:10px auto 10px auto;
 	}
+	#pointdiv{
+		display:flex;
+		margin-bottom:50px;
+	}
+	.pointspan{
+		font-size:50px;
+	}
+	.pit{
+		text-align: center;
+	}
+	#pointdiv1{
+		border-right:1px dashed #dee2e6;
+	}
 </style>
-
 <div class="row">
 	<div class="col-md-12">
 		<div class="tabbable" id="tabs-667120">
-			<div class="col-md-6" id="pointdiv" style="display: none;">
-				
-				<h5 class="pointh5">현재 포인트</h5>
-				<div id="betweenh5"></div>
-				<h5 class="pointh5">누적 포인트</h5>
+			<div id="pointdiv">
+				<div class="col-md-6 pit" id="pointdiv1">
+					<h5 class="pointh5">현재 포인트</h5>
+					<span class="pointspan">${nowPoint}</span>
+				</div>
+				<div class="col-md-6 pit">
+					<h5 class="pointh5">누적 포인트</h5>
+					<span class="pointspan">${allPoint}</span>
+				</div>
 			</div>
 			<ul class="nav nav-tabs">
 				<li class="nav-item"><a class="nav-link active show"
@@ -81,7 +99,7 @@
 							<tr>
 								<th>#</th>
 								<th>내용</th>
-								<th>받는사람</th>
+								<th>포인트</th>
 								<th>날짜</th>
 							</tr>
 						</thead>

@@ -126,6 +126,18 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int sumPoint(String userid) {
+		int allPoint = pointDao.AllPoint(userid);
+		return allPoint;
+	}
+
+	@Override
+	public int nowPoint(String userid) {
+		int nowPoint = pointDao.nowPoint(userid);
+		return nowPoint;
+	}
+
 	
 
 	

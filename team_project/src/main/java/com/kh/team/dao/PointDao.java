@@ -18,5 +18,7 @@ public interface PointDao {
 	public List<PointVo> getPoint_list(String userid);
 	public void updatePoint(PointVo pointVo);
 	public void deletePoint(int pno);
+	public int AllPoint(String userid);
+	public int nowPoint(String userid);
 	
 }

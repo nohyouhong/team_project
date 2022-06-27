@@ -36,5 +36,17 @@ public class PointDaoImpl implements PointDao {
 		sqlSession.delete(NAMESPACE + "deletePoint", pno);
 	}
 
+	@Override
+	public int AllPoint(String userid) {
+		int allPoint = sqlSession.selectOne(NAMESPACE+"sumPoint", userid);
+		return allPoint;
+	}
+
+	@Override
+	public int nowPoint(String userid) {
+		int nowPoint = sqlSession.selectOne(NAMESPACE+"nowPoint", userid);
+		return nowPoint;
+	}
+
 	
 }

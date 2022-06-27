@@ -131,7 +131,11 @@ public class MemberController {
 	@RequestMapping(value="/point_list", method = RequestMethod.GET)
 	public String pointList(String userid, Model model) {
 		List<PointVo> point_list = memberService.getPoint_list(userid);
+		int allPoint = memberService.sumPoint(userid);
+		int nowPoint = memberService.nowPoint(userid);
 		model.addAttribute("point_list", point_list);
+		model.addAttribute("allPoint", allPoint);
+		model.addAttribute("nowPoint", nowPoint);
 		return "point/point_list";
 	};
 	

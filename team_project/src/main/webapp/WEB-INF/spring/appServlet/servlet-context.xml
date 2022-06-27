@@ -43,6 +43,7 @@
 			<mapping path="/ask/**/*"/>
 			<mapping path="/declare/**/*"/>
 			<mapping path="/inquiry/**/*"/>
+			<mapping path="/message/**/*"/>
 			<mapping path="/column/column_form"/>
 			<mapping path="/customer/ask_form"/>
 			<mapping path="/recipeboard/recipeCreateForm"/>

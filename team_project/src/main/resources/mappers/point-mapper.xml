@@ -16,6 +16,15 @@
 		where p.p_code = c.p_code
 		and userid = #{userid}
 	</select>
+	<select id="sumPoint" resultType="int">
+		select sum(point) from tbl_point
+		where userid = #{userid}
+	</select>
+	<select id="nowPoint" resultType="int">
+		select sum(point) from tbl_point
+		where p_code != '1004'
+		and userid = 'user01'
+	</select>
 	
 	<update id="updatePoint">
 		update tbl_member set 

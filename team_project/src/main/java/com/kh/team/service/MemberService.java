@@ -19,6 +19,8 @@ public interface MemberService {
 	public MemberVo getMemberByIdAndPw(String userid, String userpw);
 	
 	public List<PointVo> getPoint_list(String userid);
+	public int sumPoint(String userid);
+	public int nowPoint(String userid);
 	public int recogExistId(MemberVo memberVo);
 	public List<String> findId(MemberVo memberVo);
 	public int recogId(MemberVo memberVo);

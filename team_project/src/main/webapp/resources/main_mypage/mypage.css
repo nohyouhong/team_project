@@ -33,7 +33,7 @@
 .mypage-wrapper {
     background: white;
     min-height: 80vh;
-    padding: 2rem 1rem;
+    padding: 0 1rem;
     transition: all .8s ease;
     width: calc(100% - 315px);
 }

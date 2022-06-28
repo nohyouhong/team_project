@@ -41,8 +41,6 @@
 <script>
 $(document).ready(function(){
 	var frmpaging = $("#frmPaging");
-	var isPushed1 = "true";
-	var isPushed2 = "true";
 	
 	$(".td_list").click(function(){
 		var mno = $(this).attr("data-mno");
@@ -67,28 +65,26 @@ $(document).ready(function(){
 	$(".dropdown-menu").on("click","#sendMessageSender", function(){
 		$("#modal-693650").trigger("click");
 		var sender = "${loginVo.userid}";
-		console.log($(this).val());		
+		var rec = $(this).attr("data-sender");
+		var receiver = $("#rec").val(rec);
+		console.log(receiver);
 	})
 	
-// 	$("#rec").blur(function(){
-// 		if($("#rec").val() == ""){
-// 			$("#msgspan").html('<b style=" color: #75daff">[받을 사람의 아이디를 입력해주세요.]</b>');
-// 			isPushed1 = "false";
-// 		}else{
-// 			$("#msgspan").html("");
-// 			isPushed1 = "true";
-// 		} 
-// 	});
+	$("#rec").blur(function(){
+		if($("#rec").val() == ""){
+			$("#msgspan").html('<b style=" color: #75daff">[받을 사람의 아이디를 입력해주세요.]</b>');
+		}else{
+			$("#msgspan").html("");
+		} 
+	});
 	
-// 	$("#message").blur(function(){
-// 		if($("#message").val() == ""){
-// 			$("#msgspan").html('<b style=" color: #75daff">[메세지 내용을 입력해주세요.]</b>');
-// 			isPushed2 = "false";
-// 		}else{
-// 			$("#msgspan").html("");
-// 			isPushed2 = "true";
-// 		}
-// 	});
+	$("#message").blur(function(){
+		if($("#message").val() == ""){
+			$("#msgspan").html('<b style=" color: #75daff">[메세지 내용을 입력해주세요.]</b>');
+		}else{
+			$("#msgspan").html("");
+		}
+	});
 	
 	$("#btnMsgSend").click(function(){
 		var message = $("#message").val();
@@ -100,10 +96,16 @@ $(document).ready(function(){
 				"sender"  : sender
 		};
 		var url = "/message/sendMessage";
-		$.post(url, sData, function(rData){
-			console.log(rData);
-			$("#modalX").trigger("click");
-		});
+		if($("#rec").val() == ""){
+			$("#msgspan").html('<b style=" color: #75daff">[받을 사람의 아이디를 입력해주세요.]</b>');
+		}else if($("#message").val() == ""){
+			$("#msgspan").html('<b style=" color: #75daff">[메세지 내용을 입력해주세요.]</b>');
+		}else{
+			$.post(url, sData, function(rData){
+				console.log(rData);
+				$("#modalX").trigger("click");
+			});
+		}
 	});
 	
 	

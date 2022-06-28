@@ -232,6 +232,9 @@
     background: #F1F1F1;
     padding: 3px 10px;
 }
+.goProductPage{
+	cursor: pointer;
+}
 </style>
 <script>
 $(function() {
@@ -249,7 +252,6 @@ $(function() {
 				var oneProductList = $(".oneProductListDiv").eq(0).clone();
 				oneProductList.show();
 				var p_name = $(this)[0].p_name;
-				console.log(p_name);
 				var p_bno = $(this)[0].p_bno;
 				$(oneProductList).find("div.tableTitleDiv").find("span").eq(0).text(p_name);
 				$(oneProductList).find("div.hiddenP_bnoDiv").text(p_bno);
@@ -277,8 +279,10 @@ $(function() {
 						var o_sum = $(this)[0].o_sum.toLocaleString('ko-kr');	
 						priceSum += parseInt($(this)[0].o_sum);
 						allSum += parseInt($(this)[0].o_sum);
-						console.log("allSum", allSum);
 						var o_deliverycharge = $(this)[0].o_deliverycharge.toLocaleString('ko-kr');						
+						$(oneTr).find("img.goProductPage").attr("data-p_bno", p_bno);
+						$(oneTr).find("div.goProductPage").attr("data-p_bno", p_bno);
+						$(oneTr).find(".updateAmountBtn").attr("data-p_bno", p_bno);
 						$(oneTr).find(".orderProductCheck").val(o_pno);
 						$(oneTr).find(".proImage").attr("src", o_titlepic);
 						$(oneTr).find("span.proTitle").text(p_title);
@@ -382,19 +386,54 @@ $(function() {
 	});
 	//선택 상품 주문
 	$("#selectedPurchaseBtn").click(function() {
-		orderForm.attr("action", "/pointshop/");
+		orderForm.attr("action", "/pay/paymentScreen");
 		orderForm.attr("method", "get");
 		orderForm.submit();
 	});
 	//모든 상품 주문
 	$("#allPurchaseBtn").click(function() {
-		orderForm.attr("action", "/pointshop/");
+		orderForm.attr("action", "/pay/paymentScreen");
 		orderForm.attr("method", "get");
 		orderForm.submit();
 	});
+	//장바구니 선택상품 누를시 상품페이지로 이동
+	$(".inputProductListDiv").on("click", ".goProductPage", function() {
+		var p_bno = $(this).attr("data-p_bno");
+		location.href = "/pointshop/read?p_bno=" + p_bno;
+	});
 	
+	//모달
+	$(".inputProductListDiv").on("click", ".updateAmountBtn", function() {
+		$(".modal-644554").trigger("click");
+		var p_bno = $(this).attr("data-p_bno");
+	});
 });
 </script>
+<!-- 모달 -->
+<a style="display: none;" id="modal-644554" href="#modal-container-644554" role="button"
+	class="btn" data-toggle="modal">Launch demo modal</a>
+
+<div class="modal fade" id="modal-container-644554" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">옵션선택</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				good
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary-secondary">취소</button>
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 모달 -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -449,8 +488,8 @@ $(function() {
 								</td>
 								<td>
 									<div>
-										<img class="proImage" src="/resources/main_mypage/images/cook.png">
-										<div class="proInfoDiv">
+										<img class="proImage goProductPage" src="/resources/main_mypage/images/cook.png">
+										<div class="proInfoDiv goProductPage">
 											<span class="proTitle">이건제목입니다 이건제목입니다 이건제목입니다 이건제목입니다 이건제목입니다</span><br>
 											<div class="proOption">이건옵션입니다 이건옵션입니다 이건옵션입니다 이건옵션입니다 이건옵션입니다</div>
 										</div>
@@ -461,7 +500,7 @@ $(function() {
 										<span class="proAmount"></span>
 										<span class="proUnit">개</span>
 									</div>
-									<button class="updateAmountBtn">옵션/수량변경</button>
+									<button type="button" class="updateAmountBtn">옵션/수량변경</button>
 								</td>
 								<td>
 									<span class="proPrice"></span>

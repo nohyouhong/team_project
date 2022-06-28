@@ -71,9 +71,7 @@ public class CalendarController {
 			} else {
 				attend_date += i;
 			}
-//			System.out.println("attend_date: " + attend_date);
 			DateData attendData = calService.getAttendDate(userid, attend_date);
-//			System.out.println("attendData: " + attendData);			
 			if(i==today_info.get("today")){
 				calendarData= new DateData(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "today");
 				if (attendData != null) {
@@ -89,7 +87,6 @@ public class CalendarController {
 					calendarData.setAttend_date(attendData.getAttend_date());
 				}
 			}
-			System.out.println("calendarData: " + calendarData);
 			dateList.add(calendarData);
 		}
 
@@ -112,7 +109,6 @@ public class CalendarController {
 	
 	@RequestMapping(value="/insertAttendance", method=RequestMethod.GET)
 		public String insertAttendance(String userid, HttpSession session, RedirectAttributes rttr) {
-		System.out.println("userid: " + userid);
 		Date sysdate = Date.valueOf(LocalDate.now());
 		int count = calService.isAttend(userid, sysdate);
 		if (count > 0) {

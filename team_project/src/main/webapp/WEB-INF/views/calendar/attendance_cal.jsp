@@ -141,7 +141,7 @@ th {
 	padding-top: 10px;
 }
 .attend_img {
-	width: 100px;
+	width: 65px;
 	height: auto;
 }
 </style>
@@ -210,7 +210,11 @@ th {
 				<tr>
 					<td class="sun_day">
 						<div class="sun">${dateList.date}</div>
-						<div></div>
+						<div class="attend_img_div">
+							<c:if test="${not empty dateList.attend_date}">
+								<img class="attend_img" src="/resources/attendance_calendar/custom_img_attendance.png">
+							</c:if>
+						</div>
 					</td>
 							</c:when>
 							<c:otherwise>

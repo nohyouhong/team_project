@@ -48,18 +48,21 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
-							<label for="r_title" class="createTitle">요리 제목</label> <input
-								type="text" class="form-control inputVal" id="r_title"
+							<label for="r_title" class="createTitle">요리 제목</label> 
+							<span id="titlespan"></span>
+							<input type="text" class="form-control inputVal" id="r_title"
 								name="r_title" placeholder="예)김치찌개 끓이기" />
 						</div>
 						<div class="form-group">
 							<label for="r_explain" class="createTitle">요리 소개</label>
+							<span id="explainspan"></span>
 							<textarea rows="4" class="form-control inputVal" id="r_explain"
 								name="r_explain"
 								placeholder="레시피의 탄생배경을 적어주세요. 예) 어머니의 된장국이 생각이나  남편과 같이 고안해보았습니다."></textarea>
 						</div>
 						<div class="form-group">
 							<label for="title" class="createTitle">카테고리</label>
+							<span id="titlespan2"></span>
 							<div class="row">
 								<div class="col">
 									<select class="custom-select inputVal" id="f_code"
@@ -73,7 +76,7 @@
 								<div class="col">
 									<select class="custom-select inputVal" id="r_time"
 										name="r_time">
-										<option selected value="">종류별</option>
+										<option selected value="">시간별</option>
 										<option value="5분이내">5분이내</option>
 										<option value="30분이내">30분이내</option>
 										<option value="1시간이내">1시간이내</option>
@@ -83,7 +86,7 @@
 								<div class="col">
 									<select class="custom-select inputVal" id="r_level"
 										name="r_level">
-										<option selected value="">종류별</option>
+										<option selected value="">난이도별</option>
 										<option value="쉬움">쉬움</option>
 										<option value="보통">보통</option>
 										<option value="어려움">어려움</option>
@@ -97,14 +100,15 @@
 					</div>
 					<div class="col-md-4" style="text-align: center;">
 						<img class="inputVal" id="mainCookImage" alt="요리사진을 등록해주세요."
-							src="/resources/main_mypage/images/cook.png" /> <label
-							for="file"> 대표 요리사진을 등록해주세요. </label> <input type="file"
-							id="mainFile" name="file" class="cookFile" />
+							src="/resources/main_mypage/images/cook.png" /> <br>
+							<span id="mainfilespan"></span>
+							<input type="file" id="mainFile" name="file" class="cookFile" />
 					</div>
 				</div>
 				<hr class="createHr">
 				<div class="explainDiv">
 					<span class="explain">재료가 남거나 부족하지 않도록 정확한 계량정보를 적어주세요.</span>
+					<span id="ingredspan"></span>
 				</div>
 				<div class="row">
 					<div class="col-md-3">

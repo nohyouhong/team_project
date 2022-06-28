@@ -1,4 +1,54 @@
 $(function() {
+	//유효성 체크
+	$('#titlespan').html('<b style=" color: yellowgreen">[요리제목을 입력해주세요]');
+	$('#explainspan').html('<b style=" color: yellowgreen">[요리 소개를 입력해주세요]');
+	$('#titlespan2').html('<b style=" color: yellowgreen">[요리종류를 선택해주세요]');
+	$('#mainfilespan').html('<b style=" color: yellowgreen">[대표 요리사진을 등록해주세요]');
+	$('#ingredspan').html('<b style=" color: yellowgreen">[재료를 입력해주세요]');
+	//요리제목 미입력시
+	$("#r_title").blur(function(){
+		if($("#r_title").val() != ""){
+			$('#titlespan').html('');
+		}else{
+			$('#titlespan').html('<b style=" color: red">[요리제목을 입력해주세요]');
+		}
+	});
+	//요리소개 미입력시
+	$("#r_explain").blur(function(){
+		if($("#r_explain").val() != ""){
+			$('#explainspan').html('');
+		}else{
+			$('#explainspan').html('<b style=" color: red">[요리소개를 입력해주세요]');
+		}
+	})
+	//카테고리 미선택시
+	$("#f_code").blur(function(){
+		if($(this).val() ==""){
+			$('#titlespan2').html('<b style=" color: red">[종류를 선택해주세요]');
+		}else if($("#r_time").val() == ""){
+			$('#titlespan2').html('<b style=" color: yellowgreen">[소요시간을 선택해주세요]');
+		}else if($(this).val() != ""){
+			$('#titlespan2').html('');
+		}
+	});
+	$("#r_time").blur(function(){
+		if($(this).val() ==""){
+			$('#titlespan2').html('<b style=" color: red">[소요시간을 선택해주세요]');
+		}else if($("#r_level").val() == ""){
+			$('#titlespan2').html('<b style=" color: yellowgreen">[난이도를 선택해주세요]');
+		}else if($(this).val() != ""){
+			$('#titlespan2').html('');
+		}
+	});
+	$("#r_level").blur(function(){
+		if($(this).val() ==""){
+			$('#titlespan2').html('<b style=" color: red">[난이도를 선택해주세요]');
+		}else if($(this).val() != ""){
+			$('#titlespan2').html('');
+		}
+	});
+	//재료 미입력시
+	
 	// 	재료추가
 	$("#addIngred").click(function() {
 		var cloneIngredDiv = $(".addIngredDiv").eq(0).clone();
@@ -56,6 +106,7 @@ $(function() {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$("#mainCookImage").attr("src", e.target.result);
+				$('#mainfilespan').html('');
 			}
 			reader.readAsDataURL(this.files[0]);
 		}
@@ -115,75 +166,60 @@ $(function() {
 	var inputState = false;
 	var ingredState = false;
 	var stepState = false;
-	function inputCheck() {
-		var r_title = $("#r_title").val();
-		var r_explain = $("#r_explain").val();
-		var f_code = $("#f_code").val();
-		var r_time = $("#r_time").val();
-		var r_level = $("#r_level").val();
-		var mainFile = $("#mainFile").val();
-		var addIngredDivs = $(".addIngredDiv");
-		var ingredNames = $(".ingredName");
-		var ingredAmounts = $(".ingredAmount");
-		var addCookStepDivs = $(".addCookStepDiv");
-		var stepContents = $(".stepContent");
-		var r_cooktip = $("#r_cooktip").val();
-
-		if (r_title == "") {
-			alert("제목이 비어 있습니다.");
-		} else if (r_explain == "") {
-			alert("소개가 비어 있습니다.");
-		} else if (f_code == "") {
-			alert("카테고리를 선택해주세요.");
-		} else if (r_time == "") {
-			alert("카테고리를 선택해주세요.");
-		} else if (r_level == "") {
-			alert("카테고리를 선택해주세요.");
-		} else if (mainFile == "") {
-			alert("타이틀 이미지를 넣어주세요.");
-		} else if (addIngredDivs.length < 2) {
-			alert("재료 내용이 하나도 없습니다.");
-		} else if (addIngredDivs.length > 1) {
-			for (var i = 1; i < addIngredDivs.length; i++) {
-				var i_name = $(ingredNames[i]).val();
-				var i_amount = $(ingredAmounts[i]).val();
-				if (i_name == "" || i_amount == "") {
-					alert(i + "번째 재료 내용이 비어 있습니다.");
-					ingredState = false;
-					break;
-				} else {
-					ingredState = true;
-				}
-			}
-		}
-		if (ingredState) {
-			console.log("싱행1");
-			if (addCookStepDivs.length < 2) {
-				alert("레시피스탭 내용이 하나도 없습니다.");
-			} else if (addCookStepDivs.length > 1) {
-				for (var i = 1; i < addCookStepDivs.length; i++) {
-					var r_content = $(stepContents[i]).val();
-					if (r_content == "") {
-						alert(i + "번째 요리 스탭내용이 비어 있습니다.");
-						stepState = false;
-						break;
-					} else {
-						stepState = true;
-					}
-				}
-			}
-		}
-		if (stepState) {
-			if (r_cooktip == "") {
-				alert("요리팁이 비어 있습니다.");
-			} else {
-				inputState = true;
-			}
-		}
-	}
+	
+	
+	
+//	function inputCheck() {
+//		var addIngredDivs = $(".addIngredDiv");
+//		var ingredNames = $(".ingredName");
+//		var ingredAmounts = $(".ingredAmount");
+//		var addCookStepDivs = $(".addCookStepDiv");
+//		var stepContents = $(".stepContent");
+//		var r_cooktip = $("#r_cooktip").val();
+//
+//		if (addIngredDivs.length < 2) {
+//			alert("재료 내용이 하나도 없습니다.");
+//		} else if (addIngredDivs.length > 1) {
+//			for (var i = 1; i < addIngredDivs.length; i++) {
+//				var i_name = $(ingredNames[i]).val();
+//				var i_amount = $(ingredAmounts[i]).val();
+//				if (i_name == "" || i_amount == "") {
+//					alert(i + "번째 재료 내용이 비어 있습니다.");
+//					ingredState = false;
+//					break;
+//				} else {
+//					ingredState = true;
+//				}
+//			}
+//		}
+//		if (ingredState) {
+//			console.log("싱행1");
+//			if (addCookStepDivs.length < 2) {
+//				alert("레시피스탭 내용이 하나도 없습니다.");
+//			} else if (addCookStepDivs.length > 1) {
+//				for (var i = 1; i < addCookStepDivs.length; i++) {
+//					var r_content = $(stepContents[i]).val();
+//					if (r_content == "") {
+//						alert(i + "번째 요리 스탭내용이 비어 있습니다.");
+//						stepState = false;
+//						break;
+//					} else {
+//						stepState = true;
+//					}
+//				}
+//			}
+//		}
+//		if (stepState) {
+//			if (r_cooktip == "") {
+//				alert("요리팁이 비어 있습니다.");
+//			} else {
+//				inputState = true;
+//			}
+//		}
+//	}
 
 	//재료등록
-	var ingredInfoCreateState = false;
+//	var ingredInfoCreateState = false;
 	$("#insertIngred").click(function() {
 		$("#modal-520057").trigger("click");
 			$("#ingredInsertBtn").click(function() {

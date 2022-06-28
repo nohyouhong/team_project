@@ -179,20 +179,37 @@
 }
 
 /* 결제 정보 css */
+
 .pay_final {
-	height: 150px;
-	border-radius: 5px;
-	border: 2px solid rgb(204, 204, 204);
-	padding: 10px;
+	border-top: 1px solid rgb(204, 204, 204);
+	border-bottom: 1px solid rgb(204, 204, 204);
 }
 
-.pay_final_div { 
-	display: flex;
-	justify-content: center;
-	margin: 30px;
-	font-size: 30px;
-	text-align: center;
+.pay_final table {
+	margin-left: auto;
+	margin-right: auto;
 }
+
+.pay_final_div {  
+ 	margin: 30px; 
+ 	font-size: 20px; 
+ 	text-align: center; 
+ 	vertical-align: middle; 
+} 
+
+.pay_final_icon {
+	font-weight: bold;
+	color: rgb(204, 204, 204);
+}
+
+.pay_final_discount h2 {
+	color: red;
+}
+
+.pay_final_point h2 {
+	color: green;
+}
+
 
 /* 모달창1 */
 .modal_list_foot {
@@ -906,35 +923,45 @@ function modal_modi_address() {
 		</div>
 		
 		<div class="pay_final">
-			<h4>결제 정보</h4>
 			<table>
 				<tr>
 					<td>
 						<div class="pay_final_div">
-							<span>상품 합계 포인트</span>
-							<span>1,000</span>				
+							<div><h4>총 상품 합계 금액</h4></div>
+							<div><h2>10,000</h2></div>					
 						</div>
 					</td>
 					<td>
 						<div class="pay_final_div">
-							<span><i class="fa-solid fa-plus"></i></span>				
+							<span><i class="fa-solid fa-plus pay_final_icon"></i></span>				
 						</div>
 					</td>
 					<td>
 						<div class="pay_final_div">
-							<span>총 배송비</span>
-							<span>20,000</span>				
+							<div><h4>총 배송비</h4></div>
+							<div><h2>20,000</h2></div>				
 						</div>
 					</td>
 					<td>
 						<div class="pay_final_div">
-							<span><i class="fa-solid fa-equals"></i></span>				
+							<span><i class="fa-solid fa-minus pay_final_icon"></i></span>				
 						</div>
 					</td>
 					<td>
 						<div class="pay_final_div">
-							<span>최종 결제 포인트</span>
-							<span>21,000</span>				
+							<div><h4>할인</h4></div>
+							<div class="pay_final_discount"><h2>9,000</h2></div>				
+						</div>
+					</td>
+					<td>
+						<div class="pay_final_div">
+							<span><i class="fa-solid fa-equals pay_final_icon"></i></span>				
+						</div>
+					</td>
+					<td>
+						<div class="pay_final_div">
+							<div><h4>최종 결제 포인트</h4></div>
+							<div class="pay_final_point"><h2>21,000</h2></div>			
 						</div>
 					</td>
 				</tr>

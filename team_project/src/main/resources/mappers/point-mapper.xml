@@ -17,13 +17,13 @@
 		and userid = #{userid}
 	</select>
 	<select id="sumPoint" resultType="int">
-		select sum(point) from tbl_point
+		select nvl(sum(point), 0) from tbl_point
 		where userid = #{userid}
 	</select>
 	<select id="nowPoint" resultType="int">
-		select sum(point) from tbl_point
+		select nvl(sum(point), 0) from tbl_point
 		where p_code != '1004'
-		and userid = 'user01'
+		and userid = #{userid}
 	</select>
 	
 	<update id="updatePoint">

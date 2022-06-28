@@ -172,6 +172,15 @@ public class PointShopController {
 		return "pointshop/read";
 	}
 	
+	@RequestMapping(value="/getOptionByBno", method=RequestMethod.GET)
+	@ResponseBody
+	public String getOptionByBno(OrderProductVo orderProductVo, HttpSession session) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		orderProductVo.setL_lno(memberVo.getBasket());
+		boolean result = orderService.basketProductCreate(orderProductVo);
+		return String.valueOf(result);
+	}
+	
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
 	@ResponseBody
 	public String uploadFile(MultipartFile file) throws Exception{

@@ -41,6 +41,9 @@
 <script>
 $(document).ready(function(){
 	var frmpaging = $("#frmPaging");
+	var isPushed1 = "true";
+	var isPushed2 = "true";
+	
 	$(".td_list").click(function(){
 		var mno = $(this).attr("data-mno");
 		frmpaging.find("input[name=mno]").val(mno);
@@ -56,6 +59,37 @@ $(document).ready(function(){
 		frmpaging.attr("method", "get");
 		frmpaging.submit();
 	});
+	
+	$("#btnWriteMessage").click(function() {
+		$("#modal-693650").trigger("click");
+	});
+	
+	$(".dropdown-menu").on("click","#sendMessageSender", function(){
+		$("#modal-693650").trigger("click");
+		var sender = "${loginVo.userid}";
+		console.log($(this).val());		
+	})
+	
+// 	$("#rec").blur(function(){
+// 		if($("#rec").val() == ""){
+// 			$("#msgspan").html('<b style=" color: #75daff">[받을 사람의 아이디를 입력해주세요.]</b>');
+// 			isPushed1 = "false";
+// 		}else{
+// 			$("#msgspan").html("");
+// 			isPushed1 = "true";
+// 		} 
+// 	});
+	
+// 	$("#message").blur(function(){
+// 		if($("#message").val() == ""){
+// 			$("#msgspan").html('<b style=" color: #75daff">[메세지 내용을 입력해주세요.]</b>');
+// 			isPushed2 = "false";
+// 		}else{
+// 			$("#msgspan").html("");
+// 			isPushed2 = "true";
+// 		}
+// 	});
+	
 	$("#btnMsgSend").click(function(){
 		var message = $("#message").val();
 		var receiver = $("#rec").val();
@@ -69,17 +103,10 @@ $(document).ready(function(){
 		$.post(url, sData, function(rData){
 			console.log(rData);
 			$("#modalX").trigger("click");
-	 	});
+		});
 	});
 	
-	$("#btnWriteMessage").click(function() {
-		$("#modal-693650").trigger("click");
-	});
 	
-	$(".dropdown-menu").on("click","#sendMessageSender", function(){
-		$("#modal-693650").trigger("click");
-		var sender = "${loginVo.userid}";
-	})
 
 });
 </script>
@@ -108,6 +135,7 @@ $(document).ready(function(){
 						<textarea class="form-control" id="message" placeholder="내용을 적어주세요(150글자이내)" rows="4"></textarea>
 					</div>
 					<div class="modal-footer">
+						<span id="msgspan"></span>
 						<button type="button" class="btn btn-primary" id="btnMsgSend">보내기</button>
 						<button type="button" class="btn btn-secondary" id="btnMsgClose"
 							data-dismiss="modal">닫기</button>
@@ -153,7 +181,7 @@ $(document).ready(function(){
 								${messageVo.sender}
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#" id="sendMessageSender" >
+								<a class="dropdown-item" href="#" id="sendMessageSender" data-sender="${messageVo.sender}">
 									쪽지보내기
 								</a> 
 								<a class="dropdown-item" href="#">

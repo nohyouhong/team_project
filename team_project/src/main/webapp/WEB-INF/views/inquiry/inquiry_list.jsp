@@ -51,10 +51,12 @@ $(document).ready(function(){
 								<li class="on"><a href="#">문의게시판</a></li>
 							</ul>
 							<c:if test="${not empty loginVo}">
-								<div style="text-align:right;">
-									<a href="/inquiry/inquiry_form" class="btn btn-outline-secondary askbtn">문의하기</a>
-									<a href="/ask/ask_form" class="btn btn-outline-danger askbtn">1:1문의하기</a>
-								</div>
+								<c:if test="${loginVo.m_code == 102}">
+									<div style="text-align:right;">
+										<a href="/inquiry/inquiry_form" class="btn btn-outline-secondary askbtn">문의하기</a>
+										<a href="/ask/ask_form" class="btn btn-outline-danger askbtn">1:1문의하기</a>
+									</div>
+								</c:if>
 							</c:if>
 							<table class="table ask_table">
 								<thead>

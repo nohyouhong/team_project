@@ -28,6 +28,11 @@
 							</li>
 							<li class="admin-item">
 								<a class="nav-link menuEx" href="/member/member_list"> 
+									<span class="admin-title">신고접수내역</span>
+								</a>
+							</li>
+							<li class="admin-item">
+								<a class="nav-link menuEx" href="/member/member_list"> 
 									<span class="admin-title">회원정보관리</span>
 								</a>
 							</li>

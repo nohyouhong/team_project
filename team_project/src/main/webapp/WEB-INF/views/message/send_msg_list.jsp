@@ -61,7 +61,7 @@ $(document).ready(function(){
 		var perPage = $(this).val();
 		console.log(perPage);
 		frmPaging.find("input[name=perPage]").val(perPage);
-		frmPaging.attr("action", "/message/send_msg_list");
+		frmPaging.attr("action", "/message/send_list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});

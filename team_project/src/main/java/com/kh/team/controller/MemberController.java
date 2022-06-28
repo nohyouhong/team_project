@@ -109,9 +109,17 @@ public class MemberController {
 	public String loginForm(HttpSession session, HttpServletRequest request) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		if(memberVo == null) {
-			String url = request.getHeader("referer");
-			String targetLocation = url;
-			session.setAttribute("targetLocation", targetLocation);
+			String targetLocation = request.getHeader("referer");
+			if (targetLocation.equals("http://localhost/member/login_form")) {
+				String original_targetLocation = String.valueOf(session.getAttribute("original_targetLocation"));
+				if (original_targetLocation == null || original_targetLocation.equals("")) {
+					session.setAttribute("targetLocation", "/");								
+				} else {
+					session.setAttribute("targetLocation", original_targetLocation);					
+				}
+			} else {
+				session.setAttribute("targetLocation", targetLocation);
+			}
 		}
 		return "member/login_form";
 	}
@@ -162,7 +170,10 @@ public class MemberController {
 		MemberVo memberVo = memberService.getMemberByIdAndPw(userid, userpw);
 //		System.out.println("memberVo" + memberVo);
 		if(memberVo == null) {
+			String original_targetLocation = String.valueOf(session.getAttribute("targetLocation"));
+//			System.out.println("original_targetLocation: " + original_targetLocation);
 			rttr.addFlashAttribute("login_result", "fail");
+			session.setAttribute("original_targetLocation", original_targetLocation);
 			return "redirect:/member/login_form";
 		} else {
 			//장바구니 없는사람 갱신해주기
@@ -185,7 +196,7 @@ public class MemberController {
 			}
 			
 			String targetLocation = (String)session.getAttribute("targetLocation");
-			System.out.println("targetLoc: " + targetLocation);
+//			System.out.println("targetLoc: " + targetLocation);
 			if(targetLocation == null || targetLocation.equals("")) {
 				return "redirect:/";
 			}else {

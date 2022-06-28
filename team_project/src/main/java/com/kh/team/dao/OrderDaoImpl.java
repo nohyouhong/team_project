@@ -96,6 +96,12 @@ private final String NAMESPACE = "com.kh.team.mappers.order.";
 	}
 	
 	@Override
+	public List<OrderProductVo> getBasketProductOptionsAll(int p_bno) {
+		List<OrderProductVo> basketProductOptionList = sqlSession.selectList(NAMESPACE + "getBasketProductOptionsAll", p_bno);
+		return basketProductOptionList;
+	}
+	
+	@Override
 	public boolean basketProductCreate(OrderProductVo orderProductVo) {
 		int count = sqlSession.insert(NAMESPACE + "basketProductCreate", orderProductVo);
 		if(count > 0) {

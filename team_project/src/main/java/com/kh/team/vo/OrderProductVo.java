@@ -21,9 +21,12 @@ public class OrderProductVo {
 	private String p_discount;
 	private String p_name;
 	private String p_title;
+	private String p_explain;
+	private int p_stock;
 	private int o_deliverycharge;
 	private int l_deliverycharge;
 	private int p_deliverycharge;
+	private int deletestate;
 	
 	public OrderProductVo() {
 		super();
@@ -31,8 +34,8 @@ public class OrderProductVo {
 
 	public OrderProductVo(int o_pno, int l_lno, int p_ino, int[] p_inos, int p_bno, String o_titlepic, int p_price,
 			int o_price, int[] o_prices, int o_amount, int[] o_amounts, int o_sum, int l_sum, int[] o_sums,
-			String p_option, String p_discount, String p_name, String p_title, int o_deliverycharge,
-			int l_deliverycharge, int p_deliverycharge) {
+			String p_option, String p_discount, String p_name, String p_title, String p_explain, int p_stock,
+			int o_deliverycharge, int l_deliverycharge, int p_deliverycharge, int deletestate) {
 		super();
 		this.o_pno = o_pno;
 		this.l_lno = l_lno;
@@ -52,9 +55,12 @@ public class OrderProductVo {
 		this.p_discount = p_discount;
 		this.p_name = p_name;
 		this.p_title = p_title;
+		this.p_explain = p_explain;
+		this.p_stock = p_stock;
 		this.o_deliverycharge = o_deliverycharge;
 		this.l_deliverycharge = l_deliverycharge;
 		this.p_deliverycharge = p_deliverycharge;
+		this.deletestate = deletestate;
 	}
 
 	public int getO_pno() {
@@ -225,6 +231,30 @@ public class OrderProductVo {
 		this.p_price = p_price;
 	}
 
+	public String getP_explain() {
+		return p_explain;
+	}
+
+	public void setP_explain(String p_explain) {
+		this.p_explain = p_explain;
+	}
+
+	public int getP_stock() {
+		return p_stock;
+	}
+
+	public void setP_stock(int p_stock) {
+		this.p_stock = p_stock;
+	}
+	
+	public int getDeletestate() {
+		return deletestate;
+	}
+
+	public void setDeletestate(int deletestate) {
+		this.deletestate = deletestate;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderProductVo [o_pno=" + o_pno + ", l_lno=" + l_lno + ", p_ino=" + p_ino + ", p_inos="
@@ -232,8 +262,10 @@ public class OrderProductVo {
 				+ ", o_price=" + o_price + ", o_prices=" + Arrays.toString(o_prices) + ", o_amount=" + o_amount
 				+ ", o_amounts=" + Arrays.toString(o_amounts) + ", o_sum=" + o_sum + ", l_sum=" + l_sum + ", o_sums="
 				+ Arrays.toString(o_sums) + ", p_option=" + p_option + ", p_discount=" + p_discount + ", p_name="
-				+ p_name + ", p_title=" + p_title + ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge="
-				+ l_deliverycharge + ", p_deliverycharge=" + p_deliverycharge + "]";
+				+ p_name + ", p_title=" + p_title + ", p_explain=" + p_explain + ", p_stock=" + p_stock
+				+ ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge=" + l_deliverycharge
+				+ ", p_deliverycharge=" + p_deliverycharge + ", deletestate=" + deletestate + "]";
 	}
-	
+
+
 }

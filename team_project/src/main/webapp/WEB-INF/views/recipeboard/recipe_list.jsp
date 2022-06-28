@@ -56,10 +56,13 @@ $(function(){
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="listTypeDiv">
-				<button id="createRecipeBtn" class="btn btn-outline-danger">
-					<i class="fa-solid fa-pen-to-square fa-lg"></i>
-					레시피 작성하기
-				</button>
+				<button style="visibility: hidden;" class="btn btn-outline-danger">레시피 작성 공간을 위해</button>
+				<c:if test="${not empty loginVo }">
+					<button id="createRecipeBtn" class="btn btn-outline-danger">
+						<i class="fa-solid fa-pen-to-square fa-lg"></i>
+						레시피 작성하기
+					</button>
+				</c:if>
 				<a href="r_bno" class="listType"><span class="listTypeBtn 
 				<c:if test="${pagingDto.listType == 'r_bno'}">selectTypeBtn</c:if>
 				">최신순</span></a>

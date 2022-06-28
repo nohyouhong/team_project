@@ -235,6 +235,57 @@
 .goProductPage{
 	cursor: pointer;
 }
+.modalProImg{
+	width: 70px;
+	height: 70px;
+	margin: 25px;
+}
+.modalProTitleDiv{
+	display: inline-block;
+    width: 340px;
+}
+.modalProTitle{
+    font-weight: 500;
+}
+.modalProExplain{
+    font-size: 14px;
+	color: #A6A6A6;
+}
+.modalProSelectDiv{
+	margin: 20px;
+}
+.modalProSelectTitle{
+	font-weight: 500;
+	margin-right: 50px;
+}
+.modalProSelect{
+	width: 330px;
+	color: #626262;
+	border: 1px solid #A6A6A6;
+    padding: 3px 10px;
+}
+.thisOptionDiv{
+	background: #F6F6F6;
+	padding: 10px 0px;
+}
+.thisOption{
+    font-size: 13px;
+	display: inline-block;
+    width: 240px;
+    margin-left: 20px;
+}
+.thisAmount{
+    width: 50px;
+    text-align: center;
+    margin-right: 15px;
+}
+.thisSum{
+	font-size: 18px;
+}
+.thisUnit{
+    font-size: 17px;
+    font-weight: 600;
+}
 </style>
 <script>
 $(function() {
@@ -270,6 +321,7 @@ $(function() {
 						var oneTr = $(oneProductList).find("tr.oneProInfoInputDiv").eq(0).clone();
 						$(oneTr).show();
 						var o_pno = $(this)[0].o_pno;						
+						var p_ino = $(this)[0].p_ino;						
 						var o_titlepic = "/pointshop/displayImage?filename=" + $(this)[0].o_titlepic;						
 						var p_title = $(this)[0].p_title;						
 						var p_option = $(this)[0].p_option;						
@@ -283,6 +335,7 @@ $(function() {
 						$(oneTr).find("img.goProductPage").attr("data-p_bno", p_bno);
 						$(oneTr).find("div.goProductPage").attr("data-p_bno", p_bno);
 						$(oneTr).find(".updateAmountBtn").attr("data-p_bno", p_bno);
+						$(oneTr).find(".updateAmountBtn").attr("data-p_ino", p_ino);
 						$(oneTr).find(".orderProductCheck").val(o_pno);
 						$(oneTr).find(".proImage").attr("src", o_titlepic);
 						$(oneTr).find("span.proTitle").text(p_title);
@@ -401,14 +454,103 @@ $(function() {
 		var p_bno = $(this).attr("data-p_bno");
 		location.href = "/pointshop/read?p_bno=" + p_bno;
 	});
+	//모달안에 갱신
+	function modalProListSetting(input_p_bno, input_p_ino){
+		var p_bno = input_p_bno;
+		var p_ino = input_p_ino;
+		var url = "/pointshop/getOptionByBno";
+		var sData = {
+			"p_bno" : p_bno	
+		};
+		$.get(url, sData, function(rData) {
+			console.log(rData);
+			var src = "/pointshop/displayImage?filename=" + rData[0].o_titlepic;
+			var p_title = rData[0].p_title;
+			var p_explain = rData[0].p_explain;
+			$(".modalOption:gt(0)").remove();
+			$(".modalProImg").attr("src", src);
+			$(".modalProTitle").text(p_title);
+			$(".modalProExplain").text(p_explain);
+			$(".modalProSelect").attr("data-p_bno", p_bno);
+			for(var i = 0; i < rData.length; i++){
+				var this_p_ino = rData[i].p_ino;
+				var p_option = rData[i].p_option;
+				var o_price = rData[i].o_price;
+				var p_stock = rData[i].p_stock;
+				var html = "<option  class='modalOption' value='" + this_p_ino + "'>" + p_option;
+				html += " : " + o_price + "포인트 : " + p_stock + "개</option>";
+				$(".modalProSelect").append(html);				
+				if(this_p_ino == p_ino){
+					var this_option = rData[i].p_option;
+					var this_amount = rData[i].o_amount;
+					var this_sum = rData[i].o_sum.toLocaleString('ko-kr');
+					if(rData[i].deletestate != 1){
+						this_amount	= "1";
+						this_sum = o_price.toLocaleString('ko-kr');
+						console.log(this_sum);
+						console.log(o_price);
+					}
+					$(".thisOption").text(this_option);
+					$(".thisPrice").text(o_price);
+					$(".thisAmount").val(this_amount);
+					$(".thisSum").text(this_sum);
+				}
+			}
+			//전송폼으로(미리)
+			$("#p_ino").val(p_ino);
+			$("#p_bno").val(p_bno);
+			$("#o_titlepic").val(rData[0].o_titlepic);
+			$("#o_deliverycharge").val(rData[0].o_deliverycharge);
+		});
+	}
 	
-	//모달
+	//모달 키기
 	$(".inputProductListDiv").on("click", ".updateAmountBtn", function() {
-		$(".modal-644554").trigger("click");
-		var p_bno = $(this).attr("data-p_bno");
+		$("#modal-644554").trigger("click");
+		var input_p_bno = $(this).attr("data-p_bno");
+		var input_p_ino = $(this).attr("data-p_ino");
+		modalProListSetting(input_p_bno, input_p_ino)
+	});
+	//모달 숫자바꾸면 가격변동
+	$(".thisAmount").change(function() {
+		var price = parseInt($(".thisPrice").text());
+		var amount = $(this).val();
+		$(".thisSum").text((price * amount).toLocaleString('ko-kr'));
+	});
+	//모달 셀렉트옵션 바뀔때 옵션변동
+	$(".modalProSelect").change(function() {
+		var input_p_bno = $(this).attr("data-p_bno");
+		var input_p_ino = $(this).val();
+		modalProListSetting(input_p_bno, input_p_ino)
+	});
+	//모달옵션 바꾸고 확인버튼시 창 사라지기
+	$(".modalUpdateRunBtn").click(function(){
+		$("#modal-644554").trigger("click");
+		
+		var o_price = $(".thisPrice").text();
+		var o_amount = $(".thisAmount").val();
+		var o_sum = $(".thisSum").text().replaceAll(",", "");
+		$("#o_price").val(o_price);
+		$("#o_amount").val(o_amount);
+		$("#o_sum").val(o_sum);
+		var basketUpdateForm = $("#basketUpdateForm");
+		basketUpdateForm.attr("action", "/pointshop/updateBasket");
+		basketUpdateForm.attr("method", "post");
+		basketUpdateForm.submit();
 	});
 });
 </script>
+<!-- 전송폼 -->
+<form id="basketUpdateForm">
+	<input type="hidden" id="p_ino" name="p_ino">
+	<input type="hidden" id="p_bno" name="p_bno">
+	<input type="hidden" id="o_amount" name="o_amount">
+	<input type="hidden" id="o_sum" name="o_sum">
+	<input type="hidden" id="o_titlepic" name="o_titlepic">
+	<input type="hidden" id="o_price" name="o_price">
+	<input type="hidden" id="o_deliverycharge" name="o_deliverycharge">
+</form>
+<!-- 전송폼 -->
 <!-- 모달 -->
 <a style="display: none;" id="modal-644554" href="#modal-container-644554" role="button"
 	class="btn" data-toggle="modal">Launch demo modal</a>
@@ -424,11 +566,31 @@ $(function() {
 				</button>
 			</div>
 			<div class="modal-body">
-				good
+				<div class="modalTitleDiv">
+					<img class="modalProImg">
+					<div class="modalProTitleDiv">
+						<div class="modalProTitle">요고의 타이틀요고의 타이틀요고의 타이틀요고의 틀</div>
+						<div class="modalProExplain">요고의 타이틀요고의 타이틀요고의 타이틀요고의 타</div>
+					</div>
+				</div>
+				<hr>
+				<div class="modalProSelectDiv">
+					<span class="modalProSelectTitle">구성</span>
+					<select class="modalProSelect">
+						<option class="modalOption" value="">= 옵션 : 가격 : 재고 =</option>
+					</select>
+				</div>
+				<div class="thisOptionDiv">
+					<div class="thisOption">요거의 옵션요거의 옵션요거의 옵션</div>
+					<input class="thisAmount" type="number" value="10">
+					<span style="display: none;" class="thisPrice">19000</span>
+					<span class="thisSum">19000</span>
+					<span class="thisUnit">P</span>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary-secondary">취소</button>
-				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">확인</button>
+				<button type="button" class="btn btn-outline-secondary modalUpdateRunBtn">확인</button>
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>

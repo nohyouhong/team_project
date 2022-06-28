@@ -49,6 +49,11 @@ public class OrderServiceImpl implements OrderService{
 	public List<OrderProductVo> getBasketProductOptions(int p_bno) {
 		return orderDao.getBasketProductOptions(p_bno);
 	}
+	
+	@Override
+	public List<OrderProductVo> getBasketProductOptionsAll(int p_bno) {
+		return orderDao.getBasketProductOptionsAll(p_bno);
+	}
 
 	@Override
 	@Transactional
@@ -64,7 +69,6 @@ public class OrderServiceImpl implements OrderService{
 			&& (o_amounts != null && !o_amounts.equals(""))
 			&& (o_sums != null && !o_sums.equals(""))){
 			for(int i = 0; i < o_prices.length; i ++) {
-				int o_pno = orderDao.getNextPno();
 				int p_ino = p_inos[i];
 				int o_price = o_prices[i]; 
 				int o_amount = o_amounts[i]; 
@@ -78,6 +82,7 @@ public class OrderServiceImpl implements OrderService{
 					oldVo.setO_sum(old_o_sum + o_sum);
 					orderDao.basketProductUpdate(oldVo);
 				}else {//중복된 옵션이 있지 않는경우
+					int o_pno = orderDao.getNextPno();
 					orderProductVo.setO_pno(o_pno);
 					orderProductVo.setP_ino(p_ino);
 					orderProductVo.setO_price(o_price);
@@ -91,9 +96,21 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
+	@Transactional
 	public boolean basketProductUpdate(OrderProductVo orderProductVo) {
-		// TODO Auto-generated method stub
-		return false;
+		int l_lno = orderProductVo.getL_lno();
+		int p_ino = orderProductVo.getP_ino();
+		boolean result = orderDao.getInoByLno(l_lno, p_ino);
+		if(result) {//중복된 바꾸기
+			OrderProductVo oldVo = orderDao.getBasketProductVoByIno(p_ino);
+			orderProductVo.setO_pno(oldVo.getO_pno());
+			orderDao.basketProductUpdate(orderProductVo);
+		}else {//중복된 옵션이 있지 않는경우
+			int o_pno = orderDao.getNextPno();
+			orderProductVo.setO_pno(o_pno);
+			orderDao.basketProductCreate(orderProductVo);
+		}
+		return true;
 	}
 
 	@Override

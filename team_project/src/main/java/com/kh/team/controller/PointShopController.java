@@ -98,6 +98,15 @@ public class PointShopController {
 		return String.valueOf(result);
 	}
 	
+	@RequestMapping(value="/updateBasket", method=RequestMethod.POST)
+	public String updateBasket(OrderProductVo orderProductVo, HttpSession session) {
+		System.out.println(orderProductVo);
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		orderProductVo.setL_lno(memberVo.getBasket());
+		orderService.basketProductUpdate(orderProductVo);
+		return "redirect:/pointshop/shopping_basket";
+	}
+	
 	@RequestMapping(value="/createRun", method=RequestMethod.POST)
 	public String createRun(PointShopBoardVo pointShopBoardVo, ProductVo productVo, 
 			RedirectAttributes rttr, @RequestParam("files") List<MultipartFile> files) {
@@ -174,11 +183,9 @@ public class PointShopController {
 	
 	@RequestMapping(value="/getOptionByBno", method=RequestMethod.GET)
 	@ResponseBody
-	public String getOptionByBno(OrderProductVo orderProductVo, HttpSession session) {
-		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		orderProductVo.setL_lno(memberVo.getBasket());
-		boolean result = orderService.basketProductCreate(orderProductVo);
-		return String.valueOf(result);
+	public List<OrderProductVo> getOptionByBno(int p_bno) {
+		List<OrderProductVo> productOptionList = orderService.getBasketProductOptionsAll(p_bno);
+		return productOptionList;
 	}
 	
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)

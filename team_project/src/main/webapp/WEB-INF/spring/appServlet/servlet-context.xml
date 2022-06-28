@@ -39,7 +39,8 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/**/*"/>
-			<mapping path="/culumn/**/*"/>
+			<mapping path="/column/column_create_form"/>
+			<mapping path="/column/column_create_run"/>
 			<mapping path="/ask/**/*"/>
 			<mapping path="/declare/**/*"/>
 			<mapping path="/inquiry/**/*"/>
@@ -50,6 +51,7 @@
 			<mapping path="/comment/insertRecipeComment"/>
 			<mapping path="/comment/replyRecipeComment"/>
 			<mapping path="/comment/insertRecipeReview"/>
+			<mapping path="/pay/**/*"/>
 			<exclude-mapping path="/inquiry/inquiry_list"/>
 			<exclude-mapping path="/member/login_form"/>
 			<exclude-mapping path="/member/join_form"/>

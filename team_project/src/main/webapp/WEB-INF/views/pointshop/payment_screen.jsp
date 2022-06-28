@@ -716,9 +716,9 @@ function modal_modi_address() {
 							<tr>
 								<th>받으실 곳</th>
 								<td>
-									<input type="text" id="modal_new_postcode" name="add_postcode">
+									<input type="text" id="modal_new_postcode" name="add_postcode" readonly>
 									<button type="button" onclick="modal_search_address()" class="modal_new_search_address">우편번호 검색</button><br>
-									<input type="text" id="modal_new_addr" name="add_address"><input type="text" id="modal_new_detail" name="add_addrdetail">
+									<input type="text" id="modal_new_addr" name="add_address" readonly><input type="text" id="modal_new_detail" name="add_addrdetail">
 								</td>
 							</tr>
 							<tr>
@@ -761,24 +761,24 @@ function modal_modi_address() {
 						<tbody>
 							<tr>
 								<th>배송지 이름</th>
-								<td><input type="text" name="add_nickname" class="modal_modi_nickname" value=""></td>
+								<td><input type="text" name="add_nickname" class="modal_modi_nickname"></td>
 							</tr>
 							<tr>
 								<th>받으실분</th>
-								<td><input type="text" name="add_receiver" class="modal_modi_receiver" value=""></td>
+								<td><input type="text" name="add_receiver" class="modal_modi_receiver"></td>
 							</tr>
 							<tr>
 								<th>받으실 곳</th>
 								<td>
-									<input type="text" id="modal_modi_postcode" name="add_postcode"  value="">
-									<button type="button" onclick="modal_modi_address()" class="modal_modi_search_address" value="">우편번호 검색</button><br>
-									<input type="text" id="modal_modi_addr" name="add_address" value="">
-									<input type="text" id="modal_modi_detail" name="add_addrdetail" value="">
+									<input type="text" id="modal_modi_postcode" name="add_postcode" readonly>
+									<button type="button" onclick="modal_modi_address()" class="modal_modi_search_address">우편번호 검색</button><br>
+									<input type="text" id="modal_modi_addr" name="add_address" readonly>
+									<input type="text" id="modal_modi_detail" name="add_addrdetail">
 								</td>
 							</tr>
 							<tr>
 								<th>휴대폰 번호</th>
-								<td><input type="text" name="add_cellphone" class="modal_modi_cellphone" value=""></td>
+								<td><input type="text" name="add_cellphone" class="modal_modi_cellphone"></td>
 							</tr>
 						</tbody>
 					</table>

@@ -6,7 +6,12 @@
 
 <style>
 #insertColumn {
-	background-color: rgb(248, 56, 1);
+	width: 100px; 
+ 	height: 40px; 
+	border-radius: 5px;
+	border: 2px solid rgb(248, 56, 1);
+	color: rgb(248, 56, 1);
+	background-color: white;
 }
 
 .insertColumn {
@@ -60,7 +65,27 @@
 }
 
 .page-item {
-	width: 40px;
+	text-align: center;
+}
+
+.column_paging {
+	width: 35px;
+	margin: 2px;
+	border: none;
+}
+
+.column_paging_prev {
+	width: 70px;
+	margin: 2px;
+	background-color: white;
+	border: none;
+}
+
+.column_paging_next {
+	width: 60px;
+	margin: 2px;
+	background-color: white;
+	border: none;
 }
 
 </style>
@@ -112,17 +137,26 @@
 			<ul class="pagination justify-content-center">
 			<c:if test="${pagingDto.startPage != 1}">
 				<li class="page-item">
-					<a class="page-link" href="/column/column_list?page=${pagingDto.startPage -1}">이전</a>
+					<a class="page-link column_paging_prev" href="/column/column_list?page=${pagingDto.startPage -1}">이전</a>
 				</li>
 			</c:if>
 			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
-				<li class="page-item">
-					<a class="page-link" href="/column/column_list?page=${v}">${v}</a>
+				<li 
+					<c:choose>
+						<c:when test="${v == param.page}">
+							class="page-item active"
+						</c:when>
+						<c:otherwise>
+							class="page-item"
+						</c:otherwise>
+					</c:choose>
+				>
+					<a class="page-link column_paging" href="/column/column_list?page=${v}">${v}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
 				<li class="page-item">
-					<a class="page-link" href="/column/column_list?page=${pagingDto.endPage + 1}">다음</a>
+					<a class="page-link column_paging_next" href="/column/column_list?page=${pagingDto.endPage + 1}">다음</a>
 				</li>
 			</c:if>
 			</ul>

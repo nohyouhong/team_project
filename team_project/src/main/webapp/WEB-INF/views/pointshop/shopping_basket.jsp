@@ -438,13 +438,21 @@ $(function() {
 		}
 	});
 	//선택 상품 주문
-	$("#selectedPurchaseBtn").click(function() {
+	$("#selectedPurchaseBtn").click(function(e) {
+		e.preventDefault();
+		for(var i = 0; i < $(".oneProductListDiv").length; i++) {
+			$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
+		}
 		orderForm.attr("action", "/pay/paymentScreen");
 		orderForm.attr("method", "get");
 		orderForm.submit();
 	});
 	//모든 상품 주문
-	$("#allPurchaseBtn").click(function() {
+	$("#allPurchaseBtn").click(function(e) {
+		e.preventDefault();
+		for(var i = 0; i < $(".oneProductListDiv").length; i++) {
+			$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
+		}
 		orderForm.attr("action", "/pay/paymentScreen");
 		orderForm.attr("method", "get");
 		orderForm.submit();

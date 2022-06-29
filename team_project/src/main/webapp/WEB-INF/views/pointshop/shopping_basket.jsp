@@ -428,10 +428,10 @@ $(function() {
 	$("#allDeleteBtn").click(function(e) {
 		if (confirm("정말로 삭제하시겠습니까?")) {
 			e.preventDefault();
+			$(".orderProductCheck").attr("checked", true);
 			for(var i = 0; i < $(".oneProductListDiv").length; i++) {
 				$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
 			}
-			$(".orderProductCheck").attr("checked", true);
 			orderForm.attr("action", "/pointshop/deleteBasket");
 			orderForm.attr("method", "get");
 			orderForm.submit();
@@ -450,6 +450,7 @@ $(function() {
 	//모든 상품 주문
 	$("#allPurchaseBtn").click(function(e) {
 		e.preventDefault();
+		$(".orderProductCheck").prop("checked", true);
 		for(var i = 0; i < $(".oneProductListDiv").length; i++) {
 			$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
 		}

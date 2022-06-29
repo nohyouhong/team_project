@@ -22,6 +22,12 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 	private SqlSession sqlSession;
 
 	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto); 
+		return count;
+	}
+	
+	@Override
 	public int getNextBno() {
 		int p_bno = sqlSession.selectOne(NAMESPACE + "getNextBno");
 		return p_bno;
@@ -196,6 +202,8 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		}
 		return false;
 	}
+
+	
 
 
 }

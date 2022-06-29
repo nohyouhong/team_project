@@ -146,6 +146,7 @@ $(function(){
 	});
 });
 </script>
+${pointShopBoardList }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -155,7 +156,7 @@ $(function(){
 				<c:if test="${not empty loginVo }">
 					<button id="createRecipeBtn" class="btn btn-outline-danger">
 						<i class="fa-solid fa-pen-to-square fa-lg"></i>
-						레시피 작성하기
+						상품 등록하기
 					</button>
 				</c:if>
 				<a href="r_bno" class="listType"><span class="listTypeBtn 
@@ -171,13 +172,13 @@ $(function(){
 			<div class="recipeListNumDiv">
 				<span>총</span>
 				<span class="listNumVal">${boardCount }</span>
-				<span>개의 맛있는 레시피가 있습니다.</span>
+				<span>개의 상품이 등록 되있습니다.</span>
 			</div>
 			<div class="recipeListDiv">
-				<c:forEach items="${recipeBoardList }" var="recipeBoardVo">
+				<c:forEach items="${pointShopBoardList }" var="pointShopBoardVo">
 					<div class="oneRecipe">
 						<div>
-							<a class="recipeBoardLink" data-r_bno="${recipeBoardVo.r_bno}" href="/recipeboard/recipe_read?r_bno=${recipeBoardVo.r_bno }">
+							<a class="recipeBoardLink" data-r_bno="${pointShopBoardVo.r_bno}" href="/recipeboard/recipe_read?r_bno=${recipeBoardVo.r_bno }">
 								<img class="oneRecipeImage" src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic}">
 							</a>
 						</div>
@@ -186,7 +187,7 @@ $(function(){
 							<div>
 								<c:choose>
 									<c:when test="${not empty recipeBoardVo.m_picture}">
-										<img class="listUserImage rounded-circle" src="/recipeboard/displayImage?filename=${recipeBoardVo.m_picture}">
+										<img class="listUserImage rounded-circle" src="/recipeboard/displayImage?filename=${pointShopBoardVo.m_picture}">
 									</c:when>
 									<c:otherwise>
 										<img class="listUserImage rounded-circle" src="/resources/main_mypage/images/userImageM.png">

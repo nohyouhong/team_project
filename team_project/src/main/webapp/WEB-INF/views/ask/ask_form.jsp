@@ -64,7 +64,15 @@ $(function(){
 			$("#frmCreate").prepend(inputHtml);
 		});
 	});
-
+	$("#submitBtn").click(function(){
+		if($("#a_title").val() == ""){
+			alert("문의 제목을 입력해주세요");
+		}else if($("#a_content").val() == ""){
+			alert("문의 내용을 입력해주세요");
+		}else{
+			$("#frmCreate").submit();
+		}
+	});
 });
 </script>
 
@@ -87,10 +95,10 @@ $(function(){
 						<span id="notice_top">1:1 문의 글작성</span>
 						<hr>
 							<div class="form-group inq">
-								<b>문의 제목</b><input type="text" class="form-control" name="a_title" />
+								<b>문의 제목</b><input type="text" class="form-control" name="a_title" id="a_title"/>
 							</div>
 							<div class="form-group inq">
-								<b>문의 내용</b><textarea class="form-control" name="a_content" rows="20"></textarea>
+								<b>문의 내용</b><textarea class="form-control" name="a_content" rows="20" id="a_content"></textarea>
 							</div>
 							<!--file upload -->
 							<div>
@@ -104,7 +112,7 @@ $(function(){
 							</div>
 							<div id="uploadedList"></div>
 							<div id="ask_submit">
-								<button type="submit" class="btn btn-outline-warning">문의등록</button>
+								<button type="button" class="btn btn-outline-warning" id="submitBtn">문의등록</button>
 							</div>
 						</form>
 					</div>

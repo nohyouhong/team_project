@@ -43,6 +43,22 @@
 .column_title_div {
 	font-family: Chosunilbo_myungjo;
 }
+
+.modi_column_btn {
+	width: 100px; 
+ 	height: 40px; 
+	border-radius: 5px;
+	border: 2px solid #007bff;
+	color: #007bff;
+}
+
+.del_column_btn {
+	width: 100px; 
+ 	height: 40px; 
+	border-radius: 5px;
+	border: 2px solid #dc3545;
+	color: #dc3545;
+}
 </style>
 
 <script>
@@ -117,8 +133,8 @@ $(document).ready(function(){
 		<div class="column_content_div">${columnVo.c_content}</div>
 		<c:if test="${loginVo.m_code == 101}">
 			<div id="column_manage_btn_div">
-				<a href="/column/column_modify_form?c_bno=${columnVo.c_bno}" class="btn btn-info">수정</a>
-				<a href="/column/column_delete?c_bno=${columnVo.c_bno}" class="btn btn-danger">삭제</a>
+				<a href="/column/column_modify_form?c_bno=${columnVo.c_bno}" class="btn modi_column_btn">수정</a>
+				<a href="/column/column_delete?c_bno=${columnVo.c_bno}" class="btn del_column_btn">삭제</a>
 			</div>
 		</c:if>
 		<div id="column_like_div">

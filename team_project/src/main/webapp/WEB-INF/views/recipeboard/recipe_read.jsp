@@ -961,7 +961,9 @@ $(function(){
 				<div class="col-md-10 userInfos">
 					<div>
 						<span>${memberVo.username }</span>
-						<a id="sendMessageBtn" class="btn btn-outline-primary" style="margin-left: 10px;">쪽지 보내기</a>
+						<c:if test="${not empty loginVo}">
+							<a id="sendMessageBtn" class="btn btn-outline-primary" style="margin-left: 10px;">쪽지 보내기</a>
+						</c:if>
 					</div>
 					<div class="userEmail">${memberVo.email }</div>
 				</div>
@@ -1009,6 +1011,7 @@ $(function(){
 				<button id="reviewShowButton" class="showButton" style="display: none;">더보기</button>
 				<button id="reviewHideButton" class="hideButton" style="display: none;">줄여보기</button>
 			</div>
+			<c:if test="${not empty loginVo}">
 			<form id="cookReviewForm">
 				<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
 				<input type="hidden" name="userid" value="${loginVo.userid}">
@@ -1030,6 +1033,7 @@ $(function(){
 					</div>
 				</div>
 			</form>
+			</c:if>
 		</div>
 		<hr class="createHr2">
 		
@@ -1054,6 +1058,7 @@ $(function(){
 				</div>
 
 				<!-- 				<이동용> -->
+				<c:if test="${not empty loginVo}">
 				<form id="cookCommentForm2" style="display: none;">
 					<div class="cookCommentInputDiv2 row">
 						<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
@@ -1074,6 +1079,7 @@ $(function(){
 						</div>
 					</div>
 				</form>
+				</c:if>
 			</div>
 			
 <!-- 				<이동용> -->
@@ -1081,6 +1087,7 @@ $(function(){
 				<button id="commentShowButton" class="showButton" style="display: none;">더보기</button>
 				<button id="commentHideButton" class="hideButton" style="display: none;">줄여보기</button>
 			</div>
+			<c:if test="${not empty loginVo}">
 			<form id="cookCommentForm">
 				<div class="cookCommentInputDiv row">
 					<input type="hidden" name="r_bno" value="${recipeBoardVo.r_bno}">
@@ -1100,6 +1107,7 @@ $(function(){
 					</div>
 				</div>
 			</form>
+			</c:if>
 		</div>
 		<hr class="createHr2">
 		
@@ -1117,7 +1125,7 @@ $(function(){
 		</div>
 		<hr class="createHr2">
 		<div class="cookP" id="buttonsDiv">
-			<a class="btn btn-outline-success linkBtn" href="#recipeBoardGoTop">맨위로</a>
+			<a class="btn btn-outline-success linkBtn" href="#recipeBoardGoTop">TOP</a>
 		</div>
 	</div>
 	<div class="col-md-2"></div>

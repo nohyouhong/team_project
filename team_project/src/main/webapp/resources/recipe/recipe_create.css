@@ -144,11 +144,11 @@
 }
 .ingredName{
 	display: inline-block;
-	width: 32%;
+	width: 200px;
 }
 .ingredAmount, .ingredUnit{
 	display: inline-block;
-	width: 21%;
+	width: 200px;
 }
 .ingredLabel{
 	margin-right: 5px;

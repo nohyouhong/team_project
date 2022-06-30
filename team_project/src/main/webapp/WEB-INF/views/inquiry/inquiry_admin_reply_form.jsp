@@ -6,6 +6,19 @@
 <%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <link rel="stylesheet" href="/resources/customer_center/customer_center.css" type="text/css">
 <link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
+<script>
+$(document).ready(function(){
+	$("#submitBtn").click(function(){
+		if($("#i_title").val() == ""){
+			alert("문의 제목을 입력해주세요");
+		}else if($("#message").val() == ""){
+			alert("문의 내용을 입력해주세요");
+		}else{
+			$("#frmCreate").submit();
+		}
+	});
+});
+</script>
 <div class="row">
 	<div class="col-md-12">
 		<div class="tabbable" id="tabs-667120">
@@ -31,14 +44,14 @@
 						rows="8" readonly>${inquiryVo.i_content}</textarea>
 				</div>
 				<hr>
-				<form role="form" action="/inquiry/inquiryAdminReplyRun" method="post">
+				<form role="form" action="/inquiry/inquiryAdminReplyRun" method="post" id="frmCreate">
 				<input type="hidden" name="userid" value="${loginVo.userid}">
 				<input type="hidden" name="re_group" value="${inquiryVo.re_group}">
 				<input type="hidden" name="i_bno" value="${inquiryVo.i_bno}">
 					<div id="read-title-writer">
 						<div class="form-group message_read text-left" id="read-title2">
 							답글 제목
-							<input type="text" class="form-control" name="i_title" value="[re:]"/>
+							<input type="text" class="form-control" name="i_title" value="[re:]" id="i_title"/>
 						</div>
 					</div>
 					<div class="form-group message_read text-left">
@@ -47,7 +60,7 @@
 					</div>
 					<div id="inquirysend">
 						<a href="/inquiry/inquiry_admin_list" class="btn btn-outline-warning">목록으로</a>
-						<button type="submit" class="btn btn-outline-danger">답글등록</button>
+						<button type="button" class="btn btn-outline-danger">답글등록</button>
 					</div>
 				</form>
 			</div>

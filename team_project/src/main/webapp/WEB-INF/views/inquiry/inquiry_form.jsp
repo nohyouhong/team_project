@@ -7,7 +7,19 @@
 <link rel="stylesheet" href="/resources/customer_center/inquiry.css" type="text/css">
 
 <script src="/resources/js/myscript.js"></script>
-
+<script>
+$(document).ready(function(){
+	$("#submitBtn").click(function(){
+		if($("#i_title").val() == ""){
+			alert("문의 제목을 입력해주세요");
+		}else if($("#i_content").val() == ""){
+			alert("문의 내용을 입력해주세요");
+		}else{
+			$("#frmCreate").submit();
+		}
+	});
+});
+</script>
 <div class="row">
 	<div class="col-md-12" id="col-md-12">
 		<div class="row">
@@ -28,13 +40,13 @@
 						
 						<hr>
 							<div class="form-group inq">
-								<b>문의 제목</b><input type="text" class="form-control" name="i_title" />
+								<b>문의 제목</b><input type="text" class="form-control" name="i_title" id="i_title"/>
 							</div>
 							<div class="form-group inq">
-								<b>문의 내용</b><textarea class="form-control" name="i_content" rows="20"></textarea>
+								<b>문의 내용</b><textarea class="form-control" name="i_content" rows="20" id="i_content"></textarea>
 							</div>
 							<div id="ask_submit">
-								<button type="submit" class="btn btn-outline-warning">문의등록</button>
+								<button type="button" class="btn btn-outline-warning" id="submitBtn">문의등록</button>
 							</div>
 						</form>
 					</div>

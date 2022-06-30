@@ -126,8 +126,7 @@ public class PointShopServiceImpl implements PointShopService{
 
 	@Override
 	public boolean delete(int p_bno) {
-		// TODO Auto-generated method stub
-		return false;
+		return pointShopDao.delete(p_bno);
 	}
 	
 }

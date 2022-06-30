@@ -1,4 +1,4 @@
- ㅍㅊ<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -460,6 +460,16 @@ $(function() {
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8 pointShopProDiv">
+			<div style="text-align: right; margin-top:30px; margin-bottom:30px; margin-right:60px;">
+				<a class="btn btn-outline-success linkBtn" href="/pointshop/list">
+					<i class="fa-solid fa-list fa-lg"></i> 목록가기</a>
+				<c:if test="${loginVo.m_code == 101 }">
+					<a class="btn btn-outline-info linkBtn" href="/pointshop/update_form?p_bno=${pointShopBoardVo.p_bno }">
+						<i class="fa-solid fa-highlighter fa-lg"></i> 수정하기</a>
+					<a class="btn btn-outline-danger linkBtn" href="/pointshop/delete?p_bno=${pointShopBoardVo.p_bno }" id="btnDelete">
+						<i class="fa-solid fa-eraser fa-lg"></i> 삭제하기</a>
+				</c:if>
+			</div>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="allProPicDiv">

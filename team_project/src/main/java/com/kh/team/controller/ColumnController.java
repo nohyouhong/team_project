@@ -92,8 +92,10 @@ public class ColumnController {
 			String tagC_content = c_content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
 			columnVo.setC_content(tagC_content);
 			ColumnVo columnTitlePics = columnService.getColumnTitlePic(c_bno);
-			String columnTitlePic = columnTitlePics.getC_picture();
-			columnVo.setC_picture(columnTitlePic);
+			if (columnTitlePics != null) {
+				String columnTitlePic = columnTitlePics.getC_picture();
+				columnVo.setC_picture(columnTitlePic);				
+			}
 //			System.out.println("ColumnController, column_list, columnTitlePic: " + columnTitlePic);
 //			for (ColumnVo columnPicVo : columnTitlePics) {
 //			}

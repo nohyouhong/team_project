@@ -105,7 +105,14 @@
 				<div class="single_column_post d-flex">
 					<!-- Blog Thumbnail -->
 					<div class="column_title_pic">
-						<img class="column_img" src="/column/displayImage?column_image=//192.168.0.110/boardattach/${columnVo.c_picture}" alt="">
+						<c:choose>
+							<c:when test="${not empty columnVo.c_picture}">
+								<img class="column_img" src="/column/displayImage?column_image=//192.168.0.110/boardattach/${columnVo.c_picture}" onerror="this.onerror=null; this.src='/resources/main_column/alt_images.png';">
+							</c:when>
+							<c:otherwise>
+								<img class="column_img" src="/resources/main_column/alt_images.png">								
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<!-- Blog Content -->
 					<div class="column_content">

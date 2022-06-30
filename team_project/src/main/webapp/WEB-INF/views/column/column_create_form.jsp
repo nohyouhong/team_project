@@ -23,18 +23,18 @@ $(function(){
 	});
 	
 	
-// 	$("#column_submit").click(function(e){
-// 		e.preventDefault();
-// 		var c_title = $("#c_title").val();
-// 		var c_content = $("#c_content").val();
-// 		if (c_title == "") {
-// 			alert("제목을 입력해주세요");
-// 		} else if (c_content == "") {
-// 			alert("내용을 입력해주세요");
-// 		} else {
-// 			$("#frmColumn").submit();
-// 		}
-// 	});
+	$("#column_submit").click(function(e){
+		e.preventDefault();
+		var c_title = $("#c_title").val();
+		var c_content = $("#c_content").val();
+		if (c_title == "") {
+			alert("제목을 입력해주세요");
+		} else if (c_content == "") {
+			alert("내용을 입력해주세요");
+		} else {
+			$("#frmColumn").submit();
+		}
+	});
 	
 	
 });

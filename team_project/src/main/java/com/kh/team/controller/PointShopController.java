@@ -47,7 +47,17 @@ public class PointShopController {
 	}
 	
 	@RequestMapping(value="/update_form", method=RequestMethod.GET)
-	public String updateForm() {
+	public String updateForm(int p_bno, Model model, PagingDto pagingDto) {
+		PointShopBoardVo pointShopBoardVo = pointShopService.read(p_bno);
+		List<ProductVo> productList = pointShopService.productRead(p_bno);
+		List<String> productPicList = pointShopService.productPicList(p_bno);
+		List<String> productExPicList = pointShopService.productExPicList(p_bno);
+		List<String> tagList = pointShopService.tagRead(p_bno);
+		model.addAttribute("pointShopBoardVo", pointShopBoardVo);
+		model.addAttribute("productList", productList);
+		model.addAttribute("productPicList", productPicList);
+		model.addAttribute("productExPicList", productExPicList);
+		model.addAttribute("tagList", tagList);
 		return "pointshop/update_form";
 	}
 	
@@ -154,6 +164,15 @@ public class PointShopController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		return "redirect:/pointshop/list";
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String delete(int p_bno, RedirectAttributes rttr, PagingDto pagingDto) {
+		boolean result = pointShopService.delete(p_bno);
+		rttr.addFlashAttribute("delete_result", result);
+		rttr.addAttribute("page", pagingDto.getPage());
+		rttr.addAttribute("perPage", pagingDto.getPerPage());
 		return "redirect:/pointshop/list";
 	}
 	

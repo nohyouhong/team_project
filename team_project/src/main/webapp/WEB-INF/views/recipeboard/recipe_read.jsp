@@ -778,14 +778,16 @@ $(function(){
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="cookP cookCenterDiv">
-			<c:if test="${memberVo.userid == loginVo.userid }">
-				<div style="text-align: right; margin-top:30px;">
+			<div style="text-align: right; margin-top:30px;">
+				<a class="btn btn-outline-success linkBtn" href="/recipeboard/recipe_list">
+					<i class="fa-solid fa-list fa-lg"></i> 목록가기</a>
+				<c:if test="${memberVo.userid == loginVo.userid }">
 					<a class="btn btn-outline-info linkBtn" href="/recipeboard/recipeUpdateForm?r_bno=${recipeBoardVo.r_bno }">
 						<i class="fa-solid fa-highlighter fa-lg"></i> 수정하기</a>
 					<a class="btn btn-outline-danger linkBtn" href="/recipeboard/delete?r_bno=${recipeBoardVo.r_bno }" id="btnDelete">
 						<i class="fa-solid fa-eraser fa-lg"></i> 삭제하기</a>
-				</div>
-			</c:if>
+				</c:if>
+			</div>
 			<img id="recipeBoardGoTop" class="mainImage" 
 				src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic }"/>
 			<div class="userImageDiv">

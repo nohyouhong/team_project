@@ -22,6 +22,12 @@ public class PointShopServiceImpl implements PointShopService{
 	private PointShopDao pointShopDao;
 
 	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = pointShopDao.getCount(pagingDto);
+		return count;
+	}
+	
+	@Override
 	@Transactional
 	public boolean create(ProductVo productVo,PointShopBoardVo pointShopBoardVo) {
 		System.out.println(productVo);

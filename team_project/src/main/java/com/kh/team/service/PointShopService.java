@@ -9,6 +9,7 @@ import com.kh.team.vo.ProductVo;
 
 public interface PointShopService {
 	
+	public int getCount(PagingDto pagingDto);
 	public boolean create(ProductVo productVo,PointShopBoardVo pointShopBoardVo);
 	public PointShopBoardVo read(int p_bno);
 	public List<PointShopBoardVo> list(PagingDto pagingDto);

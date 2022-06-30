@@ -52,7 +52,15 @@ public class PointShopController {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list() {
+	public String list(Model model, PagingDto pagingDto) {
+		int boardCount = pointShopService.getCount(pagingDto);
+		pagingDto.setCount(boardCount);
+		pagingDto.setPerPage(16);
+		pagingDto.setPage(pagingDto.getPage());
+		List<PointShopBoardVo> pointShopBoardList = pointShopService.list(pagingDto);
+		model.addAttribute("pointShopBoardList", pointShopBoardList);
+		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("boardCount", boardCount);
 		return "pointshop/list";
 	}
 	

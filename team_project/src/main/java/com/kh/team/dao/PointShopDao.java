@@ -8,6 +8,7 @@ import com.kh.team.vo.PointShopBoardVo;
 import com.kh.team.vo.ProductVo;
 
 public interface PointShopDao {
+	public int getCount(PagingDto pagingDto);
 	public int getNextBno();
 	public boolean create(PointShopBoardVo pointShopBoardVo);
 	public boolean productExPicCreate(String p_picture, int p_bno);

@@ -5,6 +5,10 @@
   
 <mapper namespace="com.kh.team.mappers.pointshop">
 
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_pointshop_board
+	</select>
+
 	<select id="getNextBno" resultType="int">
 		select seq_pointshop_board_bno.nextval from dual
 	</select>

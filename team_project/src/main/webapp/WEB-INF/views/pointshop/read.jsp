@@ -489,8 +489,8 @@ $(function() {
 						<div class="proPriceDiv">
 							<span class="proDiscount">${productList[0].p_discount }%</span>
 							<span class="proPrice2"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${productList[0].p_sum}" /></span>
-							<span class="proPrice2Unit">원</span>
-							<div class="proPrice1">${productList[0].p_price }원</div>
+							<span class="proPrice2Unit">P</span>
+							<div class="proPrice1">${productList[0].p_price }P</div>
 						</div>
 						<div class="proRating">
 							<span class="starRating">
@@ -558,7 +558,7 @@ $(function() {
 										</span>
 										<span class="oneVal" style="display:none;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_sum }" /></span>
 										<span class="sumVal"><fmt:formatNumber type="number" maxFractionDigits="3" value="${productVo.p_sum }" /></span>
-										<span class="sumValUnit">원</span>
+										<span class="sumValUnit">P</span>
 									</div>
 								</div>
 							</c:forEach>
@@ -566,7 +566,7 @@ $(function() {
 						<div class="sumAllValDiv" style="display: none;">
 							<span class="sumAllTitle">주문금액</span>
 							<span class="sumAllVal">0</span>
-							<span class="sumAllValUnit">원</span>
+							<span class="sumAllValUnit">P</span>
 						</div>
 						<div class="proPurchaseBtnDiv">
 							<button type="button" class="basketBtn">장바구니</button>

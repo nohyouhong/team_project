@@ -428,23 +428,32 @@ $(function() {
 	$("#allDeleteBtn").click(function(e) {
 		if (confirm("정말로 삭제하시겠습니까?")) {
 			e.preventDefault();
+			$(".orderProductCheck").attr("checked", true);
 			for(var i = 0; i < $(".oneProductListDiv").length; i++) {
 				$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
 			}
-			$(".orderProductCheck").attr("checked", true);
 			orderForm.attr("action", "/pointshop/deleteBasket");
 			orderForm.attr("method", "get");
 			orderForm.submit();
 		}
 	});
 	//선택 상품 주문
-	$("#selectedPurchaseBtn").click(function() {
+	$("#selectedPurchaseBtn").click(function(e) {
+		e.preventDefault();
+		for(var i = 0; i < $(".oneProductListDiv").length; i++) {
+			$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
+		}
 		orderForm.attr("action", "/pay/paymentScreen");
 		orderForm.attr("method", "get");
 		orderForm.submit();
 	});
 	//모든 상품 주문
-	$("#allPurchaseBtn").click(function() {
+	$("#allPurchaseBtn").click(function(e) {
+		e.preventDefault();
+		$(".orderProductCheck").prop("checked", true);
+		for(var i = 0; i < $(".oneProductListDiv").length; i++) {
+			$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
+		}
 		orderForm.attr("action", "/pay/paymentScreen");
 		orderForm.attr("method", "get");
 		orderForm.submit();
@@ -666,7 +675,7 @@ $(function() {
 								</td>
 								<td>
 									<span class="proPrice"></span>
-									<span class="proUnit">원</span>
+									<span class="proUnit">P</span>
 								</td>
 								<td>
 									<span class="proDiscount"></span>
@@ -674,11 +683,11 @@ $(function() {
 								</td>
 								<td>
 									<span class="proSum"></span>
-									<span class="proUnit">원</span>
+									<span class="proUnit">P</span>
 								</td>
 								<td class="proDelivery">
 									<span class="proDelivery"></span>
-									<span class="proDeliveryUnit">원</span>
+									<span class="proDeliveryUnit">P</span>
 								</td>
 							</tr>
 						</tbody>
@@ -696,19 +705,19 @@ $(function() {
 											<span class="infoTitle">2</span>
 											<span class="infoTitle">개의 주문금액</span><br>
 											<span class="infoEx"></span>
-											<span class="infoEx2">원</span>
+											<span class="infoEx2">P</span>
 										</span>
 										<i class="fa-solid fa-circle-plus fa-lg infoIcon"></i>
 										<span class="proSumInfoDiv">
 											<span class="infoTitle">배송비</span><br>
 											<span class="infoEx"></span>
-											<span class="infoEx2">원</span>
+											<span class="infoEx2">P</span>
 										</span>
 										<i class="fa-solid fa-circle-pause fa-lg fa-rotate-90 infoEx infoIcon"></i>
 										<span class="proSumInfoDiv2">
 											<span class="infoTitle">합계</span><br>
 											<span class="infoEx"></span>
-											<span class="infoEx2">원</span>
+											<span class="infoEx2">P</span>
 										</span>
 									</div>
 								</td>
@@ -727,19 +736,19 @@ $(function() {
 								<span class="allInfoTitle"></span>
 								<span class="allInfoTitle">개의 배송금액</span><br>
 								<span class="allInfoEx"></span>
-								<span class="allInfoEx2">원</span>
+								<span class="allInfoEx2">P</span>
 							</span>
 							<i class="fa-solid fa-circle-plus fa-lg infoIcon"></i>
 							<span class="allProSumInfoDiv">
 								<span class="allInfoTitle">배송비</span><br>
 								<span class="allInfoEx"></span>
-								<span class="allInfoEx2">원</span>
+								<span class="allInfoEx2">P</span>
 							</span>
 							<i class="fa-solid fa-circle-pause fa-lg fa-rotate-90 infoEx infoIcon"></i>
 							<span class="allProSumInfoDiv2">
 								<span class="allInfoTitle">합계</span><br>
 								<span class="allInfoEx"></span>
-								<span class="allInfoEx2">원</span>
+								<span class="allInfoEx2">P</span>
 							</span>
 						</div>
 					</td>

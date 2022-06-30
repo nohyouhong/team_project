@@ -1,9 +1,12 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.AddrService;
+import com.kh.team.service.PayService;
 import com.kh.team.vo.AddrVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.OrderProductVo;
 
 @Controller
 @RequestMapping("/pay")
@@ -22,13 +27,42 @@ public class PayController {
 	@Autowired
 	private AddrService addrService;
 	
+	@Autowired
+	private PayService payService;
+	
 	@RequestMapping(value="/paymentScreen", method=RequestMethod.GET)
-	public String paymentScreen(HttpSession session, Model model) {
-//		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-//		String userid = loginVo.getUserid();
-//		List<AddrVo> addrList = addrService.addrList(userid);
-//		model.addAttribute("addrList", addrList);
+	public String paymentScreen(HttpSession session, Model model, int[] o_pno) {
+		List<Object> orderLists = new ArrayList<>();
+		for (int i = 0; i < o_pno.length; i++) {
+			List<OrderProductVo> orderList = payService.getOrderList(o_pno[i]);
+			OrderProductVo orderProductVo = orderList.get(0);
+			int p_ino = orderProductVo.getP_ino();
+			int p_bno = orderProductVo.getP_bno();
+			List<OrderProductVo> orderOptionList = payService.getOrderOptionList(p_ino);
+			OrderProductVo optionVo = orderOptionList.get(0);
+			String p_option = optionVo.getP_option();
+			int p_price = optionVo.getP_price();
+			String p_discount = optionVo.getP_discount();
+			List<String> productName = payService.getProductName(p_bno);
+			String p_title = productName.get(0);
+			orderProductVo.setP_option(p_option);
+			orderProductVo.setP_price(p_price);
+			orderProductVo.setP_discount(p_discount);
+			orderProductVo.setP_title(p_title);
+			orderOptionList.add(orderProductVo);
+			orderLists.add(orderProductVo);
+		}
+		model.addAttribute("orderLists", orderLists);
 		return "pointshop/payment_screen";
+	}
+	
+	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception{
+		FileInputStream fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
 	}
 	
 	@RequestMapping(value="/insertAddr", method=RequestMethod.POST)

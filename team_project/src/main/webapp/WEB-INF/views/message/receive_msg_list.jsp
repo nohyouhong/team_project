@@ -186,7 +186,7 @@ $(document).ready(function(){
 								<a class="dropdown-item" href="#" id="sendMessageSender" data-sender="${messageVo.sender}">
 									쪽지보내기
 								</a> 
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item userRecipeListLink" href="/recipeboard/recipe_list?keyword=${messageVo.sender}&searchType=userid">
 									레시피보기 
 								</a>
 							</div>

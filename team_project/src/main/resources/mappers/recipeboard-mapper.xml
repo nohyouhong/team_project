@@ -142,39 +142,34 @@
   		  (select * from 
   		  tbl_recipe_board b join tbl_member m
   		  	on b.userid = m.userid
+  		  <include refid="search"></include>
    			 order by ${listType} desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
-<!--   		  <include refid="search"></include> -->
 	
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_recipe_board
-		<include refid="search"></include>
+		<include refid="search2"></include>
 	</select>
 	
 	<sql id="search">
 		<if test="searchType != null and keyword != null">
 			<choose>
-				<when test='searchType == "t"'>
-					where title like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "c"'>
-					where content like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "w"'>
-					where writer like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "tc"'>
-					where title like '%' || #{keyword} || '%'
-					or content like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "tcw"'>
-					where title like '%' || #{keyword} || '%'
-					or content like '%' || #{keyword} || '%'
-					or writer like '%' || #{keyword} || '%'
+				<when test='searchType == "userid"'>
+					where b.userid = #{keyword}
 				</when>
 			</choose>
-  		  </if>
+  		</if>
+	</sql>
+	
+	<sql id="search2">
+		<if test="searchType != null and keyword != null">
+			<choose>
+				<when test='searchType == "userid"'>
+					where userid = #{keyword}
+				</when>
+			</choose>
+  		 </if>
 	</sql>
 	
 	<update id="updateViewCnt">

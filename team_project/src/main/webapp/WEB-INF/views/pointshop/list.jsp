@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
+<%@include file="/WEB-INF/views/include/paging.jsp" %>
 <style>
-.recipeListNumDiv{
+.productListNumDiv{
 	margin-left: 20px;
 	margin-right: 20px;
 	font-size: 18px;
@@ -38,79 +40,78 @@
 	background: #FA7C61;
 	color: white;
 }
-.listNumVal{
-	font-size: 25px;
-	color: rgba(248, 56, 1);
-}
-.recipeListDiv{
+.productListDiv{
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
-.oneRecipe{
+.oneProduct{
 	display: inline-block;
 	margin: 10px;
 	margin-top: 20px;
 	margin-bottom: 35px;
 	width: 280px;
+	vertical-align: top;
 }
-.oneRecipeImage{
+.oneProductImage{
 	width: 280px;
 	height: 280px;
 	border-radius: 10px;
 	cursor: pointer;
 }
-.listUserImage{
-	width: 25px;
-	height: 25px;
-}
-.listUserName{
-	margin-left: 5px;
-}
-.oneRecipeTitle{
+.oneProductTitle{
 	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 1px;
 	font-size: 16px;
-	font-weight: bold;
-	height: 50px;
-}
-.oneRecipeInfo{
-	margin-top: 10px;
-}
-.listStarNum, .listViewName, .listViewCnt{
-	color: #BEB6B6;
-}
-.listViewName{
-	margin-left: 5px;
-}
-.listYellowStar{
-	color: #EAE909;
-	margin-right: -3px;
-}
-.listGrayStar{
-	color: #BEB6B6;
-	margin-right: -3px;
-}
-.listStarNum{
-	margin-left: 3px;
+	font-weight: 600;
 }
 .pagingDiv{
 	margin-top: 30px;
 }
-#createRecipeBtn{
+#createPointShopBtn{
     position: relative;
     top: 10px;
     right: 10px;
+}
+.discountSpan{
+	color: #FF6B6B;
+	font-size: 19px;
+	font-weight: 600;
+}
+.discountSpanUnit{
+	color: #FF6B6B;
+	font-size: 18px;
+	margin-left: -4px;
+	font-weight: 600;
+	margin-right: 5px;
+}
+.priceSpan{
+	font-size: 19px;
+    font-weight: 500;
+}
+.priceSpanUnit{
+	font-size: 18px;
+	font-weight: 500;
+	margin-left: -4px;
+}
+.freeDeliveryDiv{
+	margin-top: 10px
+}
+.freeDeliverySpan{
+	font-size: 12px;
+    border: 1px solid #D1D1D1;
+    padding: 4px 7px;
 }
 </style>
 <script>
 $(function(){
 	var frmPaging = $("#frmPaging");
 	//read할때 
-	$(".recipeBoardLink").click(function() {
-		var r_bno = $(this).attr("data-r_bno"); 
-		frmPaging.find("input[name=r_bno]").val(r_bno);
-		frmPaging.attr("action", "/recipeboard/recipe_read");
+	$(".pointshopBoardLink").click(function(e) {
+		e.preventDefault();
+		var p_bno = $(this).attr("data-p_bno"); 
+		frmPaging.find("input[name=p_bno]").val(p_bno);
+		frmPaging.attr("action", "/pointshop/read");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -121,127 +122,81 @@ $(function(){
 		var page = $(this).attr("href");
 		
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/recipeboard/recipe_list");
+		frmPaging.attr("action", "/pointshop/list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
-	
 	// 최신순, 조회순, 평점순   등등..
-	$("a.listType").click(function(e) {
+	$("a.pointshopListType").click(function(e) {
 		e.preventDefault();
 		var listType = $(this).attr("href");
 		
-		frmPaging.find("input[name=listType]").val(listType);
-		frmPaging.attr("action", "/recipeboard/recipe_list");
+		frmPaging.find("input[name=pointshopListType]").val(listType);
+		frmPaging.attr("action", "/pointshop/list");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
-	
-	$("#createRecipeBtn").click(function(e) {
+	//물품등록
+	$("#createPointShopBtn").click(function(e) {
 		e.preventDefault();
 		
-		frmPaging.attr("action", "/recipeboard/recipeCreateForm");
+		frmPaging.attr("action", "/pointshop/createForm");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
 });
 </script>
-${pointShopBoardList }
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="listTypeDiv">
-				<button style="visibility: hidden;" class="btn btn-outline-danger">레시피 작성 공간을 위해</button>
-				<c:if test="${not empty loginVo }">
-					<button id="createRecipeBtn" class="btn btn-outline-danger">
+				<button style="visibility: hidden;" class="btn btn-outline-danger">공간을 위해</button>
+				<c:if test="${loginVo.m_code == 101 }">
+					<button id="createPointShopBtn" class="btn btn-outline-danger">
 						<i class="fa-solid fa-pen-to-square fa-lg"></i>
 						상품 등록하기
 					</button>
 				</c:if>
-				<a href="r_bno" class="listType"><span class="listTypeBtn 
-				<c:if test="${pagingDto.listType == 'r_bno'}">selectTypeBtn</c:if>
+				<a href="p_purchasecnt" class="pointshopListType"><span class="listTypeBtn 
+				<c:if test="${pagingDto.pointshopListType == 'p_purchasecnt'}">selectTypeBtn</c:if>
+				">주문순</span></a>
+				<a href="p_price" class="pointshopListType"><span class="listTypeBtn 
+				<c:if test="${pagingDto.pointshopListType == 'p_price'}">selectTypeBtn</c:if>
+				">가격순</span></a>
+				<a href="p_bno" class="pointshopListType"><span class="listTypeBtn 
+				<c:if test="${pagingDto.pointshopListType == 'p_bno'}">selectTypeBtn</c:if>
 				">최신순</span></a>
-				<a href="r_viewcnt" class="listType"><span class="listTypeBtn 
-				<c:if test="${pagingDto.listType == 'r_viewcnt'}">selectTypeBtn</c:if>
-				">조회순</span></a>
-				<a href="avgRating" class="listType"><span class="listTypeBtn 
-				<c:if test="${pagingDto.listType == 'avgRating'}">selectTypeBtn</c:if>
-				">평점순</span></a>
 			</div>
-			<div class="recipeListNumDiv">
+			<div class="productListNumDiv">
 				<span>총</span>
 				<span class="listNumVal">${boardCount }</span>
 				<span>개의 상품이 등록 되있습니다.</span>
 			</div>
-			<div class="recipeListDiv">
+			<div class="productListDiv">
 				<c:forEach items="${pointShopBoardList }" var="pointShopBoardVo">
-					<div class="oneRecipe">
+					<div class="oneProduct">
 						<div>
-							<a class="recipeBoardLink" data-r_bno="${pointShopBoardVo.r_bno}" href="/recipeboard/recipe_read?r_bno=${recipeBoardVo.r_bno }">
-								<img class="oneRecipeImage" src="/recipeboard/displayImage?filename=${recipeBoardVo.r_titlepic}">
+							<a class="pointshopBoardLink" data-p_bno="${pointShopBoardVo.p_bno}" href="/pointshop/read?p_bno=${pointShopBoardVo.p_bno }">
+								<img class="oneProductImage" src="/pointshop/displayImage?filename=${pointShopBoardVo.p_picture}">
 							</a>
 						</div>
 						<div>
-							<div class="oneRecipeTitle">${fn:substring(recipeBoardVo.r_title, 0, 26 )}...</div>
-							<div>
-								<c:choose>
-									<c:when test="${not empty recipeBoardVo.m_picture}">
-										<img class="listUserImage rounded-circle" src="/recipeboard/displayImage?filename=${pointShopBoardVo.m_picture}">
-									</c:when>
-									<c:otherwise>
-										<img class="listUserImage rounded-circle" src="/resources/main_mypage/images/userImageM.png">
-									</c:otherwise>
-								</c:choose>
-								<span class="listUserName">${recipeBoardVo.username }</span>
-							</div>
-							<div class="oneRecipeInfo">
-								<span class="listStars">
-									<c:choose>
-										<c:when test="${recipeBoardVo.avgRating > 4}">
-											<c:forEach begin="1" end="5">
-												<i class="fas fa-star listYellowStar"></i>		
-											</c:forEach>
-										</c:when>
-										<c:when test="${recipeBoardVo.avgRating > 3}">
-											<c:forEach begin="1" end="4">
-												<i class="fas fa-star listYellowStar"></i>		
-											</c:forEach>
-											<i class="fas fa-star listGrayStar"></i>
-										</c:when>
-										<c:when test="${recipeBoardVo.avgRating > 2}">
-											<c:forEach begin="1" end="3">
-												<i class="fas fa-star listYellowStar"></i>		
-											</c:forEach>
-											<c:forEach begin="1" end="2">
-												<i class="fas fa-star listGrayStar"></i>		
-											</c:forEach>
-										</c:when>
-										<c:when test="${recipeBoardVo.avgRating > 1}">
-											<c:forEach begin="1" end="2">
-												<i class="fas fa-star listYellowStar"></i>		
-											</c:forEach>
-											<c:forEach begin="1" end="3">
-												<i class="fas fa-star listGrayStar"></i>		
-											</c:forEach>
-										</c:when>
-										<c:when test="${recipeBoardVo.avgRating > 0}">
-											<c:forEach begin="1" end="4">
-												<i class="fas fa-star listYellowStar"></i>		
-											</c:forEach>
-											<i class="fas fa-star listGrayStar"></i>		
-										</c:when>
-										<c:otherwise>
-											<c:forEach begin="1" end="5">
-												<i class="fas fa-star listGrayStar"></i>		
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
+							<div class="oneProductTitle">${pointShopBoardVo.p_title}</div>
+							<div class="oneProductCharge">
+								<span class="discountSpan">${pointShopBoardVo.p_discount}</span>
+								<span class="discountSpanUnit">%</span>
+								<span class="priceSpan">
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${pointShopBoardVo.p_sum}" />
 								</span>
-								<span class="listStarNum">(${recipeBoardVo.ratingNum })</span>
-								<span class="listViewName">조회수</span>
-								<span class="listViewCnt">${recipeBoardVo.r_viewcnt }</span>
+								<span class="priceSpanUnit">P</span>
 							</div>
+							<c:if test="${pointShopBoardVo.deliverycharge == 0}">
+								<div class="freeDeliveryDiv">
+									<span class="freeDeliverySpan">무료배송</span>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>

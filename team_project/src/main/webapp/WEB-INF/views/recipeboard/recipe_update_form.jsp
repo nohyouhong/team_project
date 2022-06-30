@@ -82,7 +82,7 @@
 								<div class="col">
 									<select class="custom-select inputVal" id="r_time"
 										name="r_time">
-										<option value="">종류별</option>
+										<option value="">시간별</option>
 										<option value="5분이내"
 										<c:if test="${recipeBoardVo.r_time == '5분이내' }">selected</c:if>
 										>5분이내</option>
@@ -100,7 +100,7 @@
 								<div class="col">
 									<select class="custom-select inputVal" id="r_level"
 										name="r_level">
-										<option value="">종류별</option>
+										<option value="">난이도별</option>
 										<option value="쉬움"
 										<c:if test="${recipeBoardVo.r_level == '쉬움' }">selected</c:if>
 										>쉬움</option>
@@ -216,7 +216,7 @@
 									<span class="cookStepTitle">step${index.count }</span>
 								</div>
 								<div class="col-md-7">
-									<textarea rows="5" class="form-control inputVal"
+									<textarea rows="5" class="form-control inputVal stepContent"
 										name="r_contents"
 										placeholder="예)소고기는 기름기를 떼어내어 먹기 편안크기로 썰어주세요.">${recipeStepVo.r_content }</textarea>
 								</div>

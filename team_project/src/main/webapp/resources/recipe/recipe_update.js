@@ -162,12 +162,12 @@ $(function() {
 		if (ingredState) {
 			console.log("싱행1");
 			if (addCookStepDivs.length < 2) {
-				alert("레시피스탭 내용이 하나도 없습니다.");
+				alert("요리 순서 내용이 하나도 없습니다.");
 			} else if (addCookStepDivs.length > 1) {
 				for (var i = 1; i < addCookStepDivs.length; i++) {
 					var r_content = $(stepContents[i]).val();
 					if (r_content == "") {
-						alert(i + "번째 요리 스탭내용이 비어 있습니다.");
+						alert(i + "번째 요리 순서 내용이 비어 있습니다.");
 						stepState = false;
 						break;
 					} else {
@@ -189,50 +189,50 @@ $(function() {
 	var ingredInfoCreateState = false;
 	$("#insertIngred").click(function() {
 		$("#modal-520057").trigger("click");
-			$("#ingredInsertBtn").click(function() {
-				var i_name = $("#i_name").val();
-				var i_addressVal = "https://namu.wiki/w/" + i_name;
-				$("#i_address").val(i_addressVal);
-				if(i_name == "") {
-					alert("재료이름을 입력하세요.");
-				}else{
-					var form = $("#ingredInsertForm");
-					var formData = new FormData(form[0]);
-					var url = "/recipeboard/ingredInfoCreate";
-					
-					$.ajax({
-						"enctype" : "multipart/form-data",  
-						"processData" : false,
-						"contentType" : false,
-						"url" : url,
-						"method" : "post",
-						"data" : formData,
-						"success" : function(rData) {
-							if(rData == "true"){
-								ingredInfoCreateState = true;
-								alert(i_name + "를 등록했습니다.");
-// 								console.log("아약스 안", ingredInfoCreateState);
-							}
-						}
-					});
-					//아약스 비동기라 셋타임아웃 안쓰면 밑에꺼랑 아약스안 함수랑 거의 동시에 실행
-					setTimeout(function() {
-// 						console.log("아약스 이후", ingredInfoCreateState);
-						if(!ingredInfoCreateState){
-							alert(i_name + "는 이미 등록되있습니다.");
-						}
-						ingredInfoCreateState = false;
-						$("#i_name").val("");
-						$("#i_unit").val("");
-						$("#i_address").val("");
-						var thats = $(".ingredName");
-						$.each(thats, function(){
-							var that = $(this);
-							checkIngred(that);
-						});
-					}, 2000);
+	});
+	$("#ingredInsertBtn").click(function() {
+		var i_name = $("#i_name").val();
+		var i_addressVal = "https://namu.wiki/w/" + i_name;
+		$("#i_address").val(i_addressVal);
+		if(i_name == "") {
+			alert("재료이름을 입력하세요.");
+		}else{
+			var form = $("#ingredInsertForm");
+			var formData = new FormData(form[0]);
+			var url = "/recipeboard/ingredInfoCreate";
+			
+			$.ajax({
+				"enctype" : "multipart/form-data",  
+				"processData" : false,
+				"contentType" : false,
+				"url" : url,
+				"method" : "post",
+				"data" : formData,
+				"success" : function(rData) {
+					if(rData == "true"){
+						ingredInfoCreateState = true;
+						alert(i_name + "를 등록했습니다.");
+						$("#modal-520057").trigger("click");
+					}
 				}
 			});
+			//아약스 비동기라 셋타임아웃 안쓰면 밑에꺼랑 아약스안 함수랑 거의 동시에 실행
+			setTimeout(function() {
+//					console.log("아약스 이후", ingredInfoCreateState);
+				if(!ingredInfoCreateState){
+					alert(i_name + "는 이미 등록되있습니다.");
+				}
+				ingredInfoCreateState = false;
+				$("#i_name").val("");
+				$("#i_unit").val("");
+				$("#i_address").val("");
+				var thats = $(".ingredName");
+				$.each(thats, function(){
+					var that = $(this);
+					checkIngred(that);
+				});
+			}, 2000);
+		}
 	});
 	//재료칸에 이름적을때
 	$("#addIngredList").on("change", ".ingredName", function(){

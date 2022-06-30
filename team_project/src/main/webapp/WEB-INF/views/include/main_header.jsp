@@ -110,7 +110,6 @@ $(function(){
 				<div class="container">
 					<div class="row toploginmenu">
 						<div class="col-md-12" id="col12" >
-							<a href="/pay/paymentScreen">결제창 접속(임시)</a>
 						<c:choose>
 							<c:when test="${empty loginVo}">
 								<a href="/member/login_form">로그인</a>

@@ -20,10 +20,10 @@ $(document).ready(function(){
 		e.preventDefault();
 		var page = $(this).attr("href");
 		
-		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/ask/ask_admin_list");
-		frmPaging.attr("method", "get");
-		frmPaging.submit();
+		frmpaging.find("input[name=page]").val(page);
+		frmpaging.attr("action", "/ask/ask_admin_list");
+		frmpaging.attr("method", "get");
+		frmpaging.submit();
 	});
 });
 </script>
@@ -58,13 +58,13 @@ $(document).ready(function(){
 										<td>${askVo.a_regdate}</td>
 										<td>
 										<c:choose>
-											<c:when test="${askVo.re_level == 1}">
+											<c:when test="${askVo.re_level >= 1}">
 												-
 											</c:when>
 											<c:when test="${askVo.a_state == 0}">
 												답변예정
 											</c:when>
-											<c:when test="${askVo.a_state == 1}">
+											<c:when test="${askVo.a_state >= 1}">
 												<b>답변완료</b>
 											</c:when>
 										</c:choose>
@@ -86,9 +86,19 @@ $(document).ready(function(){
 					<a class="page-link in_page_link" href="${pagingDto.startPage -1}">이전</a>
 				</li>
 			</c:if>
-			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
-				<li class="page-item">
-					<a class="page-link in_page_link" href="${v}">${v}</a>
+			<c:forEach begin="${pagingDto.startPage }"
+				end="${pagingDto.endPage }" var="i">
+				<li
+					<c:choose>
+						<c:when test="${i == pagingDto.page }">
+							class="page-item active"
+						</c:when>
+						<c:otherwise>
+							class="page-item"
+						</c:otherwise>							
+					</c:choose>
+					class="page-item">
+					<a class="page-link" href="${i}">${i}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">

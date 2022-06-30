@@ -10,9 +10,9 @@
 $(document).ready(function(){
 	$("#submitBtn").click(function(){
 		if($("#i_title").val() == ""){
-			alert("문의 제목을 입력해주세요");
-		}else if($("#message").val() == ""){
-			alert("문의 내용을 입력해주세요");
+			alert("답글 제목을 입력해주세요");
+		}else if($("#i_content").val() == ""){
+			alert("답글 내용을 입력해주세요");
 		}else{
 			$("#frmCreate").submit();
 		}
@@ -56,11 +56,11 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group message_read text-left">
 						답글 내용 
-						<textarea class="form-control" id="message" name="i_content" rows="8"></textarea>
+						<textarea class="form-control" id="i_content" name="i_content" rows="8"></textarea>
 					</div>
 					<div id="inquirysend">
 						<a href="/inquiry/inquiry_admin_list" class="btn btn-outline-warning">목록으로</a>
-						<button type="button" class="btn btn-outline-danger">답글등록</button>
+						<button type="button" class="btn btn-outline-danger" id="submitBtn">답글등록</button>
 					</div>
 				</form>
 			</div>

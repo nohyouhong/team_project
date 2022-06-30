@@ -791,6 +791,7 @@ function modal_modi_address() {
 		</div>
 	</div>
 </div>
+<!-- 모달창 끝 -->
 
 <div class="row">
 	<div class="col-md-2"></div>
@@ -830,30 +831,32 @@ function modal_modi_address() {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							<div class="pay_order_product_div">
-								<div>
-									<img class="pay_product_img" src="/resources/pointshop/dakbal.jpg">
-								</div>
-								<div class="pay_order_product_title">
-									<div>
-										<a class="pay_order_product_a" href="#">
-											<span>제목: 엄청 매운 닭발 엄청 매운 닭발엄청 매운 닭발 엄청 매운 닭발엄청 매운 닭발 엄청 매운 닭발</span>
-										</a>
+					<c:forEach items="${orderLists}" var="orderVo">
+							<tr>
+								<td>
+									<div class="pay_order_product_div">
+										<div>
+											<img class="pay_product_img" src="/pay/displayImage?filename=${orderVo.o_titlepic}">
+										</div>
+										<div class="pay_order_product_title">
+											<div>
+												<a class="pay_order_product_a" href="#">
+													<span>${orderVo.p_title }</span>
+												</a>
+											</div>
+											<div>
+												<span class="pay_order_product_span">${orderVo.p_option}</span>
+											</div>
+										</div>
 									</div>
-									<div>
-										<span class="pay_order_product_span">옵션: 한국에서 제일 매운맛 한국에서 제일 매운맛</span>
-									</div>
-								</div>
-							</div>
-						</td>
-						<td>1</td>
-						<td>10,000</td>
-						<td>90%</td>
-						<td>1,000</td>
-						<td>20,000</td>
-					</tr>
+								</td>
+								<td>${orderVo.o_amount}</td>
+								<td>${orderVo.p_price }</td>
+								<td>${orderVo.p_discount}%</td>
+								<td>${orderVo.o_sum}</td>
+								<td>${orderVo.o_deliverycharge}</td>
+							</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -926,9 +929,14 @@ function modal_modi_address() {
 			<table>
 				<tr>
 					<td>
+						<c:forEach items="${orderLists}" var="orderVo">
+							<c:set var="total_price" value="${total_price + (orderVo.p_price * orderVo.o_amount)}"/>
+							<c:set var="total_delivery" value="${total_delivery + orderVo.o_deliverycharge}"/>
+							<c:set var="final_price" value="${final_price + orderVo.o_sum}"/>
+						</c:forEach>
 						<div class="pay_final_div">
 							<div><h4>총 상품 합계 금액</h4></div>
-							<div><h2>10,000</h2></div>					
+							<div><h2><c:out value="${total_price}"/></h2></div>					
 						</div>
 					</td>
 					<td>
@@ -939,7 +947,7 @@ function modal_modi_address() {
 					<td>
 						<div class="pay_final_div">
 							<div><h4>총 배송비</h4></div>
-							<div><h2>20,000</h2></div>				
+							<div><h2><c:out value="${total_delivery}"/></h2></div>				
 						</div>
 					</td>
 					<td>
@@ -950,7 +958,7 @@ function modal_modi_address() {
 					<td>
 						<div class="pay_final_div">
 							<div><h4>할인</h4></div>
-							<div class="pay_final_discount"><h2>9,000</h2></div>				
+							<div class="pay_final_discount"><h2><c:out value="${total_price - final_price}"/></h2></div>				
 						</div>
 					</td>
 					<td>
@@ -961,7 +969,7 @@ function modal_modi_address() {
 					<td>
 						<div class="pay_final_div">
 							<div><h4>최종 결제 포인트</h4></div>
-							<div class="pay_final_point"><h2>21,000</h2></div>			
+							<div class="pay_final_point"><h2><c:out value="${final_price}"/></h2></div>			
 						</div>
 					</td>
 				</tr>

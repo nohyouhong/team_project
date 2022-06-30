@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.pay">
+	
+	<select id="getOrderList" resultType="OrderProductVo">
+		select p_bno, p_ino, o_amount, o_sum, o_deliverycharge, o_titlepic from tbl_order_product
+		where o_pno = #{o_pno}
+	</select>
+	
+	<select id="getOrderOptionList" resultType="OrderProductVo">
+		select p_option, p_price, p_discount from tbl_product_info
+   		where p_ino = #{p_ino}
+	</select>
+
+	<select id="getProductName" resultType="String">
+		select p_title from tbl_pointshop_board
+   		where p_bno = #{p_bno}
+	</select>
+	
+</mapper>

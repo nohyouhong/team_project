@@ -63,6 +63,14 @@ public class OrderProductVo {
 		this.deletestate = deletestate;
 	}
 
+	public OrderProductVo(int p_price, String p_option, String p_discount, String p_title) {
+		super();
+		this.p_price = p_price;
+		this.p_option = p_option;
+		this.p_discount = p_discount;
+		this.p_title = p_title;
+	}
+
 	public int getO_pno() {
 		return o_pno;
 	}
@@ -266,6 +274,4 @@ public class OrderProductVo {
 				+ ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge=" + l_deliverycharge
 				+ ", p_deliverycharge=" + p_deliverycharge + ", deletestate=" + deletestate + "]";
 	}
-
-
 }

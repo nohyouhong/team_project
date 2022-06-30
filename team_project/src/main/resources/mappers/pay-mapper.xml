@@ -11,13 +11,18 @@
 	</select>
 	
 	<select id="getOrderOptionList" resultType="OrderProductVo">
-		select p_option, p_price, p_discount from tbl_product_info
+		select pno, p_option, p_price, p_discount from tbl_product_info
    		where p_ino = #{p_ino}
 	</select>
 
 	<select id="getProductName" resultType="String">
 		select p_title from tbl_pointshop_board
    		where p_bno = #{p_bno}
+	</select>
+	
+	<select id="getDeliverCount" resultType="int">
+		select count(*) from tbl_order_product
+    	where p_bno = #{p_bno} and deletestate = 1
 	</select>
 	
 </mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 
 <style>
@@ -203,11 +204,11 @@
 }
 
 .pay_final_discount h2 {
-	color: red;
+	color: rgb(248, 56, 1);
 }
 
 .pay_final_point h2 {
-	color: green;
+	color: #57DA4C;
 }
 
 
@@ -832,30 +833,38 @@ function modal_modi_address() {
 				</thead>
 				<tbody>
 					<c:forEach items="${orderLists}" var="orderVo">
-							<tr>
-								<td>
-									<div class="pay_order_product_div">
+						<tr>
+							<td>
+								<div class="pay_order_product_div">
+									<div>
+										<img class="pay_product_img" src="/pay/displayImage?filename=${orderVo.o_titlepic}">
+									</div>
+									<div class="pay_order_product_title">
 										<div>
-											<img class="pay_product_img" src="/pay/displayImage?filename=${orderVo.o_titlepic}">
+											<a class="pay_order_product_a" href="#">
+												<span>${orderVo.p_title }</span>
+											</a>
 										</div>
-										<div class="pay_order_product_title">
-											<div>
-												<a class="pay_order_product_a" href="#">
-													<span>${orderVo.p_title }</span>
-												</a>
-											</div>
-											<div>
-												<span class="pay_order_product_span">${orderVo.p_option}</span>
-											</div>
+										<div>
+											<span class="pay_order_product_span">${orderVo.p_option}</span>
 										</div>
 									</div>
-								</td>
-								<td>${orderVo.o_amount}</td>
-								<td>${orderVo.p_price }</td>
-								<td>${orderVo.p_discount}%</td>
-								<td>${orderVo.o_sum}</td>
-								<td>${orderVo.o_deliverycharge}</td>
-							</tr>
+								</div>
+							</td>
+							<td>${orderVo.o_amount}</td>
+							<td>${orderVo.p_price }</td>
+							<td>${orderVo.p_discount}%</td>
+							<td>${orderVo.o_sum}</td>
+							<c:choose>
+								<c:when test="${orderVo.o_deliverycharge == 0}">
+								</c:when>
+								<c:otherwise>
+									<td rowspan='<c:out value="${orderVo.deliver_count}"/>'>
+										${orderVo.o_deliverycharge}
+									</td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -936,7 +945,7 @@ function modal_modi_address() {
 						</c:forEach>
 						<div class="pay_final_div">
 							<div><h4>총 상품 합계 금액</h4></div>
-							<div><h2><c:out value="${total_price}"/></h2></div>					
+							<div><h2><fmt:formatNumber value="${total_price}" type="number" maxFractionDigits="3"/></h2></div>					
 						</div>
 					</td>
 					<td>
@@ -947,7 +956,7 @@ function modal_modi_address() {
 					<td>
 						<div class="pay_final_div">
 							<div><h4>총 배송비</h4></div>
-							<div><h2><c:out value="${total_delivery}"/></h2></div>				
+							<div><h2><fmt:formatNumber value="${total_delivery}" type="number" maxFractionDigits="3"/></h2></div>				
 						</div>
 					</td>
 					<td>
@@ -958,7 +967,7 @@ function modal_modi_address() {
 					<td>
 						<div class="pay_final_div">
 							<div><h4>할인</h4></div>
-							<div class="pay_final_discount"><h2><c:out value="${total_price - final_price}"/></h2></div>				
+							<div class="pay_final_discount"><h2><fmt:formatNumber value="${total_price - final_price}" type="number" maxFractionDigits="3"/></h2></div>				
 						</div>
 					</td>
 					<td>
@@ -969,7 +978,7 @@ function modal_modi_address() {
 					<td>
 						<div class="pay_final_div">
 							<div><h4>최종 결제 포인트</h4></div>
-							<div class="pay_final_point"><h2><c:out value="${final_price}"/></h2></div>			
+							<div class="pay_final_point"><h2><fmt:formatNumber value="${final_price}" type="number" maxFractionDigits="3"/></h2></div>			
 						</div>
 					</td>
 				</tr>

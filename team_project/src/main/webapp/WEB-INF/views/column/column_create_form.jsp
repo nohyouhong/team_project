@@ -21,6 +21,22 @@ $(function(){
 			console.log("rData: " + rData)
 		});	
 	});
+	
+	
+// 	$("#column_submit").click(function(e){
+// 		e.preventDefault();
+// 		var c_title = $("#c_title").val();
+// 		var c_content = $("#c_content").val();
+// 		if (c_title == "") {
+// 			alert("제목을 입력해주세요");
+// 		} else if (c_content == "") {
+// 			alert("내용을 입력해주세요");
+// 		} else {
+// 			$("#frmColumn").submit();
+// 		}
+// 	});
+	
+	
 });
 function isImage(filename) {
 	// 확장자 체크 - png, jpg, gif
@@ -109,7 +125,7 @@ function uploadColumnImageFile(file, el) {
 		            }
 				});
 				</script>								
-				<button type="submit" class="btn btn-primary">작성 완료</button>
+				<button type="button" id="column_submit" class="btn btn-primary">작성 완료</button>
 			</form>
 		</div>
 		<div class="col-md-2"></div>

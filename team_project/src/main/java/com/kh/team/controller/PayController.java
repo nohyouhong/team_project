@@ -2,6 +2,7 @@ package com.kh.team.controller;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +33,7 @@ public class PayController {
 	
 	@RequestMapping(value="/paymentScreen", method=RequestMethod.GET)
 	public String paymentScreen(HttpSession session, Model model, int[] o_pno) {
-		List<Object> orderLists = new ArrayList<>();
+		List<OrderProductVo> orderLists = new ArrayList<>();
 		for (int i = 0; i < o_pno.length; i++) {
 			List<OrderProductVo> orderList = payService.getOrderList(o_pno[i]);
 			OrderProductVo orderProductVo = orderList.get(0);
@@ -44,13 +45,24 @@ public class PayController {
 			int p_price = optionVo.getP_price();
 			String p_discount = optionVo.getP_discount();
 			List<String> productName = payService.getProductName(p_bno);
+			int pno = optionVo.getPno();
 			String p_title = productName.get(0);
+			int deliver_count = payService.getDeliverCount(p_bno);
+			System.out.println("deliver_count: " + deliver_count);
+			orderProductVo.setPno(pno);
 			orderProductVo.setP_option(p_option);
 			orderProductVo.setP_price(p_price);
 			orderProductVo.setP_discount(p_discount);
 			orderProductVo.setP_title(p_title);
+			orderProductVo.setDeliver_count(deliver_count);
 			orderOptionList.add(orderProductVo);
 			orderLists.add(orderProductVo);
+		}
+		for (int i = 1; i < orderLists.size(); i++) {
+			if(orderLists.get(i).getPno() == orderLists.get(i-1).getPno()) {
+				orderLists.get(i).setO_deliverycharge(0);
+			}
+			System.out.println("orderLists: " + orderLists);
 		}
 		model.addAttribute("orderLists", orderLists);
 		return "pointshop/payment_screen";

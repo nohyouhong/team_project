@@ -27,6 +27,8 @@ public class OrderProductVo {
 	private int l_deliverycharge;
 	private int p_deliverycharge;
 	private int deletestate;
+	private int pno;
+	private int deliver_count;
 	
 	public OrderProductVo() {
 		super();
@@ -69,6 +71,22 @@ public class OrderProductVo {
 		this.p_option = p_option;
 		this.p_discount = p_discount;
 		this.p_title = p_title;
+	}
+
+	public int getDeliver_count() {
+		return deliver_count;
+	}
+
+	public void setDeliver_count(int deliver_count) {
+		this.deliver_count = deliver_count;
+	}
+
+	public int getPno() {
+		return pno;
+	}
+
+	public void setPno(int pno) {
+		this.pno = pno;
 	}
 
 	public int getO_pno() {
@@ -272,6 +290,8 @@ public class OrderProductVo {
 				+ Arrays.toString(o_sums) + ", p_option=" + p_option + ", p_discount=" + p_discount + ", p_name="
 				+ p_name + ", p_title=" + p_title + ", p_explain=" + p_explain + ", p_stock=" + p_stock
 				+ ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge=" + l_deliverycharge
-				+ ", p_deliverycharge=" + p_deliverycharge + ", deletestate=" + deletestate + "]";
+				+ ", p_deliverycharge=" + p_deliverycharge + ", deletestate=" + deletestate + ", pno=" + pno
+				+ ", deliver_count=" + deliver_count + "]";
 	}
+	
 }

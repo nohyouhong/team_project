@@ -10,7 +10,7 @@ import com.kh.team.vo.OrderProductVo;
 
 @Repository
 public class PayDaoImpl implements PayDao {
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.kh.team.mappers.pay.";
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -31,6 +31,12 @@ public class PayDaoImpl implements PayDao {
 	public List<String> getProductName(int p_bno) {
 		List<String> productName = sqlSession.selectList(NAMESPACE + "getProductName", p_bno);				
 		return productName;
+	}
+
+	@Override
+	public int getDeliverCount(int p_bno) {
+		int count = sqlSession.selectOne(NAMESPACE + "getDeliverCount", p_bno);
+		return count;
 	}
 	
 	

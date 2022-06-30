@@ -31,5 +31,11 @@ public class PayServiceImpl implements PayService {
 		List<String> productName = payDao.getProductName(p_bno);				
 		return productName;
 	}
+
+	@Override
+	public int getDeliverCount(int p_bno) {
+		int count = payDao.getDeliverCount(p_bno);
+		return count;
+	}
 	
 }

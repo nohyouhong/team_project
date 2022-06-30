@@ -852,15 +852,15 @@ function modal_modi_address() {
 								</div>
 							</td>
 							<td>${orderVo.o_amount}</td>
-							<td>${orderVo.p_price }</td>
+							<td><fmt:formatNumber value="${orderVo.p_price}" type="number" maxFractionDigits="3"/>P</td>
 							<td>${orderVo.p_discount}%</td>
-							<td>${orderVo.o_sum}</td>
+							<td><fmt:formatNumber value="${orderVo.o_sum}" type="number" maxFractionDigits="3"/>P</td>
 							<c:choose>
 								<c:when test="${orderVo.o_deliverycharge == 0}">
 								</c:when>
 								<c:otherwise>
 									<td rowspan='<c:out value="${orderVo.deliver_count}"/>'>
-										${orderVo.o_deliverycharge}
+										<fmt:formatNumber value="${orderVo.o_deliverycharge}" type="number" maxFractionDigits="3"/>P
 									</td>
 								</c:otherwise>
 							</c:choose>

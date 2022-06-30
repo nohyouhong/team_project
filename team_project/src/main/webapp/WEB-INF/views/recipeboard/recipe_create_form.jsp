@@ -107,15 +107,12 @@
 				</div>
 				<hr class="createHr">
 				<div class="explainDiv">
+					<label for="title" class="createTitle">재료</label>
 					<span class="explain">재료가 남거나 부족하지 않도록 정확한 계량정보를 적어주세요.</span>
 					<span id="ingredspan"></span>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
-						<input type="text" class="form-control" value="재료"
-							style="background: #FFFECC" readonly/>
-					</div>
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<div id="addIngredList">
 							<!-- 						클론용 -->
 							<div class="addIngredDiv" style="display: none;">

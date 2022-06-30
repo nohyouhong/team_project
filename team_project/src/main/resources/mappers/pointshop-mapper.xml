@@ -36,10 +36,18 @@
 	
 	<select id="list" resultType="PointShopBoardVo">
 		select * from(select rownum rnum, a.* from 
-  		  (select * from 
-  		  tbl_pointshop_board b join tbl_member m
-  		  	on b.userid = m.userid
-   			 order by p_regdate desc) a)
+           (select  b.p_bno, pic.p_picture , b.p_title, b.p_explain, i.p_discount, i.p_sum,
+       		b.deliverycharge,
+       		row_number() over (partition by b.p_bno order by i.p_ino asc, pic.picno asc) num 
+          
+	  		from tbl_pointshop_board b join tbl_product p
+	            on b.p_bno = p.p_bno
+	        join tbl_product_pic pic
+	            on p.pno = pic.pno
+	        join tbl_product_info i
+	            on p.pno = i.pno
+	   		order by ${pointshopListType} desc) a
+	        where num = 1)
 		where rnum between #{startRow} and #{endRow}
 	</select>
 <!--   		  <include refid="search"></include> -->

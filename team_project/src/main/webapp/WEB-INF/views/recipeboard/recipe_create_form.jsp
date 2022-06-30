@@ -49,20 +49,17 @@
 					<div class="col-md-8">
 						<div class="form-group">
 							<label for="r_title" class="createTitle">요리 제목</label> 
-							<span id="titlespan"></span>
 							<input type="text" class="form-control inputVal" id="r_title"
 								name="r_title" placeholder="예)김치찌개 끓이기" />
 						</div>
 						<div class="form-group">
 							<label for="r_explain" class="createTitle">요리 소개</label>
-							<span id="explainspan"></span>
 							<textarea rows="4" class="form-control inputVal" id="r_explain"
 								name="r_explain"
 								placeholder="레시피의 탄생배경을 적어주세요. 예) 어머니의 된장국이 생각이나  남편과 같이 고안해보았습니다."></textarea>
 						</div>
 						<div class="form-group">
 							<label for="title" class="createTitle">카테고리</label>
-							<span id="titlespan2"></span>
 							<div class="row">
 								<div class="col">
 									<select class="custom-select inputVal" id="f_code"
@@ -109,7 +106,6 @@
 				<div class="explainDiv">
 					<label for="title" class="createTitle">재료</label>
 					<span class="explain">재료가 남거나 부족하지 않도록 정확한 계량정보를 적어주세요.</span>
-					<span id="ingredspan"></span>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -190,7 +186,7 @@
 								<span class="cookStepTitle">step1</span>
 							</div>
 							<div class="col-md-7">
-								<textarea rows="5" class="form-control inputVal"
+								<textarea rows="5" class="form-control inputVal stepContent"
 									name="r_contents"
 									placeholder="예)소고기는 기름기를 떼어내어 먹기 편안크기로 썰어주세요."></textarea>
 							</div>

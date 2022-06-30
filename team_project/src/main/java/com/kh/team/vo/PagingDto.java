@@ -7,6 +7,7 @@ public class PagingDto {
 	private String searchType;
 	private String keyword;
 	private String listType = "avgRating";
+	private String pointshopListType = "p_bno";
 	private int perPage = 10;
 	private int totalPage;
 	private int count;
@@ -92,18 +93,19 @@ public class PagingDto {
 	public int getPAGE_BLOCK() {
 		return PAGE_BLOCK;
 	}
+	
+	public String getPointshopListType() {
+		return pointshopListType;
+	}
+	public void setPointshopListType(String pointshopListType) {
+		this.pointshopListType = pointshopListType;
+	}
 	@Override
 	public String toString() {
 		return "PagingDto [page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", searchType="
-				+ searchType + ", keyword=" + keyword + ", listType=" + listType + ", perPage=" + perPage
-				+ ", totalPage=" + totalPage + ", count=" + count + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+				+ searchType + ", keyword=" + keyword + ", listType=" + listType + ", pointshopListType="
+				+ pointshopListType + ", perPage=" + perPage + ", totalPage=" + totalPage + ", count=" + count
+				+ ", startPage=" + startPage + ", endPage=" + endPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
-	
-	
-	
-
-
-	
 	
 }

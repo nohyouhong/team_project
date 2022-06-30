@@ -509,9 +509,9 @@ $(function() {
 				</div>
 				<hr class="createHr">
 				<div class="form-group">
-					<span class="createTitle">물품 정보 사진</span><br>
+					<span class="createTitle">상세 페이지</span><br>
 					<div class="explainDiv">
-						<span class="explain">물품 정보 사진을 차례에 맞게 올려주세요.</span><br>
+						<span class="explain">상세 페이지를 차례에 맞게 등록해주세요.</span><br>
 					</div>
 					<div id="productExDivList">
 <!-- 						클론용 -->

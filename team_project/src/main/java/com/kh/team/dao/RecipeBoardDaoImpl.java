@@ -90,6 +90,7 @@ private final String NAMESPACE = "com.kh.team.mappers.recipeboard.";
 
 	@Override
 	public List<RecipeBoardVo> list(PagingDto pagingDto) {
+		System.out.println(pagingDto);
 		List<RecipeBoardVo> list = sqlSession.selectList(NAMESPACE + "list", pagingDto);
 		return list;
 	}

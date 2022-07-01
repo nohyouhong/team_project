@@ -20,6 +20,7 @@ import com.kh.team.service.PayService;
 import com.kh.team.vo.AddrVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.OrderProductVo;
+import com.kh.team.vo.PayVo;
 
 @Controller
 @RequestMapping("/pay")
@@ -124,5 +125,13 @@ public class PayController {
 		String userid = loginVo.getUserid();
 		AddrVo addrVo = addrService.getBasicAddr(userid);
 		return addrVo;
+	}
+	
+	@RequestMapping(value="/getFinalOrder", method=RequestMethod.POST)
+	public String getFinalOrder(PayVo payVo, HttpSession session) {
+		System.out.println("payVo: " + payVo);
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = memberVo.getUserid();
+		return null;
 	}
 }

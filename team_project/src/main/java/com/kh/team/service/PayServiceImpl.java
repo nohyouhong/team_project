@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.PayDao;
 import com.kh.team.vo.OrderProductVo;
+import com.kh.team.vo.PayVo;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -36,6 +37,17 @@ public class PayServiceImpl implements PayService {
 	public int getDeliverCount(int p_bno) {
 		int count = payDao.getDeliverCount(p_bno);
 		return count;
+	}
+
+	@Override
+	public boolean insertFinalOrder(PayVo payVo, int o_pno) {
+		boolean result1 = payDao.insertFinalAddr(payVo);
+		boolean result2 = payDao.insertFinalProduct(payVo);
+		boolean result3 = payDao.updateOState(o_pno);
+		if (result1 && result2 && result3) {
+			return true;
+		}
+		return false;
 	}
 	
 }

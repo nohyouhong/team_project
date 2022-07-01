@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class PointShopBoardVo {
 	private int p_bno;
 	private String p_title;
+	private String p_name;
 	private String p_explain;
 	private int deliverycharge;
 	private String userid;
@@ -16,6 +17,9 @@ public class PointShopBoardVo {
 	private String purchaseplace;
 	private String p_picture;
 	private String[] p_pictures;
+	private String[] p_pictures2;
+	private String[] p_exPictures;
+	private String[] p_exPictures2;
 	private String[] p_tags;
 	private int p_purchasecnt;
 	private int p_discount;
@@ -37,12 +41,14 @@ public class PointShopBoardVo {
 		this.purchaseplace = purchaseplace;
 	}
 
-	public PointShopBoardVo(int p_bno, String p_title, String p_explain, int deliverycharge, String userid,
-			Date p_regdate, int p_viewcnt, float p_avgrating, String sellstate, String purchaseplace, String p_picture,
-			String[] p_pictures, String[] p_tags, int p_purchasecnt, int p_discount, int p_sum) {
+	public PointShopBoardVo(int p_bno, String p_title, String p_name, String p_explain, int deliverycharge,
+			String userid, Date p_regdate, int p_viewcnt, float p_avgrating, String sellstate, String purchaseplace,
+			String p_picture, String[] p_pictures, String[] p_pictures2, String[] p_exPictures, String[] p_exPictures2,
+			String[] p_tags, int p_purchasecnt, int p_discount, int p_sum) {
 		super();
 		this.p_bno = p_bno;
 		this.p_title = p_title;
+		this.p_name = p_name;
 		this.p_explain = p_explain;
 		this.deliverycharge = deliverycharge;
 		this.userid = userid;
@@ -53,6 +59,9 @@ public class PointShopBoardVo {
 		this.purchaseplace = purchaseplace;
 		this.p_picture = p_picture;
 		this.p_pictures = p_pictures;
+		this.p_pictures2 = p_pictures2;
+		this.p_exPictures = p_exPictures;
+		this.p_exPictures2 = p_exPictures2;
 		this.p_tags = p_tags;
 		this.p_purchasecnt = p_purchasecnt;
 		this.p_discount = p_discount;
@@ -187,14 +196,47 @@ public class PointShopBoardVo {
 		this.p_sum = p_sum;
 	}
 
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public String[] getP_exPictures() {
+		return p_exPictures;
+	}
+
+	public void setP_exPictures(String[] p_exPictures) {
+		this.p_exPictures = p_exPictures;
+	}
+
+	public String[] getP_pictures2() {
+		return p_pictures2;
+	}
+
+	public void setP_pictures2(String[] p_pictures2) {
+		this.p_pictures2 = p_pictures2;
+	}
+
+	public String[] getP_exPictures2() {
+		return p_exPictures2;
+	}
+
+	public void setP_exPictures2(String[] p_exPictures2) {
+		this.p_exPictures2 = p_exPictures2;
+	}
+
 	@Override
 	public String toString() {
-		return "PointShopBoardVo [p_bno=" + p_bno + ", p_title=" + p_title + ", p_explain=" + p_explain
-				+ ", deliverycharge=" + deliverycharge + ", userid=" + userid + ", p_regdate=" + p_regdate
+		return "PointShopBoardVo [p_bno=" + p_bno + ", p_title=" + p_title + ", p_name=" + p_name + ", p_explain="
+				+ p_explain + ", deliverycharge=" + deliverycharge + ", userid=" + userid + ", p_regdate=" + p_regdate
 				+ ", p_viewcnt=" + p_viewcnt + ", p_avgrating=" + p_avgrating + ", sellstate=" + sellstate
 				+ ", purchaseplace=" + purchaseplace + ", p_picture=" + p_picture + ", p_pictures="
-				+ Arrays.toString(p_pictures) + ", p_tags=" + Arrays.toString(p_tags) + ", p_purchasecnt="
-				+ p_purchasecnt + ", p_discount=" + p_discount + ", p_sum=" + p_sum + "]";
+				+ Arrays.toString(p_pictures) + ", p_pictures2=" + Arrays.toString(p_pictures2) + ", p_exPictures="
+				+ Arrays.toString(p_exPictures) + ", p_exPictures2=" + Arrays.toString(p_exPictures2) + ", p_tags="
+				+ Arrays.toString(p_tags) + ", p_purchasecnt=" + p_purchasecnt + ", p_discount=" + p_discount
+				+ ", p_sum=" + p_sum + "]";
 	}
-	
 }

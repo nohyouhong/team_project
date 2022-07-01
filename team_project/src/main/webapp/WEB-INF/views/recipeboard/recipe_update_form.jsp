@@ -5,6 +5,22 @@
 <%@include file="/WEB-INF/views/include/main_header.jsp" %>
 <link rel="stylesheet" href="/resources/recipe/recipe_update.css" type="text/css">
 <script src="/resources/recipe/recipe_update.js" ></script>
+<script>
+$(function() {
+// 	요리스텝추가
+	var index = $(".addCookStepDiv").length;
+	$("#addStep").click(
+		function() {
+			var cloneCookStepDiv = $(".addCookStepDiv").eq(0).clone();
+			cloneCookStepDiv.show();
+			cloneCookStepDiv.find("span").text("step" + index++);
+			cloneCookStepDiv.find("textarea").val("");
+			cloneCookStepDiv.find("img").attr("src",
+					"/resources/main_mypage/images/plus.png");
+			$("#addCookStepList").append(cloneCookStepDiv);
+		});
+});
+</script>
 <!-- 모달 -->
 <a id="modal-520057" style="display: none;" href="#modal-container-520057" role="button"
 	class="btn" data-toggle="modal">Launch demo modal</a>

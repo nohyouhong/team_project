@@ -307,7 +307,7 @@ $(function() {
 		var purchaseplace = $("#purchaseplace").val();
 		var deliverycharge = $("#deliverycharge").val();
 		var productImage = $(".productFile").eq(0).val();
-		var productStepFile = $(".productStepFile").eq(4).val();
+		var productStepFile = $(".productStepFile").eq(1).val();
 		var productInfos = $(".oneProductInfo");
 		var p_options = $(".p_option");
 		var p_prices = $(".p_price");

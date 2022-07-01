@@ -9,8 +9,10 @@
 	border:medium ridge rgb(255,227,219);
 	border-radius:5px;
 	box-shadow: 10px 5px 5px rgb(255,227,219);
-	padding:15px 10px 25px 10px;
+	padding:15px 10px 15px 10px;
 	font-family: jua;
+	width: 600px;
+    margin: 0 auto;
 }
 
 .findResult {
@@ -20,6 +22,21 @@
 }
 .resultTxt {
 	font-size: 25px;
+}
+#namediv{
+	border-top:solid 1px rgb(255,227,219);
+	padding-top:10px;
+}
+.findIdbtn{
+	border-radius:5px;
+}
+#findIddiv{
+	margin-top:25px;
+	margin-bottom:10px;
+	text-align:right;
+}
+#id_hr{
+	width:480px;
 }
 </style>
 <script>
@@ -72,17 +89,17 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid window">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<h3>아이디 찾기</h3>
-			<hr>
-			<p>아이디를 찾는 방법을 선택해주세요</p>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+				<h3>아이디 찾기</h3>
+				<hr id="id_hr">
+				<p>아이디를 찾는 방법을 선택해주세요</p>
 			<div class="findIdDiv">
 				<input type="radio" name="selectMethod" class="selectMethod" value="email" checked>
-					<label for="selectMethod"> 가입시 등록한 이메일로 찾기</label>
+					<label for="selectMethod"> 가입시 등록한 이메일로 찾기</label><br>
 				<input type="radio" name="selectMethod" class="selectMethod" value="cellphone">
 					<label for="selectMethod"> 가입시 등록한 휴대폰번호로 찾기</label>
-				<div class="form-group">
+				<div class="form-group" id="namediv">
 					<label for="username">이름</label>
 					<input type="text" class="form-control username"/>
 				</div>
@@ -101,8 +118,8 @@ $(document).ready(function(){
 							<input type="text" class="form-control" id="cellphone"/>
 						</div>
 					</div>
-				<div class="form-group">
-					<a class="btn btn-info findIdbtn">아이디 찾기</a>
+				<div class="form-group" id="findIddiv">
+					<a class="btn btn-outline-danger findIdbtn">아이디 찾기</a>
 				</div>
 				</div>
 				<div class="findResult" style="display: none;">
@@ -116,7 +133,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-4"></div>
 	</div>
 </div>
 <%@include file="/WEB-INF/views/include/main_footer.jsp" %>

@@ -242,4 +242,15 @@ public class PointShopController {
 		boolean result = MyFileUploader.deleteFile(filename);
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value="/order_complete", method=RequestMethod.GET)
+	public String orderComplete() {
+		return "pointshop/order_complete";
+	}
+	
+	
+	@RequestMapping(value="/order_history_list", method=RequestMethod.GET)
+	public String orderHistoryList() {
+		return "pointshop/order_history_list";
+	}
 }

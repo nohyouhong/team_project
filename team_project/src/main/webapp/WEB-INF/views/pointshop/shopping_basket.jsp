@@ -493,7 +493,7 @@ $(function() {
 					var this_option = rData[i].p_option;
 					var this_amount = rData[i].o_amount;
 					var this_sum = rData[i].o_sum.toLocaleString('ko-kr');
-					if(rData[i].deletestate != 1){
+					if(rData[i].o_state != 1){
 						this_amount	= "1";
 						this_sum = o_price.toLocaleString('ko-kr');
 						console.log(this_sum);

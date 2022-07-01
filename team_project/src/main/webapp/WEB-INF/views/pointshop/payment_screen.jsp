@@ -371,6 +371,7 @@
 </style>
 <script>
 getBasicAddress();
+
 $(function(){
 	
 	$("#address_list_btn").click(function(e){
@@ -381,6 +382,7 @@ $(function(){
 	
 	$("#modal_new_address_btn").click(function(e){
 		e.preventDefault();
+		$(".new_address_tbl td input").val("");
 		$("#modal_new_address").modal("show");
 	}); // modal insert창 출력 버튼
 	
@@ -392,26 +394,36 @@ $(function(){
 			$("#add_code").val("1001");
 		};
 		
-		
-		var form = $("#modal_frm");
-		var formData = new FormData(form[0]);
-		var url = "/pay/insertAddr";
-		
-		$.ajax({
-			"enctype" : "multipart/form-data",  
-			"processData" : false,
-			"contentType" : false,
-			"url" : url,
-			"method" : "post",
-			"data" : formData,
-			"success" : function(rData) {
-				if (rData == "true") {
-					getAddrList();		
+		if ($("#modal_new_nickname").val() == "") {
+			alert("배송지 이름을 입력해주세요");
+		} else if ($("#modal_new_receiver").val() == "") {
+			alert("받으실분의 이름을 입력해주세요");			
+		} else if ($("#add_postcode").val() == "") {
+			alert("우편번호를 검색한 후 선택해주세요");			
+		} else if ($("#modal_new_cellphone").val() == "") {
+			alert("휴대폰 번호를 입력해주세요");
+		} else {
+			var form = $("#modal_frm");
+			var formData = new FormData(form[0]);
+			var url = "/pay/insertAddr";
+			
+			$.ajax({
+				"enctype" : "multipart/form-data",  
+				"processData" : false,
+				"contentType" : false,
+				"url" : url,
+				"method" : "post",
+				"data" : formData,
+				"success" : function(rData) {
+					if (rData == "true") {
+						getAddrList();		
+					}
 				}
-			}
-		});
-		$(".new_address_tbl td input").val("");
-		$("#address_list_modal").modal("show");
+			});
+			$(this).attr("data-dismiss", "modal");
+			$("#address_list_modal").modal("show");
+		}
+		
 	}); // modal insert창 저장 버튼
 	
 	$("#modal_list_tbl").on("click", ".modal_modi_btn", function(e){
@@ -441,19 +453,30 @@ $(function(){
 		var form = $("#modal_modi_frm");
 		var formData = new FormData(form[0]);
 		
-		var url = "/pay/modifyAddr";
-		$.ajax({
-			"enctype" : "multipart/form-data",  
-			"processData" : false,
-			"contentType" : false,
-			"url" : url,
-			"method" : "post",
-			"data" : formData,
-			"success" : function(rData) {
-				getAddrList();
-			}
-		});
-		$("#address_list_modal").modal("show");
+		if ($("#modal_modi_nickname").val() == "") {
+			alert("배송지 이름을 입력해주세요");
+		} else if ($("#modal_modi_receiver").val() == "") {
+			alert("받으실분의 이름을 입력해주세요");			
+		} else if ($("#modal_modi_postcode").val() == "") {
+			alert("우편번호를 검색한 후 선택해주세요");			
+		} else if ($("#modal_modi_cellphone").val() == "") {
+			alert("휴대폰 번호를 입력해주세요");
+		} else {
+			var url = "/pay/modifyAddr";
+			$.ajax({
+				"enctype" : "multipart/form-data",  
+				"processData" : false,
+				"contentType" : false,
+				"url" : url,
+				"method" : "post",
+				"data" : formData,
+				"success" : function(rData) {
+					getAddrList();
+				}
+			});
+			$(this).attr("data-dismiss", "modal");
+			$("#address_list_modal").modal("show");	
+		}
 	}); // modal 수정창 수정완료 버튼
 	
 	$("#modal_list_tbl").on("click", ".modal_del_btn", function(e){
@@ -549,7 +572,11 @@ function getAddrList() {
 			addrListTable += "<td><button type='button' class='modal_choose_btn' data-dismiss='modal' data-addNo=" + addrVo.add_no + ">선택</button></td>";
 			addrListTable += "<td>" + addrVo.add_nickname + "</td>";
 			addrListTable += "<td>" + addrVo.add_receiver + "</td>";
-			addrListTable += "<td>" + addrVo.add_address + "<br>" + addrVo.add_addrdetail + "</td>";
+			addrListTable += "<td>" + addrVo.add_address + "<br>"
+			if (addrVo.add_addrdetail != null) {
+				addrListTable += addrVo.add_addrdetail
+			}
+			addrListTable += "</td>";				
 			addrListTable += "<td>" + addrVo.add_cellphone + "</td>";
 			addrListTable += "<td>";
 			addrListTable += "<div class='modal_modi_del_div'>";
@@ -573,17 +600,17 @@ function getBasicAddress(){
 			$("#pay_address_tbl > tbody > tr > td input").eq(3).val(rData.add_receiver);
 			$("#pay_address_tbl > tbody > tr > td input").eq(4).val(rData.add_postcode);
 			$("#pay_address_tbl > tbody > tr > td input").eq(5).val(rData.add_address);
-			$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);
+			if (rData.add_addrdetail == null) {
+				$("#pay_address_tbl > tbody > tr > td input").eq(6).val("");			
+			} else {
+				$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);				
+			}
 			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.add_cellphone);
 		} else if (rData == "") {
 			$("#edit_addr_rdo").prop("checked", true);
 		}
 	});
 } // radio button 기본 배송지 함수
-
-function getRecentAddress(){
-	
-}; // radio button 최근 배송지 함수
 
 function pay_search_address() {
     new daum.Postcode({
@@ -708,11 +735,11 @@ function modal_modi_address() {
 						<tbody>
 							<tr>
 								<th>배송지 이름</th>
-								<td><input type="text" name="add_nickname" class="modal_new_nickname" value=""></td>
+								<td><input type="text" name="add_nickname" id="modal_new_nickname" value=""></td>
 							</tr>
 							<tr>
 								<th>받으실분</th>
-								<td><input type="text" name="add_receiver" class="modal_new_receiver" value=""></td>
+								<td><input type="text" name="add_receiver" id="modal_new_receiver" value=""></td>
 							</tr>
 							<tr>
 								<th>받으실 곳</th>
@@ -736,7 +763,7 @@ function modal_modi_address() {
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="modal_btn_cancel" data-dismiss="modal">취소</button>
-				<button type="button" class="modal_btn_regist" data-dismiss="modal">저장</button>
+				<button type="button" class="modal_btn_regist">저장</button>
 			</div>
 		</div>
 	</div>
@@ -762,11 +789,11 @@ function modal_modi_address() {
 						<tbody>
 							<tr>
 								<th>배송지 이름</th>
-								<td><input type="text" name="add_nickname" class="modal_modi_nickname"></td>
+								<td><input type="text" name="add_nickname" id="modal_modi_nickname"></td>
 							</tr>
 							<tr>
 								<th>받으실분</th>
-								<td><input type="text" name="add_receiver" class="modal_modi_receiver"></td>
+								<td><input type="text" name="add_receiver" id="modal_modi_receiver"></td>
 							</tr>
 							<tr>
 								<th>받으실 곳</th>
@@ -779,7 +806,7 @@ function modal_modi_address() {
 							</tr>
 							<tr>
 								<th>휴대폰 번호</th>
-								<td><input type="text" name="add_cellphone" class="modal_modi_cellphone"></td>
+								<td><input type="text" id="modal_modi_cellphone" name="add_cellphone"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -787,7 +814,7 @@ function modal_modi_address() {
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="modal_btn_cancel" data-dismiss="modal">취소</button>
-				<button type="button" class="modal_btn_modify" data-dismiss="modal">수정</button>
+				<button type="button" class="modal_btn_modify">수정</button>
 			</div>
 		</div>
 	</div>
@@ -842,7 +869,7 @@ function modal_modi_address() {
 									<div class="pay_order_product_title">
 										<div>
 											<a class="pay_order_product_a" href="#">
-												<span>${orderVo.p_title }</span>
+												<span>${orderVo.p_title}</span>
 											</a>
 										</div>
 										<div>
@@ -945,7 +972,7 @@ function modal_modi_address() {
 						</c:forEach>
 						<div class="pay_final_div">
 							<div><h4>총 상품 합계 금액</h4></div>
-							<div><h2><fmt:formatNumber value="${total_price}" type="number" maxFractionDigits="3"/></h2></div>					
+							<div><h2><fmt:formatNumber value="${total_price}" type="number" maxFractionDigits="3"/></h2></div>
 						</div>
 					</td>
 					<td>

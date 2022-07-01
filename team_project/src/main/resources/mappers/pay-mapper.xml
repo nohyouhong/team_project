@@ -22,7 +22,7 @@
 	
 	<select id="getDeliverCount" resultType="int">
 		select count(*) from tbl_order_product
-    	where p_bno = #{p_bno} and deletestate = 1
+    	where p_bno = #{p_bno} and o_state = 1
 	</select>
 	
 </mapper>

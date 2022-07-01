@@ -44,13 +44,13 @@
 		select count(*) from tbl_order_product
 		where p_ino = #{p_ino}
 		and l_lno = #{l_lno}
-		and deletestate = 1
+		and o_state = 1
 	</select>
 	
 	<select id="getBasketProductVoByIno" resultType="OrderProductVo">
 		select * from tbl_order_product
 		where p_ino = #{p_ino}
-		and deletestate = 1
+		and o_state = 1
 	</select>
 	
 	<select id="getBasketProduct" resultType="OrderProductVo">
@@ -62,7 +62,7 @@
 		join tbl_product p
 		    on i.pno = p.pno
 		where l.l_lno = #{l_lno}
-		and deletestate = 1
+		and o_state = 1
 	</select>
 	
 	<select id="getBasketProductOptions" resultType="OrderProductVo">
@@ -72,14 +72,14 @@
 		join tbl_pointshop_board b
             on p.p_bno = b.p_bno
 		where p.p_bno = #{p_bno}
-		and deletestate = 1
+		and o_state = 1
 		order by o_pno
 	</select>
 	
 	<select id="getBasketProductOptionsAll" resultType="OrderProductVo">
 		select a.* from 
         	(select  p.p_ino , b.p_title, b.p_explain, i.p_option, i.p_stock,
-       		p.o_price, p.o_amount, p.o_sum, p.o_deliverycharge ,p.deletestate, p.o_titlepic,
+       		p.o_price, p.o_amount, p.o_sum, p.o_deliverycharge ,p.o_state, p.o_titlepic,
        		row_number() over (partition by p.p_ino order by p.o_pno desc) num 
        		
        		from tbl_order_product p join tbl_product_info i
@@ -106,7 +106,7 @@
 	
 	<update id="basketProductDelete">
 		update tbl_order_product set
-			deletestate = 0
+			o_state = 0
 		where o_pno = #{o_pno}
 	</update>
 	

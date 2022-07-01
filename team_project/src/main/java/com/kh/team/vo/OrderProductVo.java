@@ -26,7 +26,7 @@ public class OrderProductVo {
 	private int o_deliverycharge;
 	private int l_deliverycharge;
 	private int p_deliverycharge;
-	private int deletestate;
+	private int o_state;
 	private int pno;
 	private int deliver_count;
 	
@@ -37,7 +37,7 @@ public class OrderProductVo {
 	public OrderProductVo(int o_pno, int l_lno, int p_ino, int[] p_inos, int p_bno, String o_titlepic, int p_price,
 			int o_price, int[] o_prices, int o_amount, int[] o_amounts, int o_sum, int l_sum, int[] o_sums,
 			String p_option, String p_discount, String p_name, String p_title, String p_explain, int p_stock,
-			int o_deliverycharge, int l_deliverycharge, int p_deliverycharge, int deletestate) {
+			int o_deliverycharge, int l_deliverycharge, int p_deliverycharge, int o_state) {
 		super();
 		this.o_pno = o_pno;
 		this.l_lno = l_lno;
@@ -62,7 +62,7 @@ public class OrderProductVo {
 		this.o_deliverycharge = o_deliverycharge;
 		this.l_deliverycharge = l_deliverycharge;
 		this.p_deliverycharge = p_deliverycharge;
-		this.deletestate = deletestate;
+		this.o_state = o_state;
 	}
 
 	public OrderProductVo(int p_price, String p_option, String p_discount, String p_title) {
@@ -273,12 +273,12 @@ public class OrderProductVo {
 		this.p_stock = p_stock;
 	}
 	
-	public int getDeletestate() {
-		return deletestate;
+	public int getO_state() {
+		return o_state;
 	}
 
-	public void setDeletestate(int deletestate) {
-		this.deletestate = deletestate;
+	public void setO_state(int o_state) {
+		this.o_state = o_state;
 	}
 
 	@Override
@@ -290,7 +290,7 @@ public class OrderProductVo {
 				+ Arrays.toString(o_sums) + ", p_option=" + p_option + ", p_discount=" + p_discount + ", p_name="
 				+ p_name + ", p_title=" + p_title + ", p_explain=" + p_explain + ", p_stock=" + p_stock
 				+ ", o_deliverycharge=" + o_deliverycharge + ", l_deliverycharge=" + l_deliverycharge
-				+ ", p_deliverycharge=" + p_deliverycharge + ", deletestate=" + deletestate + ", pno=" + pno
+				+ ", p_deliverycharge=" + p_deliverycharge + ", o_state=" + o_state + ", pno=" + pno
 				+ ", deliver_count=" + deliver_count + "]";
 	}
 	

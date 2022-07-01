@@ -48,7 +48,7 @@ public class PayController {
 			int pno = optionVo.getPno();
 			String p_title = productName.get(0);
 			int deliver_count = payService.getDeliverCount(p_bno);
-			System.out.println("deliver_count: " + deliver_count);
+//			System.out.println("deliver_count: " + deliver_count);
 			orderProductVo.setPno(pno);
 			orderProductVo.setP_option(p_option);
 			orderProductVo.setP_price(p_price);
@@ -62,7 +62,7 @@ public class PayController {
 			if(orderLists.get(i).getPno() == orderLists.get(i-1).getPno()) {
 				orderLists.get(i).setO_deliverycharge(0);
 			}
-			System.out.println("orderLists: " + orderLists);
+//			System.out.println("orderLists: " + orderLists);
 		}
 		model.addAttribute("orderLists", orderLists);
 		return "pointshop/payment_screen";

@@ -52,6 +52,8 @@
 			<mapping path="/comment/replyRecipeComment"/>
 			<mapping path="/comment/insertRecipeReview"/>
 			<mapping path="/pay/**/*"/>
+			<mapping path="/pointshop/**/*"/>
+			<exclude-mapping path="/pointshop/list"/>
 			<exclude-mapping path="/inquiry/inquiry_list"/>
 			<exclude-mapping path="/member/login_form"/>
 			<exclude-mapping path="/member/join_form"/>

@@ -65,7 +65,7 @@ $(function() {
 						<div class="user-info">
 							<form id="mainHeaderForm">
 								<c:choose>
-									<c:when test="${not empty loginVo}">
+									<c:when test="${not empty loginVo.m_picture}">
 										<img class="rounded-circle mainHeaderUserImage" src="/member/displayImage?filename=${loginVo.m_picture}">
 									</c:when>
 									<c:otherwise>
@@ -91,6 +91,11 @@ $(function() {
 							<li class="mypage-item">
 								<a class="nav-link menuEx" href="/message/receive_list?page=1"> 
 									<span class="menu-title jua">쪽지함</span>
+								</a>
+							</li>
+							<li class="mypage-item">
+								<a class="nav-link menuEx" href="/pointshop/order_history_list"> 
+									<span class="menu-title jua">주문내역</span>
 								</a>
 							</li>
 							<li class="mypage-item">

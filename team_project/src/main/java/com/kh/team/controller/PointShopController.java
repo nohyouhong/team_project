@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.service.HistoryService;
 import com.kh.team.service.OrderService;
 import com.kh.team.service.PointShopService;
 import com.kh.team.util.MyFileUploader;
+import com.kh.team.vo.HistoryVo;
 import com.kh.team.vo.IngredientListVo;
 import com.kh.team.vo.IngredientVo;
 import com.kh.team.vo.MemberVo;
@@ -40,6 +42,9 @@ public class PointShopController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private HistoryService historyService;
 	
 	@RequestMapping(value="/createForm", method=RequestMethod.GET)
 	public String createForm() {
@@ -307,7 +312,11 @@ public class PointShopController {
 	
 	
 	@RequestMapping(value="/order_history_list", method=RequestMethod.GET)
-	public String orderHistoryList() {
+	public String orderHistoryList(HttpSession session, Model model) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		List<HistoryVo> orderHistoryList = historyService.getOrderHistoryList(userid);
+		model.addAttribute("orderHistoryList", orderHistoryList);
 		return "pointshop/order_history_list";
 	}
 }

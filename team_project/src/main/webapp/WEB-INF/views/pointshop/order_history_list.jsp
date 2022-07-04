@@ -85,34 +85,23 @@ li{
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach items="${orderHistoryList}" var="historyVo">
 								<tr>
-									<td class="td1"><img src="#" class="productImg"></td>
+									<td class="td1"><img src="${h_picture}" class="productImg"></td>
 									<td class="td2">
-										<a href="#" class="product_name">물품이름</a><br>
-										<span class="h_price">38,000원  </span> <span class="status">|</span> <span class="status h_date">  2022.07.01</span>
+										<a href="#" class="product_name">${historyVo.h_title}</a><br>
+										<span class="h_price">38,000원  </span> <span class="status">|</span> 
+										<span class="status h_date">${historyVo.h_date}</span>
 										<hr>
-										<p class="status">결제상태</p>
-										<p class="status">배송지정보</p>
+										<p class="status">배송비 ${historyVo.h_deliverycharge}</p>
+										<p class="status">배송지정보: ${historyVo.h_address}</p>
 									</td>
 									<td class="td3">
 										<a href="" class="btn btn-outline-danger ">확정하기</a>
 										<a href="" class="btn btn-outline-secondary">취소하기</a>
 									</td>
 								</tr>
-								<tr>
-									<td class="td1"><img src="#" class="productImg"></td>
-									<td class="td2">
-										<a href="#" class="product_name">물품이름</a><br>
-										<span class="h_price">38,000원  </span> <span class="status">|</span> <span class="status h_date">  2022.07.01</span>
-										<hr>
-										<p class="status">결제상태</p>
-										<p class="status">배송지정보</p>
-									</td>
-									<td class="td3">
-										<a href="" class="btn btn-outline-danger ">확정하기</a>
-										<a href="" class="btn btn-outline-secondary">취소하기</a>
-									</td>
-								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>

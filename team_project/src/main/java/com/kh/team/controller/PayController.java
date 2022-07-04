@@ -30,6 +30,7 @@ public class PayController {
 	
 	@Autowired
 	private PayService payService;
+
 	
 	@RequestMapping(value="/paymentScreen", method=RequestMethod.GET)
 	public String paymentScreen(HttpSession session, Model model, int[] o_pno) {
@@ -161,4 +162,5 @@ public class PayController {
 		
 		return "redirect: /pointshop/order_complete";
 	}
+	
 }

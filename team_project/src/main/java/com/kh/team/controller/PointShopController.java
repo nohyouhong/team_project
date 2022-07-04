@@ -118,6 +118,23 @@ public class PointShopController {
 		return String.valueOf(result);
 	}
 	
+	@RequestMapping(value="/buyBasket", method=RequestMethod.POST)
+	@ResponseBody
+	public int[] buyBasket(OrderProductVo orderProductVo, HttpSession session) {
+		System.out.println("orderProductVo: " + orderProductVo);		
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		orderProductVo.setL_lno(memberVo.getBasket());
+		orderService.basketProductCreate(orderProductVo);
+		List<OrderProductVo> orderProductOptionList = orderService.getBasketProductOptions(orderProductVo.getP_bno());
+//		System.out.println("orderProductOptionList: " + orderProductOptionList);
+		int[] o_pno = new int[orderProductOptionList.size()];
+		for (int i = 0; i < orderProductOptionList.size(); i++) {
+			o_pno[i] = orderProductOptionList.get(i).getO_pno();
+//			System.out.println("o_pno: " + o_pno[i]);
+		}
+		return o_pno;
+	}
+	
 	@RequestMapping(value="/updateBasket", method=RequestMethod.POST)
 	public String updateBasket(OrderProductVo orderProductVo, HttpSession session) {
 		System.out.println(orderProductVo);

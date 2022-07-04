@@ -35,7 +35,9 @@ public class PayController {
 	public String paymentScreen(HttpSession session, Model model, int[] o_pno) {
 		List<OrderProductVo> orderLists = new ArrayList<>();
 		for (int i = 0; i < o_pno.length; i++) {
+			System.out.println("o_pno: " + o_pno[i]);
 			List<OrderProductVo> orderList = payService.getOrderList(o_pno[i]);
+			System.out.println("orderList: " + orderList);
 			OrderProductVo orderProductVo = orderList.get(0);
 			int p_ino = orderProductVo.getP_ino();
 			int p_bno = orderProductVo.getP_bno();
@@ -142,8 +144,6 @@ public class PayController {
 		int hno = payService.getNextHno();
 		payVo.setUserid(memberVo.getUserid());
 		payVo.setHno(hno);
-		int count = payVo.getH_titles().length;
-		System.out.println("count: " + count);
 		payService.insertFinalAddr(payVo);
 		for(int i = 0; i < payVo.getH_titles().length; i++) {
 			String h_picture = payVo.getH_pictures()[i];
@@ -155,11 +155,9 @@ public class PayController {
 			int h_sale = payVo.getH_sales()[i];
 			int h_sum_price = payVo.getH_sum_prices()[i];
 			PayVo payProductVo = new PayVo(hno, h_picture, h_title, h_option, h_amount, h_price, h_sale, h_sum_price, h_deliverycharge);
-			System.out.println("payProductVo: " + payProductVo);
 			payService.insertFinalProduct(payProductVo);
 			payService.updateOState(payVo.getO_pno()[i]);
 		}
-		System.out.println("payVo: " + payVo);
 		
 		return "redirect: /pointshop/order_complete";
 	}

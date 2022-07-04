@@ -443,6 +443,43 @@ $(function() {
 			}
 		});
 	});
+	
+	$(".purchaseBtn").click(function(e){
+		e.preventDefault();
+		var basketInfos = $(".oneBasketInfo");
+		for(var i = 0; i < basketInfos.length; i++){
+			if($(basketInfos).eq(i).css("display") != "none"){
+				var p_ino = $(basketInfos).eq(i).find("span.oneProIno").text();
+				var html = '<input type="hidden" name="p_inos" value="' + p_ino + '">';	
+				var o_price = $(basketInfos).eq(i).find("span.oneVal").text().replace(",", "");
+				html += '<input type="hidden" name="o_prices" value="' + o_price + '">';	
+				var o_amount = $(basketInfos).eq(i).find("input.oneProNumInput").val();
+				html += '<input type="hidden" name="o_amounts" value="' + o_amount + '">';	
+				var o_sum = $(basketInfos).eq(i).find("span.sumVal").text().replaceAll(",", "");
+				html += '<input type="hidden" name="o_sums" value="' + o_sum + '">';	
+				$("#basketRunForm").append(html);
+			}
+		}
+		
+		var form = $("#basketRunForm");
+		var formData = new FormData(form[0]);
+		console.log(formData);
+		var url = "/pointshop/buyBasket";
+		
+		$.ajax({
+			"enctype" : "multipart/form-data",  
+			"processData" : false,
+			"contentType" : false,
+			"url" : url,
+			"method" : "post",
+			"data" : formData,
+			"success" : function(rData) {
+					console.log(rData);
+					location.href = "/pay/paymentScreen?o_pno=" + rData;
+			}
+		}); // ajax
+		n
+	}); // 바로구매 버튼
 });
 </script>
 <%-- ${pointShopBoardVo }<br><br> --%>
@@ -450,7 +487,7 @@ $(function() {
 <%-- ${productPicList[0] }<br><br> --%>
 <%-- ${productExPicList }<br><br> --%>
 <%-- ${tagList }<br><br> --%>
-<form id="basketRunForm">
+<form id="basketRunForm" action="/pointshop/buyBasket" method="post">
 	<input type="hidden" name="o_titlepic" value="${productPicList[0]}">
 	<input type="hidden" name="p_bno" value="${pointShopBoardVo.p_bno}">
 	<input type="hidden" name="o_deliverycharge" value="${pointShopBoardVo.deliverycharge}">

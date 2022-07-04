@@ -61,6 +61,7 @@ $(document).ready(function(){
 				};
 				var url = "/member/checkNick";
 				$.post(url, sData, function(rData){
+					console.log(rData);
 					if(rData != 1){
 						$(this).css('background-color', 'aliceblue');
 			            $('#nickChk').html('<b style=" color: #75daff">[사용가능한 닉네임입니다.]</b>');
@@ -131,14 +132,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#email3").change(function(){
-		if($(this).val()==9){
-			$("#emailAdInput").removeAttr("disabled");
-		}else{
-			$("#emailAdInput").val($("#email3").val());
-			$("#emailAdInput").attr("disabled", true);
-		}
-    });
+	
 	
 	$("#userid").keyup(function(){
 		console.log("아이디 변경중");
@@ -153,20 +147,29 @@ $(document).ready(function(){
 	$("#emailIdInput").blur(function(){
 		email();
 	});
-	$("#email3").change(function(){
+	$("#emailAdInput").blur(function(){
 		email();
 	});
 	
-	
-	
 	function email(){
-		const email = $("#emailIdInput").val();
-		const middle = $("#emailB").text();
-		const address = $("#emailAdInput").val();
+		var email = $("#emailIdInput").val();
+		var middle = $("#emailB").text();
+		var address = $("#emailAdInput").val();
 		if(email != "" && address != "") {
 			$("#totalemail").val(email+middle+address);
 		}
 	};
+	
+	$("#email3").change(function(){
+		if($(this).val()==9){
+			$("#emailAdInput").removeAttr("disabled");
+			$("#emailAdInput").val("");
+		}else{
+			$("#emailAdInput").val($("#email3").val());
+			$("#emailAdInput").attr("disabled", true);
+		}
+		email();
+    });
 	
 	$("#cellphoneInput2").keyup(function(){
 		isPushed2 = "false";
@@ -198,13 +201,13 @@ $(document).ready(function(){
 				var url = "/member/checkPhoneNum";
 				$.post(url, sData, function(rData){
 					console.log("rData: "+rData);
-					if(rData != 2){
+					if(rData == 1){
+		            	$(this).css('background-color', 'pink');
+			            $('#phoneChk').html('<b style=" color: red">[사용중인 번호입니다.]</b>');
+		            } else {
 						$(this).css('background-color', 'aliceblue');
 			            $('#phoneChk').html('<b style=" color: #75daff">[사용가능한 번호입니다.]</b>');
 			            isPushed2="true";
-		            } else {
-		            	$(this).css('background-color', 'pink');
-			            $('#phoneChk').html('<b style=" color: red">[사용중인 번호입니다.]</b>');
 		            };
 				});
 			});
@@ -245,7 +248,7 @@ $(document).ready(function(){
 			alert("닉네임를 확인하세요")
 		}else{
 			$("#join_form").submit();
-// 			console.log($("#totalemail").val());
+			console.log($("#totalemail").val());
 		}
 	});
 		
@@ -259,7 +262,8 @@ $(document).ready(function(){
 						<img class="joinImage" id="writeImg" src="/resources/login_join/images/jointitle.png">
 					</form>
 				</div>
-				<form id="join_form" role="form" action="/member/join_run" method="post">
+				<form id="join_form" role="form" action="/member/join_run" method="post"
+					 enctype="multipart/form-data">
 					<div class="form-group" id="profileImg">
 						<img class="joinImage" id="joinImg" src="/resources/login_join/images/join.png">
 						<input class="joinImageFile" type="file" id="file" name="file"

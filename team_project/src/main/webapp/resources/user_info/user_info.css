@@ -11,7 +11,7 @@
 #overlapPhoneCheckBtn, #modify_userRun, #overlapNickCheckBtn, #email3, #pwChg, .pwChgInput{
 	display:none;
 }
-#modify_userBtn, #overlapPhoneCheckBtn, #modify_userRun, #overlapNickCheckBtn, #pwChg{
+#modify_userBtn, #overlapPhoneCheckBtn, #modify_userRun, #overlapNickCheckBtn, #pwChg, #delete_user{
 	border-radius: 10px;
 	margin-top:5px;
 	padding:5px 15px;

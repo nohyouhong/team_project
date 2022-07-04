@@ -13,8 +13,16 @@ $(document).ready(function(){
 	var isPushed2 = "true";
 	var isPushed3 = "true";
 	var isPushed4 = "true";
-// 	var isPushed5 = "true";
-// 	var isPushed6 = "true";
+	
+	$("#pwChg").click(function(){
+		$(".pwChgInput").show();
+		$("#userpwNow").val("");
+		$("#userpwNow").attr("name","");
+		$("#hiddenpwd").attr("name","");
+		$("#userpwInput").attr("name","userpw");
+		$("#userpwNow").attr("disabled", false);
+		$(this).hide();
+	});
 	
     $('#userpwInput').keyup(function(){
     	if($(this).val() === '' ) {
@@ -64,29 +72,6 @@ $(document).ready(function(){
 			$('#NowPwChk').html('<b style="color: yellowgreen">[현재 비밀번호와 일치합니다.]</b>');
 		}
 	});
-	
-	
-	
-	$("#pwChg").click(function(){
-		$(".pwChgInput").show();
-		$("#userpwNow").val("");
-		$("#userpwNow").attr("name","");
-		$("#hiddenpwd").attr("name","");
-		$("#userpwInput").attr("name","userpw");
-		$("#userpwNow").attr("disabled", false);
-		$(this).hide();
-	});
-	
-// 	$("#userpwNow").keyup(function(){
-// 		if($("#userpwInput").val() == ""){
-// 			isPushed5 = "false";
-// 		}else if($("#userpwInputCheck").val() == ""){
-// 			isPushed6 = "false";
-// 			isPushed5 = "true";
-// 		}else{
-// 			isPushed6="true";
-// 		}
-// 	});
 	
 	if(${memberVo.gender == 'M'}){
 		$("#M").attr("checked", "checked");
@@ -215,25 +200,26 @@ $(document).ready(function(){
 	
 	$("#modify_userRun").click(function(){
 		var userpw = ${memberVo.userpw};
-		if($("#userpwInput").val() == ""){
-			isPushed = "false";
-			$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호를 입력해주세요.]</b>');
-		}else if($("#userpwInputCheck").val() == ""){
-			isPushed = "false";
-			$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호확인을 입력해주세요.]</b>');
-		}else if(isPushed == "false"){
-			$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호를 입력해주세요.]</b>');
-		}else if(isPushed2 == "false"){
-			$('#joinBtnSpan').html('<b style="color: red">[폰번호를 확인해주세요.]</b>');
-		}else if(isPushed3 == "false"){
-			$('#joinBtnSpan').html('<b style="color: red">[닉네임을 확인해주세요.]</b>');
-		}else if(isPushed4 == "false"){
-			$('#joinBtnSpan').html('<b style="color: red">[이메일을 입력해주세요.]</b>');
-		}else if($("#userpwNow").val() != userpw){
-			$('#joinBtnSpan').html('<b style="color: red">[현재 비밀번호를 확인해주세요.]</b>');
+		if(isPushed == "false"){
+			if($("#userpwInput").val() == ""){
+				$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호를 입력해주세요.]</b>');
+			}else if($("#userpwInputCheck").val() == ""){
+				$('#joinBtnSpan').html('<b style="color: red">[수정된 비밀번호확인을 입력해주세요.]</b>');
+			}
 		}else{
-			$("#info-form").submit();
+			if(isPushed2 == "false"){
+				$('#joinBtnSpan').html('<b style="color: red">[폰번호를 확인해주세요.]</b>');
+			}else if(isPushed3 == "false"){
+				$('#joinBtnSpan').html('<b style="color: red">[닉네임을 확인해주세요.]</b>');
+			}else if(isPushed4 == "false"){
+				$('#joinBtnSpan').html('<b style="color: red">[이메일을 입력해주세요.]</b>');
+			}else if($("#userpwNow").val() != userpw){
+				$('#joinBtnSpan').html('<b style="color: red">[현재 비밀번호를 확인해주세요.]</b>');
+			}else{
+				$("#info-form").submit();
+			}
 		}
+		
 // 		console.log(isPushed);
 // 		console.log("userid: " + $("#userid").val());
 // 		console.log("userpw: " + $("#userpwNow").val());
@@ -326,6 +312,7 @@ $(document).ready(function(){
 					</div>
 						<button type="button" class="btn btn-outline-danger" id="modify_userBtn">정보수정</button>
 						<button type="button" class="btn btn-outline-primary" id="modify_userRun">정보수정완료</button>
+						<a href="/member/user_ask_delete" class="btn btn-outline-warning" id="delete_user">회원탈퇴</a>
 						<span id="joinBtnSpan"></span>
 				</form>
 			</div>

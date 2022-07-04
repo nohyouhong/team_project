@@ -59,6 +59,7 @@
 			<exclude-mapping path="/member/join_form"/>
 			<exclude-mapping path="/member/checkId"/>
 			<exclude-mapping path="/member/checkPhoneNum"/>
+			<exclude-mapping path="/member/checkNick"/>
 			<exclude-mapping path="/member/login_run"/>
 			<exclude-mapping path="/member/join_run"/>
 			<exclude-mapping path="/member/member_delete"/>

@@ -63,6 +63,18 @@ public class MemberController {
 		return "member/member_list";
 	}
 	
+	@RequestMapping(value="/user_ask_delete", method=RequestMethod.GET)
+	public String userAskDelete() {
+		return "member/delete_check_pw";
+	}
+	
+	@RequestMapping(value="/user_delete", method=RequestMethod.GET)
+	public String deleteUser(HttpSession session, String userid) {
+		memberService.deleteMember(userid);
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value="/member_delete", method=RequestMethod.GET)
 	public String deleteMember(String userid) {
 		memberService.deleteMember(userid);
@@ -76,7 +88,6 @@ public class MemberController {
 		memberService.modifyMember(memberVo);
 		return "redirect:/member/user_info?userid="+memberVo.getUserid();
 	}
-	
 	
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	@ResponseBody

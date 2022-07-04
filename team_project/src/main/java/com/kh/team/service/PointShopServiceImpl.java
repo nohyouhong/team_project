@@ -132,8 +132,8 @@ public class PointShopServiceImpl implements PointShopService{
 		//물품등록
 		int pno = productVo.getPno();
 		String p_name = productVo.getP_name();
-		System.out.println("pno" + pno + "p_name" + p_name);
 		pointShopDao.productUpdate(pno, p_name);
+		int infoCount = pointShopDao.getProductInfoCount(pno);
 		
 		int[] p_ino = productVo.getP_inos();
 		String[] p_options = productVo.getP_options();
@@ -142,6 +142,15 @@ public class PointShopServiceImpl implements PointShopService{
 		int[] p_stocks = productVo.getP_stocks();
 		int[] p_sums = productVo.getP_sums();
 		
+		
+		//삭제
+		if(infoCount > p_options.length) {
+			int deleteCount = infoCount - p_options.length;
+			for(int i = 0; i < deleteCount; i++) {
+				
+			}
+		}
+		//생성및 수정		
 		if((p_options != null && p_options.length != 0) &&
 				(p_prices != null && p_prices.length != 0) &&
 				(p_discounts != null && p_discounts.length != 0) &&

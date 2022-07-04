@@ -263,10 +263,15 @@ public class PointShopController {
 	
 	@RequestMapping(value="/read", method=RequestMethod.GET)
 	public String read(int p_bno, Model model, PagingDto pagingDto) {
+		//포인트샵 정보
 		PointShopBoardVo pointShopBoardVo = pointShopService.read(p_bno);
+		//물품옵션
 		List<ProductVo> productList = pointShopService.productRead(p_bno);
+		//물품이미지리스트
 		List<String> productPicList = pointShopService.productPicList(p_bno);
+		//물품설명이미지 리스트
 		List<String> productExPicList = pointShopService.productExPicList(p_bno);
+		//태그
 		List<String> tagList = pointShopService.tagRead(p_bno);
 		model.addAttribute("pointShopBoardVo", pointShopBoardVo);
 		model.addAttribute("productList", productList);

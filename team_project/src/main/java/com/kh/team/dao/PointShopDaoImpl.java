@@ -123,6 +123,12 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 	}
 	
 	@Override
+	public int getProductInfoCount(int pno) {
+		int count = sqlSession.selectOne(NAMESPACE + "getProductInfoCount", pno);
+		return count;
+	}
+	
+	@Override
 	public boolean productCreate(int pno, int p_bno, String p_name) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("pno", pno);
@@ -200,6 +206,15 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 	}
 	
 	@Override
+	public boolean productInfoDelete(int p_ino) {
+		int count = sqlSession.delete(NAMESPACE + "productInfoDelete", p_ino);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean productPicListDelete(int pno) {
 		int count = sqlSession.delete(NAMESPACE + "productPicListDelete", pno);
 		if(count > 0) {
@@ -235,6 +250,5 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		return false;
 	}
 
-	
 
 }

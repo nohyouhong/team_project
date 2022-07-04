@@ -87,6 +87,11 @@
 		where p_bno = #{p_bno}
 	</select>
 	
+	<select id="getProductInfoCount" resultType="int">
+		select pno from tbl_product_info
+		where pno = #{pno}
+	</select>
+	
 	<insert id="productCreate">
 		insert into tbl_product
 			(pno, p_bno, p_name)
@@ -142,6 +147,11 @@
 	<delete id="productDelete">
 		delete from tbl_product
 		where pno = #{pno}
+	</delete>
+	
+	<delete id="productInfoDelete">
+		delete from tbl_product_info
+		where p_ino = #{p_ino}
 	</delete>
 	
 	<insert id="tagCreate">

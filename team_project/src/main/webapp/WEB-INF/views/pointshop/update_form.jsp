@@ -542,6 +542,7 @@ $(function() {
 								<div class="oneProductOp" style="display: none;">
 									<div class="productStepTitle">1</div>
 									<div class="oneProductInfo">
+										<input type="hidden" name="p_inos" value="0">
 										<label for="p_option" class="productInfoLabel">물품명</label>
 										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
 											placeholder="예) 시원한 열무 무김치 2kg" name="p_options">

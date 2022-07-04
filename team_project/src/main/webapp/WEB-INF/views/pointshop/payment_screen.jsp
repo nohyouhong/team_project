@@ -612,6 +612,23 @@ function getBasicAddress(){
 	});
 } // radio button 기본 배송지 함수
 
+function final_order() {
+	if ($("#pay_receiver").val() == "") {
+		alert("받으실분의 이름을 입력해주세요");			
+	} else if ($("#pay_search_postcode").val() == "") {
+		alert("우편번호를 검색한 후 선택해주세요");			
+	} else if ($("#pay_cellphone").val() == "") {
+		alert("휴대폰 번호를 입력해주세요");
+	} else if($("#emailIdInput").val() == "") {
+		alert("이메일 아이디를 입력해주세요.");
+	} else if($("#emailAdInput").val() == "") {
+		alert("상세 이메일 주소를 선택하거나 입력해주세요");
+	} else {
+		$("#final_order_frm").submit();		
+	};
+	
+}
+
 function pay_search_address() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -844,176 +861,189 @@ function modal_modi_address() {
 		</div>
 		
 		<hr>
-		
-		<div class="order_list_div">
-			<h4>주문 상세 내역</h4>
-			<table class="table order_list_tbl">
-				<thead>
-					<tr>
-						<th width="50%">상품 정보</th>
-						<th width="10%">수량</th>
-						<th width="10%">상품 금액</th>
-						<th width="10%">할인</th>
-						<th width="10%">합계 금액</th>
-						<th width="10%">배송비</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${orderLists}" var="orderVo">
+		<form method="post" action="/pay/getFinalOrder" id="final_order_frm">
+			<div class="order_list_div">
+				<h4>주문 상세 내역</h4>
+				<table class="table order_list_tbl">
+					<thead>
 						<tr>
-							<td>
-								<div class="pay_order_product_div">
-									<div>
-										<img class="pay_product_img" src="/pay/displayImage?filename=${orderVo.o_titlepic}">
-									</div>
-									<div class="pay_order_product_title">
-										<div>
-											<a class="pay_order_product_a" href="#">
-												<span>${orderVo.p_title}</span>
-											</a>
-										</div>
-										<div>
-											<span class="pay_order_product_span">${orderVo.p_option}</span>
-										</div>
-									</div>
-								</div>
-							</td>
-							<td>${orderVo.o_amount}</td>
-							<td><fmt:formatNumber value="${orderVo.p_price}" type="number" maxFractionDigits="3"/>P</td>
-							<td>${orderVo.p_discount}%</td>
-							<td><fmt:formatNumber value="${orderVo.o_sum}" type="number" maxFractionDigits="3"/>P</td>
-							<c:choose>
-								<c:when test="${orderVo.o_deliverycharge == 0}">
-								</c:when>
-								<c:otherwise>
-									<td rowspan='<c:out value="${orderVo.deliver_count}"/>'>
-										<fmt:formatNumber value="${orderVo.o_deliverycharge}" type="number" maxFractionDigits="3"/>P
-									</td>
-								</c:otherwise>
-							</c:choose>
+							<th width="50%">상품 정보</th>
+							<th width="10%">수량</th>
+							<th width="10%">상품 금액</th>
+							<th width="10%">할인</th>
+							<th width="10%">합계 금액</th>
+							<th width="10%">배송비</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		
-		<div class="pay_address_div">
-			<h4>배송 정보</h4>
-			<table class="table" id="pay_address_tbl">
-				<tbody>
-					<tr>
-						<th>배송지 확인</th>
-						<td>
-							<input type="radio" id="basic_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="basic"><label for="new_saved_address">기본 배송지</label>
-							<input type="radio" id="recent_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="recent"><label for="new_saved_address">최근 배송지</label>
-							<input type="radio" id="edit_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="edit"><label for="new_saved_address">직접 입력</label>
-							<button type="button" id="address_list_btn" class="new_address_btn">배송지 관리</button>
-						</td>
-					</tr>
-					<tr>
-						<th>받으실분</th>
-						<td><input type="text" name="ob_receiver" class="pay_receiver"></td>
-					</tr>
-					<tr>
-						<th>받으실 곳</th>
-						<td>
-							<input type="text" name="ob_postcode" id="pay_search_postcode" readonly>
-							<button type="button" onclick="pay_search_address()" class="pay_search_address">우편번호 검색</button><br>
-							<input type="text" name="ob_address" id="pay_search_addr" class="pay_search_input" readonly>
-							<input type="text" name="ob_address_detail" id="pay_search_detail" class="pay_search_input">
-						</td>
-					</tr>
-					<tr>
-						<th>휴대폰 번호</th>
-						<td><input type="text" name="ob_cellphone" class="pay_cellphone"></td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>
-							<input type="hidden" name="ob_email" id="totalemail">
-							<input type="text" name="email1" id="emailIdInput" /><span id="emailB">@</span>
-							<input type="text" name="email2" id="emailAdInput" disabled/>
-							<select name="email3" id="email3">
-								<option value=''>메일 선택</option>
-								<option value='9'>직접 입력하기</option>
-								<option value="naver.com">naver.com</option>
-								<option value="daum.net">daum.net</option>
-								<option value="gmail.com">gmail.com</option>
-								<option value="kakao.com">kakao.com</option>
-								<option value="nate.com">nate.com</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<th>배송 메모</th>
-						<td>
-							<select id="comment_select" name="ob_deliver_comment">
-								<option value=""></option>
-								<option value="배송 전에 미리 연락 부탁드려요.">배송 전에 미리 연락 부탁드려요.</option>
-								<option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
-								<option value="부재시 문자나 전화 주세요.">부재시 문자나 전화 주세요.</option>
-								<option value="direct">직접 입력</option>
-							</select><br>
-							<input type="text" name="direct_comment" id="direct_comment">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		
-		<div class="pay_final">
-			<table>
-				<tr>
-					<td>
+					</thead>
+					<tbody>
 						<c:forEach items="${orderLists}" var="orderVo">
-							<c:set var="total_price" value="${total_price + (orderVo.p_price * orderVo.o_amount)}"/>
-							<c:set var="total_delivery" value="${total_delivery + orderVo.o_deliverycharge}"/>
-							<c:set var="final_price" value="${final_price + orderVo.o_sum}"/>
+						<input type="hidden" name="o_pno" value="${orderVo.o_pno}">
+						<input type="hidden" name="h_pictures" value="${orderVo.o_titlepic}">
+						<input type="hidden" name="h_titles" value="${orderVo.p_title}">
+						<input type="hidden" name="h_options" value="${orderVo.p_option}">
+						<input type="hidden" name="h_amounts" value="${orderVo.o_amount}">
+						<input type="hidden" name="h_prices" value="${orderVo.p_price}">
+						<input type="hidden" name="h_sales" value="${orderVo.p_discount}">
+						<input type="hidden" name="h_sum_prices" value="${orderVo.o_sum}">
+						<input type="hidden" name="h_deliverycharges" value="${orderVo.o_deliverycharge}">
+							<tr>
+								<td>
+									<div class="pay_order_product_div">
+										<div>
+											<img class="pay_product_img" src="/pay/displayImage?filename=${orderVo.o_titlepic}">
+										</div>
+										<div class="pay_order_product_title">
+											<div>
+												<a class="pay_order_product_a" href="#">
+													<span>${orderVo.p_title}</span>
+												</a>
+											</div>
+											<div>
+												<span class="pay_order_product_span">${orderVo.p_option}</span>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td>${orderVo.o_amount}</td>
+								<td><fmt:formatNumber value="${orderVo.p_price}" type="number" maxFractionDigits="3"/>P</td>
+								<td>${orderVo.p_discount}%</td>
+								<td><fmt:formatNumber value="${orderVo.o_sum}" type="number" maxFractionDigits="3"/>P</td>
+								<c:choose>
+									<c:when test="${orderVo.o_deliverycharge == 0}">
+									</c:when>
+									<c:otherwise>
+										<td rowspan='<c:out value="${orderVo.deliver_count}"/>'>
+											<fmt:formatNumber value="${orderVo.o_deliverycharge}" type="number" maxFractionDigits="3"/>P
+										</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
 						</c:forEach>
-						<div class="pay_final_div">
-							<div><h4>총 상품 합계 금액</h4></div>
-							<div><h2><fmt:formatNumber value="${total_price}" type="number" maxFractionDigits="3"/></h2></div>
-						</div>
-					</td>
-					<td>
-						<div class="pay_final_div">
-							<span><i class="fa-solid fa-plus pay_final_icon"></i></span>				
-						</div>
-					</td>
-					<td>
-						<div class="pay_final_div">
-							<div><h4>총 배송비</h4></div>
-							<div><h2><fmt:formatNumber value="${total_delivery}" type="number" maxFractionDigits="3"/></h2></div>				
-						</div>
-					</td>
-					<td>
-						<div class="pay_final_div">
-							<span><i class="fa-solid fa-minus pay_final_icon"></i></span>				
-						</div>
-					</td>
-					<td>
-						<div class="pay_final_div">
-							<div><h4>할인</h4></div>
-							<div class="pay_final_discount"><h2><fmt:formatNumber value="${total_price - final_price}" type="number" maxFractionDigits="3"/></h2></div>				
-						</div>
-					</td>
-					<td>
-						<div class="pay_final_div">
-							<span><i class="fa-solid fa-equals pay_final_icon"></i></span>				
-						</div>
-					</td>
-					<td>
-						<div class="pay_final_div">
-							<div><h4>최종 결제 포인트</h4></div>
-							<div class="pay_final_point"><h2><fmt:formatNumber value="${final_price}" type="number" maxFractionDigits="3"/></h2></div>			
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
+					</tbody>
+				</table>
+			</div>
+		
+			<div class="pay_address_div">
+				<h4>배송 정보</h4>
+				<table class="table" id="pay_address_tbl">
+					<tbody>
+						<tr>
+							<th>배송지 확인</th>
+							<td>
+								<input type="radio" id="basic_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="basic"><label for="new_saved_address">기본 배송지</label>
+								<input type="radio" id="recent_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="recent"><label for="new_saved_address">최근 배송지</label>
+								<input type="radio" id="edit_addr_rdo" class="new_saved_address_rdo" name="new_saved_address" value="edit"><label for="new_saved_address">직접 입력</label>
+								<button type="button" id="address_list_btn" class="new_address_btn">배송지 관리</button>
+							</td>
+						</tr>
+						<tr>
+							<th>받으실분</th>
+							<td><input type="text" name="h_receiver" id="pay_receiver"></td>
+						</tr>
+						<tr>
+							<th>받으실 곳</th>
+							<td>
+								<input type="text" name="h_postcode" id="pay_search_postcode" readonly>
+								<button type="button" onclick="pay_search_address()" class="pay_search_address">우편번호 검색</button><br>
+								<input type="text" name="h_address" id="pay_search_addr" class="pay_search_input" readonly>
+								<input type="text" name="h_address_detail" id="pay_search_detail" class="pay_search_input">
+							</td>
+						</tr>
+						<tr>
+							<th>휴대폰 번호</th>
+							<td><input type="text" name="h_cellphone" id="pay_cellphone"></td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td>
+								<input type="hidden" name="h_email" id="totalemail">
+								<input type="text" name="email1" id="emailIdInput" /><span id="emailB">@</span>
+								<input type="text" name="email2" id="emailAdInput" disabled/>
+								<select name="email3" id="email3">
+									<option value=''>메일 선택</option>
+									<option value='9'>직접 입력하기</option>
+									<option value="naver.com">naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="kakao.com">kakao.com</option>
+									<option value="nate.com">nate.com</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>배송 메모</th>
+							<td>
+								<select id="comment_select" name="h_deliver_comment">
+									<option value=""></option>
+									<option value="배송 전에 미리 연락 부탁드려요.">배송 전에 미리 연락 부탁드려요.</option>
+									<option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
+									<option value="부재시 문자나 전화 주세요.">부재시 문자나 전화 주세요.</option>
+									<option value="direct">직접 입력</option>
+								</select><br>
+								<input type="text" name="direct_comment" id="direct_comment">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<c:forEach items="${orderLists}" var="orderVo">
+				<c:set var="total_price" value="${total_price + (orderVo.p_price * orderVo.o_amount)}"/>
+				<c:set var="total_delivery" value="${total_delivery + orderVo.o_deliverycharge}"/>
+				<c:set var="final_price" value="${final_price + orderVo.o_sum}"/>
+			</c:forEach>
+			<input type="hidden" name="h_totaldeliverycharge" value="${total_delivery}">
+			<input type="hidden" name="h_totalsale" value="${total_price - final_price}">
+			<input type="hidden" name="h_totalprice" value="${total_price}">
+			<div class="pay_final">
+				<table>
+					<tr>
+						<td>
+							<div class="pay_final_div">
+								<div><h4>총 상품 합계 금액</h4></div>
+								<div><h2><fmt:formatNumber value="${total_price}" type="number" maxFractionDigits="3"/></h2></div>
+							</div>
+						</td>
+						<td>
+							<div class="pay_final_div">
+								<span><i class="fa-solid fa-plus pay_final_icon"></i></span>				
+							</div>
+						</td>
+						<td>
+							<div class="pay_final_div">
+								<div><h4>총 배송비</h4></div>
+								<div><h2><fmt:formatNumber value="${total_delivery}" type="number" maxFractionDigits="3"/></h2></div>				
+							</div>
+						</td>
+						<td>
+							<div class="pay_final_div">
+								<span><i class="fa-solid fa-minus pay_final_icon"></i></span>				
+							</div>
+						</td>
+						<td>
+							<div class="pay_final_div">
+								<div><h4>할인</h4></div>
+								<div class="pay_final_discount"><h2><fmt:formatNumber value="${total_price - final_price}" type="number" maxFractionDigits="3"/></h2></div>				
+							</div>
+						</td>
+						<td>
+							<div class="pay_final_div">
+								<span><i class="fa-solid fa-equals pay_final_icon"></i></span>				
+							</div>
+						</td>
+						<td>
+							<div class="pay_final_div">
+								<div><h4>최종 결제 포인트</h4></div>
+								<div class="pay_final_point"><h2><fmt:formatNumber value="${final_price}" type="number" maxFractionDigits="3"/></h2></div>			
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
 		<div>
 			<div class="order_complete_div">
-				<button type="button" id="order_complete_btn" onclick="">주문 완료</button>
+				<button type="button" id="order_complete_btn" onclick="final_order()">주문 완료</button>
 			</div>
 		</div>
 	</div>

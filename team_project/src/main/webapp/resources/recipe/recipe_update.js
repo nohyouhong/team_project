@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
 	// 	재료추가
 	$("#addIngred").click(function() {
 		var cloneIngredDiv = $(".addIngredDiv").eq(0).clone();
@@ -14,18 +14,6 @@ $(function() {
 		$(this).parent().parent().remove();
 	});
 
-	// 	요리스텝추가
-	var index = "${fn: length(recipeStepVoList) + 1}";
-	$("#addStep").click(
-			function() {
-				var cloneCookStepDiv = $(".addCookStepDiv").eq(0).clone();
-				cloneCookStepDiv.show();
-				cloneCookStepDiv.find("span").text("step" + index++);
-				cloneCookStepDiv.find("textarea").val("");
-				cloneCookStepDiv.find("img").attr("src",
-						"/resources/main_mypage/images/plus.png");
-				$("#addCookStepList").append(cloneCookStepDiv);
-			});
 
 	//  요리스텝삭제
 	$("#addCookStepList").on("click", ".stepRemove", function() {

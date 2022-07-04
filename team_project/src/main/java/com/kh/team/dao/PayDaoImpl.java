@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.OrderProductVo;
+import com.kh.team.vo.PayVo;
 
 @Repository
 public class PayDaoImpl implements PayDao {
@@ -39,6 +40,37 @@ public class PayDaoImpl implements PayDao {
 		return count;
 	}
 	
-	
+	@Override
+	public int getNextHno() {
+		int hno = sqlSession.selectOne(NAMESPACE + "getNextHno");
+		return hno;
+	}
+
+	@Override
+	public boolean insertFinalAddr(PayVo payVo) {
+		int count = sqlSession.insert(NAMESPACE + "insertFinalAddr", payVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean insertFinalProduct(PayVo payVo) {
+		int count = sqlSession.insert(NAMESPACE + "insertFinalProduct", payVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateOState(int o_pno) {
+		int count = sqlSession.update(NAMESPACE + "updateOState", o_pno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

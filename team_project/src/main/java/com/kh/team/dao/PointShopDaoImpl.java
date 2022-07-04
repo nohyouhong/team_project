@@ -41,7 +41,7 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean productExPicCreate(String p_picture, int p_bno) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
@@ -59,7 +59,7 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		PointShopBoardVo pointShopBoardVo = sqlSession.selectOne(NAMESPACE + "read", p_bno);
 		return pointShopBoardVo;
 	}
-
+	
 	@Override
 	public List<PointShopBoardVo> list(PagingDto pagingDto) {
 		List<PointShopBoardVo> pointShopBoardVoList = sqlSession.selectList(NAMESPACE + "list", pagingDto);
@@ -99,6 +99,14 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		return false;
 	}
 
+	@Override
+	public boolean deleteProductExPicList(int p_bno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteProductExPicList", p_bno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int getNextPno() {
@@ -175,6 +183,15 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean productPicListDelete(int pno) {
+		int count = sqlSession.delete(NAMESPACE + "productPicListDelete", pno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean tagCreate(String p_tag, int p_bno) {
@@ -204,6 +221,5 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 	}
 
 	
-
 
 }

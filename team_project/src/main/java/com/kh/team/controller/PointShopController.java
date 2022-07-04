@@ -167,6 +167,46 @@ public class PointShopController {
 		return "redirect:/pointshop/list";
 	}
 	
+	@RequestMapping(value="/updateRun", method=RequestMethod.POST)
+	public String updateRun(PointShopBoardVo pointShopBoardVo, ProductVo productVo, 
+			RedirectAttributes rttr, @RequestParam("files") List<MultipartFile> files) {
+		System.out.println(pointShopBoardVo);
+		System.out.println(productVo);
+		try {
+			//상품이미지들
+			int index = 0;
+			String[] productPictures = new String[4];
+			for(int i = 0; i < 4; i++) {
+				String oneOriginalFilename = files.get(i).getOriginalFilename();
+				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
+					String p_picture = MyFileUploader.uploadFile(
+							"//192.168.0.110/boardattach", oneOriginalFilename, files.get(i).getBytes());
+					productPictures[index++] = p_picture;
+				} 
+			}
+			pointShopBoardVo.setP_pictures2(productPictures);
+			
+			//상품설명이미지들(4번째부터 상품설명사진임)
+			int productExIndex = 0;
+			String[] productExPictures = new String[files.size() - 4];
+			for(int i = 4; i < files.size(); i++) {
+				String oneOriginalFilename = files.get(i).getOriginalFilename();
+				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
+					String p_picture = MyFileUploader.uploadFile(
+							"//192.168.0.110/boardattach", oneOriginalFilename, files.get(i).getBytes());
+					productExPictures[productExIndex++] = p_picture;
+				} 
+			}
+			pointShopBoardVo.setP_exPictures2(productExPictures);
+			
+			boolean result = pointShopService.update(productVo, pointShopBoardVo);
+			rttr.addFlashAttribute("update_result", result);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/pointshop/read?p_bno=" + pointShopBoardVo.getP_bno();
+	}
+	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(int p_bno, RedirectAttributes rttr, PagingDto pagingDto) {
 		boolean result = pointShopService.delete(p_bno);

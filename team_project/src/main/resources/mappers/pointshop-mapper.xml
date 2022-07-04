@@ -30,8 +30,9 @@
 	
 	<select id="read" resultType="PointShopBoardVo">
 		select * from 
-		tbl_pointshop_board
-		where p_bno = #{p_bno}
+		tbl_pointshop_board b join tbl_product p 
+			on b.p_bno = p.p_bno
+		where b.p_bno = #{p_bno}
 	</select>
 	
 	<select id="list" resultType="PointShopBoardVo">
@@ -56,6 +57,11 @@
 		select p_picture from tbl_pointshop_board_pic
 		where p_bno = #{p_bno}
 	</select>
+	
+	<delete id="productExPicListDelete">
+		delete from tbl_pointshop_board_pic
+		where p_bno = #{p_bno}
+	</delete>
 	
 	<update id="update">
 		update tbl_pointshop_board set
@@ -117,6 +123,11 @@
 			p_name = #{p_name},
 		where pno = #{pno}
 	</update>
+	
+	<delete id="productPicListDelete">
+		delete from tbl_product_pic
+		where pno = #{pno}
+	</delete>
 	
 	<delete id="productDelete">
 		delete from tbl_product

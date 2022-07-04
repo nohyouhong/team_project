@@ -161,11 +161,14 @@
 	width: 40%;
 	margin-left: 10px;
 }
+.tagRemove, .ingredIconX {
+	cursor: pointer;
+}
 </style>
 <script>
 $(function() {
 	// 	물품추가
-	var productIndex = 2;
+	var productIndex = $(".oneProductOp").length;
 	$("#addProduct").click(function() {
 		var cloneProductOpDiv = $(".oneProductOp").eq(0).clone();
 		cloneProductOpDiv.show();
@@ -184,7 +187,7 @@ $(function() {
 	});
 
 	// 	물품설명스텝셋트로추가
-	var stepIndex = 2;
+	var stepIndex = $(".oneProductExDiv").length;
 	$("#addStep").click(function() {
 		var cloneOneProductExDivDiv = $(".oneProductExDiv").eq(0).clone();
 		cloneOneProductExDivDiv.show();
@@ -284,12 +287,25 @@ $(function() {
 	$("#productFormBtn").click(function() {
 		inputCheck();
 		if (productState) {
+			var proFiles = $(".proPicFilename");
+			for(var i = 0; i < proFiles.length; i++){
+				var proFile = $(proFiles).eq(i).text();
+				var html = "<input type='hidden' name='p_pictures' value=" + proFile + ">";
+				$("#pointShopForm").append(html);
+			}
+			var proExFiles = $(".proExPicFilename");
+			for(var i = 0; i < proExFiles.length; i++){
+				var proExFile = $(proExFiles).eq(i).text();
+				var html = "<input type='hidden' name='p_exPictures' value=" + proExFile + ">";
+				$("#pointShopForm").append(html);
+			}
+			
 			var tags = $(".tagName");
 			for (var i = 1; i < tags.length; i++) {
 				var tag = $(".tagName").eq(i).text();
 				console.log(tag);
 				var tagHtml = "<input type='hidden' name='p_tags' value=" + tag + ">";
-				$("#pointShopForm").prepend(tagHtml);
+				$("#pointShopForm").append(tagHtml);
 			}
 			//클론input삭제
 			$(".oneProductOp").eq(0).remove();
@@ -306,8 +322,9 @@ $(function() {
 		var sellstate = $("#sellstate").val();
 		var purchaseplace = $("#purchaseplace").val();
 		var deliverycharge = $("#deliverycharge").val();
-		var productImage = $(".productFile").eq(0).val();
-		var productStepFile = $(".productStepFile").eq(4).val();
+		var productImage = $(".productImages").eq(0).attr("src");
+		var productStepFile = $(".stepProductImage").eq(1).attr("src");
+		
 		var productInfos = $(".oneProductInfo");
 		var p_options = $(".p_option");
 		var p_prices = $(".p_price");
@@ -326,9 +343,9 @@ $(function() {
 			alert("매입처를 선택해주세요.");
 		} else if (deliverycharge == "") {
 			alert("배송비를 선택해주세요.");
-		} else if (productImage == "") {
+		} else if (productImage == "/resources/main_mypage/images/goods.png") {
 			alert("물품 사진을 최소 하나 이상 올리셔야합니다.");
-		} else if (productStepFile == "") {
+		} else if (productStepFile == "/resources/main_mypage/images/plusImage3.jpg") {
 			alert("물품 설명 사진을 최소 하나 이상 올리셔야합니다.");
 		} else if (productInfos.length <= 1) {
 			alert("물품을 최소 하나 이상 올리셔야합니다.");
@@ -363,26 +380,28 @@ $(function() {
 		<div class="col-md-8">
 			<span class="createTitleSpan">포인트물품 수정</span>
 			<hr class="createHr">
-			<form role="form" id="pointShopForm" action="/pointshop/createRun"
+			<form role="form" id="pointShopForm" action="/pointshop/updateRun"
 				method="post" enctype="multipart/form-data">
 			<input type="hidden" name="userid" value="${loginVo.userid }">
+			<input type="hidden" name="p_bno" value="${pointShopBoardVo.p_bno }">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
+						
 							<label for="p_title" class="createTitle">물품 제목</label> 
 							<input type="text" class="form-control inputVal" id="p_title"
-								name="p_title" placeholder="예) [美친특가] 시원한 열무 물김치 2kg / 5kg" />
+								name="p_title" value="${pointShopBoardVo.p_title }" placeholder="예) [美친특가] 시원한 열무 물김치 2kg / 5kg" />
 						</div>
 						<div class="form-group">
 							<label for="p_name" class="createTitle">물품 종류</label> 
 							<input type="text" class="form-control inputVal" id="p_name"
-								name="p_name" placeholder="예) 김치 두부 물 소금 설탕 식용유" />
+								name="p_name" value="${pointShopBoardVo.p_name }" placeholder="예) 김치 두부 물 소금 설탕 식용유" />
 						</div>
 						<div class="form-group">
 							<label for="p_explain" class="createTitle">물품 소개</label>
 							<textarea rows="4" class="form-control inputVal" id="p_explain"
-								name="p_explain"
-								placeholder="물품을 간단히 소개해주세요. 예) 여름 별미 시원하고 상큼한 열무 물김치"></textarea>
+								name="p_explain" 
+								placeholder="물품을 간단히 소개해주세요. 예) 여름 별미 시원하고 상큼한 열무 물김치">${pointShopBoardVo.p_explain }</textarea>
 						</div>
 						<div class="form-group">
 							<label for="title" class="createTitle">카테고리</label>
@@ -391,26 +410,42 @@ $(function() {
 									<select class="custom-select inputVal" id="sellstate"
 										name="sellstate">
 										<option selected value="">판매현황</option>
-										<option value="판매예정">판매예정</option>
-										<option value="판매중">판매중</option>
-										<option value="판매중지">판매중지</option>
+										<option value="판매예정"
+										<c:if test="${pointShopBoardVo.sellstate == '판매예정' }">selected</c:if>
+										>판매예정</option>
+										<option value="판매중"
+										<c:if test="${pointShopBoardVo.sellstate == '판매중' }">selected</c:if>
+										>판매중</option>
+										<option value="판매중지"
+										<c:if test="${pointShopBoardVo.sellstate == '판매중지' }">selected</c:if>
+										>판매중지</option>
 									</select>
 								</div>
 								<div class="col">
 									<select class="custom-select inputVal" id="purchaseplace"
 										name="purchaseplace">
 										<option selected value="">매입처</option>
-										<option value="자사">자사</option>
-										<option value="기타">기타</option>
+										<option value="자사"
+										<c:if test="${pointShopBoardVo.purchaseplace == '자사' }">selected</c:if>
+										>자사</option>
+										<option value="기타"
+										<c:if test="${pointShopBoardVo.purchaseplace == '기타' }">selected</c:if>
+										>기타</option>
 									</select>
 								</div>
 								<div class="col">
 									<select class="custom-select inputVal" id="deliverycharge"
 										name="deliverycharge">
 										<option selected value="">배송비</option>
-										<option value="0">무료배송</option>
-										<option value="3000">3000</option>
-										<option value="5000">5000</option>
+										<option value="0"
+										<c:if test="${pointShopBoardVo.deliverycharge == '0' }">selected</c:if>
+										>무료배송</option>
+										<option value="3000"
+										<c:if test="${pointShopBoardVo.deliverycharge == '3000' }">selected</c:if>
+										>3000</option>
+										<option value="5000"
+										<c:if test="${pointShopBoardVo.deliverycharge == '5000' }">selected</c:if>
+										>5000</option>
 									</select>
 								</div>
 							</div>
@@ -422,25 +457,69 @@ $(function() {
 					<div class="col-md-4" id="productFiles" style="text-align: center;">
 						<div>
 							<img class="inputVal productImages" id="mainProductImage" 
-								src="/resources/main_mypage/images/goods.png" /> 
+								<c:choose>
+									<c:when test="${not empty productPicList[0] }">
+										src="/pointshop/displayImage?filename=${productPicList[0] }" 
+									</c:when>
+									<c:otherwise>
+										src="/resources/main_mypage/images/goods.png" 
+									</c:otherwise>
+								</c:choose>
+							/> 
 							<label for="file"> 물품 사진을 등록해주세요. </label> 
 							<input type="file" style="display: none;" id="mainFile" name="files" class="productFile" />
+							<c:if test="${not empty productPicList[0]}">
+								<div style="display:none;" class="proPicFilename">${productPicList[0] }</div>
+							</c:if>
 						</div>
 						<div>
 							<span>
 								<img class="inputVal productImages"
-									src="/resources/main_mypage/images/plusImage1.png" /> 
-								<input type="file" style="display: none;" name="files" class="productFile" />
+									<c:choose>
+										<c:when test="${not empty productPicList[1] }">
+											src="/pointshop/displayImage?filename=${productPicList[1] }" 
+										</c:when>
+										<c:otherwise>
+											src="/resources/main_mypage/images/plusImage1.png" 
+										</c:otherwise>
+									</c:choose>
+								/> 
+								<input type="file" style="display: none;" name="files" class="productFile"/>
+								<c:if test="${not empty productPicList[1]}">
+									<div style="display:none;" class="proPicFilename">${productPicList[1] }</div>
+								</c:if>
 							</span>
 							<span>
 								<img class="inputVal productImages"
-									src="/resources/main_mypage/images/plusImage1.png" /> 
-								<input type="file" style="display: none;" name="files" class="productFile" />
+									<c:choose>
+										<c:when test="${not empty productPicList[2] }">
+											src="/pointshop/displayImage?filename=${productPicList[2] }" 
+										</c:when>
+										<c:otherwise>
+											src="/resources/main_mypage/images/plusImage1.png" 
+										</c:otherwise>
+									</c:choose>
+								/> 
+								<input type="file" style="display: none;" name="files" class="productFile"/>
+								<c:if test="${not empty productPicList[2]}">
+									<div style="display:none;" class="proPicFilename">${productPicList[2] }</div>
+								</c:if>
 							</span>
 							<span>
 								<img class="inputVal productImages"
-									src="/resources/main_mypage/images/plusImage1.png" /> 
-								<input type="file" style="display: none;" name="files" class="productFile" />
+									<c:choose>
+										<c:when test="${not empty productPicList[3] }">
+											src="/pointshop/displayImage?filename=${productPicList[3] }" 
+										</c:when>
+										<c:otherwise>
+											src="/resources/main_mypage/images/plusImage1.png" 
+										</c:otherwise>
+									</c:choose>
+								/> 
+								<input type="file" style="display: none;" name="files" class="productFile"/>
+								<c:if test="${not empty productPicList[3]}">
+									<div style="display:none;" class="proPicFilename">${productPicList[3] }</div>
+								</c:if>
 							</span>
 						</div>
 					</div>
@@ -479,27 +558,29 @@ $(function() {
 									<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 								</div>
 	<!-- 							클론용 -->
-								<div class="oneProductOp">
-									<div class="productStepTitle">1</div>
-									<div class="oneProductInfo">
-										<label for="p_option" class="productInfoLabel">물품명</label>
-										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
-											placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
-										<label for="p_price" class="productInfoLabel">원가</label>
-										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
-											placeholder="예) 15000" name="p_prices">
-										<label for="p_discount" class="productInfoLabel">할인율</label>
-										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
-											placeholder="예) 70" name="p_discounts">
-										<label for="priceSum" class="productInfoLabel">가격</label>
-										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
-											placeholder="자동계산" name="p_sums" readonly>
-										<label for="p_stock" class="productInfoLabel">재고</label>
-										<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
-											placeholder="예) 100" name="p_stocks">
+								<c:forEach items="${productList}" var="productVo" varStatus="status">
+									<div class="oneProductOp">
+										<div class="productStepTitle">${status.index + 1}</div>
+										<div class="oneProductInfo">
+											<label for="p_option" class="productInfoLabel">물품명</label>
+											<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
+												placeholder="예) 시원한 열무 무김치 2kg" name="p_options" value="${productVo.p_option}">
+											<label for="p_price" class="productInfoLabel">원가</label>
+											<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_price"
+												placeholder="예) 15000" name="p_prices" value="${productVo.p_price}">
+											<label for="p_discount" class="productInfoLabel">할인율</label>
+											<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_discount"
+												placeholder="예) 70" name="p_discounts" value="${productVo.p_discount}">
+											<label for="priceSum" class="productInfoLabel">가격</label>
+											<input type="number" class="form-control productInfoVal productInfoInput2 inputVal priceSum"
+												placeholder="자동계산" name="p_sums"  value="${productVo.p_sum}" readonly>
+											<label for="p_stock" class="productInfoLabel">재고</label>
+											<input type="number" class="form-control productInfoVal productInfoInput2 inputVal p_stock"
+												placeholder="예) 100" name="p_stocks"  value="${productVo.p_stock}">
+										</div>
+										<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
 									</div>
-									<i class="fas fa-times-circle fa-2x productIconX productRemove"></i>
-								</div>
+								</c:forEach>
 							</div>
 							<div style="text-align: center;">
 								<span class="addButton btn btn-outline-info" id="addProduct">물품추가</span> 
@@ -526,16 +607,27 @@ $(function() {
 							<i class="fas fa-times-circle fa-3x stepIconX stepRemove"></i>
 						</div>
 <!-- 						클론용 -->
-						<div class="oneProductExDiv">
-							<div class="productStepTitle pageTitle">page1</div>
-							<div class="stepImageDiv">
-								<img class="inputImage stepProductImage" 
-									src="/resources/main_mypage/images/plusImage3.jpg" /> 
-								<input style="display: none;" type="file" class="productFile productStepFile" style="display: none;" name="files" />
+						<c:forEach items="${productExPicList}" var="productExPic" varStatus="status">
+							<div class="oneProductExDiv">
+								<div class="productStepTitle pageTitle">page${status.index + 1 }</div>
+								<div class="stepImageDiv">
+									<img class="inputImage stepProductImage" 
+										<c:choose>
+											<c:when test="${not empty productExPic }">
+												src="/pointshop/displayImage?filename=${productExPic}" 
+											</c:when>
+											<c:otherwise>
+												src="/resources/main_mypage/images/plusImage3.jpg" 
+											</c:otherwise>
+										</c:choose>
+									/> 
+									<input style="display: none;" type="file" class="productFile productStepFile" value="" style="display: none;" name="files" />
+									<div style="display:none;" class="proExPicFilename">${productExPic}</div>
+								</div>
+								<div class="pageExplain" style="visibility: hidden;">물품 설명 사진을 등록해주세요.</div>
+								<i class="fas fa-times-circle fa-3x stepIconX stepRemove"></i>
 							</div>
-							<div class="pageExplain">물품 설명 사진을 등록해주세요.</div>
-							<i class="fas fa-times-circle fa-3x stepIconX stepRemove"></i>
-						</div>
+						</c:forEach>
 					</div>
 					<!-- 					여기 -->
 					<div></div>
@@ -555,6 +647,13 @@ $(function() {
 							class="tagFront">#</span> <span class="tagName"></span> <i
 							class="fas fa-times-circle productIconX tagRemove"></i>
 						</span>
+						<c:forEach items="${tagList}" var="oneTag">
+							<span class="oneTag" > 
+								<span class="tagFront">#</span> 
+								<span class="tagName">${oneTag }</span> 
+								<i class="fas fa-times-circle ingredIconX tagRemove"></i>
+							</span>
+						</c:forEach>
 					</div>
 				</div>
 				<hr class="createHr">

@@ -18,6 +18,7 @@ public interface PointShopDao {
 	public boolean update(PointShopBoardVo pointShopBoardVo);
 	public boolean updateProductExPicList(String p_picture);
 	public boolean delete(int p_bno);
+	public boolean deleteProductExPicList(int p_bno);
 	
 	public int getNextPno();
 	public int getPnoByBno(int p_bno);
@@ -28,6 +29,7 @@ public interface PointShopDao {
 	public List<String> productPicList(int pno);
 	public boolean productUpdate(ProductVo productVo);//애는 안쓸듯
 	public boolean productDelete(int pno);
+	public boolean productPicListDelete(int pno);
 	
 	public boolean tagCreate(String p_tag, int p_bno);
 	public List<String> tagRead(int p_bno);

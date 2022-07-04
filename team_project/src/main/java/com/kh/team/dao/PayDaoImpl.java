@@ -72,5 +72,11 @@ public class PayDaoImpl implements PayDao {
 		}
 		return false;
 	}
+
+	@Override
+	public PayVo getRecentAddr(String userid) {
+		PayVo payVo = sqlSession.selectOne(NAMESPACE + "getRecentAddr", userid);
+		return payVo;
+	}
 	
 }

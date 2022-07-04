@@ -506,6 +506,7 @@ $(function(){
 			$("#pay_address_tbl > tbody > tr > td input").eq(5).val(rData.add_address);
 			$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.add_addrdetail);
 			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.add_cellphone);
+			$("#edit_addr_rdo").prop("checked", true);
 		});
 	}); // modal list 선택 버튼
 	
@@ -515,7 +516,7 @@ $(function(){
 		if (chked_rdo == "basic") {
 			getBasicAddress();
 		} else if (chked_rdo == "recent") {
-			
+			getRecentAddress();
 		} else if (chked_rdo == "edit") {
 			$("#pay_address_tbl > tbody > tr > td input").eq(3).val("");
 			$("#pay_address_tbl > tbody > tr > td input").eq(4).val("");
@@ -611,6 +612,27 @@ function getBasicAddress(){
 		}
 	});
 } // radio button 기본 배송지 함수
+
+function getRecentAddress(){
+	var url = "/pay/getRecentAddr";
+	$.get(url, function(rData) {
+		console.log("rData: ", rData);
+		if (rData != "") {
+			$("#recent_addr_rdo").prop("checked", true);
+			$("#pay_address_tbl > tbody > tr > td input").eq(3).val(rData.h_receiver);
+			$("#pay_address_tbl > tbody > tr > td input").eq(4).val(rData.h_postcode);
+			$("#pay_address_tbl > tbody > tr > td input").eq(5).val(rData.h_address);
+			if (rData.h_addrdetail == null) {
+				$("#pay_address_tbl > tbody > tr > td input").eq(6).val("");			
+			} else {
+				$("#pay_address_tbl > tbody > tr > td input").eq(6).val(rData.h_addrdetail);				
+			}
+			$("#pay_address_tbl > tbody > tr > td input").eq(7).val(rData.h_cellphone);
+		} else if (rData == "") {
+			$("#edit_addr_rdo").prop("checked", true);
+		}
+	});
+}; // radio button 최근 배송지 함수
 
 function final_order() {
 	if ($("#pay_receiver").val() == "") {
@@ -946,7 +968,7 @@ function modal_modi_address() {
 								<input type="text" name="h_postcode" id="pay_search_postcode" readonly>
 								<button type="button" onclick="pay_search_address()" class="pay_search_address">우편번호 검색</button><br>
 								<input type="text" name="h_address" id="pay_search_addr" class="pay_search_input" readonly>
-								<input type="text" name="h_address_detail" id="pay_search_detail" class="pay_search_input">
+								<input type="text" name="h_addrdetail" id="pay_search_detail" class="pay_search_input">
 							</td>
 						</tr>
 						<tr>

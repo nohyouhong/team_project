@@ -51,4 +51,12 @@
 		where o_pno = #{o_pno}
 	</update>
 	
+	<select id="getRecentAddr" resultType="PayVo">
+		select * from
+			(select h_receiver, h_postcode, h_address, h_addrdetail, h_cellphone from tbl_order_history_list
+			where userid = #{userid}
+			order by hno desc)
+		where rownum = 1
+	</select>
+	
 </mapper>

@@ -58,7 +58,7 @@
 		where p_bno = #{p_bno}
 	</select>
 	
-	<delete id="productExPicListDelete">
+	<delete id="deleteProductExPicList">
 		delete from tbl_pointshop_board_pic
 		where p_bno = #{p_bno}
 	</delete>
@@ -108,6 +108,22 @@
 			(#{p_picture}, #{pno})
 	</insert>
 	
+	<update id="productUpdate">
+		update tbl_product set
+			p_name = #{p_name}
+		where pno = #{pno}
+	</update>
+	
+	<update id="productInfoUpdate">
+		update tbl_product_info set
+			p_option = #{p_option},
+			p_price = #{p_price},
+			p_discount = #{p_discount},
+			p_stock = #{p_stock},
+			p_sum = #{p_sum}
+		where p_ino = #{p_ino}
+	</update>
+	
 	<select id="productRead" resultType="ProductVo">
 		select * from tbl_product_info
 		where pno = #{pno}
@@ -117,12 +133,6 @@
 		select p_picture from tbl_product_pic
 		where pno = #{pno}
 	</select>
-	
-	<update id="productUpdate">
-		update tbl_product set
-			p_name = #{p_name},
-		where pno = #{pno}
-	</update>
 	
 	<delete id="productPicListDelete">
 		delete from tbl_product_pic

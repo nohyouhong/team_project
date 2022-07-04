@@ -174,30 +174,40 @@ public class PointShopController {
 		System.out.println(productVo);
 		try {
 			//상품이미지들
-			int index = 0;
-			String[] productPictures = new String[4];
+			String[] productPictures1 = pointShopBoardVo.getP_pictures();
+			String[] productPictures2 = new String[4];
 			for(int i = 0; i < 4; i++) {
 				String oneOriginalFilename = files.get(i).getOriginalFilename();
 				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
 					String p_picture = MyFileUploader.uploadFile(
 							"//192.168.0.110/boardattach", oneOriginalFilename, files.get(i).getBytes());
-					productPictures[index++] = p_picture;
-				} 
+					productPictures2[i] = p_picture;
+					System.out.println("p_picture" + p_picture);
+				} else {
+					productPictures2[i] = productPictures1[i];
+					System.out.println("productPictures1[i]" + productPictures1[i]);
+					
+				}
 			}
-			pointShopBoardVo.setP_pictures2(productPictures);
+			pointShopBoardVo.setP_pictures2(productPictures2);
 			
 			//상품설명이미지들(4번째부터 상품설명사진임)
 			int productExIndex = 0;
-			String[] productExPictures = new String[files.size() - 4];
-			for(int i = 4; i < files.size(); i++) {
-				String oneOriginalFilename = files.get(i).getOriginalFilename();
+			String[] productExPictures1 = pointShopBoardVo.getP_exPictures();
+			String[] productExPictures2 = new String[files.size() - 5];
+			for(int i = 1; i < files.size() - 4; i++) {
+				String oneOriginalFilename = files.get(i + 4).getOriginalFilename();
 				if(oneOriginalFilename != null && !oneOriginalFilename.equals("")) {
 					String p_picture = MyFileUploader.uploadFile(
-							"//192.168.0.110/boardattach", oneOriginalFilename, files.get(i).getBytes());
-					productExPictures[productExIndex++] = p_picture;
-				} 
+							"//192.168.0.110/boardattach", oneOriginalFilename, files.get(i + 4).getBytes());
+					productExPictures2[productExIndex] = p_picture;
+					productExIndex++;
+				} else {
+					productExPictures2[productExIndex] = productExPictures1[productExIndex + 1];
+					productExIndex++;
+				}
 			}
-			pointShopBoardVo.setP_exPictures2(productExPictures);
+			pointShopBoardVo.setP_exPictures2(productExPictures2);
 			
 			boolean result = pointShopService.update(productVo, pointShopBoardVo);
 			rttr.addFlashAttribute("update_result", result);

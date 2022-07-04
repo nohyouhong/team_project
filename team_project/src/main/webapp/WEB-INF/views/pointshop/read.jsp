@@ -307,7 +307,7 @@ $(function() {
 				var sum = info_price + now_priceVal;
 				var sumVal = sum.toLocaleString('ko-kr');
 				$(".sumAllVal").text(sumVal);
-			} 
+			}
 		}
 	});
 	

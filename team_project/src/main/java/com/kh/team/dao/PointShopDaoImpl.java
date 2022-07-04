@@ -47,6 +47,8 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("p_picture", p_picture);
 		parameter.put("p_bno", p_bno);
+		System.out.println("p_picture" + p_picture);
+		System.out.println("p_bno" + p_bno);
 		int count = sqlSession.insert(NAMESPACE + "productExPicCreate", parameter);
 		if(count > 0) {
 			return true;
@@ -147,6 +149,7 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("p_picture", p_picture);
 		parameter.put("pno", pno);
+		System.out.println("p_picture" + p_picture + "pno" + pno);
 		int count = sqlSession.insert(NAMESPACE + "productPicCreate", parameter);
 		if(count > 0) {
 			return true;
@@ -167,8 +170,20 @@ private final String NAMESPACE = "com.kh.team.mappers.pointshop.";
 	}
 
 	@Override
-	public boolean productUpdate(ProductVo productVo) {
-		int count = sqlSession.update(NAMESPACE + "productUpdate", productVo);
+	public boolean productUpdate(int pno, String p_name) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("pno", pno);
+		parameter.put("p_name", p_name);
+		int count = sqlSession.insert(NAMESPACE + "productUpdate", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean productInfoUpdate(ProductVo productVo) {
+		int count = sqlSession.insert(NAMESPACE + "productInfoUpdate", productVo);
 		if(count > 0) {
 			return true;
 		}

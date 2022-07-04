@@ -27,7 +27,8 @@ public interface PointShopDao {
 	public boolean productPicCreate(String p_picture, int pno);
 	public List<ProductVo> productRead(int pno);
 	public List<String> productPicList(int pno);
-	public boolean productUpdate(ProductVo productVo);//애는 안쓸듯
+	public boolean productUpdate(int pno, String p_name);
+	public boolean productInfoUpdate(ProductVo productVo);
 	public boolean productDelete(int pno);
 	public boolean productPicListDelete(int pno);
 	

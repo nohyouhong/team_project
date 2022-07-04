@@ -51,9 +51,6 @@ public class PointShopServiceImpl implements PointShopService{
 		int[] p_stocks = productVo.getP_stocks();
 		int[] p_sums = productVo.getP_sums();
 		
-		for(int p_sum : p_sums) {
-//			System.out.println(p_sum);
-		}
 		if((p_options != null && p_options.length != 0) &&
 				(p_prices != null && p_prices.length != 0) &&
 				(p_discounts != null && p_discounts.length != 0) &&
@@ -119,54 +116,56 @@ public class PointShopServiceImpl implements PointShopService{
 	}
 
 	@Override
+	@Transactional
 	public boolean update(ProductVo productVo, PointShopBoardVo pointShopBoardVo) {
-//		pointShopDao.productPicListDelete(pno);
+		
 		int p_bno = pointShopBoardVo.getP_bno();
 		boolean result = pointShopDao.update(pointShopBoardVo);
 		pointShopDao.deleteProductExPicList(p_bno);
-		String[] pictures1 = pointShopBoardVo.getP_pictures();
-		String[] pictures2 = pointShopBoardVo.getP_pictures2();
-		for(int i = 0; i < pictures1.length; i++) {
-			pointShopDao.productExPicCreate(pictures1[i], p_bno);
-		}
-		if(pictures2 != null && pictures2.length != 0) {
-			for(String picture : pictures2) {
+		String[] exPictures = pointShopBoardVo.getP_exPictures2();
+		if(exPictures != null && exPictures.length != 0) {
+			for(String picture : exPictures) {
 				pointShopDao.productExPicCreate(picture, p_bno);
 			}
 		}
 		
-//		//물품등록
-//		int pno = pointShopDao.getNextPno();
-//		productVo.setPno(pno);
-//		pointShopDao.productCreate(pno, p_bno, productVo.getP_name());
-//		String[] p_options = productVo.getP_options();
-//		int[] p_prices = productVo.getP_prices();
-//		int[] p_discounts = productVo.getP_discounts();
-//		int[] p_stocks = productVo.getP_stocks();
-//		int[] p_sums = productVo.getP_sums();
-//		
-//		for(int p_sum : p_sums) {
-////					System.out.println(p_sum);
-//		}
-//		if((p_options != null && p_options.length != 0) &&
-//				(p_prices != null && p_prices.length != 0) &&
-//				(p_discounts != null && p_discounts.length != 0) &&
-//				(p_stocks != null && p_stocks.length != 0) &&
-//				(p_sums != null && p_sums.length != 0)) {
-//			for(int i = 0; i < p_options.length; i++) {
-//				System.out.println(p_sums[i]);
-//				ProductVo productInfoVo = new ProductVo(pno, p_options[i], p_prices[i], p_discounts[i], p_stocks[i], p_sums[i]);  
-//				pointShopDao.productInfoCreate(productInfoVo);
-//			}
-//		}
-//		String[] pictures2 = productVo.getP_pictures();
-//		if(pictures2 != null && pictures2.length != 0) {
-//			for(String picture : pictures2) {
-//				pointShopDao.productPicCreate(picture, pno);
-//			}
-//		}
-//		
+		//물품등록
+		int pno = productVo.getPno();
+		String p_name = productVo.getP_name();
+		System.out.println("pno" + pno + "p_name" + p_name);
+		pointShopDao.productUpdate(pno, p_name);
 		
+		int[] p_ino = productVo.getP_inos();
+		String[] p_options = productVo.getP_options();
+		int[] p_prices = productVo.getP_prices();
+		int[] p_discounts = productVo.getP_discounts();
+		int[] p_stocks = productVo.getP_stocks();
+		int[] p_sums = productVo.getP_sums();
+		
+		if((p_options != null && p_options.length != 0) &&
+				(p_prices != null && p_prices.length != 0) &&
+				(p_discounts != null && p_discounts.length != 0) &&
+				(p_stocks != null && p_stocks.length != 0) &&
+				(p_sums != null && p_sums.length != 0)) {
+			for(int i = 0; i < p_options.length; i++) {
+				if(p_ino[i] != 0) {
+					ProductVo productInfoVo = new ProductVo(pno, p_options[i], p_prices[i], p_discounts[i], p_stocks[i], p_sums[i]);
+					productInfoVo.setP_ino(p_ino[i]);
+					pointShopDao.productInfoUpdate(productInfoVo);
+				}else {
+					ProductVo productInfoVo = new ProductVo(pno, p_options[i], p_prices[i], p_discounts[i], p_stocks[i], p_sums[i]);  
+					pointShopDao.productInfoCreate(productInfoVo);
+				}
+			}
+		}
+		
+		pointShopDao.productPicListDelete(pno);
+		String[] pictures = pointShopBoardVo.getP_pictures2();
+		if(pictures != null && pictures.length != 0) {
+			for(int i = 0; i < pictures.length; i++) {
+				pointShopDao.productPicCreate(pictures[i], pno);
+			}
+		}
 		return result;
 	}
 

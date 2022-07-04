@@ -438,7 +438,10 @@ $(function() {
 				if(rData == "true"){
 					console.log(rData);
 					//장바구니아이콘 숫자 올리기 비동기를 여기다가
-					alert("장바구니에 추가 되었습니다.");
+					var confirmVal = confirm('장바구니에 추가 되었습니다.\n장바구니로 이동하시겠습니까?');
+					if (confirmVal) {
+						location.href = "/pointshop/shopping_basket";
+					}
 				}
 			}
 		});

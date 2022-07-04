@@ -99,6 +99,15 @@ $(function(){
 	} else if (attend_success == 'true') {
 		alert("출석완료!포인트가 지급되었습니다.")
 	}
+	// 검색
+	$(".searchInputBtn").click(function(e) {
+		e.preventDefault();
+		var searchInput = $(".searchInput").val();
+		if(searchInput != ""){
+			console.log(searchInput);
+			location.href = "/recipeboard/recipe_list?searchType=allSearch&keyword=" + searchInput;
+		}
+	});
 });
 </script>
 	<body>
@@ -147,10 +156,10 @@ $(function(){
 						</ul>
 						</div>
 						<div class="col-sm-4 col-md-3">
-			            <form action="#" class="search-wrap" style="padding-top:70px;">
+			            <form id="searchForm" action="#" class="search-wrap" style="padding-top:70px;">
 			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
-			                  <button class="btn submit-search text-center searchBtn" type="submit"><i class="icon-search"></i></button>
+			                  <input type="search" class="form-control search searchInput" placeholder="Search">
+			                  <button class="btn submit-search text-center searchBtn searchInputBtn" type="submit"><i class="icon-search"></i></button>
 			               </div>
 			            </form>
 			       		</div>

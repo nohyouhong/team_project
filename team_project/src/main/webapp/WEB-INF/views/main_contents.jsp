@@ -92,7 +92,7 @@
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
-		                                <a href="#" class="post-title">한식 레시피</a>
+		                                <a href="/recipeboard/recipe_list?searchType=f_code&keyword=1001" class="post-title">한식 레시피</a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -105,7 +105,7 @@
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
-		                                <a href="#" class="post-title">중식 레시피</a>
+		                                <a href="/recipeboard/recipe_list?searchType=f_code&keyword=1002" class="post-title">중식 레시피</a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -118,7 +118,7 @@
 		                        <!-- Content -->
 		                        <div class="catagory-content-bg">
 		                            <div class="catagory-content">
-		                                <a href="#" class="post-title">양식 레시피</a>
+		                                <a href="/recipeboard/recipe_list?searchType=f_code&keyword=1003" class="post-title">양식 레시피</a>
 		                            </div>
 		                        </div>
 		                    </div>

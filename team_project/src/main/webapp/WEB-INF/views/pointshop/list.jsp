@@ -73,6 +73,11 @@
     top: 10px;
     right: 10px;
 }
+#goShopBasketBtn{
+	position: relative;
+    top: 10px;
+    right: 2px;
+}
 .discountSpan{
 	color: #FF6B6B;
 	font-size: 19px;
@@ -144,6 +149,14 @@ $(function(){
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	//물품등록
+	$("#goShopBasketBtn").click(function(e) {
+		e.preventDefault();
+		
+		frmPaging.attr("action", "/pointshop/shopping_basket");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 
@@ -157,6 +170,10 @@ $(function(){
 					<button id="createPointShopBtn" class="btn btn-outline-danger">
 						<i class="fa-solid fa-pen-to-square fa-lg"></i>
 						상품 등록하기
+					</button>
+					<button id="goShopBasketBtn" class="btn btn-outline-dark">
+						<i class="fas fa-shopping-cart fa-lg"></i>
+						장바구니
 					</button>
 				</c:if>
 				<a href="p_purchasecnt" class="pointshopListType"><span class="listTypeBtn 

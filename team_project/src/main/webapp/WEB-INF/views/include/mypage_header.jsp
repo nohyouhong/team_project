@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="/resources/main_mypage/mypage.css" type="text/css">
 <style>
 #mainHeaderUserImage{
@@ -81,7 +82,7 @@ $(function() {
 							<li class="mypage-item">
 								<a class="nav-link menuEx" href="" id="attendspan">
 									<span class="attendance"> 
-										<span class="jua">${nowPoint}</span><br> <span class="jua">현재 포인트</span>
+										<span class="jua"><fmt:formatNumber type="number" maxFractionDigits="3" value="${nowPoint}"/></span><br> <span class="jua">현재 포인트</span>
 									</span> 
 									<span class="attendance" id="lineleft"> 
 										<span class="jua">${loginVo.m_totalattend}</span><br> <span class="jua">총누적 출석</span>

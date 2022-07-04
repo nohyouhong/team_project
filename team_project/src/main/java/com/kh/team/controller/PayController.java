@@ -32,6 +32,7 @@ public class PayController {
 	
 	@Autowired
 	private PayService payService;
+
 	
 	@Autowired
 	private PointService pointService;
@@ -171,4 +172,5 @@ public class PayController {
 		
 		return "redirect: /pointshop/order_complete";
 	}
+	
 }

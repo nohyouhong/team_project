@@ -18,7 +18,7 @@ public interface MemberService {
 	public boolean deleteMember(String userid);
 	public MemberVo getMemberByIdAndPw(String userid, String userpw);
 	
-	public List<PointVo> getPoint_list(String userid);
+	public List<PointVo> getPoint_list(String userid, PagingDto pagingDto);
 	public int sumPoint(String userid);
 	public int nowPoint(String userid);
 	public int recogExistId(MemberVo memberVo);

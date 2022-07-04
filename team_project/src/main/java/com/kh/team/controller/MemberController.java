@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.MemberService;
 import com.kh.team.service.OrderService;
+import com.kh.team.service.PointService;
 import com.kh.team.util.MyFileUploader;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
@@ -42,6 +43,9 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private PointService pointService;
 	
 	@RequestMapping(value="/mapper", method=RequestMethod.GET) 
 	public String home() {
@@ -148,8 +152,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/point_list", method = RequestMethod.GET)
-	public String pointList(String userid, HttpSession session, Model model) {
-		List<PointVo> point_list = memberService.getPoint_list(userid);
+	public String pointList(PagingDto pagingDto, HttpSession session, Model model) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = memberVo.getUserid();
+		pagingDto.setCount(pointService.getPointCount(userid));
+		pagingDto.setPerPage(10);
+		pagingDto.setPage(pagingDto.getPage());
+		System.out.println("pagingDto: " + pagingDto);
+		List<PointVo> point_list = memberService.getPoint_list(userid, pagingDto);
 		int allPoint = memberService.sumPoint(userid);
 		int nowPoint = memberService.nowPoint(userid);
 		model.addAttribute("point_list", point_list);

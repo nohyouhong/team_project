@@ -2,6 +2,7 @@ package com.kh.team.dao;
 
 import java.util.List;
 
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointVo;
 
 public interface PointDao {
@@ -15,7 +16,8 @@ public interface PointDao {
 	
 	
 	public boolean insertPoint(PointVo pointVo);
-	public List<PointVo> getPoint_list(String userid);
+	public List<PointVo> getPoint_list(String userid, PagingDto pagingDto);
+	public int getPointCount(String userid);
 	public boolean updatePoint(PointVo pointVo);
 	public void deletePoint(int pno);
 	public int AllPoint(String userid);

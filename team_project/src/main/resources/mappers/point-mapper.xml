@@ -11,10 +11,19 @@
 	</insert>
 	
 	<select id="getPoint_list" resultType="PointVo">
-		select pno, userid, point, p.p_code, p_regdate, p_desc
-		from tbl_point p, tbl_point_code c
-		where p.p_code = c.p_code
-		and userid = #{userid}
+		select * from
+    		(select rownum rnum, a.* from
+        		(select pno, userid, point, p.p_code, p_regdate, p_desc
+				from tbl_point p, tbl_point_code c
+				where p.p_code = c.p_code
+				and userid = #{userid}
+				order by pno desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getPointCount" resultType="int">
+		select count(*) from tbl_point
+		where userid = #{userid}
 	</select>
 	
 	<select id="sumPoint" resultType="int">

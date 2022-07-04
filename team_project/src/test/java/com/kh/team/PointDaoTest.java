@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.PointDao;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.PointVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,7 +22,8 @@ public class PointDaoTest {
 	@Test
 	public void testPointList() {
 		String userid = "user01";
-		List<PointVo> point_list = pointDao.getPoint_list(userid);
+		PagingDto pagingDto = new PagingDto();
+		List<PointVo> point_list = pointDao.getPoint_list(userid, pagingDto);
 		System.out.println("PointShopDaoTest, testPointList, point_list: " + point_list);
 	}
 	

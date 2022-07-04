@@ -18,45 +18,38 @@ public class PayVo {
 	private String h_email;
 	private String h_deliver_comment;
 	private String userid;
-	private String[] h_picture;
-	private String[] h_title;
-	private String[] h_option;
-	private int[] h_amount;
-	private int[] h_price;
-	private int[] h_discount;
-	private int[] h_sum_price;
-	private int[] h_deliverycharge;
+	private String h_picture;
+	private String h_title;
+	private String h_option;
+	private int h_amount;
+	private int h_price;
+	private int h_sale;
+	private int h_sum_price;
+	private int h_deliverycharge;
+	private String[] h_pictures;
+	private String[] h_titles;
+	private String[] h_options;
+	private int[] h_amounts;
+	private int[] h_prices;
+	private int[] h_sales;
+	private int[] h_sum_prices;
+	private int[] h_deliverycharges;
+	private int[] o_pno;
 	
 	public PayVo() {
 		super();
 	}
 
-	public PayVo(int hno, int h_pno, Date h_date, int h_totaldeliverycharge, int h_totalsale, int h_totalprice,
-			String h_receiver, int h_postcode, String h_address, String h_addrdetail, String h_cellphone,
-			String h_email, String h_deliver_comment, String userid, String[] h_picture, String[] h_title,
-			String[] h_option, int[] h_amount, int[] h_price, int[] h_discount, int[] h_sum_price,
-			int[] h_deliverycharge) {
+	public PayVo(int hno, String h_picture, String h_title, String h_option, int h_amount, int h_price, int h_sale,
+			int h_sum_price, int h_deliverycharge) {
 		super();
 		this.hno = hno;
-		this.h_pno = h_pno;
-		this.h_date = h_date;
-		this.h_totaldeliverycharge = h_totaldeliverycharge;
-		this.h_totalsale = h_totalsale;
-		this.h_totalprice = h_totalprice;
-		this.h_receiver = h_receiver;
-		this.h_postcode = h_postcode;
-		this.h_address = h_address;
-		this.h_addrdetail = h_addrdetail;
-		this.h_cellphone = h_cellphone;
-		this.h_email = h_email;
-		this.h_deliver_comment = h_deliver_comment;
-		this.userid = userid;
 		this.h_picture = h_picture;
 		this.h_title = h_title;
 		this.h_option = h_option;
 		this.h_amount = h_amount;
 		this.h_price = h_price;
-		this.h_discount = h_discount;
+		this.h_sale = h_sale;
 		this.h_sum_price = h_sum_price;
 		this.h_deliverycharge = h_deliverycharge;
 	}
@@ -173,68 +166,140 @@ public class PayVo {
 		this.userid = userid;
 	}
 
-	public String[] getH_picture() {
+	public String getH_picture() {
 		return h_picture;
 	}
 
-	public void setH_picture(String[] h_picture) {
+	public void setH_picture(String h_picture) {
 		this.h_picture = h_picture;
 	}
 
-	public String[] getH_title() {
+	public String getH_title() {
 		return h_title;
 	}
 
-	public void setH_title(String[] h_title) {
+	public void setH_title(String h_title) {
 		this.h_title = h_title;
 	}
 
-	public String[] getH_option() {
+	public String getH_option() {
 		return h_option;
 	}
 
-	public void setH_option(String[] h_option) {
+	public void setH_option(String h_option) {
 		this.h_option = h_option;
 	}
 
-	public int[] getH_amount() {
+	public int getH_amount() {
 		return h_amount;
 	}
 
-	public void setH_amount(int[] h_amount) {
+	public void setH_amount(int h_amount) {
 		this.h_amount = h_amount;
 	}
 
-	public int[] getH_price() {
+	public int getH_price() {
 		return h_price;
 	}
 
-	public void setH_price(int[] h_price) {
+	public void setH_price(int h_price) {
 		this.h_price = h_price;
 	}
 
-	public int[] getH_discount() {
-		return h_discount;
+	public int getH_sale() {
+		return h_sale;
 	}
 
-	public void setH_discount(int[] h_discount) {
-		this.h_discount = h_discount;
+	public void setH_sale(int h_sale) {
+		this.h_sale = h_sale;
 	}
 
-	public int[] getH_sum_price() {
+	public int getH_sum_price() {
 		return h_sum_price;
 	}
 
-	public void setH_sum_price(int[] h_sum_price) {
+	public void setH_sum_price(int h_sum_price) {
 		this.h_sum_price = h_sum_price;
 	}
 
-	public int[] getH_deliverycharge() {
+	public int getH_deliverycharge() {
 		return h_deliverycharge;
 	}
 
-	public void setH_deliverycharge(int[] h_deliverycharge) {
+	public void setH_deliverycharge(int h_deliverycharge) {
 		this.h_deliverycharge = h_deliverycharge;
+	}
+
+	public String[] getH_pictures() {
+		return h_pictures;
+	}
+
+	public void setH_pictures(String[] h_pictures) {
+		this.h_pictures = h_pictures;
+	}
+
+	public String[] getH_titles() {
+		return h_titles;
+	}
+
+	public void setH_titles(String[] h_titles) {
+		this.h_titles = h_titles;
+	}
+
+	public String[] getH_options() {
+		return h_options;
+	}
+
+	public void setH_options(String[] h_options) {
+		this.h_options = h_options;
+	}
+
+	public int[] getH_amounts() {
+		return h_amounts;
+	}
+
+	public void setH_amounts(int[] h_amounts) {
+		this.h_amounts = h_amounts;
+	}
+
+	public int[] getH_prices() {
+		return h_prices;
+	}
+
+	public void setH_prices(int[] h_prices) {
+		this.h_prices = h_prices;
+	}
+
+	public int[] getH_sales() {
+		return h_sales;
+	}
+
+	public void setH_sales(int[] h_sales) {
+		this.h_sales = h_sales;
+	}
+
+	public int[] getH_sum_prices() {
+		return h_sum_prices;
+	}
+
+	public void setH_sum_prices(int[] h_sum_prices) {
+		this.h_sum_prices = h_sum_prices;
+	}
+
+	public int[] getH_deliverycharges() {
+		return h_deliverycharges;
+	}
+
+	public void setH_deliverycharges(int[] h_deliverycharges) {
+		this.h_deliverycharges = h_deliverycharges;
+	}
+
+	public int[] getO_pno() {
+		return o_pno;
+	}
+
+	public void setO_pno(int[] o_pno) {
+		this.o_pno = o_pno;
 	}
 
 	@Override
@@ -243,11 +308,14 @@ public class PayVo {
 				+ h_totaldeliverycharge + ", h_totalsale=" + h_totalsale + ", h_totalprice=" + h_totalprice
 				+ ", h_receiver=" + h_receiver + ", h_postcode=" + h_postcode + ", h_address=" + h_address
 				+ ", h_addrdetail=" + h_addrdetail + ", h_cellphone=" + h_cellphone + ", h_email=" + h_email
-				+ ", h_deliver_comment=" + h_deliver_comment + ", userid=" + userid + ", h_picture="
-				+ Arrays.toString(h_picture) + ", h_title=" + Arrays.toString(h_title) + ", h_option="
-				+ Arrays.toString(h_option) + ", h_amount=" + Arrays.toString(h_amount) + ", h_price="
-				+ Arrays.toString(h_price) + ", h_discount=" + Arrays.toString(h_discount) + ", h_sum_price="
-				+ Arrays.toString(h_sum_price) + ", h_deliverycharge=" + Arrays.toString(h_deliverycharge) + "]";
+				+ ", h_deliver_comment=" + h_deliver_comment + ", userid=" + userid + ", h_picture=" + h_picture
+				+ ", h_title=" + h_title + ", h_option=" + h_option + ", h_amount=" + h_amount + ", h_price=" + h_price
+				+ ", h_sale=" + h_sale + ", h_sum_price=" + h_sum_price + ", h_deliverycharge=" + h_deliverycharge
+				+ ", h_pictures=" + Arrays.toString(h_pictures) + ", h_titles=" + Arrays.toString(h_titles)
+				+ ", h_options=" + Arrays.toString(h_options) + ", h_amounts=" + Arrays.toString(h_amounts)
+				+ ", h_prices=" + Arrays.toString(h_prices) + ", h_sales=" + Arrays.toString(h_sales)
+				+ ", h_sum_prices=" + Arrays.toString(h_sum_prices) + ", h_deliverycharges="
+				+ Arrays.toString(h_deliverycharges) + ", o_pno=" + Arrays.toString(o_pno) + "]";
 	}
 	
 }

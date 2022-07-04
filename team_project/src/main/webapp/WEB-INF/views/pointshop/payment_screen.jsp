@@ -613,8 +613,20 @@ function getBasicAddress(){
 } // radio button 기본 배송지 함수
 
 function final_order() {
-	alert("주문하시겠습니까?");
-	$("#final_order_frm").submit();
+	if ($("#pay_receiver").val() == "") {
+		alert("받으실분의 이름을 입력해주세요");			
+	} else if ($("#pay_search_postcode").val() == "") {
+		alert("우편번호를 검색한 후 선택해주세요");			
+	} else if ($("#pay_cellphone").val() == "") {
+		alert("휴대폰 번호를 입력해주세요");
+	} else if($("#emailIdInput").val() == "") {
+		alert("이메일 아이디를 입력해주세요.");
+	} else if($("#emailAdInput").val() == "") {
+		alert("상세 이메일 주소를 선택하거나 입력해주세요");
+	} else {
+		$("#final_order_frm").submit();		
+	};
+	
 }
 
 function pay_search_address() {
@@ -865,14 +877,15 @@ function modal_modi_address() {
 					</thead>
 					<tbody>
 						<c:forEach items="${orderLists}" var="orderVo">
-						<input type="hidden" name="h_picture" value="${orderVo.o_titlepic}">
-						<input type="hidden" name="h_title" value="${orderVo.p_title}">
-						<input type="hidden" name="h_option" value="${orderVo.p_option}">
-						<input type="hidden" name="h_amount" value="${orderVo.o_amount}">
-						<input type="hidden" name="h_price" value="${orderVo.p_price}">
-						<input type="hidden" name="h_discount" value="${orderVo.p_discount}">
-						<input type="hidden" name="h_sum_price" value="${orderVo.o_sum}">
-						<input type="hidden" name="h_deliverycharge" value="${orderVo.o_deliverycharge}">
+						<input type="hidden" name="o_pno" value="${orderVo.o_pno}">
+						<input type="hidden" name="h_pictures" value="${orderVo.o_titlepic}">
+						<input type="hidden" name="h_titles" value="${orderVo.p_title}">
+						<input type="hidden" name="h_options" value="${orderVo.p_option}">
+						<input type="hidden" name="h_amounts" value="${orderVo.o_amount}">
+						<input type="hidden" name="h_prices" value="${orderVo.p_price}">
+						<input type="hidden" name="h_sales" value="${orderVo.p_discount}">
+						<input type="hidden" name="h_sum_prices" value="${orderVo.o_sum}">
+						<input type="hidden" name="h_deliverycharges" value="${orderVo.o_deliverycharge}">
 							<tr>
 								<td>
 									<div class="pay_order_product_div">
@@ -925,7 +938,7 @@ function modal_modi_address() {
 						</tr>
 						<tr>
 							<th>받으실분</th>
-							<td><input type="text" name="h_receiver" class="pay_receiver"></td>
+							<td><input type="text" name="h_receiver" id="pay_receiver"></td>
 						</tr>
 						<tr>
 							<th>받으실 곳</th>
@@ -938,7 +951,7 @@ function modal_modi_address() {
 						</tr>
 						<tr>
 							<th>휴대폰 번호</th>
-							<td><input type="text" name="h_cellphone" class="pay_cellphone"></td>
+							<td><input type="text" name="h_cellphone" id="pay_cellphone"></td>
 						</tr>
 						<tr>
 							<th>이메일</th>

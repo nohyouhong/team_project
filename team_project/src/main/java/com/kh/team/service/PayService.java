@@ -10,5 +10,9 @@ public interface PayService {
 	public List<OrderProductVo> getOrderOptionList(int p_ino);
 	public List<String> getProductName(int p_bno);
 	public int getDeliverCount(int p_bno);
-	public boolean insertFinalOrder(PayVo payVo, int o_pno);
+	public int getNextHno();
+	public boolean insertFinalAddr(PayVo payVo);
+	public boolean insertFinalProduct(PayVo payVo);
+	public boolean updateOState(int o_pno);
+	public PayVo getRecentAddr(String userid);
 }

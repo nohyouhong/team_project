@@ -39,6 +39,12 @@ public class PayDaoImpl implements PayDao {
 		int count = sqlSession.selectOne(NAMESPACE + "getDeliverCount", p_bno);
 		return count;
 	}
+	
+	@Override
+	public int getNextHno() {
+		int hno = sqlSession.selectOne(NAMESPACE + "getNextHno");
+		return hno;
+	}
 
 	@Override
 	public boolean insertFinalAddr(PayVo payVo) {
@@ -66,7 +72,11 @@ public class PayDaoImpl implements PayDao {
 		}
 		return false;
 	}
-	
-	
+
+	@Override
+	public PayVo getRecentAddr(String userid) {
+		PayVo payVo = sqlSession.selectOne(NAMESPACE + "getRecentAddr", userid);
+		return payVo;
+	}
 	
 }

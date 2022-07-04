@@ -38,16 +38,35 @@ public class PayServiceImpl implements PayService {
 		int count = payDao.getDeliverCount(p_bno);
 		return count;
 	}
+	
+	@Override
+	public int getNextHno() {
+		int hno = payDao.getNextHno();
+		return hno;
+	}
 
 	@Override
-	public boolean insertFinalOrder(PayVo payVo, int o_pno) {
-		boolean result1 = payDao.insertFinalAddr(payVo);
-		boolean result2 = payDao.insertFinalProduct(payVo);
-		boolean result3 = payDao.updateOState(o_pno);
-		if (result1 && result2 && result3) {
-			return true;
-		}
-		return false;
+	public boolean insertFinalAddr(PayVo payVo) {
+		boolean result = payDao.insertFinalAddr(payVo);
+		return result;
+	}
+
+	@Override
+	public boolean insertFinalProduct(PayVo payVo) {
+		boolean result = payDao.insertFinalProduct(payVo);
+		return result;
+	}
+
+	@Override
+	public boolean updateOState(int o_pno) {
+		boolean result = payDao.updateOState(o_pno);
+		return result;
+	}
+
+	@Override
+	public PayVo getRecentAddr(String userid) {
+		PayVo payVo = payDao.getRecentAddr(userid);
+		return payVo;
 	}
 	
 }

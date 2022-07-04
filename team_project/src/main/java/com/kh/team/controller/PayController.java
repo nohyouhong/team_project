@@ -2,7 +2,6 @@ package com.kh.team.controller;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,7 +35,9 @@ public class PayController {
 	public String paymentScreen(HttpSession session, Model model, int[] o_pno) {
 		List<OrderProductVo> orderLists = new ArrayList<>();
 		for (int i = 0; i < o_pno.length; i++) {
+			System.out.println("o_pno: " + o_pno[i]);
 			List<OrderProductVo> orderList = payService.getOrderList(o_pno[i]);
+			System.out.println("orderList: " + orderList);
 			OrderProductVo orderProductVo = orderList.get(0);
 			int p_ino = orderProductVo.getP_ino();
 			int p_bno = orderProductVo.getP_bno();
@@ -50,6 +51,7 @@ public class PayController {
 			String p_title = productName.get(0);
 			int deliver_count = payService.getDeliverCount(p_bno);
 //			System.out.println("deliver_count: " + deliver_count);
+			orderProductVo.setO_pno(o_pno[i]);
 			orderProductVo.setPno(pno);
 			orderProductVo.setP_option(p_option);
 			orderProductVo.setP_price(p_price);
@@ -127,11 +129,36 @@ public class PayController {
 		return addrVo;
 	}
 	
+	@RequestMapping(value="/getRecentAddr", method=RequestMethod.GET)
+	@ResponseBody
+	public PayVo getRecentAddr(HttpSession session) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		PayVo payVo = payService.getRecentAddr(userid);
+		return payVo;
+	}
+	
 	@RequestMapping(value="/getFinalOrder", method=RequestMethod.POST)
 	public String getFinalOrder(PayVo payVo, HttpSession session) {
-		System.out.println("payVo: " + payVo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = memberVo.getUserid();
-		return null;
+		int hno = payService.getNextHno();
+		payVo.setUserid(memberVo.getUserid());
+		payVo.setHno(hno);
+		payService.insertFinalAddr(payVo);
+		for(int i = 0; i < payVo.getH_titles().length; i++) {
+			String h_picture = payVo.getH_pictures()[i];
+			String h_title = payVo.getH_titles()[i];
+			String h_option = payVo.getH_options()[i];
+			int h_amount = payVo.getH_amounts()[i];
+			int h_price = payVo.getH_prices()[i];
+			int h_deliverycharge = payVo.getH_deliverycharges()[i];
+			int h_sale = payVo.getH_sales()[i];
+			int h_sum_price = payVo.getH_sum_prices()[i];
+			PayVo payProductVo = new PayVo(hno, h_picture, h_title, h_option, h_amount, h_price, h_sale, h_sum_price, h_deliverycharge);
+			payService.insertFinalProduct(payProductVo);
+			payService.updateOState(payVo.getO_pno()[i]);
+		}
+		
+		return "redirect: /pointshop/order_complete";
 	}
 }

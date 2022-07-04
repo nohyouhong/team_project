@@ -25,20 +25,24 @@
     	where p_bno = #{p_bno} and o_state = 1
 	</select>
 	
+	<select id="getNextHno" resultType="int">
+		select seq_pointshop_hno.nextval from dual
+	</select>
+	
 	<insert id="insertFinalAddr">
 		insert into tbl_order_history_list 
 		    (hno, h_totaldeliverycharge, h_totalsale, h_totalprice, h_receiver, h_postcode, 
 		    h_address, h_addrdetail, h_cellphone, h_email, h_deliver_comment, userid) 
 		values(#{hno}, #{h_totaldeliverycharge}, #{h_totalsale}, #{h_totalprice}, #{h_receiver}, 
-			   #{h_postcode}, #{h_address}, #{h_addrdetail}, #{h_cellphone}, #{h_email}, 
-		       #{h_deliver_comment}, #{userid})
+			   #{h_postcode}, #{h_address}, #{h_addrdetail, jdbcType=VARCHAR}, #{h_cellphone}, #{h_email}, 
+		       #{h_deliver_comment, jdbcType=VARCHAR}, #{userid})
 	</insert>
 	
 	<insert id="insertFinalProduct">
 		insert into tbl_order_history_product 
-		    (h_pno, hno, h_picture, h_title, h_option, h_amount, h_price, h_sale, h_deliverycharge)
+		    (h_pno, hno, h_picture, h_title, h_option, h_amount, h_price, h_sale, h_sum_price, h_deliverycharge)
 		values(seq_pointshop_h_pno.nextval, #{hno}, #{h_picture}, #{h_title}, #{h_option}, #{h_amount}, #{h_price}, 
-        	#{h_sale}, #{h_deliverycharge})
+        	#{h_sale}, #{h_sum_price}, #{h_deliverycharge})
 	</insert>
 	
 	<update id="updateOState">
@@ -46,5 +50,13 @@
 		    o_state = 2
 		where o_pno = #{o_pno}
 	</update>
+	
+	<select id="getRecentAddr" resultType="PayVo">
+		select * from
+			(select h_receiver, h_postcode, h_address, h_addrdetail, h_cellphone from tbl_order_history_list
+			where userid = #{userid}
+			order by hno desc)
+		where rownum = 1
+	</select>
 	
 </mapper>

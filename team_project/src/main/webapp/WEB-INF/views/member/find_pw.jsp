@@ -11,6 +11,8 @@
 	box-shadow: 10px 5px 5px rgb(255,227,219);
 	padding:15px 10px 25px 10px;
 	font-family: jua;
+	width: 600px;
+	margin: 0 auto;
 }
 </style>
 <script>
@@ -54,8 +56,8 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid window">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
 			<h3>비밀번호 재설정</h3>
 			<hr>
 			<p>아래의 내용을 빠짐없이 입력해주세요</p>
@@ -85,7 +87,7 @@ $(document).ready(function(){
 				</div>
 			</form>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-4"></div>
 	</div>
 </div>
 <%@include file="/WEB-INF/views/include/main_footer.jsp" %>

@@ -130,7 +130,7 @@ public class PointShopController {
 		int[] o_pno = new int[orderProductOptionList.size()];
 		for (int i = 0; i < orderProductOptionList.size(); i++) {
 			o_pno[i] = orderProductOptionList.get(i).getO_pno();
-//			System.out.println("o_pno: " + o_pno[i]);
+			System.out.println("o_pno: " + o_pno[i]);
 		}
 		return o_pno;
 	}

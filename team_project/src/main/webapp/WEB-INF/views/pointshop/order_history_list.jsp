@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 <style>
@@ -32,7 +33,7 @@ td.td3{
 	font-size:20px;
 	
 }
-a.btn{
+.cancleOrderBtn, .confirm{
 	border-radius: 5px;
 	padding: 4px 13px;
 	font-size:12px !important;
@@ -68,6 +69,16 @@ li{
 	margin-right:20px;
 }
 </style>
+<script>
+$(document).ready(function(){
+	$(".cancleOrderBtn").click(function(){
+		var h_pno = $(this).attr("data-h_pno");
+		var sData = {
+				"h_pno" : h_pno
+		}
+	});
+});
+</script>
 <div class="container-fluid window">
 	<div class="row">
 		<div class="col-md-12">
@@ -87,18 +98,18 @@ li{
 							<tbody>
 							<c:forEach items="${orderHistoryList}" var="historyVo">
 								<tr>
-									<td class="td1"><img src="${h_picture}" class="productImg"></td>
+									<td class="td1"><img src="/pay/displayImage?filename=${historyVo.h_picture}" class="productImg"></td>
 									<td class="td2">
 										<a href="#" class="product_name">${historyVo.h_title}</a><br>
-										<span class="h_price">38,000원  </span> <span class="status">|</span> 
+										<span class="h_price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${historyVo.h_sum_price}"/>원</span> <span class="status">|</span> 
 										<span class="status h_date">${historyVo.h_date}</span>
 										<hr>
-										<p class="status">배송비 ${historyVo.h_deliverycharge}</p>
+										<p class="status">배송비: <fmt:formatNumber type="number" maxFractionDigits="3" value="${historyVo.h_deliverycharge}"/>원</p>
 										<p class="status">배송지정보: ${historyVo.h_address}</p>
 									</td>
 									<td class="td3">
-										<a href="" class="btn btn-outline-danger ">확정하기</a>
-										<a href="" class="btn btn-outline-secondary">취소하기</a>
+										<a href="" class="btn btn-outline-danger confirm">확정하기</a>
+										<button type="button" class="btn btn-outline-secondary cancleOrderBtn" data-h_pno="${historyVo.h_pno}">취소하기</button>
 									</td>
 								</tr>
 							</c:forEach>

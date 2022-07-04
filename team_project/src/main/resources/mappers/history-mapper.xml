@@ -13,7 +13,7 @@
 	</select>
 	<delete id="cancleOrder">
 		delete from tbl_order_history_list
-    	where hno = #{hno}
+    	where h_pno = #{h_pno}
 	</delete>
 	
 </mapper>

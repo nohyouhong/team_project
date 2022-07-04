@@ -62,5 +62,11 @@ public class PayServiceImpl implements PayService {
 		boolean result = payDao.updateOState(o_pno);
 		return result;
 	}
+
+	@Override
+	public PayVo getRecentAddr(String userid) {
+		PayVo payVo = payDao.getRecentAddr(userid);
+		return payVo;
+	}
 	
 }

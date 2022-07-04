@@ -127,6 +127,15 @@ public class PayController {
 		return addrVo;
 	}
 	
+	@RequestMapping(value="/getRecentAddr", method=RequestMethod.GET)
+	@ResponseBody
+	public PayVo getRecentAddr(HttpSession session) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		PayVo payVo = payService.getRecentAddr(userid);
+		return payVo;
+	}
+	
 	@RequestMapping(value="/getFinalOrder", method=RequestMethod.POST)
 	public String getFinalOrder(PayVo payVo, HttpSession session) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");

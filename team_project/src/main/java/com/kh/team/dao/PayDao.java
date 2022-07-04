@@ -14,4 +14,5 @@ public interface PayDao {
 	public boolean insertFinalAddr(PayVo payVo);
 	public boolean insertFinalProduct(PayVo payVo);
 	public boolean updateOState(int o_pno);
+	public PayVo getRecentAddr(String userid);
 }

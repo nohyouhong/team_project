@@ -25,5 +25,11 @@ public class PointServiceImpl implements PointService {
 		boolean result = pointDao.updatePoint(pointVo);
 		return result;
 	}
+
+	@Override
+	public int getPointCount(String userid) {
+		int count = pointDao.getPointCount(userid);
+		return count;
+	}
 	
 }

@@ -74,7 +74,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>#</th>
+<!-- 								<th>#</th> -->
 								<th>포인트 획득 사유</th>
 								<th>포인트</th>
 								<th>포인트 획득 날짜</th>
@@ -84,7 +84,7 @@
 						<c:forEach var="pointVo" items="${point_list}" varStatus="getPoint_status">
 							<c:if test="${pointVo.p_code != 1004}">
 								<tr class="tr_list">
-									<td>${getPoint_status.count}</td>
+<%-- 									<td>${getPoint_status.count}</td> --%>
 									<td class="td_list">${pointVo.p_desc}</td>
 									<td><fmt:formatNumber value="${pointVo.point}" type="number" maxFractionDigits="3"/></td>
 									<td>${pointVo.p_regdate}</td>
@@ -98,7 +98,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>#</th>
+<!-- 								<th>#</th> -->
 								<th>내용</th>
 								<th>포인트</th>
 								<th>날짜</th>
@@ -108,7 +108,7 @@
 							<c:forEach var="pointVo" items="${point_list}" varStatus="usePoint_status">
 								<c:if test="${pointVo.p_code == 1004}">
 									<tr class="tr_list">
-										<td>${usePoint_status.count}</td>
+<%-- 										<td>${usePoint_status.count}</td> --%>
 										<td class="td_list">${pointVo.p_desc}</td>
 										<td><fmt:formatNumber value="${pointVo.point}" type="number" maxFractionDigits="3"/></td>
 										<td>${pointVo.p_regdate}</td>
@@ -131,7 +131,7 @@
 			<ul class="pagination justify-content-center">
 			<c:if test="${pagingDto.startPage != 1}">
 				<li class="page-item">
-					<a class="page-link column_paging_prev" href="/column/column_list?page=${pagingDto.startPage -1}">이전</a>
+					<a class="page-link column_paging_prev" href="/member/point_list?page=${pagingDto.startPage -1}">이전</a>
 				</li>
 			</c:if>
 			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
@@ -145,12 +145,12 @@
 						</c:otherwise>
 					</c:choose>
 				>
-					<a class="page-link column_paging" href="/column/column_list?page=${v}">${v}</a>
+					<a class="page-link column_paging" href="/member/point_list?page=${v}">${v}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
 				<li class="page-item">
-					<a class="page-link column_paging_next" href="/column/column_list?page=${pagingDto.endPage + 1}">다음</a>
+					<a class="page-link column_paging_next" href="/member/point_list?page=${pagingDto.endPage + 1}">다음</a>
 				</li>
 			</c:if>
 			</ul>

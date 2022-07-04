@@ -73,8 +73,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<PointVo> getPoint_list(String userid) {
-		List<PointVo> point_list = pointDao.getPoint_list(userid);
+	public List<PointVo> getPoint_list(String userid, PagingDto pagingDto) {
+		List<PointVo> point_list = pointDao.getPoint_list(userid, pagingDto);
 		return point_list;
 	}
 

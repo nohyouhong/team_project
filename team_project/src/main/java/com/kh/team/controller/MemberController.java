@@ -164,7 +164,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/join_run", method=RequestMethod.POST)
-	public String joinRun(MemberVo memberVo) {
+	public String joinRun(MemberVo memberVo, MultipartFile file) {
+		try {
+			String originalFilename = file.getOriginalFilename();
+			if(originalFilename != null && !originalFilename.equals("")) {
+				String r_titlepic = MyFileUploader.uploadFile(
+						"//192.168.0.110/boardattach", originalFilename, file.getBytes());
+				memberVo.setM_picture(r_titlepic);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		memberService.insertMember(memberVo);
 		return "redirect:/";
 	}

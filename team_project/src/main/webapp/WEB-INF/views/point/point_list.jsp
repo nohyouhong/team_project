@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
 
@@ -55,11 +56,11 @@
 			<div id="pointdiv">
 				<div class="col-md-6 pit" id="pointdiv1">
 					<h5 class="pointh5">현재 포인트</h5>
-					<span class="pointspan">${nowPoint}</span>
+					<span class="pointspan"><fmt:formatNumber value="${nowPoint}" type="number" maxFractionDigits="3"/></span>
 				</div>
 				<div class="col-md-6 pit">
 					<h5 class="pointh5">누적 포인트</h5>
-					<span class="pointspan">${allPoint}</span>
+					<span class="pointspan"><fmt:formatNumber value="${allPoint}" type="number" maxFractionDigits="3"/></span>
 				</div>
 			</div>
 			<ul class="nav nav-tabs">
@@ -85,7 +86,7 @@
 								<tr class="tr_list">
 									<td>${getPoint_status.count}</td>
 									<td class="td_list">${pointVo.p_desc}</td>
-									<td>${pointVo.point}</td>
+									<td><fmt:formatNumber value="${pointVo.point}" type="number" maxFractionDigits="3"/></td>
 									<td>${pointVo.p_regdate}</td>
 								</tr>
 							</c:if>
@@ -109,7 +110,7 @@
 									<tr class="tr_list">
 										<td>${usePoint_status.count}</td>
 										<td class="td_list">${pointVo.p_desc}</td>
-										<td>${pointVo.point}</td>
+										<td><fmt:formatNumber value="${pointVo.point}" type="number" maxFractionDigits="3"/></td>
 										<td>${pointVo.p_regdate}</td>
 									</tr>
 								</c:if>
@@ -123,22 +124,39 @@
 </div>
 
 <!-- 페이징 -->
-<!-- <div class="row" id="point_paging"> -->
-<!-- 	<div class="col-md-2"></div> -->
-<!-- 	<div class="col-md-8"> -->
-<!-- 		<nav> -->
-<!-- 			<ul class="pagination justify-content-center"> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">4</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">5</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">Next</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</nav> -->
-<!-- 	</div> -->
-<!-- 	<div class="col-md-2"></div> -->
-<!-- </div> -->
+<div class="row" id="point_paging">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<nav>
+			<ul class="pagination justify-content-center">
+			<c:if test="${pagingDto.startPage != 1}">
+				<li class="page-item">
+					<a class="page-link column_paging_prev" href="/column/column_list?page=${pagingDto.startPage -1}">이전</a>
+				</li>
+			</c:if>
+			<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
+				<li 
+					<c:choose>
+						<c:when test="${v == param.page}">
+							class="page-item active"
+						</c:when>
+						<c:otherwise>
+							class="page-item"
+						</c:otherwise>
+					</c:choose>
+				>
+					<a class="page-link column_paging" href="/column/column_list?page=${v}">${v}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+				<li class="page-item">
+					<a class="page-link column_paging_next" href="/column/column_list?page=${pagingDto.endPage + 1}">다음</a>
+				</li>
+			</c:if>
+			</ul>
+		</nav>
+	</div>
+	<div class="col-md-2"></div>
+</div>
 <%@ include file="/WEB-INF/views/include/mypage_footer.jsp" %>
 <%@ include file="/WEB-INF/views/include/main_footer.jsp" %>

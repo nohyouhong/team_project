@@ -14,9 +14,9 @@ public interface PointDao {
 	public static final int USE_POINT_CODE = 1004;
 	
 	
-	public void insertPoint(PointVo pointVo);
+	public boolean insertPoint(PointVo pointVo);
 	public List<PointVo> getPoint_list(String userid);
-	public void updatePoint(PointVo pointVo);
+	public boolean updatePoint(PointVo pointVo);
 	public void deletePoint(int pno);
 	public int AllPoint(String userid);
 	public int nowPoint(String userid);

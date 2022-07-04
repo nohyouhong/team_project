@@ -22,13 +22,21 @@ public class PointDaoImpl implements PointDao {
 	}
 
 	@Override
-	public void insertPoint(PointVo pointVo) {
-		sqlSession.insert(NAMESPACE + "insertPoint", pointVo);
+	public boolean insertPoint(PointVo pointVo) {
+		int count = sqlSession.insert(NAMESPACE + "insertPoint", pointVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public void updatePoint(PointVo pointVo) {
-		sqlSession.update(NAMESPACE + "updatePoint", pointVo);
+	public boolean updatePoint(PointVo pointVo) {
+		int count = sqlSession.update(NAMESPACE + "updatePoint", pointVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

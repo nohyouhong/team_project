@@ -16,19 +16,20 @@
 		where p.p_code = c.p_code
 		and userid = #{userid}
 	</select>
+	
 	<select id="sumPoint" resultType="int">
 		select sum(point) from tbl_point
-		where userid = #{userid}
+		where userid = #{userid} and p_code != '1004'
 	</select>
+	
 	<select id="nowPoint" resultType="int">
 		select sum(point) from tbl_point
-		where p_code != '1004'
-		and userid = #{userid}
+		where userid = #{userid}
 	</select>
 	
 	<update id="updatePoint">
 		update tbl_member set 
-			<include refid="gainorlossPoint"></include>
+			m_point = m_point + #{point}
 		where userid = #{userid}
 	</update>
 	
@@ -37,14 +38,4 @@
 		where pno = #{pno}
 	</delete>
 	
-	<sql id="gainorlossPoint">
-		<choose>
-			<when test="p_code == 1004">
-				m_point = m_point - #{point}
-			</when>
-			<otherwise>
-				m_point = m_point + #{point}				
-			</otherwise>
-		</choose>
-	</sql>
 </mapper>

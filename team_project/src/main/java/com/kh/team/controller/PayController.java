@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.AddrService;
 import com.kh.team.service.PayService;
+import com.kh.team.service.PointService;
 import com.kh.team.vo.AddrVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.OrderProductVo;
 import com.kh.team.vo.PayVo;
+import com.kh.team.vo.PointVo;
 
 @Controller
 @RequestMapping("/pay")
@@ -31,6 +33,9 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 
+	
+	@Autowired
+	private PointService pointService;
 	
 	@RequestMapping(value="/paymentScreen", method=RequestMethod.GET)
 	public String paymentScreen(HttpSession session, Model model, int[] o_pno) {
@@ -142,8 +147,9 @@ public class PayController {
 	@RequestMapping(value="/getFinalOrder", method=RequestMethod.POST)
 	public String getFinalOrder(PayVo payVo, HttpSession session) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = memberVo.getUserid();
 		int hno = payService.getNextHno();
-		payVo.setUserid(memberVo.getUserid());
+		payVo.setUserid(userid);
 		payVo.setHno(hno);
 		payService.insertFinalAddr(payVo);
 		for(int i = 0; i < payVo.getH_titles().length; i++) {
@@ -159,6 +165,10 @@ public class PayController {
 			payService.insertFinalProduct(payProductVo);
 			payService.updateOState(payVo.getO_pno()[i]);
 		}
+		PointVo pointVo = new PointVo(userid, -(payVo.getH_totalprice() - payVo.getH_totalsale()));
+		System.out.println("pointVo: " + pointVo);
+		pointService.insertPoint(pointVo);
+		pointService.updatePoint(pointVo);
 		
 		return "redirect: /pointshop/order_complete";
 	}

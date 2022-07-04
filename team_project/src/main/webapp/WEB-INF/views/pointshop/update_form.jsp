@@ -384,6 +384,9 @@ $(function() {
 				method="post" enctype="multipart/form-data">
 			<input type="hidden" name="userid" value="${loginVo.userid }">
 			<input type="hidden" name="p_bno" value="${pointShopBoardVo.p_bno }">
+			<c:if test="${not empty productList[0]}">
+				<input type="hidden" name="pno" value="${productList[0].pno}">
+			</c:if>
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
@@ -539,6 +542,7 @@ $(function() {
 								<div class="oneProductOp" style="display: none;">
 									<div class="productStepTitle">1</div>
 									<div class="oneProductInfo">
+										<input type="hidden" name="p_inos" value="0">
 										<label for="p_option" class="productInfoLabel">물품명</label>
 										<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
 											placeholder="예) 시원한 열무 무김치 2kg" name="p_options">
@@ -562,6 +566,7 @@ $(function() {
 									<div class="oneProductOp">
 										<div class="productStepTitle">${status.index + 1}</div>
 										<div class="oneProductInfo">
+											<input type="hidden" name="p_inos" value="${productVo.p_ino }">
 											<label for="p_option" class="productInfoLabel">물품명</label>
 											<input type="text" class="form-control productInfoVal productInfoInput1 inputVal p_option"
 												placeholder="예) 시원한 열무 무김치 2kg" name="p_options" value="${productVo.p_option}">
@@ -602,6 +607,7 @@ $(function() {
 								<img class="inputImage stepProductImage" 
 									src="/resources/main_mypage/images/plusImage3.jpg" /> 
 								<input style="display: none;" type="file" class="productFile productStepFile" style="display: none;" name="files" />
+								<div style="display:none;" class="proExPicFilename">${productExPic}</div>
 							</div>
 							<div class="pageExplain">물품 설명 사진을 등록해주세요.</div>
 							<i class="fas fa-times-circle fa-3x stepIconX stepRemove"></i>

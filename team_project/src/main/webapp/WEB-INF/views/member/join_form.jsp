@@ -262,7 +262,8 @@ $(document).ready(function(){
 						<img class="joinImage" id="writeImg" src="/resources/login_join/images/jointitle.png">
 					</form>
 				</div>
-				<form id="join_form" role="form" action="/member/join_run" method="post">
+				<form id="join_form" role="form" action="/member/join_run" method="post"
+					 enctype="multipart/form-data">
 					<div class="form-group" id="profileImg">
 						<img class="joinImage" id="joinImg" src="/resources/login_join/images/join.png">
 						<input class="joinImageFile" type="file" id="file" name="file"

@@ -22,13 +22,16 @@ public interface PointShopDao {
 	
 	public int getNextPno();
 	public int getPnoByBno(int p_bno);
+	public int getProductInfoCount(int pno);
 	public boolean productCreate(int pno, int p_bno, String p_name);
 	public boolean productInfoCreate(ProductVo productVo);
 	public boolean productPicCreate(String p_picture, int pno);
 	public List<ProductVo> productRead(int pno);
 	public List<String> productPicList(int pno);
-	public boolean productUpdate(ProductVo productVo);//애는 안쓸듯
+	public boolean productUpdate(int pno, String p_name);
+	public boolean productInfoUpdate(ProductVo productVo);
 	public boolean productDelete(int pno);
+	public boolean productInfoDelete(int p_ino);
 	public boolean productPicListDelete(int pno);
 	
 	public boolean tagCreate(String p_tag, int p_bno);

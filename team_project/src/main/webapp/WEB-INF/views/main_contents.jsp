@@ -69,7 +69,7 @@
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100" alt="Carousel Bootstrap Third"
-							src="/resources/main_catagory/custom_images/9.jpg" />
+							src="/resources/main_header/images/main_img_3.png" />
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carousel-392965"

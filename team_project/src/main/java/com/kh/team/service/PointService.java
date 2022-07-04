@@ -5,4 +5,5 @@ import com.kh.team.vo.PointVo;
 public interface PointService {
 	public boolean insertPoint(PointVo pointVo);
 	public boolean updatePoint(PointVo pointVo);
+	public int getPointCount(String userid);
 }

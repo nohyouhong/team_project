@@ -30,7 +30,7 @@ $(function() {
     	$("#mainHeaderFormBtn").show();
     });
 	$("#mainHeaderFormBtn").click(function() {
-		var form = $("#mainHeaderForm");
+		var form = $("#mypage_form");
 		var formData = new FormData(form[0]);
 		var url = "/member/uploadFile";
 		$.ajax({
@@ -63,9 +63,9 @@ $(function() {
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8" id="mypage_div">
+				<form id="mypage_form">
 					<nav class="mypagesidebar">
 						<div class="user-info">
-							<form id="mainHeaderForm">
 								<c:choose>
 									<c:when test="${not empty loginVo.m_picture}">
 										<img class="rounded-circle mainHeaderUserImage" src="/member/displayImage?filename=${loginVo.m_picture}">
@@ -78,7 +78,6 @@ $(function() {
 								<div>
 									<button type="button" class="btn btn-outline-info" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
 								</div>
-							</form>
 							<p class="name">${loginVo.username}</p>
 						</div>
 						<ul class="nav">
@@ -124,5 +123,6 @@ $(function() {
 							</li>
 						</ul>
 					</nav>
+				</form>
 					<!-- partial -->
 					<div class="mypage-wrapper">

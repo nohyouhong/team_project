@@ -331,7 +331,8 @@ public class MemberController {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
 		boolean result = memberService.updateUserImage(filename, userid);
-		session.setAttribute("loginVo", loginVo);
+		MemberVo memberVo = memberService.getMemberById(userid);
+		session.setAttribute("loginVo", memberVo);
 		return String.valueOf(result);
 	}
 	

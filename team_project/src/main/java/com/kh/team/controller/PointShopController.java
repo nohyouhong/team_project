@@ -335,4 +335,12 @@ public class PointShopController {
 		model.addAttribute("orderHistoryList", orderHistoryList);
 		return "pointshop/order_history_list";
 	}
+	
+	@RequestMapping(value="/deleteOrder", method=RequestMethod.GET)
+//	@ResponseBody
+	public String cancleHistory(int h_pno) {
+		historyService.cancleOrder(h_pno);
+//		System.out.println("result: "+ result);
+		return "redirect:/pointshop/order_history_list";
+	}
 }

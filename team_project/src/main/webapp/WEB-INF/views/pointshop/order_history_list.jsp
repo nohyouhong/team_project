@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/views/include/main_header.jsp" %>
 <%@ include file="/WEB-INF/views/include/mypage_header.jsp" %>
+<%@ include file="/WEB-INF/views/include/paging.jsp" %>
 <style>
 #h_title{
 	font-style: jua;
@@ -68,13 +69,40 @@ li{
 .h_price{
 	margin-right:20px;
 }
+#more_order_list{
+	text-align:center;
+}
+#moreBtn{
+	border: 0px;
+	border-radius: 5px;
+	width:300px;
+}
 </style>
 <script>
 $(document).ready(function(){
-	$(".cancleOrderBtn").click(function(){
-		var h_pno = $(this).attr("data-h_pno");
-		var sData = {
-				"h_pno" : h_pno
+	moreOrderList();
+	var frmPaging = $("#frmPaging");
+	var h_pno = $(".cancleOrderBtn").attr("data-h_pno");
+	
+	$(".cancleOrderBtn").click(function(e){
+		e.preventDefault();
+		frmPaging.find("input[name=h_pno]").val(h_pno);
+		frmPaging.attr("action","/pointshop/deleteOrder");
+		frmPaging.attr("method","get");
+		frmPaging.submit();
+	});
+	moreOrderList();
+	function moreOrderList(){
+		var tr = $(".trclass");
+		for(var i = 4; i <tr.length; i++){
+			$(tr[i]).hide();
+		}
+	};
+	$("#moreBtn").click(function(){
+		var tr = $(".trclass");
+		$(this).hide();
+		for(var i = 0; i <tr.length; i++){
+			$(tr[i]).show();
 		}
 	});
 });
@@ -95,9 +123,9 @@ $(document).ready(function(){
 									<th colspan="3" id="h_th"></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="listBody">
 							<c:forEach items="${orderHistoryList}" var="historyVo">
-								<tr>
+								<tr class="trclass">
 									<td class="td1"><img src="/pay/displayImage?filename=${historyVo.h_picture}" class="productImg"></td>
 									<td class="td2">
 										<a href="#" class="product_name">${historyVo.h_title}</a><br>
@@ -109,12 +137,15 @@ $(document).ready(function(){
 									</td>
 									<td class="td3">
 										<a href="" class="btn btn-outline-danger confirm">확정하기</a>
-										<button type="button" class="btn btn-outline-secondary cancleOrderBtn" data-h_pno="${historyVo.h_pno}">취소하기</button>
+										<button type="button" class="btn btn-outline-secondary cancleOrderBtn" data-h_pno="${historyVo.h_pno }">주문취소</button>
 									</td>
 								</tr>
 							</c:forEach>
 							</tbody>
 						</table>
+						<div id="more_order_list">
+							<button type="button" class="btn btn-outline-warning" id="moreBtn">더보기</button>
+						</div>
 					</div>
 				</div>
 			</div>

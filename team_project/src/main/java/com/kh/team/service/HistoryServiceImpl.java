@@ -21,8 +21,8 @@ public class HistoryServiceImpl implements HistoryService{
 	}
 
 	@Override
-	public boolean cancleOrder(int hno) {
-		boolean result = historyDao.cancleOrder(hno);
+	public boolean cancleOrder(int h_pno) {
+		boolean result = historyDao.cancleOrder(h_pno);
 		if(result) {
 			return true;
 		}

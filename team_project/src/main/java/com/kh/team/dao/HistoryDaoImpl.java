@@ -23,8 +23,8 @@ public class HistoryDaoImpl implements HistoryDao{
 	}
 
 	@Override
-	public boolean cancleOrder(int hno) {
-		int cnt = sqlSession.delete(NAMESPACE+"cancleOrder", hno);
+	public boolean cancleOrder(int h_pno) {
+		int cnt = sqlSession.delete(NAMESPACE+"cancleOrder", h_pno);
 		if(cnt >0) {
 			return true;
 		}

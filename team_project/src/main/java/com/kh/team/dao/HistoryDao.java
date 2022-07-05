@@ -6,5 +6,5 @@ import com.kh.team.vo.HistoryVo;
 
 public interface HistoryDao {
 	public List<HistoryVo> getOrderHistoryList(String userid);
-	public boolean cancleOrder(int hno);
+	public boolean cancleOrder(int h_pno);
 }

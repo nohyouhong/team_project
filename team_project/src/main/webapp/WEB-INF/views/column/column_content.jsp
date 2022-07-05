@@ -69,6 +69,7 @@ $(document).ready(function(){
 	
 	// 좋아요 - 하트
 	$(".fa-thumbs-up").click(function() {
+		console.log("클릭됨")
 		var userid = "${loginVo.userid}"
 		var url = "/column/column_like";
 		var sendData = {
@@ -99,11 +100,12 @@ $(document).ready(function(){
 			});	
 		}
 	});
+	
 	var sData = {
 			"c_bno" : c_bno, 
 			"userid" : "${loginVo.userid}"
 	}
-	console.log("sData: ", sData);
+// 	console.log("sData: ", sData);
 	$.get("/column/is_column_like", sData, function(receivedData){
 //	 	console.log(receivedData);
 		is_column_like = receivedData;
@@ -117,7 +119,7 @@ $(document).ready(function(){
 	
 	$(".column_content_div").find("*").each(function() {
 		var content = $(this).text();
-		console.log("content: ", content);
+// 		console.log("content: ", content);
 		$(this).css("font-size", "20px")
 			   .css("font-family", "Chosunilbo_myungjo");
 	});

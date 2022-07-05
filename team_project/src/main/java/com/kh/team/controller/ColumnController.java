@@ -38,10 +38,8 @@ public class ColumnController {
 	
 	@RequestMapping(value="/column_create_run", method=RequestMethod.POST)
 	public String column_create_run(ColumnVo columnVo, RedirectAttributes rttr) {
-//		System.out.println("ColumnControlService, column_run, columnVo: " + columnVo);
 		String[] c_pictures = columnVo.getPictures();
 		boolean result = columnService.insertColumn(columnVo);
-//		System.out.println("ColumController, column_run, result: " + result);
 		return "redirect: /column/column_list";
 	}
 	

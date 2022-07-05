@@ -221,7 +221,7 @@
 }
 
 #modal_new_address_btn {
-	width: 120px; 
+	width: 135px; 
  	height: 30px; 
 	border-radius: 5px;
 	border:none;

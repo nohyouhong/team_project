@@ -642,25 +642,25 @@ $(function() {
 				<button type="button" id="hideBtn" class="showHideBtn" style="display: none;">숨기기</button>
 			</div>
 			<hr class="creHr2">
-			<div class="proExDiv">
-				<div class="starRatingDiv">
-					<span class="ratingValSpan">${pointShopBoardVo.p_avgrating }</span>
-					<i class="fas fa-star fa-3x yellowStar"></i>
-					<i class="fas fa-star fa-3x yellowStar"></i>
-					<i class="fas fa-star fa-3x yellowStar"></i>
-					<i class="fas fa-star fa-3x yellowStar"></i>
-					<i class="fas fa-star fa-3x yellowStar"></i>				
-				</div>
-			</div>
-			<hr class="creHr2">
-			<div class="proExDiv">
-				<div class="proTitleDivs">
-					<span class="titleDiv">후기</span>
-					<span class="productTitleDiv">Review</span>
-				</div>
+<!-- 			<div class="proExDiv"> -->
+<!-- 				<div class="starRatingDiv"> -->
+<%-- 					<span class="ratingValSpan">${pointShopBoardVo.p_avgrating }</span> --%>
+<!-- 					<i class="fas fa-star fa-3x yellowStar"></i> -->
+<!-- 					<i class="fas fa-star fa-3x yellowStar"></i> -->
+<!-- 					<i class="fas fa-star fa-3x yellowStar"></i> -->
+<!-- 					<i class="fas fa-star fa-3x yellowStar"></i> -->
+<!-- 					<i class="fas fa-star fa-3x yellowStar"></i>				 -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<hr class="creHr2"> -->
+<!-- 			<div class="proExDiv"> -->
+<!-- 				<div class="proTitleDivs"> -->
+<!-- 					<span class="titleDiv">후기</span> -->
+<!-- 					<span class="productTitleDiv">Review</span> -->
+<!-- 				</div> -->
 				
 				
-			</div>
+<!-- 			</div> -->
 		</div>
 		<div class="col-md-2">
 		</div>

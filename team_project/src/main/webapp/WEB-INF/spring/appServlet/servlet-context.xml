@@ -73,6 +73,7 @@
 			<exclude-mapping path="/member/modi_pw_run"/>
 			<exclude-mapping path="/member/modi_pw_run"/>
 			<exclude-mapping path="/member/displayImage"/>
+			<exclude-mapping path="/pointshop/displayImage"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

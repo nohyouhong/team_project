@@ -327,9 +327,11 @@ public class MemberController {
 	@RequestMapping(value="/updateUserImage", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateUserImage(String filename, HttpSession session) {
+		System.out.println(filename);
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
 		boolean result = memberService.updateUserImage(filename, userid);
+		session.setAttribute("loginVo", loginVo);
 		return String.valueOf(result);
 	}
 	

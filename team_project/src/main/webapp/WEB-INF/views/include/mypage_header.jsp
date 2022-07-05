@@ -15,7 +15,7 @@
 <script>
 $(function() {
 	//메인헤더 이미지바꾸기
-	$("#mainHeaderUserImage").click(function() {
+	$(".mainHeaderUserImage").click(function() {
 		var inputFile = $("#mainHeaderUserImageFile");
 		inputFile.trigger("click");
 	});
@@ -23,7 +23,7 @@ $(function() {
     	if (this.files && this.files[0]) {
        		var reader = new FileReader();
     			reader.onload = function (e) {
-    			$("#mainHeaderUserImage").attr("src", e.target.result);
+    			$(".mainHeaderUserImage").attr("src", e.target.result);
     			}
             reader.readAsDataURL(this.files[0]);
     	}
@@ -47,7 +47,9 @@ $(function() {
 						"filename" : rData
 				}
 				$.post(url2, sData, function(rData2){
-						console.log(rData2);
+					if(rData2 == "true"){
+						$("#mainHeaderFormBtn").hide();
+					}
 				});
 			}
 		});
@@ -61,7 +63,6 @@ $(function() {
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8" id="mypage_div">
-				<form id="mypage_form">
 					<nav class="mypagesidebar">
 						<div class="user-info">
 							<form id="mainHeaderForm">
@@ -74,7 +75,9 @@ $(function() {
 									</c:otherwise>
 								</c:choose>
 								<input style="display: none;" type="file" id="mainHeaderUserImageFile" name="file" class="mainHeaderUserImageFile"/>
-								<button type="button" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
+								<div>
+									<button type="button" class="btn btn-outline-info" id="mainHeaderFormBtn" style="display: none;">수정하기</button>
+								</div>
 							</form>
 							<p class="name">${loginVo.username}</p>
 						</div>
@@ -121,6 +124,5 @@ $(function() {
 							</li>
 						</ul>
 					</nav>
-				</form>
 					<!-- partial -->
 					<div class="mypage-wrapper">

@@ -7,7 +7,7 @@ public class PagingDto {
 	private String searchType;
 	private String keyword;
 	private String listType = "avgRating";
-	private String pointshopListType = "p_bno";
+	private String pointshopListType = "p_purchasecnt";
 	private int perPage = 10;
 	private int totalPage;
 	private int count;

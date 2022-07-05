@@ -149,7 +149,7 @@ $(function(){
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
-	//물품등록
+	//장바구니 가기
 	$("#goShopBasketBtn").click(function(e) {
 		e.preventDefault();
 		

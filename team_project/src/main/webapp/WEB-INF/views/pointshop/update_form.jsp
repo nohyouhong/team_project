@@ -667,7 +667,7 @@ $(function() {
 				<div style="text-align: center;">
 					<button type="button" id="productFormBtn"
 						class="btn btn-outline-success btn-lg">수정하기</button>
-					<a href="#" class="btn btn-outline-danger btn-lg">취소하기</a>
+					<a href="/pointshop/list" class="btn btn-outline-danger btn-lg">취소하기</a>
 				</div>
 			</form>
 		</div>

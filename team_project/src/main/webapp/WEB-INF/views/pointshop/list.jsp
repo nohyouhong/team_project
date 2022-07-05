@@ -171,6 +171,8 @@ $(function(){
 						<i class="fa-solid fa-pen-to-square fa-lg"></i>
 						상품 등록하기
 					</button>
+				</c:if>
+				<c:if test="${not empty loginVo }">
 					<button id="goShopBasketBtn" class="btn btn-outline-dark">
 						<i class="fas fa-shopping-cart fa-lg"></i>
 						장바구니

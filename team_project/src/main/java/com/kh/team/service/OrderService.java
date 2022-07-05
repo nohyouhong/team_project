@@ -13,7 +13,7 @@ public interface OrderService {
 //	장바구니물건
 	public int getNextPno();
 	public List<OrderProductVo> getBasketProduct(int l_lno);
-	public List<OrderProductVo> getBasketProductOptions(int p_bno);
+	public List<OrderProductVo> getBasketProductOptions(int p_bno, int l_lno);
 	public List<OrderProductVo> getBasketProductOptionsAll(int p_bno);
 	public boolean basketProductCreate(OrderProductVo orderProductVo);
 	public boolean basketProductUpdate(OrderProductVo orderProductVo);

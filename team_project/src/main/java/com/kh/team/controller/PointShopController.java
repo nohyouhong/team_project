@@ -97,14 +97,15 @@ public class PointShopController {
 	public List<OrderProductVo> orderProductList(HttpSession session) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int l_lno = memberVo.getBasket();
+		System.out.println("l_lno" + l_lno);
 		List<OrderProductVo> orderProductList = orderService.getBasketProduct(l_lno);
 		return orderProductList;
 	}
 	
 	@RequestMapping(value="/orderProductOptionList", method=RequestMethod.GET)
 	@ResponseBody
-	public List<OrderProductVo> orderProductOptionList(int p_bno) {
-		List<OrderProductVo> orderProductOptionList = orderService.getBasketProductOptions(p_bno);
+	public List<OrderProductVo> orderProductOptionList(int p_bno, int l_lno) {
+		List<OrderProductVo> orderProductOptionList = orderService.getBasketProductOptions(p_bno, l_lno);
 		return orderProductOptionList;
 	}
 	
@@ -130,7 +131,7 @@ public class PointShopController {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		orderProductVo.setL_lno(memberVo.getBasket());
 		orderService.basketProductCreate(orderProductVo);
-		List<OrderProductVo> orderProductOptionList = orderService.getBasketProductOptions(orderProductVo.getP_bno());
+		List<OrderProductVo> orderProductOptionList = orderService.getBasketProductOptions(orderProductVo.getP_bno(), memberVo.getBasket());
 //		System.out.println("orderProductOptionList: " + orderProductOptionList);
 		int[] o_pno = new int[orderProductOptionList.size()];
 		for (int i = 0; i < orderProductOptionList.size(); i++) {

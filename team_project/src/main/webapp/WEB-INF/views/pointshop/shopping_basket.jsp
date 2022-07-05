@@ -304,6 +304,8 @@ $(function() {
 				oneProductList.show();
 				var p_name = $(this)[0].p_name;
 				var p_bno = $(this)[0].p_bno;
+				var l_lno = $(this)[0].l_lno;
+				console.log(l_lno);
 				$(oneProductList).find("div.tableTitleDiv").find("span").eq(0).text(p_name);
 				$(oneProductList).find("div.hiddenP_bnoDiv").text(p_bno);
 				$(oneProductList).find("span.proFactoryInfo").eq(1).text(p_name);
@@ -314,7 +316,8 @@ $(function() {
 				$(oneProductList).find("tr.oneProInfoInputDiv:gt(0)").remove();
 				var url = "/pointshop/orderProductOptionList";
 				var sData = {
-					"p_bno" : p_bno
+					"p_bno" : p_bno,
+					"l_lno" : l_lno
 				};
 				$.get(url, sData, function(rData) {
 					$.each(rData, function(){
@@ -387,9 +390,27 @@ $(function() {
 		if($(this).is(":checked")){//모두체크
 			console.log("전체체크누름 모두체크");
 			$(this).parents("table.basketTable").find(".orderProductCheck").prop("checked", true);
+			//금액 올리기
+			var deliveryChargeVal = $(this).parents("table.basketTable").find("span.proDelivery").eq(1).text().replaceAll(",", "");
+			var deliveryCharge = parseInt(deliveryChargeVal);
+			var proSum = 0;
+			var proSumVals = $(this).parents("table.basketTable").find(".proSum");
+			for(var i = 1; i < proSumVals.length; i++){
+				var proSumVal = $(proSumVals).eq(i).text().replaceAll(",", "");
+				proSum += parseInt(proSumVal);
+			}
+			var allSum = proSum + deliveryCharge;
+			$(this).parents("table.basketTable").find(".infoTitle").eq(1).text(proSumVals.length - 1);
+			$(this).parents("table.basketTable").find(".infoEx").eq(0).text(proSum.toLocaleString('ko-kr'));
+			$(this).parents("table.basketTable").find(".infoEx").eq(1).text(deliveryCharge.toLocaleString('ko-kr'));
+			$(this).parents("table.basketTable").find(".infoEx").eq(2).text(allSum.toLocaleString('ko-kr'));
+			
 		} else{//모두해제
 			console.log("전체체크누름 모두해제");
 			$(this).parents("table.basketTable").find(".orderProductCheck").prop("checked", false);
+			//금액 0 ㄱ
+			$(this).parents("table.basketTable").find(".infoTitle").eq(1).text(0);
+			$(this).parents("table.basketTable").find(".infoEx").text(0);
 		}
 	});
 	//체크박스 설정2(개별개별)
@@ -404,11 +425,23 @@ $(function() {
 				$(this).parents("table.basketTable").find(".allCheck").prop("checked", false);
 			}
 		}
-		console.log(checkState);
 		if(checkState){
 			$(this).parents("table.basketTable").find(".allCheck").prop("checked", true);
 		}
+		pointChange();
 	});
+	
+	
+	//포인트 최신화
+	function pointChange(){
+		//테이블찾고 그안에서 슷삭슷삭하기
+		var checkNum = $("input:checkbox[name=o_pno]:checked");
+		var allSum = parseInt($(this).parents("table.basketTable").find(".infoEx").eq(2).text().replaceAll(",", ""));
+		var allSum = parseInt($(this).parents("table.basketTable").find(".infoEx").eq(2).text().replaceAll(",", ""));
+		var allSum = parseInt($(this).parents("table.basketTable").find(".infoEx").eq(2).text().replaceAll(",", ""));
+		
+	}
+	
 	//폼
 	var orderForm = $("#orderListForm");
 	//선택 상품 삭제
@@ -450,7 +483,7 @@ $(function() {
 	//모든 상품 주문
 	$("#allPurchaseBtn").click(function(e) {
 		e.preventDefault();
-		$(".orderProductCheck").prop("checked", true);
+		allCheck();
 		for(var i = 0; i < $(".oneProductListDiv").length; i++) {
 			$(".oneProductListDiv").eq(i).find(".orderProductCheck").eq(0).remove();
 		}
@@ -458,6 +491,12 @@ $(function() {
 		orderForm.attr("method", "get");
 		orderForm.submit();
 	});
+	//모든체크박스클릭
+	allCheck();
+	function allCheck() {
+		$(".allCheck").prop("checked", true);
+		$(".orderProductCheck").prop("checked", true);
+	}
 	//장바구니 선택상품 누를시 상품페이지로 이동
 	$(".inputProductListDiv").on("click", ".goProductPage", function() {
 		var p_bno = $(this).attr("data-p_bno");
@@ -713,7 +752,7 @@ $(function() {
 											<span class="infoEx"></span>
 											<span class="infoEx2">P</span>
 										</span>
-										<i class="fa-solid fa-circle-pause fa-lg fa-rotate-90 infoEx infoIcon"></i>
+										<i class="fa-solid fa-circle-pause fa-lg fa-rotate-90 infoIcon"></i>
 										<span class="proSumInfoDiv2">
 											<span class="infoTitle">합계</span><br>
 											<span class="infoEx"></span>

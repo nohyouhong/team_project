@@ -54,7 +54,7 @@
 	</select>
 	
 	<select id="getBasketProduct" resultType="OrderProductVo">
-		select distinct o.p_bno, p.p_name from 
+		select distinct o.p_bno, p.p_name, l.l_lno l_lno from 
 		tbl_order_list l join tbl_order_product o
 		    on l.l_lno = o.l_lno
 		join tbl_product_info i
@@ -72,6 +72,7 @@
 		join tbl_pointshop_board b
             on p.p_bno = b.p_bno
 		where p.p_bno = #{p_bno}
+		and l_lno = #{l_lno}
 		and o_state = 1
 		order by o_pno
 	</select>

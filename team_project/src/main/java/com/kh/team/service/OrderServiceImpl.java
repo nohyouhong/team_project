@@ -46,8 +46,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public List<OrderProductVo> getBasketProductOptions(int p_bno) {
-		return orderDao.getBasketProductOptions(p_bno);
+	public List<OrderProductVo> getBasketProductOptions(int p_bno, int l_lno) {
+		return orderDao.getBasketProductOptions(p_bno, l_lno);
 	}
 	
 	@Override

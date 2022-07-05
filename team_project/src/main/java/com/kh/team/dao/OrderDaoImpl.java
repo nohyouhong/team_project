@@ -90,8 +90,11 @@ private final String NAMESPACE = "com.kh.team.mappers.order.";
 	}
 
 	@Override
-	public List<OrderProductVo> getBasketProductOptions(int p_bno) {
-		List<OrderProductVo> basketProductOptionList = sqlSession.selectList(NAMESPACE + "getBasketProductOptions", p_bno);
+	public List<OrderProductVo> getBasketProductOptions(int p_bno, int l_lno) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("p_bno", p_bno);
+		parameter.put("l_lno", l_lno);
+		List<OrderProductVo> basketProductOptionList = sqlSession.selectList(NAMESPACE + "getBasketProductOptions", parameter);
 		return basketProductOptionList;
 	}
 	

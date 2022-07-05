@@ -176,6 +176,14 @@
 				<when test='searchType == "userid"'>
 					where userid = #{keyword}
 				</when>
+				<when test='searchType == "f_code"'>
+					where f_code = #{keyword}
+				</when>
+				<when test='searchType == "allSearch"'> -->
+					where r_title like '%' || #{keyword} || '%'
+					or r_explain like '%' || #{keyword} || '%'
+					or r_cooktip like '%' || #{keyword} || '%'
+				</when>
 			</choose>
   		 </if>
 	</sql>

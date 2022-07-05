@@ -19,7 +19,7 @@ public interface OrderDao {
 	public boolean getInoByLno(int l_lno, int p_ino);
 	public OrderProductVo getBasketProductVoByIno(int p_ino);//안씀
 	public List<OrderProductVo> getBasketProduct(int l_lno);
-	public List<OrderProductVo> getBasketProductOptions(int p_bno);
+	public List<OrderProductVo> getBasketProductOptions(int p_bno, int l_lno);
 	public List<OrderProductVo> getBasketProductOptionsAll(int p_bno);
 	public boolean basketProductCreate(OrderProductVo orderProductVo);
 	public boolean basketProductUpdate(OrderProductVo orderProductVo);

@@ -7,6 +7,7 @@
 	<input type="hidden" name="r_bno" value="">
 	<input type="hidden" name="i_bno" value="">
 	<input type="hidden" name="p_bno" value="">
+	<input type="hidden" name="h_pno" value="">
 	<input type="hidden" name="userid" value="">
 	<input type="hidden" name="pointshopListType" value="${pagingDto.pointshopListType}">
 	<input type="hidden" name="listType" value="${pagingDto.listType}">

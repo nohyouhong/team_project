@@ -34,7 +34,7 @@
 								<a href="/inquiry/inquiryReplyForm?i_bno=${inquiryVo.i_bno}" class="btn btn-outline-primary">답글달기</a>
 							</c:if>
 							<c:if test="${loginVo.userid == inquiryVo.userid}">
-								<a href="${inquiryVo.i_bno}" class="btn btn-sm btn-outline-danger" id="inquiry_del_btn">
+								<a href="/inquiry/inquiry_delete?i_bno=${inquiryVo.i_bno}" class="btn btn-sm btn-outline-danger" id="inquiry_del_btn">
 									삭제하기
 								</a>
 							</c:if>

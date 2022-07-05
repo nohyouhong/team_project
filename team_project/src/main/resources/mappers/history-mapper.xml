@@ -12,7 +12,7 @@
         where userid = #{userid}
 	</select>
 	<delete id="cancleOrder">
-		delete from tbl_order_history_list
+		delete from tbl_order_history_product
     	where h_pno = #{h_pno}
 	</delete>
 	

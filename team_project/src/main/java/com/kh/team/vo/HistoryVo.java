@@ -25,6 +25,7 @@ public class HistoryVo {
 	private int h_sale;
 	private int h_sum_price;
 	private int h_deliverycharge;
+	private int start;
 	
 	public HistoryVo() {
 		super();
@@ -234,6 +235,15 @@ public class HistoryVo {
 
 	public void setH_deliverycharge(int h_deliverycharge) {
 		this.h_deliverycharge = h_deliverycharge;
+	}
+	
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
 	}
 
 	@Override

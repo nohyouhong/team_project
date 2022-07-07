@@ -138,33 +138,53 @@
 	</insert>
 	
 	<select id="list" resultType="RecipeBoardVo">
-		select * from(select rownum rnum, a.* from 
-  		  (select * from 
-  		  tbl_recipe_board b join tbl_member m
-  		  	on b.userid = m.userid
-  		  <include refid="search"></include>
-   			 order by ${listType} desc) a)
+         select * from(
+         select rownum rnum, a.* from 
+        	(select  b.r_bno , b.r_titlepic, m.m_picture, b.r_title, m.username,
+       		b.avgRating, b.r_viewcnt, m.userid, b.r_cooktip, b.r_explain , t.r_tag,
+       		row_number() over (partition by b.r_bno order by b.r_bno desc) num 
+       		
+       		from tbl_recipe_board b join tbl_member m
+  		  	 on b.userid = m.userid
+            left join tbl_recipe_tag t
+             on b.r_bno = t.r_bno) a
+			
+		where num = 1) 
 		where rnum between #{startRow} and #{endRow}
+        <include refid="search1"></include>
+        order by ${listType} desc
 	</select>
 	
 	<select id="getCount" resultType="int">
-		select count(*) from tbl_recipe_board
+		select count(*) from(
+         select rownum rnum, a.* from 
+        	(select  b.r_bno , b.r_titlepic, m.m_picture, b.r_title, m.username,
+       		b.avgRating, b.r_viewcnt, m.userid, b.r_cooktip, b.r_explain , t.r_tag,
+       		row_number() over (partition by b.r_bno order by b.r_bno desc) num 
+       		
+       		from tbl_recipe_board b join tbl_member m
+  		  	 on b.userid = m.userid
+            left join tbl_recipe_tag t
+             on b.r_bno = t.r_bno) a
+		
+		where num = 1) 
 		<include refid="search2"></include>
 	</select>
 	
-	<sql id="search">
+	<sql id="search1">
 		<if test="searchType != null and keyword != null">
 			<choose>
 				<when test='searchType == "userid"'>
-					where b.userid = #{keyword}
+					and userid = #{keyword}
 				</when>
 				<when test='searchType == "f_code"'>
-					where f_code = #{keyword}
+					and f_code = #{keyword}
 				</when>
-				<when test='searchType == "allSearch"'> -->
-					where r_title like '%' || #{keyword} || '%'
+				<when test='searchType == "allSearch"'>
+					and r_title like '%' || #{keyword} || '%'
 					or r_explain like '%' || #{keyword} || '%'
 					or r_cooktip like '%' || #{keyword} || '%'
+					or r_tag like '%' || #{keyword} || '%'
 				</when>
 			</choose>
   		</if>
@@ -179,13 +199,14 @@
 				<when test='searchType == "f_code"'>
 					where f_code = #{keyword}
 				</when>
-				<when test='searchType == "allSearch"'> -->
+				<when test='searchType == "allSearch"'>
 					where r_title like '%' || #{keyword} || '%'
 					or r_explain like '%' || #{keyword} || '%'
 					or r_cooktip like '%' || #{keyword} || '%'
+					or r_tag like '%' || #{keyword} || '%'
 				</when>
 			</choose>
-  		 </if>
+  		</if>
 	</sql>
 	
 	<update id="updateViewCnt">

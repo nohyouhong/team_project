@@ -582,6 +582,11 @@ $(function(){
 			});			
 		});
 	});
+	//태그 누를때 이동
+	$(".oneTag").click(function() {
+		var tagKeyword = $(this).find(".tagName").text();
+		location.href = "/recipeboard/recipe_list?searchType=allSearch&keyword=" + tagKeyword;
+	});
 });
 </script>
 <!-- 모달리스트 -->

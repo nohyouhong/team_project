@@ -1056,7 +1056,7 @@ function modal_modi_address() {
 						<td>
 							<div class="pay_final_div">
 								<div><h4>최종 결제 포인트</h4></div>
-								<div class="pay_final_point"><h2><fmt:formatNumber value="${final_price}" type="number" maxFractionDigits="3"/></h2></div>			
+								<div class="pay_final_point"><h2><fmt:formatNumber value="${final_price + total_delivery}" type="number" maxFractionDigits="3"/></h2></div>			
 							</div>
 						</td>
 					</tr>
